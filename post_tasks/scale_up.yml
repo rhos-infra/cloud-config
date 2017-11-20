@@ -174,3 +174,7 @@
             openstack stack failures list overcloud
         when: overcloud_scale.rc != 0 and undercloud_version|openstack_release >= 10
         tags: skip_ansible_lint
+
+      - fail:
+            msg: "Overcloud scale up failed... :("
+        when: overcloud_scale.rc != 0
