@@ -16,6 +16,23 @@
       "revId": "0576ff415bafed7b7fe695bffb95a454b635d615",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "23531b53_8075f4c1",
+        "filename": "post_tasks/libvirt_log_filters.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1009441
+      },
+      "writtenOn": "2017-11-22T13:21:08Z",
+      "side": 1,
+      "message": "is this filter going to change often?\nif so, maybe using a yaml file will be better idea than hard coded filters",
+      "revId": "0576ff415bafed7b7fe695bffb95a454b635d615",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
