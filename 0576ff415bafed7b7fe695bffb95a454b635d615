@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "451dd640_d6b72f13",
+        "filename": "post_tasks/libvirt_log_filters.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1009441
+      },
+      "writtenOn": "2017-11-22T13:10:32Z",
+      "side": 1,
+      "message": "please remove comments like this\nplease use 4 indentations instead of 2",
+      "revId": "0576ff415bafed7b7fe695bffb95a454b635d615",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
