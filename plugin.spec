@@ -50,6 +50,12 @@ subparsers:
                           (CIDR, Allocation Pool, Gateway)
                           __LISTYAMLS__
                       default: default_subnet
+
+                  external-vlan:
+                      type: Value
+                      help: |
+                         An Optional external VLAN ID of the external network (Not to be confused with the Public API network)
+
             - title: Scale down nodes
               options:
                   node-name:
