@@ -3,7 +3,7 @@
   include: ../tasks/virt_fencing.yml
   when:
       - hostvars[groups['undercloud']|first].undercloud_version|openstack_release < 11
-      - 'hypervisor' in groups
+      - "'hypervisor' in groups"
 
 - name: Enable native fencing
   include: ../tasks/native_fencing.yml
