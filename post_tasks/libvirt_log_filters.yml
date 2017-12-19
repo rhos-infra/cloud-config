@@ -6,7 +6,7 @@
 # examining live migration interactions, debugging, etc.
 
 - name: Set libvirt debug log filters and log output file
-  hosts: compute:!unused:all
+  hosts: compute:!unused
   become: yes
   tags: enable_libvirt_log_filters
   any_errors_fatal: false
