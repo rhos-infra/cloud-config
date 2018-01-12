@@ -20,6 +20,13 @@ subparsers:
                       lookup_dir: 'post_tasks'
                       required: yes
 
+            - title: Common parameters
+              options:
+                  overcloud-stack:
+                      type: Value
+                      help: The overcloud stack name
+                      default: overcloud
+
             - title: Service Discovery
               options:
                   resync:

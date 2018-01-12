@@ -1,7 +1,7 @@
 ---
 - name: Get service nodes from Undercloud
   shell: |
-      source ~/overcloudrc
+      source ~/{{ install.overcloud.stack }}rc
       {{ service_map[service].command }}
   register: uc_service_info
   tags: skip_ansible_lint

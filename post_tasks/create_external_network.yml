@@ -102,7 +102,7 @@
 
       - name: print network details to console
         shell: |
-            source ~/overcloudrc
+            source ~/{{ install.overcloud.stack }}rc
             neutron net-show {{ net_create.network.name }}
         tags: skip_ansible_lint
 
@@ -131,6 +131,6 @@
 
       - name: print subnet details to console
         shell: |
-            source ~/overcloudrc
+            source ~/{{ install.overcloud.stack }}rc
             neutron subnet-show {{ subnet_create.subnet.name }}
         tags: skip_ansible_lint
