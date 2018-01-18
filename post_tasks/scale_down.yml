@@ -50,7 +50,8 @@
       - name: run scale down script
         shell: |
             source ~/stackrc
-            bash ~/overcloud_node_scale.sh &> overcloud_scale.log
+            #bash ~/overcloud_node_scale.sh &> overcloud_scale.log
+            bash ~/overcloud_node_scale.sh &> overcloud_scale.log || while ! ( [[ `openstack stack list  -f value -c "Stack Status"` == "UPDATE_COMPLETE" ]] || [[ `openstack stack list  -f value -c "Stack Status"` == "UPDATE_FAILED" ]] ); do echo "Querying the stack status"; sleep 60; done #BZ1499020 - temp workaround
         register: overcloud_scale
         ignore_errors: yes
         tags: skip_ansible_lint
