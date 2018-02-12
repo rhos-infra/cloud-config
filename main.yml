@@ -39,3 +39,7 @@
 - name: Setup libvirt debug log filters
   include: post_tasks/libvirt_log_filters.yml
   when: '"libvirt_log_filters" in install.tasks'
+
+- name: Launch overcloud workload
+  include: post_tasks/launch_workload.yml
+  when: '"launch_workload" in install.tasks'

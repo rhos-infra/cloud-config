@@ -1,0 +1,164 @@
+---
+# This playbook is used to launch an instance and attach a floating IP to it with all the required steps
+# such as image, network, subnet or router creation.
+
+- name: Launch workload
+  hosts: undercloud
+  gather_facts: no
+  any_errors_fatal: true
+  tasks:
+      - name: Register stack user pub key
+        command: cat ~/.ssh/id_rsa.pub
+        register: pub_key
+
+# Upload image from undercloud via Openstack cli as the os_image module fails with
+# ShadeAdapter' object has no attribute 'get_api_major_version': RHOSINFRA-1562
+      - name: Download image
+        get_url:
+            url: "{{ install.workload.image.url }}"
+            dest: /tmp/workload_image.qcow2
+
+      - name: Check if workload image is present
+        shell: |
+            source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
+            openstack image list -f value -c Name | grep workload_image
+        register: workload_image_present
+        ignore_errors: true
+
+      - name: Upload image
+        shell: |
+            source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
+            openstack image create workload_image --disk-format qcow2 --container-format bare --file /tmp/workload_image.qcow2
+        when: workload_image_present|failed
+
+      - block:
+          - name: Create flavor
+            os_nova_flavor:
+                # Required for SSL
+                validate_certs: no
+                cloud: overcloud
+                state: present
+                name: workload_flavor
+                ram: "{{ install.workload.memory }}"
+                vcpus: "{{ install.workload.vcpu }}"
+                disk: "{{ install.workload.disk }}"
+
+          - name: Create internal network
+            os_network:
+                # Required for SSL
+                validate_certs: no
+                cloud: overcloud
+                state: present
+                name: workload_internal_net
+                external: false
+            register: workload_internal_net
+
+          - name: Create internal subnet
+            os_subnet:
+                # Required for SSL
+                validate_certs: no
+                cloud: overcloud
+                state: present
+                network_name: workload_internal_net
+                name: workload_internal_net_subnet
+                cidr: 192.168.0.0/24
+
+          - name: Register overcloud network facts
+            os_networks_facts:
+                # Required for SSL
+                validate_certs: no
+                cloud: overcloud
+                filters:
+                    router:external: true
+
+          - name: Create router
+            os_router:
+                # Required for SSL
+                validate_certs: no
+                cloud: overcloud
+                state: present
+                name: workload_router
+                network: "{{ openstack_networks[0].name }}"
+                interfaces:
+                  - workload_internal_net_subnet
+
+          - name: Create security group
+            os_security_group:
+                # Required for SSL
+                validate_certs: no
+                cloud: overcloud
+                state: present
+                name: workload_secgroup
+                description: security group for overcloud test workload
+
+          - name: Create ICMP security group rule
+            os_security_group_rule:
+                # Required for SSL
+                validate_certs: no
+                cloud: overcloud
+                state: present
+                security_group: workload_secgroup
+                protocol: icmp
+                remote_ip_prefix: 0.0.0.0/0
+
+          - name: Create SSH security group rule
+            os_security_group_rule:
+                # Required for SSL
+                validate_certs: no
+                cloud: overcloud
+                state: present
+                security_group: workload_secgroup
+                protocol: tcp
+                port_range_min: 22
+                port_range_max: 22
+                remote_ip_prefix: 0.0.0.0/0
+
+          - name: Create keypair
+            os_keypair:
+                # Required for SSL
+                validate_certs: no
+                cloud: overcloud
+                state: present
+                name: workload_key
+                public_key: "{{ pub_key.stdout }}"
+        delegate_to: "{{ groups.shade | first }}"
+        vars:
+          ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
+
+# Create instance from undercloud via Openstack cli as the os_server module fails with
+# ShadeAdapter' object has no attribute 'get_api_major_version': RHOSINFRA-1562
+      - name: Create instance
+        shell: |
+            source ~/{{ install.overcloud.stack }}rc
+            openstack server create --wait \
+                --image workload_image \
+                --flavor workload_flavor \
+                --security-group workload_secgroup \
+                --key-name  workload_key \
+                --nic net-id={{ workload_internal_net.id }} \
+            workload_instance
+
+      - block:
+          - name: Assign floating IP to workload instance
+            os_floating_ip:
+                # Required for SSL
+                validate_certs: no
+                cloud: overcloud
+                server: workload_instance
+
+          - name: Register workload instance facts
+            os_server_facts:
+                # Required for SSL
+                validate_certs: no
+                cloud: overcloud
+                server: workload_instance
+        delegate_to: "{{ groups.shade | first }}"
+        vars:
+          ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
+
+      - name: Wait for port 22 to become open on workload instance
+        wait_for:
+            port: 22
+            host: "{{ openstack_servers[0].public_v4 }}"
+            search_regex: SSH-2.0
+            delay: 5
