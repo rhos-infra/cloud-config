@@ -1,0 +1,147 @@
+---
+# This playbook is used to launch an instance and attach a floating IP to it with all the required steps
+# such as image, network, subnet or router creation.
+
+- name: Launch workload
+  hosts: undercloud
+  gather_facts: no
+  any_errors_fatal: true
+  tasks:
+      - name: Register stack user pub key
+        command: cat ~/.ssh/id_rsa.pub
+        register: pub_key
+
+      - block:
+          - name: download image
+            get_url:
+             url: "{{ install.workload.image.url }}"
+             dest: /tmp/oc_workload_image.qcow2
+
+          - name: create image
+            os_image:
+                # Required for SSL
+                validate_certs: no
+                cloud: overcloud
+                filename: /tmp/oc_workload_image.qcow2
+                name: "oc_workload_image"
+            register: image_create
+
+          - name: create flavor
+            os_nova_flavor:
+                # Required for SSL
+                validate_certs: no
+                cloud: overcloud
+                state: present
+                name: oc_workload_flavor
+                ram: "{{ install.workload.memory }}"
+                vcpus: "{{ install.workload.vcpu }}"
+                disk: "{{ install.workload.disk }}"
+
+          - name: create internal network
+            os_network:
+                # Required for SSL
+                validate_certs: no
+                cloud: overcloud
+                state: present
+                name: internal_net
+                external: false
+
+          - name: create internal subnet
+            os_subnet:
+                # Required for SSL
+                validate_certs: no
+                cloud: overcloud
+                state: present
+                network_name: internal_net
+                name: internal_net_subnet
+                cidr: 192.168.0.0/24
+
+          - name: Register overcloud network facts
+            os_networks_facts:
+                # Required for SSL
+                validate_certs: no
+                cloud: overcloud
+                filters:
+                    router:external: true 
+
+          - name: create router
+            os_router:
+                # Required for SSL
+                validate_certs: no
+                cloud: overcloud
+                state: present
+                name: workload_router
+                network: "{{ openstack_networks[0].name }}"
+                interfaces:
+                  - internal_net_subnet
+
+          - name: Create security group
+            os_security_group:
+                # Required for SSL
+                validate_certs: no
+                cloud: overcloud
+                state: present
+                name: workload_secgroup
+                description: security group for overcloud test workload
+
+          - name: Create ICMP security group rule
+            os_security_group_rule:
+                # Required for SSL
+                validate_certs: no
+                cloud: overcloud
+                state: present
+                security_group: workload_secgroup
+                protocol: icmp
+                remote_ip_prefix: 0.0.0.0/0
+
+          - name: Create SSH security group rule
+            os_security_group_rule:
+                # Required for SSL
+                validate_certs: no
+                cloud: overcloud
+                state: present
+                security_group: workload_secgroup
+                protocol: tcp
+                port_range_min: 22
+                port_range_max: 22
+                remote_ip_prefix: 0.0.0.0/0
+
+          - name: Create keypair
+            os_keypair:
+                # Required for SSL
+                validate_certs: no
+                cloud: overcloud
+                state: present
+                name: workload_key
+                public_key: "{{ pub_key.stdout }}"
+
+          - name: Create instance
+            os_server:
+                # Required for SSL
+                validate_certs: no
+                cloud: overcloud
+                state: present
+                name: workload_instance
+                image: oc_workload_image
+                flavor: oc_workload_flavor
+                security_groups: workload_secgroup
+                network: internal_net
+                auto_ip: yes
+                key_name: workload_key
+
+          - name: Register workload instance facts
+            os_server_facts:
+                # Required for SSL
+                validate_certs: no
+                cloud: overcloud
+                server: workload_instance
+        delegate_to: "{{ groups.shade | first }}"
+        vars:
+          ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
+
+      - name: Wait for port 22 to become open on workload instance
+        wait_for:
+            port: 22
+            host: "{{ openstack_servers[0].public_v4 }}"
+            search_regex: SSH-2.0
+            delay: 5
