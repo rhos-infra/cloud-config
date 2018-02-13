@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b7255dfa_b3d93f34",
+        "filename": "post_tasks/launch_workload.yml",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1010448
+      },
+      "writtenOn": "2018-02-13T17:31:11Z",
+      "side": 1,
+      "message": "For other infra elements U use \u0027workload\u0027 prefix, worth use it for network/subnet as well.",
+      "range": {
+        "startLine": 52,
+        "startChar": 22,
+        "endLine": 52,
+        "endChar": 34
+      },
+      "revId": "a3ce8df066bed909ad07ad570f179693b80f4a7c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6db9b400_c0918cd1",
+        "filename": "post_tasks/launch_workload.yml",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1010448
+      },
+      "writtenOn": "2018-02-13T17:31:11Z",
+      "side": 1,
+      "message": "If smth is malfunctioning it might take long time, can we add some retry statement, wdyt ?",
+      "range": {
+        "startLine": 133,
+        "startChar": 38,
+        "endLine": 133,
+        "endChar": 42
+      },
+      "revId": "a3ce8df066bed909ad07ad570f179693b80f4a7c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
