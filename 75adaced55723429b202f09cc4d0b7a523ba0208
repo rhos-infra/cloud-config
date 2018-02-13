@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "417cfe0b_199b777d",
+        "filename": "post_tasks/launch_workload.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1010448
+      },
+      "writtenOn": "2018-02-13T07:46:52Z",
+      "side": 1,
+      "message": "Is cloud\u0027s name \u003d\u003d stack\u0027s name used during deployment ?\nIf so - it should be referenced as install.overcloud.stack",
+      "range": {
+        "startLine": 24,
+        "startChar": 23,
+        "endLine": 24,
+        "endChar": 32
+      },
+      "revId": "75adaced55723429b202f09cc4d0b7a523ba0208",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
