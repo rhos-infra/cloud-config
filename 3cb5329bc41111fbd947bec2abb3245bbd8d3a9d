@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ea155fa_d3f10b91",
+        "filename": "post_tasks/launch_workload.yml",
+        "patchSetId": 6
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1010448
+      },
+      "writtenOn": "2018-02-14T08:12:00Z",
+      "side": 1,
+      "message": "In certain circumstances(misconfiguration) this might wait indefinitely or instance might end up in \u0027error\u0027 state, so having separte task that checks if instance reached \u0027active\u0027 state is more accurate.",
+      "range": {
+        "startLine": 133,
+        "startChar": 36,
+        "endLine": 133,
+        "endChar": 42
+      },
+      "revId": "3cb5329bc41111fbd947bec2abb3245bbd8d3a9d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
