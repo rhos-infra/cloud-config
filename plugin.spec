@@ -1,7 +1,5 @@
 config:
     plugin_type: install
-    dependencies:
-        - source: https://github.com/rhos-infra/infrared-common-libraries.git
 subparsers:
     cloud-config:
         description: Collection of overcloud configuration tasks
