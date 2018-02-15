@@ -90,3 +90,25 @@ subparsers:
                       default: password
                       help: |
                         VBMC password (Necessary when Ironic's driver is 'pxe_ipmitool' - OSP >= 11)
+            - title: Workload Launch
+              options:
+                  workload-image-url:
+                      type: Value
+                      default: 'http://download.cirros-cloud.net/0.3.5/cirros-0.3.5-x86_64-disk.img'
+                      help: |
+                        Image source URL that should be used for uploading the workload Glance image
+                  workload-memory:
+                      type: Value
+                      default: '512'
+                      help: |
+                        Amount of memory allocated to test workload flavor
+                  workload-vcpu:
+                      type: Value
+                      default: '1'
+                      help: |
+                        Amount of vcpus allocated to test workload flavor
+                  workload-disk:
+                      type: Value
+                      default: '5'
+                      help: |
+                        Disk size allocated to test workload flavor
