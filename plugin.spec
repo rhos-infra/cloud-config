@@ -112,3 +112,8 @@ subparsers:
                       default: '5'
                       help: |
                         Disk size allocated to test workload flavor
+                  workload-index:
+                      type: Value
+                      default: '1'
+                      help: |
+                        Number of workload objects to be created
