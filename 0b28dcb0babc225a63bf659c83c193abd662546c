@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3ba8e932_2daae90c",
+        "filename": "post_tasks/launch_workload_step.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1012293
+      },
+      "writtenOn": "2018-02-20T17:46:20Z",
+      "side": 1,
+      "message": "maybe add v3 conditional, just in case haven\u0027t fixed yet for 13",
+      "revId": "0b28dcb0babc225a63bf659c83c193abd662546c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "723e3c70_df22c111",
+        "filename": "post_tasks/launch_workload_step.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1012293
+      },
+      "writtenOn": "2018-02-20T17:46:20Z",
+      "side": 1,
+      "message": "same for all things below",
+      "revId": "0b28dcb0babc225a63bf659c83c193abd662546c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
