@@ -133,10 +133,10 @@
   shell: |
       source ~/{{ install.overcloud.stack }}rc
       openstack server create \
-          --image workload_image \
-          --flavor workload_flavor \
-          --security-group workload_secgroup \
-          --key-name  workload_key \
+          --image workload_image_{{ step }} \
+          --flavor workload_flavor_{{ step }} \
+          --security-group workload_secgroup_{{ step }} \
+          --key-name  workload_key_{{ step }} \
           --nic net-id={{ workload_internal_net.id }} \
       workload_instance_{{ step }}
   when: workload_instance_present|failed
