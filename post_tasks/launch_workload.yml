@@ -4,6 +4,26 @@
   gather_facts: no
   any_errors_fatal: true
   tasks:
+    - name: Update quota
+      os_quota:
+          # Required for SSL
+          validate_certs: no
+          cloud: overcloud
+          name: admin
+          cores: -1
+          instances: -1
+          volumes: -1
+          network: -1
+          subnet: -1
+          router: -1
+          security_group: -1
+          ram: -1
+          floatingip: -1
+          fixed_ips: -1
+      delegate_to: "{{ groups.shade | first }}"
+      vars:
+        ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
+
     - include: launch_workload_step.yml
       loop_control:
           loop_var: step
