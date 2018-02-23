@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2d37339e_c26a7463",
+        "filename": "post_tasks/launch_workload.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1010448
+      },
+      "writtenOn": "2018-02-23T08:49:10Z",
+      "side": 1,
+      "message": "U can use line continuation to make it more readable :D",
+      "range": {
+        "startLine": 10,
+        "startChar": 95,
+        "endLine": 10,
+        "endChar": 97
+      },
+      "revId": "5d3a677eb505af9febbc8d8b96e800a5de7bb75c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
