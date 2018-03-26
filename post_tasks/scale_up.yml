@@ -42,7 +42,12 @@
       - name: register nodes to instack
         shell: |
             source ~/stackrc
+
+            {% if install.version|default(undercloud_version) |openstack_release < 13 %}
             openstack baremetal import --json {{ instackenv_file_name }}
+            {% else %}
+            openstack overcloud node import {{ instackenv_file_name }}
+            {% endif %}
         tags: skip_ansible_lint
 
       - name: get nodes UUID
