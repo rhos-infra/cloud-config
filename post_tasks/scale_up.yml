@@ -62,6 +62,7 @@
             openstack baremetal node manage {{ item.stdout }}
         with_items: "{{ nodes_uuid_info.results }}"
         tags: skip_ansible_lint
+        when: install.version|default(undercloud_version) |openstack_release < 13
 
       - name: start node introspection
         shell: |
