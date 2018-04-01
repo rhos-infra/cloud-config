@@ -1,3 +1,4 @@
+---
 config:
     plugin_type: install
 subparsers:
@@ -123,3 +124,10 @@ subparsers:
                       default: '1'
                       help: |
                         Number of workload objects to be created
+
+            - title: Deployment Description
+              options:
+                  ntp-server:
+                      type: Value
+                      help: Ntp server name (or IP) to use.
+                      default: clock.redhat.com
