@@ -4,13 +4,43 @@
   tags:
       - always
 
+- name: Fetch tempest deployer input file
+  import_playbook: post_tasks/tempest_deployer_input.yml
+  tags:
+      - fetch_deploy_input
+      - deploy
+
 - name: Include task "External network creation"
   include: post_tasks/create_external_network.yml
-  when: '"create_external_network" in install.tasks'
+  tags:
+      - public_network
+      - post
+  when: "'create_external_network' in install.tasks or (install.public.network and 'post' in install.tasks)"
+
+- name: Forward Overcloud Dashboard from Hypervisor
+  include: post_tasks/forward_overcloud_dashboard.yml
+  tags:
+      - dashboard
+      - post
+  when:
+      - '"post" in install.tasks'
+      - '"hypervisor" in groups'
 
 - name: Include task "LBaas v2"
   include: post_tasks/lbaas_v2.yml
-  when: '"lbaas_v2" in install.tasks'
+  tags:
+      - lbaas
+      - post
+  when: "'lbaas_v2' in install.tasks or 'post' in install.tasks"
+
+- name: Octavia post workarounds
+  include: post_tasks/octavia.yml
+  tags:
+      - octavia
+      - post
+  when:
+      - install.network.octavia|default(False)
+      - '"post" in install.tasks'
 
 - name: Include task "Compute SSH"
   include: post_tasks/compute_ssh.yml
@@ -43,3 +73,13 @@
 - name: Launch overcloud workload
   include: post_tasks/launch_workload.yml
   when: '"launch_workload" in install.tasks'
+
+- name: Edit /etc/manila/manila.conf
+  include: post_tasks/manila.yml
+  tags: manila
+  when: '"manila" in install.tasks'
+
+- name: Check and correct time diff after deployment on controllers
+  include: post_tasks/network_time.yml
+  tags: time
+  when: '"network_time" in install.tasks'

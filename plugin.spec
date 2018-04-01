@@ -36,6 +36,11 @@ subparsers:
 
             - title: External Network
               options:
+                  public-network:
+                      type: Bool
+                      default: yes
+                      help: Deploy "public" external network on the overcloud as post-install.
+
                   deployment-files:
                       type: Value
                       help: |
@@ -68,6 +73,11 @@ subparsers:
                       type: Value
                       help: |
                          An Optional external VLAN ID of the external network (Not to be confused with the Public API network)
+
+                  network-octavia:
+                      type: Bool
+                      default: no
+                      help: Deploy Overcloud with Octavia (Load Balancer).
 
             - title: Scale down nodes
               options:
@@ -123,3 +133,11 @@ subparsers:
                       default: '1'
                       help: |
                         Number of workload objects to be created
+
+            - title: Deployment Description
+              options:
+                  ntp-server:
+                      type: Value
+                      help: |
+                            Ntp server name (or IP) to use.
+                      default: clock.redhat.com
