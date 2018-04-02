@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "75fabee4_1f69de19",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1010429
+      },
+      "writtenOn": "2018-04-02T13:57:51Z",
+      "side": 1,
+      "message": "The idea of cloud-config plugin is to contain post install tasks, which can be triggered after overcloud installation.\n\n--tasks option of the plugin autopopulate the names of all files in post_tasks folders as options. That is why in main we check only if \u0027example_tasks\u0027 is in install.tasks, and then after the tasks file is included we check of other mandatory params to the post task.",
+      "revId": "c52fe6d29a04317be4b924b6dc80f01a23d3c39a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fb64a064_bfbcfbf9",
+        "filename": "main.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1010429
+      },
+      "writtenOn": "2018-04-02T13:57:51Z",
+      "side": 1,
+      "message": "Please consider what i wrote as comment for the commit message.",
+      "revId": "c52fe6d29a04317be4b924b6dc80f01a23d3c39a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3755b4e8_3f6c7ea0",
+        "filename": "main.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1010429
+      },
+      "writtenOn": "2018-04-02T13:57:51Z",
+      "side": 1,
+      "message": "same as octavia comment.",
+      "range": {
+        "startLine": 10,
+        "startChar": 6,
+        "endLine": 10,
+        "endChar": 26
+      },
+      "revId": "c52fe6d29a04317be4b924b6dc80f01a23d3c39a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2465dbed_bc1b8373",
+        "filename": "main.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1010429
+      },
+      "writtenOn": "2018-04-02T13:57:51Z",
+      "side": 1,
+      "message": "I don\u0027t think this tag is needed, cause this plugin is not related to the oc deploy.",
+      "range": {
+        "startLine": 11,
+        "startChar": 6,
+        "endLine": 11,
+        "endChar": 14
+      },
+      "revId": "c52fe6d29a04317be4b924b6dc80f01a23d3c39a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0a00367_51e9b203",
+        "filename": "main.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1010429
+      },
+      "writtenOn": "2018-04-02T13:57:51Z",
+      "side": 1,
+      "message": "If tou rework the octavia to be as task, not to be triggere by install.network.octavia you won\u0027t need the whole checkup. only if create_external_network is in install.tasks",
+      "range": {
+        "startLine": 18,
+        "startChar": 3,
+        "endLine": 18,
+        "endChar": 108
+      },
+      "revId": "c52fe6d29a04317be4b924b6dc80f01a23d3c39a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7e490b33_091be382",
+        "filename": "main.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1010429
+      },
+      "writtenOn": "2018-04-02T13:57:51Z",
+      "side": 1,
+      "message": "I\u0027m not sure what is the idea here, but when there is a yml file in post_tasks, plugin will automatically detect it and it will promote it name as --tasks option\n\nMaybe you can just make check here if \u0027\"octavia\" in install.tasks\u0027 and include it.",
+      "range": {
+        "startLine": 42,
+        "startChar": 7,
+        "endLine": 43,
+        "endChar": 33
+      },
+      "revId": "c52fe6d29a04317be4b924b6dc80f01a23d3c39a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
