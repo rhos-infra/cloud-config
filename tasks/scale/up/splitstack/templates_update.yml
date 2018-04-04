@@ -1,0 +1,10 @@
+- name: Find ctrlplane-template.yml location
+  shell: cat {{ overcloud_deploy_script }} | grep ctrlplane-template.yml | awk '{print $2}'
+  register: ctrlplane_template_location
+
+- name: Create control plane network template
+  template:
+      src: "scale/ctrlplane-template.yml.j2"
+      dest: "{{ ctrlplane_template_location.stdout }}"
+      backup: yes
+      force: yes
