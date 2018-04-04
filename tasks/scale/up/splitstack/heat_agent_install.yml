@@ -1,0 +1,52 @@
+- name: Create dict with scale up info
+  set_fact:
+      scale_up_dict: "{{ scale_up_dict|default({})|combine({role_title: {'new_ips': (scale_up_dict|default({})).get(role_title, {}).get('new_ips', []) + [hostvars[item].ansible_host|default(hostvars[item].ansible_ssh_host)] } }) }}"
+  vars:
+      role_title: "{{ item.rstrip('1234567890-').split('-')[-1].title() }}"
+  with_items: "{{ install.scale.nodes }}"
+
+- name: Calculate total nodes per role
+  set_fact:
+      scale_up_dict: "{{ scale_up_dict|combine({role_title: {'count': scale_up_dict.get(role_title, {}).get('count', 0) + 1}}, recursive=True) }}"
+  vars:
+      role_title: "{{ item.rstrip('1234567890-').split('-')[-1].title() }}"
+  with_items: "{{ groups.overcloud_nodes }}"
+
+- name: Get stack resource
+  shell: |
+      source ~/stackrc
+      openstack stack resource show {{ install.overcloud.stack }} {{ item.key }}DeployedServer -c physical_resource_id -f value
+  register: rg_stack_info
+  with_dict: "{{ scale_up_dict }}"
+
+- name: Set rg_stack to scale_up_dict
+  set_fact:
+      scale_up_dict: "{{ scale_up_dict|combine({role_title: {'rg_stack': item.stdout}}, recursive=True) }}"
+  vars:
+      role_title: "{{ item.item.key }}"
+  with_items: "{{ rg_stack_info.results }}"
+
+- name: Get stack resource list
+  shell: |
+      source ~/stackrc
+      openstack stack resource list {{ item.value.rg_stack }} -c physical_resource_id -f value
+  register: stacks_info
+  with_dict: "{{ scale_up_dict }}"
+
+- name: Set stacks to scale_up_dict
+  set_fact:
+      scale_up_dict: "{{ scale_up_dict|combine({role_title: {'stacks': item.stdout_lines}}, recursive=True) }}"
+  vars:
+      role_title: "{{ item.item.key }}"
+  with_items: "{{ stacks_info.results }}"
+
+- name: Create heat agent template for new nodes
+  template:
+      src: "scale/heat-agent-new-nodes.sh.j2"
+      dest: "~/heat-agent-new-nodes.sh"
+      mode: '0755'
+
+- name: Run heat agent script in a background if splitstack deployment
+  shell: ~/heat-agent-new-nodes.sh > heat_agent_new_nodes.log 2>&1
+  async: 1000
+  poll: 0
