@@ -131,3 +131,23 @@ subparsers:
                       type: Value
                       help: Ntp server name (or IP) to use.
                       default: clock.redhat.com
+            - title: Storage
+              options:
+                  storage-external:
+                      type: Bool
+                      help: Whether to use an external storage rather than setting it up with the director
+                      default: no
+
+                  storage-backend:
+                      type: Value
+                      choices:
+                          - ceph
+                          - swift
+                          - netapp-iscsi
+                          - netapp-nfs
+                          - lvm
+                      help: |
+                        The storage that we would like to use.
+                        If not supplied, Infrared will try to discover storage nodes and select appropriate backed.
+                        The 'lvm' value will be used when storage nodes were not found.
+                        NOTE: when not using external storage, this will set the default for "--storage-nodes" to 1.
