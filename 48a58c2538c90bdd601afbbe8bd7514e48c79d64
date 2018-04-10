@@ -1,0 +1,10 @@
+Verified+1: rhosqeauto <obaranov+rhosqeauto@redhat.com>
+Code-Review+1: Avi Talmor <atalmor@redhat.com>
+Code-Review+1: Avishay Mahluf <avishay89@gmail.com>
+Code-Review+1: Daniel Todorov <leinad390@gmail.com>
+Code-Review+2: Oleksii Baranov <obaranov@redhat.com>
+Submitted-by: Oleksii Baranov <obaranov@redhat.com>
+Submitted-at: Tue, 10 Apr 2018 04:34:57 -0400
+Reviewed-on: https://review.gerrithub.io/405983
+Project: rhos-infra/cloud-config
+Branch: refs/heads/master
