@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aa61fc0c_e996b876",
+        "filename": ".gitignore",
+        "patchSetId": 10
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1006589
+      },
+      "writtenOn": "2018-04-17T08:20:25Z",
+      "side": 1,
+      "message": "why only this specific file? I\u0027d suggest to remove that or add *.retry",
+      "range": {
+        "startLine": 106,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 4
+      },
+      "revId": "2f9e7daa1c15f4bd8edd63e89002f222939e6907",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
