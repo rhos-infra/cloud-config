@@ -42,7 +42,10 @@
       template_base: "{{ ansible_user_dir }}/{{ source_dir | basename }}"
   tasks:
       - name: get the default floating ip pool name from the server
-        command: "grep -oP \"(?<=default_floating_pool=)(.*$)\" /etc/nova/nova.conf"
+        shell: |
+            test -f /etc/nova/nova.conf && \
+                grep -oP "(?<=default_floating_pool=)(.*$)" /etc/nova/nova.conf || \
+                awk -F'\"' '/default_floating_pool/ {print $4}' /etc/puppet/hieradata/service_configs.json
         register: pool_name
         delegate_to: "{{ groups.nova_scheduler | first }}"
         become: yes
