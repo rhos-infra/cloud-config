@@ -61,3 +61,6 @@
 - name: Check and correct time diff after deployment on controllers
   include: post_tasks/network_time.yml
   when: '"network_time" in install.tasks'
+
+- name: Run workarounds
+  include: workarounds.yml
