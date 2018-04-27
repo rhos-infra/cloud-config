@@ -1,0 +1,7 @@
+Code-Review+2: Daniel Todorov <leinad390@gmail.com>
+Verified+1: rhosqeauto <obaranov+rhosqeauto@redhat.com>
+Submitted-by: Oleksii Baranov <obaranov@redhat.com>
+Submitted-at: Fri, 27 Apr 2018 09:48:27 +0000
+Reviewed-on: https://review.gerrithub.io/409153
+Project: rhos-infra/cloud-config
+Branch: refs/heads/master
