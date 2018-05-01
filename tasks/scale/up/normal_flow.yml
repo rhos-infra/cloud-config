@@ -131,4 +131,4 @@
       - name: Print nodes data yaml
         command: "cat {{ nodes_data_path.stdout }}"
 
-        when: is_node_data.rc == 0
+  when: is_node_data.rc == 0
