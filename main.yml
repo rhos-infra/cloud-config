@@ -1,5 +1,5 @@
 - name: Auto discover undercloud version
-  include: "{{ auto_discover_undercloud_version | default('version.yml') }}"
+  import_playbook: "{{ auto_discover_undercloud_version | default('version.yml') }}"
   when: install.version is not defined
   tags:
       - always
@@ -9,58 +9,58 @@
   when: "'tempest_deployer_input' in install.tasks"
 
 - name: Include task "External network creation"
-  include: post_tasks/create_external_network.yml
+  import_playbook: post_tasks/create_external_network.yml
   when: "'create_external_network' in install.tasks"
 
 - name: Forward Overcloud Dashboard from Hypervisor
-  include: post_tasks/forward_overcloud_dashboard.yml
+  import_playbook: post_tasks/forward_overcloud_dashboard.yml
   when:
       - '"forward_overcloud_dashboard" in install.tasks'
       - '"hypervisor" in groups'
 
 - name: Include task "LBaas v2"
-  include: post_tasks/lbaas_v2.yml
+  import_playbook: post_tasks/lbaas_v2.yml
   when: "'lbaas_v2' in install.tasks"
 
 - name: Include task "Compute SSH"
-  include: post_tasks/compute_ssh.yml
+  import_playbook: post_tasks/compute_ssh.yml
   when: '"compute_ssh" in install.tasks'
 
 - name: Include task "Scale down"
-  include: post_tasks/scale_down.yml
+  import_playbook: post_tasks/scale_down.yml
   when: '"scale_down" in install.tasks'
 
 - name: Include task "Scale up"
-  include: post_tasks/scale_up.yml
+  import_playbook: post_tasks/scale_up.yml
   when: '"scale_up" in install.tasks'
 
 - name: Include task "Add overcloud hosts"
-  include: post_tasks/add_overcloud_hosts.yml
-  when: '"add_overcloud_hosts" in install.tasks'
+  import_playbook: post_tasks/add_overcloud_hosts.yml
+  when: '"add_overcloud_hosts" in install.tasks or "scale_up" in install.tasks'
 
 - name: Configure fencing
-  include: post_tasks/fencing.yml
+  import_playbook: post_tasks/fencing.yml
   when: '"fencing" in install.tasks'
 
 - name: Configure instance high-availability
-  include: post_tasks/instance_ha.yml
+  import_playbook: post_tasks/instance_ha.yml
   when: '"instance_ha" in install.tasks'
 
 - name: Setup libvirt debug log filters
-  include: post_tasks/libvirt_log_filters.yml
+  import_playbook: post_tasks/libvirt_log_filters.yml
   when: '"libvirt_log_filters" in install.tasks'
 
 - name: Launch overcloud workload
-  include: post_tasks/launch_workload.yml
+  import_playbook: post_tasks/launch_workload.yml
   when: '"launch_workload" in install.tasks'
 
 - name: Edit /etc/manila/manila.conf
-  include: post_tasks/manila.yml
+  import_playbook: post_tasks/manila.yml
   when: '"manila" in install.tasks'
 
 - name: Check and correct time diff after deployment on controllers
-  include: post_tasks/network_time.yml
+  import_playbook: post_tasks/network_time.yml
   when: '"network_time" in install.tasks'
 
 - name: Run workarounds
-  include: workarounds.yml
+  import_playbook: workarounds.yml

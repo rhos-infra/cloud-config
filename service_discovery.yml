@@ -26,7 +26,7 @@
         when: service_map[item] is not defined
         with_items: "{{ services }}"
 
-      - include: tasks/service_discovery.yml
+      - include_tasks: tasks/service_discovery.yml
         when: service_map[service].group not in groups or install.resync|default(false)
         with_items: "{{ services }}"
         loop_control:

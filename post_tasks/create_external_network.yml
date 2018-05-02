@@ -16,7 +16,7 @@
             msg: "--public-subnet is required"
         when: install.get('public', {}).subnet is not defined
 
-- include: ../service_discovery.yml
+- import_playbook: ../service_discovery.yml
   vars:
       services: ['nova-scheduler']
 
