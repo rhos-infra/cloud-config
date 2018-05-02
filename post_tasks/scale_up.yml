@@ -74,7 +74,7 @@
       - name: Print stack failures
         shell: |
             source ~/stackrc
-            openstack stack failures list overcloud
+            openstack stack failures list overcloud --long 2>&1 | tee openstack_failures_scale_up.log
         when: overcloud_scale.rc != 0 and undercloud_version|openstack_release >= 10
         tags: skip_ansible_lint
 
