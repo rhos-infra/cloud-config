@@ -36,7 +36,7 @@
 
 - name: Include task "Add overcloud hosts"
   import_playbook: post_tasks/add_overcloud_hosts.yml
-  when: '"add_overcloud_hosts" in install.tasks or "scale_up" in install.tasks'
+  when: '"add_overcloud_hosts" in install.tasks'
 
 - name: Configure fencing
   import_playbook: post_tasks/fencing.yml

@@ -78,6 +78,18 @@
         when: overcloud_scale.rc != 0 and undercloud_version|openstack_release >= 10
         tags: skip_ansible_lint
 
+- name: Try to update inventory even when deployment has failed
+  import_playbook: add_overcloud_hosts.yml
+  tags:
+      - inventory_update
+
+- name: Verify overcloud scale up
+  hosts: undercloud
+  gather_facts: no
+  any_errors_fatal: true
+  tasks:
       - fail:
             msg: "Overcloud scale up failed... :("
-        when: overcloud_scale.rc != 0
+        when:
+            - overcloud_scale is defined
+            - overcloud_scale.rc != 0
