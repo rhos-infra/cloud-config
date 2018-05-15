@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "231b4ea1_35c92ddb",
+        "filename": "post_tasks/launch_workload.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005418
+      },
+      "writtenOn": "2018-05-15T18:07:15Z",
+      "side": 1,
+      "message": "Instead of relying on the version var we could autodetect the version based on the installed tht package version(since we\u0027re running this on the undercloud) with something like:\n\n      - name: register tht package\n        yum:\n            list: openstack-tripleo-heat-templates\n        register: tht\n \n      - set_fact:\n          old_quota_command: \"{{ tht_pkg.version | version_compare(\u00272.0.0\u0027, \u0027\u003c\u003d\u0027) }}\"\n        vars:\n            tht_pkg: \"{{ tht.results|selectattr(\u0027yumstate\u0027, \u0027equalto\u0027, \u0027installed\u0027)|first }}\"\n\nand make the conditional based on the old_quota_command fact, 2.0.0 is the tht version installed on osp9.",
+      "revId": "f35702d43f6daf72bf6f6bd1425a154b5a71d3da",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
