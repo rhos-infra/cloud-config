@@ -16,6 +16,47 @@
       "revId": "f35702d43f6daf72bf6f6bd1425a154b5a71d3da",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5765dd79_5a85f58d",
+        "filename": "post_tasks/launch_workload.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1005418
+      },
+      "writtenOn": "2018-05-15T18:15:16Z",
+      "side": 1,
+      "message": "Never mind, we already have this info available.",
+      "parentUuid": "231b4ea1_35c92ddb",
+      "revId": "f35702d43f6daf72bf6f6bd1425a154b5a71d3da",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39026075_da12a485",
+        "filename": "post_tasks/launch_workload.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1005418
+      },
+      "writtenOn": "2018-05-15T18:15:16Z",
+      "side": 1,
+      "message": "use this instead:\n\nwhen: install.version|default(undercloud_version)|openstack_release \u003e 9",
+      "range": {
+        "startLine": 14,
+        "startChar": 6,
+        "endLine": 14,
+        "endChar": 31
+      },
+      "revId": "f35702d43f6daf72bf6f6bd1425a154b5a71d3da",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
