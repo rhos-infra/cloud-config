@@ -17,13 +17,24 @@
       delegate_to: "{{ groups.nova_scheduler | first }}"
       become: yes
 
-    - name: Update quotas
+    - name: Update quotas RHOS-10+
       shell: |
           source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
           openstack quota set --cores -1 --instances -1 --volumes -1 \
                     --networks -1 --subnets -1 --ports -1 --routers -1 \
                     --ram -1 --secgroups -1 --fixed-ips -1 \
                     --floating-ips -1 admin
+      tags: skip_ansible_lint
+      when: install.version|default(undercloud_version)|openstack_release > 9
+
+    - name: Update quotas RHOS<10
+      shell: |
+          source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
+          openstack quota set --cores -1 --instances -1 --volumes -1 \
+                    --ram -1 --secgroups -1 --fixed-ips -1 \
+                    --floating-ips -1 admin
+      tags: skip_ansible_lint
+      when: install.version|default(undercloud_version)|openstack_release < 10
 
     - include_tasks: ../tasks/launch_workload_step.yml
       loop_control:
