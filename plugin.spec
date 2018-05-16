@@ -131,6 +131,12 @@ subparsers:
                       type: Value
                       help: Ntp server name (or IP) to use.
                       default: clock.redhat.com
+                  hybrid:
+                      type: FileValue
+                      help: |
+                            Specifies whether deploying a hybrid environment.
+                            The target file should contain information about the bare-metals servers
+                            that will be added to the instackenv.json file during introspection.
             - title: Storage
               options:
                   storage-external:
