@@ -131,6 +131,10 @@ subparsers:
                       type: Value
                       help: Ntp server name (or IP) to use.
                       default: clock.redhat.com
+                  hybrid:
+                      type: Bool
+                      help: Specifies whether deploying a hybrid environment.
+                      default: no
             - title: Storage
               options:
                   storage-external:
