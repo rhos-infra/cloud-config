@@ -22,6 +22,30 @@
       "revId": "ef93e263a4889a16dc83d373b17cc6515954cae1",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3d967051_6d021a0a",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1013202
+      },
+      "writtenOn": "2018-05-17T09:48:43Z",
+      "side": 1,
+      "message": "There is use case when we can override current resource class for already exist flavor and node, that\u0027s why i need to remove old one and associate new. Such approach is used in the tripleo-overcloud plugin as well.",
+      "parentUuid": "7a469229_d51eb885",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 85
+      },
+      "revId": "ef93e263a4889a16dc83d373b17cc6515954cae1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
