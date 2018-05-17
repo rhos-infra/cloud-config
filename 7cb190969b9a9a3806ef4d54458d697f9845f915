@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fdc3d47e_21b306d1",
+        "filename": "post_tasks/create_external_network.yml",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1012221
+      },
+      "writtenOn": "2018-05-17T06:54:17Z",
+      "side": 1,
+      "message": "in tripleo-overcloud we have another condition which you\u0027re missing here:\n(\u0027bmc\u0027 in groups)",
+      "range": {
+        "startLine": 86,
+        "startChar": 58,
+        "endLine": 86,
+        "endChar": 73
+      },
+      "revId": "7cb190969b9a9a3806ef4d54458d697f9845f915",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
