@@ -22,6 +22,29 @@
       "revId": "7cb190969b9a9a3806ef4d54458d697f9845f915",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79e0787f_cfad948e",
+        "filename": "post_tasks/create_external_network.yml",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1008672
+      },
+      "writtenOn": "2018-05-17T07:59:50Z",
+      "side": 1,
+      "message": "Why add additional configuration parameter and not to depend on the existing groups within the inventory.\n\nIt becomes too much configuration parameters to specify for a pretty simple task and miss all the \"user friendly\" interface.",
+      "range": {
+        "startLine": 86,
+        "startChar": 75,
+        "endLine": 86,
+        "endChar": 97
+      },
+      "revId": "7cb190969b9a9a3806ef4d54458d697f9845f915",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
