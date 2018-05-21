@@ -50,6 +50,22 @@
       openstack baremetal node set --property capabilities='profile:{{ item.item.rstrip('1234567890-').split('-')[-1] }},boot_option:local' {{ item.stdout }}
   with_items: "{{ nodes_uuid_info.results }}"
   tags: skip_ansible_lint
+  when: not install.specific.node.ids
+
+- block:
+    - name: get baremetal info about new UUIDs
+      shell: |
+        source ~/stackrc
+        openstack baremetal node show {{ item.stdout }} -f json
+      register: nodes_baremetal_info
+      with_items: "{{ nodes_uuid_info.results }}"
+
+    - name: set specific node ids
+      shell: |
+          source ~/stackrc
+          openstack baremetal node set --property capabilities='node:{{ (item.stdout|from_json).name }},boot_option:local' {{ (item.stdout|from_json).uuid }}
+      with_items: "{{ nodes_baremetal_info.results }}"
+  when: install.specific.node.ids
 
 - name: Check if node name is not None
   shell: |
