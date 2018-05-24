@@ -103,6 +103,18 @@
         ignore_errors: yes
         tags: skip_ansible_lint
 
+- name: Try to update inventory
+  import_playbook: add_overcloud_hosts.yml
+  tags:
+      - inventory_update
+
+- name: Print scale down status
+  hosts: undercloud
+  gather_facts: no
+  any_errors_fatal: true
+  vars:
+      node_name: "{{ install.node.name }}.localdomain"
+  tasks:
       - name: Print the last few lines of the output to spot failures
         command: tail -n60 overcloud_scale.log
 
@@ -111,7 +123,10 @@
         shell: |
             source ~/stackrc
             openstack stack failures list overcloud
-        when: overcloud_scale.rc != 0 and install.version|default(undercloud_version)|openstack_release >= 10
+        when:
+            - overcloud_scale is defined
+            - overcloud_scale.rc != 0
+            - install.version|default(undercloud_version)|openstack_release >= 10
         tags: skip_ansible_lint
 
       - fail:
