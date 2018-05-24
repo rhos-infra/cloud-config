@@ -1,0 +1,7 @@
+Verified+1: rhosqeauto <obaranov+rhosqeauto@redhat.com>
+Code-Review+2: grechka91 <ahrechan@redhat.com>
+Submitted-by: Oleksii Baranov <obaranov@redhat.com>
+Submitted-at: Thu, 24 May 2018 12:16:27 +0000
+Reviewed-on: https://review.gerrithub.io/411909
+Project: rhos-infra/cloud-config
+Branch: refs/heads/master
