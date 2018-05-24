@@ -270,3 +270,14 @@ subparsers:
                         If not supplied, Infrared will try to discover storage nodes and select appropriate backed.
                         The 'lvm' value will be used when storage nodes were not found.
                         NOTE: when not using external storage, this will set the default for "--storage-nodes" to 1.
+            - title: Control Node Placement
+              options:
+                  specific-node-ids:
+                      type: Bool
+                      default: no
+                      help: |
+                          Default tagging behaviour is to set properties/capabilities profile, which is based on the
+                          node_type for all nodes from this type. If this value is set to true/yes, default behaviour
+                          will be overwritten and profile will be removed, node id will be added to properties/capabilities
+                          and scheduler hints will be generated.
+                          Examples of node IDs include controller-0, controller-1, compute-0, compute-1, and so forth.
