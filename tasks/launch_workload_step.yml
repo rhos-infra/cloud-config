@@ -153,10 +153,13 @@
 
 - block:
     - name: Assign floating IP to workload instance
+      vars:
+        network_name: "{{ install.public.get('net', {}).name|default(pool_name.stdout_lines|last) }}"
       os_floating_ip:
           # Required for SSL
           validate_certs: no
           cloud: overcloud
+          network: "{{ network_name }}"
           server: workload_instance_{{ step }}
 
     - name: Register workload instance facts
