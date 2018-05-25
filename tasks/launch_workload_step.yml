@@ -152,26 +152,45 @@
   delay: 5
 
 - block:
-    - name: Assign floating IP to workload instance
-      os_floating_ip:
-          # Required for SSL
-          validate_certs: no
-          cloud: overcloud
-          server: workload_instance_{{ step }}
-
+    ## register facts to check if floating IP is assigned
+    ## os_floating_ip is not idempotent in some cases such
+    ## as with the vlan jobs scenario
     - name: Register workload instance facts
       os_server_facts:
           # Required for SSL
           validate_certs: no
           cloud: overcloud
           server: workload_instance_{{ step }}
+
+    - name: Assign floating IP to workload instance
+      vars:
+        network_name: "{{ install.public.get('net', {}).name|default(pool_name.stdout_lines|last) }}"
+      os_floating_ip:
+          # Required for SSL
+          validate_certs: no
+          cloud: overcloud
+          network: "{{ network_name }}"
+          server: workload_instance_{{ step }}
+          wait: yes
+      when: openstack_servers[0].addresses.iteritems() | list | first | last | length == 1
+
+    ## register facts for a second time after floating IP
+    ## was assigned
+    - name: Register workload instance facts
+      os_server_facts:
+          # Required for SSL
+          validate_certs: no
+          cloud: overcloud
+          server: workload_instance_{{ step }}
+      when: openstack_servers[0].addresses.iteritems() | list | first | last | length == 1
   delegate_to: "{{ groups.shade | first }}"
   vars:
     ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
 
+
 - name: Wait for port 22 to become open on workload instance
   wait_for:
       port: 22
-      host: "{{ openstack_servers[0].public_v4 }}"
+      host: "{{ (openstack_servers[0].addresses.iteritems() | list | first | last | last).addr }}"
       search_regex: SSH-2.0
       delay: 5
