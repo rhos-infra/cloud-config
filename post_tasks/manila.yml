@@ -19,6 +19,25 @@
            value: "ceph"
            state: "absent"
 
+      - name: netapp specific
+        when: '"netapp" in install.tasks'
+        block:
+        - name: enable snapshot_support for netapp jobs
+          shell: manila type-key default set snapshot_support=True
+
+        - name: enable create_share_from_snapshot_support for rhos>=11 netapp jobs
+          shell: manila type-key default set create_share_from_snapshot_support=True
+          when: install.version|default(undercloud_version)|openstack_release >= 11
+
+        - name: check spec
+          shell: |
+            manila extra-specs-list
+            manila type-list
+          register: result
+          # TODO: add a failed_when cause that checks output
+
+        - name: debug="{{ result }}"
+
       - name: Restart manila services
         shell: systemctl restart openstack-manila\*
 
