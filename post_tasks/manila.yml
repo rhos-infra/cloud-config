@@ -1,3 +1,4 @@
+---
 - name: Edit /etc/manila/manila.conf
   hosts: controller
   become: true
@@ -19,6 +20,19 @@
            value: "ceph"
            state: "absent"
 
+      - name: fetch /etc/manila/manila.conf
+        fetch:
+          src: /etc/manila/manila.conf"
+          dest: manila.conf
+
+      - name: detect netapp installs
+        shell: crudini --get /etc/manila/manila.conf DEFAULT enabled_share_backends | grep netapp
+        failed_when: false
+        register: detect_netapp
+        become: true
+        run_once: true
+        changed_when: false
+
       - name: Restart manila services
         shell: systemctl restart openstack-manila\*
 
@@ -31,6 +45,7 @@
           - name: get the default share from manila.conf
             command: "awk -F \"=\" '/^default_share_type/ {print $2}' /etc/manila/manila.conf"
             register: share_name
+            changed_when: false
 
           - set_fact:
                 share_name: "{{ share_name }}"
@@ -51,7 +66,29 @@
                 source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc.v3 || \
                 source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
             manila type-create {{ (share_name.stdout=='')|ternary('default', share_name.stdout) }} False
+        register: result
+        failed_when: result.rc !=0 && 'Share Type default already exists' not in result.stderr
+        changed_when: "'Share Type default already exists' not in result.stderr"
         when:
           - share_name.rc == 0
           - share_name.stdout
         tags: skip_ansible_lint
+
+      - name: netapp specific
+        when: hostvars['controller']['detect_netapp']['rc'] == 0
+        block:
+        - name: enable snapshot_support for netapp jobs
+          shell: manila type-key default set snapshot_support=True
+
+        - name: enable create_share_from_snapshot_support for rhos>=11 netapp jobs
+          shell: manila type-key default set create_share_from_snapshot_support=True
+          when: install.version|default(undercloud_version)|openstack_release >= 11
+
+        - name: check spec
+          shell: |
+            manila extra-specs-list
+            manila type-list
+          register: result
+          # TODO: add a failed_when cause that checks output
+
+        - debug: msg="{{ result }}"
