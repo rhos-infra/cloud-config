@@ -19,6 +19,18 @@
            value: "ceph"
            state: "absent"
 
+      - name: fetch /etc/manila/manila.conf
+        fetch:
+          src: /etc/manila/manila.conf"
+          dest: manila.conf
+
+      - name: detect netapp installs
+        shell: crudini --get /etc/manila/manila.conf DEFAULT enabled_share_backends | grep netapp
+        failed_when: false
+        register: detect_netapp
+        become: true
+        run_once: true
+
       - name: Restart manila services
         shell: systemctl restart openstack-manila\*
 
@@ -55,3 +67,22 @@
           - share_name.rc == 0
           - share_name.stdout
         tags: skip_ansible_lint
+
+      - name: netapp specific
+        when: detect_netapp.rc == 0
+        block:
+        - name: enable snapshot_support for netapp jobs
+          shell: manila type-key default set snapshot_support=True
+
+        - name: enable create_share_from_snapshot_support for rhos>=11 netapp jobs
+          shell: manila type-key default set create_share_from_snapshot_support=True
+          when: install.version|default(undercloud_version)|openstack_release >= 11
+
+        - name: check spec
+          shell: |
+            manila extra-specs-list
+            manila type-list
+          register: result
+          # TODO: add a failed_when cause that checks output
+
+        - name: debug="{{ result }}"
