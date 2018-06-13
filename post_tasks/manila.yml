@@ -1,3 +1,4 @@
+---
 - name: Edit /etc/manila/manila.conf
   hosts: controller
   become: true
@@ -19,6 +20,25 @@
            value: "ceph"
            state: "absent"
 
+      - name: fetch /etc/manila/manila.conf
+        fetch:
+          src: /etc/manila/manila.conf"
+          dest: manila.conf
+
+      - name: detect netapp installs
+        shell: crudini --get /etc/manila/manila.conf DEFAULT enabled_share_backends | grep netapp
+        failed_when: false
+        register: result
+        become: true
+        changed_when: false
+
+      - name: set is_netapp fact
+        set_fact:
+          is_netapp: "{{ result.rc == 0 }}"
+        delegate_to: "{{ item }}"
+        delegate_facts: yes
+        with_items: "{{ groups['undercloud'] }}"
+
       - name: Restart manila services
         shell: systemctl restart openstack-manila\*
 
@@ -31,6 +51,7 @@
           - name: get the default share from manila.conf
             command: "awk -F \"=\" '/^default_share_type/ {print $2}' /etc/manila/manila.conf"
             register: share_name
+            changed_when: false
 
           - set_fact:
                 share_name: "{{ share_name }}"
@@ -51,7 +72,34 @@
                 source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc.v3 || \
                 source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
             manila type-create {{ (share_name.stdout=='')|ternary('default', share_name.stdout) }} False
+        register: result
+        failed_when: result.rc !=0 and 'Share Type default already exists' not in result.stderr
+        changed_when: "'Share Type default already exists' not in result.stderr"
         when:
           - share_name.rc == 0
           - share_name.stdout
         tags: skip_ansible_lint
+
+      - name: netapp specific
+        when: is_netapp
+        block:
+        - name: enable snapshot_support for netapp jobs
+          shell: |
+              test -f {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc.v3 && \
+                source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc.v3 || \
+                source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
+              manila type-key default set snapshot_support=True
+              manila extra-specs-list
+          register: result
+          failed_when: "'snapshot_support : True' not in result.stdout"
+
+        - name: enable create_share_from_snapshot_support for rhos>=11 netapp jobs
+          shell: |
+              test -f {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc.v3 && \
+                source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc.v3 || \
+                source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
+              manila type-key default set create_share_from_snapshot_support=True
+              manila extra-specs-list
+          when: install.version|default(undercloud_version)|openstack_release >= 11
+          register: result
+          failed_when: "'create_share_from_snapshot_support : True' not in result.stdout"

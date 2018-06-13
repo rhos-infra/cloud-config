@@ -48,6 +48,7 @@
                 awk -F'\"' '/default_floating_pool/ {print $4}' /etc/puppet/hieradata/service_configs.json
         register: pool_name
         delegate_to: "{{ groups.nova_scheduler | first }}"
+        changed_when: false
         become: yes
 
 # FIXME(yfried): this is commented because virthost solution is misconfiguring vlan. Need to reevaluate the vlan indicators
@@ -72,6 +73,7 @@
         command: "cat {{ network_environment_file_path.files[0].path }}"
         register: network_template_out
         when: network_environment_file_path.matched > 0
+        changed_when: false
 
       - name: load deployment network configuration as YAML
         set_fact:
@@ -109,6 +111,7 @@
             source ~/{{ install.overcloud.stack }}rc
             neutron net-show {{ net_create.network.name }}
         tags: skip_ansible_lint
+        changed_when: false
 
       # OSPD "External*" data can't be used to discover subnet details because:
       #     1) IPv6 public network is not supported as public network
@@ -138,3 +141,4 @@
             source ~/{{ install.overcloud.stack }}rc
             neutron subnet-show {{ subnet_create.subnet.name }}
         tags: skip_ansible_lint
+        changed_when: false
