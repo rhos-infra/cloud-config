@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aec55c80_fd0ef30b",
+        "filename": "post_tasks/manila.yml",
+        "patchSetId": 15
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1014514
+      },
+      "writtenOn": "2018-06-15T15:41:05Z",
+      "side": 1,
+      "message": "Why restart?",
+      "range": {
+        "startLine": 42,
+        "startChar": 6,
+        "endLine": 42,
+        "endChar": 37
+      },
+      "revId": "5284ff7e6e6ef38cf34c0a2af850c249260ea43d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "526c61c9_528197fe",
+        "filename": "post_tasks/manila.yml",
+        "patchSetId": 15
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1014514
+      },
+      "writtenOn": "2018-06-15T15:41:05Z",
+      "side": 1,
+      "message": "would be clearer if \"share_type_name\"",
+      "range": {
+        "startLine": 53,
+        "startChar": 28,
+        "endLine": 53,
+        "endChar": 32
+      },
+      "revId": "5284ff7e6e6ef38cf34c0a2af850c249260ea43d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1a784a5_6172dfcf",
+        "filename": "post_tasks/manila.yml",
+        "patchSetId": 15
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1014514
+      },
+      "writtenOn": "2018-06-15T15:41:05Z",
+      "side": 1,
+      "message": "missing: type",
+      "range": {
+        "startLine": 64,
+        "startChar": 27,
+        "endLine": 64,
+        "endChar": 28
+      },
+      "revId": "5284ff7e6e6ef38cf34c0a2af850c249260ea43d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e5ebd9c_7dbc0c5e",
+        "filename": "post_tasks/manila.yml",
+        "patchSetId": 15
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1014514
+      },
+      "writtenOn": "2018-06-15T15:41:05Z",
+      "side": 1,
+      "message": "share type",
+      "range": {
+        "startLine": 69,
+        "startChar": 36,
+        "endLine": 69,
+        "endChar": 41
+      },
+      "revId": "5284ff7e6e6ef38cf34c0a2af850c249260ea43d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c53575b_5da0f4f8",
+        "filename": "post_tasks/manila.yml",
+        "patchSetId": 15
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1014514
+      },
+      "writtenOn": "2018-06-15T15:41:05Z",
+      "side": 1,
+      "message": "this is the name if not overridden, but you\u0027ve gotten the name from the conf file in an earlier task..",
+      "range": {
+        "startLine": 91,
+        "startChar": 30,
+        "endLine": 91,
+        "endChar": 37
+      },
+      "revId": "5284ff7e6e6ef38cf34c0a2af850c249260ea43d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
