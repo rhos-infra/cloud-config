@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "04cb31e9_7c87426d",
+        "filename": "post_tasks/manila.yml",
+        "patchSetId": 15
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1008329
+      },
+      "writtenOn": "2018-06-15T16:39:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "526c61c9_528197fe",
+      "range": {
+        "startLine": 53,
+        "startChar": 28,
+        "endLine": 53,
+        "endChar": 32
+      },
+      "revId": "5284ff7e6e6ef38cf34c0a2af850c249260ea43d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c1a784a5_6172dfcf",
         "filename": "post_tasks/manila.yml",
         "patchSetId": 15
@@ -68,6 +92,30 @@
       "revId": "5284ff7e6e6ef38cf34c0a2af850c249260ea43d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04cc473b_db113acd",
+        "filename": "post_tasks/manila.yml",
+        "patchSetId": 15
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1008329
+      },
+      "writtenOn": "2018-06-15T16:39:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1a784a5_6172dfcf",
+      "range": {
+        "startLine": 64,
+        "startChar": 27,
+        "endLine": 64,
+        "endChar": 28
+      },
+      "revId": "5284ff7e6e6ef38cf34c0a2af850c249260ea43d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     },
     {
       "key": {
@@ -94,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "d8777aa1_c19e1d6e",
+        "filename": "post_tasks/manila.yml",
+        "patchSetId": 15
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1008329
+      },
+      "writtenOn": "2018-06-15T16:39:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e5ebd9c_7dbc0c5e",
+      "range": {
+        "startLine": 69,
+        "startChar": 36,
+        "endLine": 69,
+        "endChar": 41
+      },
+      "revId": "5284ff7e6e6ef38cf34c0a2af850c249260ea43d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5c53575b_5da0f4f8",
         "filename": "post_tasks/manila.yml",
         "patchSetId": 15
@@ -114,6 +186,30 @@
       "revId": "5284ff7e6e6ef38cf34c0a2af850c249260ea43d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cbc2dafa_dc1ce00a",
+        "filename": "post_tasks/manila.yml",
+        "patchSetId": 15
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1008329
+      },
+      "writtenOn": "2018-06-15T16:39:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c53575b_5da0f4f8",
+      "range": {
+        "startLine": 91,
+        "startChar": 30,
+        "endLine": 91,
+        "endChar": 37
+      },
+      "revId": "5284ff7e6e6ef38cf34c0a2af850c249260ea43d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
