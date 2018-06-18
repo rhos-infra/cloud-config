@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5518b54d_f987e1d2",
+        "filename": "post_tasks/manila.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1012293
+      },
+      "writtenOn": "2018-06-18T16:58:27Z",
+      "side": 1,
+      "message": "--is_public True\nNot sure how it worked earlier\nReference: https://docs.openstack.org/manila/queens/admin/shared-file-systems-share-types.html",
+      "revId": "bbccb0992f48cdccdf37f24780f104ad2e34a180",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
