@@ -67,7 +67,7 @@
   any_errors_fatal: true
   tasks:
       - name: set default share name if not already defined
-        when: share_type_name is not defined
+        when: share_type_name is not defined or not share_type_name
         set_fact:
            share_type_name: default
 
