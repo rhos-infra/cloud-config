@@ -142,10 +142,12 @@
   when: workload_instance_present|failed
 
 - name: Wait for instance to be in active state
+  vars:
+    jq_query: "{{ (install.version|default(undercloud_version)|openstack_release > 9)|ternary('jq -r -c .status', 'jq -r -c \'.[]|select(.Field == \"status\").Value\') }}"
   shell: |
       source ~/{{ install.overcloud.stack }}rc
       openstack server show workload_instance_{{ step }} -f json | \
-          jq -r -c .status
+          {{ jq_query }}
   register: instance_state
   until: instance_state.stdout.find("ACTIVE") > -1
   retries: 30
