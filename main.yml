@@ -62,5 +62,9 @@
   import_playbook: post_tasks/network_time.yml
   when: '"network_time" in install.tasks'
 
+- name: Check and correct time diff after deployment on controllers
+  import_playbook: post_tasks/replace_controller.yml
+  when: '"replace_controller" in install.tasks'
+
 - name: Run workarounds
   import_playbook: workarounds.yml

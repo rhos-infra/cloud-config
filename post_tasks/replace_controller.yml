@@ -1,0 +1,43 @@
+- name: Gather facts for Hypervisor
+  hosts: hypervisor
+  gather_facts: yes
+  any_errors_fatal: true
+
+- name: Gather facts for Overcloud Nodes
+  hosts: overcloud_nodes:!unused
+  gather_facts: no
+  any_errors_fatal: true
+  tasks:
+      - block:
+            - name: apply node hostnames
+              hostname:
+                  name: "{{ inventory_hostname }}"
+
+            - setup:
+        when: install.splitstack|default(False)
+
+- name: Replace controller
+  hosts: undercloud
+  gather_facts: yes
+  any_errors_fatal: true
+  tasks:
+      - name: call replace controller role
+        include_role:
+            name: replace-controller
+
+- name: Try to update inventory even when deployment has failed
+  import_playbook: add_overcloud_hosts.yml
+  tags:
+      - inventory_update
+
+- name: Verify controller replacement
+  hosts: undercloud
+  gather_facts: no
+  any_errors_fatal: true
+  tasks:
+      - name: fail controller replacement
+        fail:
+            msg: "Controller replacement has failed"
+        when:
+            - overcloud_replace is defined
+            - overcloud_replace.rc != 0
