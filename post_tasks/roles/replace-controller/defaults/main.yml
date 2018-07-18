@@ -1,0 +1,18 @@
+# run stages
+rc_preliminary_checks: yes
+rc_perform_undercloud_db_backup: yes
+rc_remove_ceph_monitor: yes
+rc_replace_node: yes
+rc_manual_intervention: yes
+rc_finalize: yes
+
+# specifies whether the controller is reachable by ssh or not
+rc_controller_is_reachable: yes
+
+# specifies if role should fail when replacement was not successful.
+# default is 'no' to make sure we can update inventory after failed replacement.
+rc_fail_on_replace: no
+
+rc_valid_controller_nodes: "{{ groups.controller|difference(groups.get('unused', []))|difference([install.controller.to.remove, install.controller.to.add]) }}"
+rc_corosync_retries: 5
+overcloud_deploy_script: "~/overcloud_deploy.sh"
