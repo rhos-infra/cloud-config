@@ -1,0 +1,38 @@
+- name: get mon stats
+  command: ceph mon stat
+  register: ceph_mon_stat
+  become: yes
+  delegate_to: "{{ rc_valid_controller_nodes|first }}"
+
+- name: get ip address of the monitor to remove
+  set_fact:
+      controller_remove_ip: "{{ ceph_mon_stat.stdout | regex_replace('.*' + install.controller.to.remove + '=([0-9\\.]*):.*', '\\1') }}"
+  when: install.controller.to.remove in ceph_mon_stat.stdout
+
+- name: remove mon service
+  block:
+      - name: stop mon service
+        command: "systemctl stop ceph-mon@{{ install.controller.to.remove }}"
+        delegate_to: "{{ install.controller.to.remove }}"
+        when: rc_controller_is_reachable
+
+      - name: remove the monitor from the cluster
+        command: "ceph mon remove {{ install.controller.to.remove }}"
+        when: install.controller.to.remove in ceph_mon_stat.stdout
+        delegate_to: "{{ rc_valid_controller_nodes|first }}"
+
+      - name: remove monitor entry from /etc/ceph/ceph.conf
+        replace:
+            path: /etc/ceph/ceph.conf
+            regexp: '{{ install.controller.to.remove }}(,)?'
+        delegate_to: "{{ item }}"
+        with_items: "{{ rc_valid_controller_nodes }}"
+
+      - name: remove monitor ip entry from /etc/ceph/ceph.conf
+        replace:
+            path: /etc/ceph/ceph.conf
+            regexp: "{{ controller_remove_ip }}(,)?"
+        delegate_to: "{{ item }}"
+        with_items: "{{ rc_valid_controller_nodes }}"
+        when: controller_remove_ip is defined
+  become: yes

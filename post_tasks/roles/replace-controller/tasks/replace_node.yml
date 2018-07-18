@@ -1,0 +1,76 @@
+- name: get the UUID of "{{ install.controller.to.remove }}"
+  shell: |
+      source ~/stackrc
+      openstack server list --name {{ install.controller.to.remove }} -f value -c ID
+  register: node_uuid_info
+  tags: skip_ansible_lint
+
+- name: set node_uuid
+  set_fact:
+      replace_node_uuid: "{{ node_uuid_info.stdout }}"
+
+- name: get baremetal info
+  shell: |
+      source ~/stackrc
+      openstack baremetal {{ 'node' if install.version|default(undercloud_version)|openstack_release >= 10 else '' }} show --instance {{ replace_node_uuid }} -c uuid -f value
+  register: baremetal_info
+  tags: skip_ansible_lint
+
+- name: set baremetal uuid fact
+  set_fact:
+      replace_node_baremetal_uuid: "{{ baremetal_info.stdout }}"
+
+- name: set the node "{{ install.controller.to.remove }}" into maintenance mode
+  shell: |
+      source ~/stackrc
+      openstack baremetal {{ 'node' if install.version|default(undercloud_version)|openstack_release >= 10 else '' }} maintenance set {{ replace_node_baremetal_uuid }}
+  register: node_uuid_info
+  tags: skip_ansible_lint
+
+- name: call add node role
+  include_role:
+      name: add-node
+  vars:
+      an_nodes_to_add:
+          - "{{ install.controller.to.add }}"
+      an_ignore_nodes:
+          - "{{ install.controller.to.remove }}"
+
+- name: unmanage galera service
+  command: pcs resource unmanage galera
+  become: yes
+  delegate_to: "{{ rc_valid_controller_nodes|first }}"
+
+- name: create template with controller index to remove
+  template:
+      dest: "/home/stack/remove-controller.yaml"
+      src: remove-controller.yaml.j2
+
+- name: append script to the deploy script
+  lineinfile:
+      dest: "{{ overcloud_deploy_script }}"
+      line: "-e /home/stack/remove-controller.yaml \\"
+      insertbefore: "^--log-file.*"
+      backup: yes
+
+- name: print deploy command
+  command: "cat {{ overcloud_deploy_script }}"
+
+- name: execute the overcloud deploy script
+  shell: |
+      source ~/stackrc
+      bash {{ overcloud_deploy_script }} &> overcloud_replace_controller.log
+  register: overcloud_replace
+  ignore_errors: yes
+  tags: skip_ansible_lint
+
+- name: print the last few lines of the output to spot failures
+  command: tail -n60 overcloud_replace_controller.log
+
+- name: print stack failures
+  shell: |
+      source ~/stackrc
+      openstack stack failures list {{ install.overcloud.stack }} --long 2>&1 | tee openstack_failures_replace.log
+  when: overcloud_replace.rc != 0 and undercloud_version|openstack_release >= 10
+  tags: skip_ansible_lint
+

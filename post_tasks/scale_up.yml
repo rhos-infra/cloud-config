@@ -54,6 +54,7 @@
 
         when: install.splitstack|default(False)
 
+        # todo(obaranov) migrate scale up/down to use new add-node role.
       - name: Scale up normal install
         include_tasks: ../tasks/scale/up/normal_flow.yml
         when: not install.splitstack|default(False)
