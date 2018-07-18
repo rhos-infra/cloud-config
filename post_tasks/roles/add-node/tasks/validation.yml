@@ -1,0 +1,11 @@
+- name: checking overcloud_deploy_file
+  stat:
+      path: "~/overcloud_deploy.sh"
+  register: overcloud_deploy_file
+
+- name: perform basic assertions
+  assert:
+      that:
+          - "overcloud_deploy_file.stat.exists == True"
+          - "an_nodes_to_add|length > 0"
+
