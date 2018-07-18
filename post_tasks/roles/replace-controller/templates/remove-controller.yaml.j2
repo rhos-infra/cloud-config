@@ -1,0 +1,6 @@
+parameters:
+  ControllerRemovalPolicies:
+    [{'resource_list': ['{{ install.controller.to.remove.split('-')[-1] }}']}]
+
+parameter_defaults:
+  CorosyncSettleTries: {{ rc_corosync_retries }}

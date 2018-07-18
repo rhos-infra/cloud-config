@@ -1,0 +1,27 @@
+- import_tasks: preliminary_checks.yml
+  when: rc_preliminary_checks == True
+
+- name: perform undercloud db backup
+  shell: |
+      mkdir -p /home/stack/backup
+      mysqldump --all-databases --quick --single-transaction | gzip > /home/stack/backup/dump_db_undercloud.sql.gz
+  become: yes
+  when: rc_perform_undercloud_db_backup == True
+
+- import_tasks: remove_ceph_monitor.yml
+  when:
+      - rc_remove_ceph_monitor == True
+      - "'ceph' in groups"
+
+- import_tasks: replace_node.yml
+  when: rc_replace_node
+
+- import_tasks: manual_intervention.yml
+  when:
+    - rc_manual_intervention == True
+    - overcloud_replace is defined
+    - overcloud_replace.rc != 0
+
+- import_tasks: finalize.yml
+  when:
+    - rc_finalize == True
