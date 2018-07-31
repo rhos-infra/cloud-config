@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ea7e7039_5ff22b11",
+        "filename": "plugin.spec",
+        "patchSetId": 6
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1008464
+      },
+      "writtenOn": "2018-07-31T18:32:29Z",
+      "side": 1,
+      "message": "may be it hsould be \"controller to add? \"",
+      "range": {
+        "startLine": 295,
+        "startChar": 51,
+        "endLine": 295,
+        "endChar": 57
+      },
+      "revId": "024eb1998922f06b62d48a3f9e2bd7ac4b4f3124",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d15e2e89_9ce60457",
+        "filename": "post_tasks/roles/add-node/defaults/main.yml",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1008464
+      },
+      "writtenOn": "2018-07-31T18:32:29Z",
+      "side": 1,
+      "message": "usually 6230 is the first port in use and the number goes up according to the amount of nodes. I think for the new node the port should be \"highest port from instack.json+1\"",
+      "range": {
+        "startLine": 8,
+        "startChar": 17,
+        "endLine": 8,
+        "endChar": 21
+      },
+      "revId": "024eb1998922f06b62d48a3f9e2bd7ac4b4f3124",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba5cbe45_cd757247",
+        "filename": "post_tasks/roles/add-node/tasks/discover_provision_net.yml",
+        "patchSetId": 6
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1008464
+      },
+      "writtenOn": "2018-07-31T18:32:29Z",
+      "side": 1,
+      "message": "why do u need the subnet? \n\nI did not see steps with undercloud subnet id.",
+      "range": {
+        "startLine": 5,
+        "startChar": 6,
+        "endLine": 5,
+        "endChar": 123
+      },
+      "revId": "024eb1998922f06b62d48a3f9e2bd7ac4b4f3124",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa9b8eca_4b81d0a2",
+        "filename": "post_tasks/roles/add-node/tasks/generate_instackenv.yml",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1008464
+      },
+      "writtenOn": "2018-07-31T18:32:29Z",
+      "side": 1,
+      "message": "prepare newnode.json file ?",
+      "range": {
+        "startLine": 31,
+        "startChar": 15,
+        "endLine": 31,
+        "endChar": 36
+      },
+      "revId": "024eb1998922f06b62d48a3f9e2bd7ac4b4f3124",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
