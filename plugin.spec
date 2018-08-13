@@ -281,3 +281,15 @@ subparsers:
                           will be overwritten and profile will be removed, node id will be added to properties/capabilities
                           and scheduler hints will be generated.
                           Examples of node IDs include controller-0, controller-1, compute-0, compute-1, and so forth.
+            - title: Replace controller
+              options:
+                  controller-to-remove:
+                      type: Value
+                      help: |
+                          The controller node name to be replaced.
+                          Example: --controller-to-remove="controller-1"
+                  controller-to-add:
+                      type: Value
+                      help: |
+                          The controller node name to be added instead the old one.
+                          Example: --controller-to-add="controller-1"

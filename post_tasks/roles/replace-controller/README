@@ -1,0 +1,18 @@
+Info
+----
+
+The replace controller role that implements this: https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html/director_installation_and_usage/sect-scaling_the_overcloud#sect-Replacing_Controller_Nodes
+
+Supported product versions:
+    - OSP13
+    - OSP14
+
+
+Pre-requirements
+----------------
+1. Gather facts for hypervisor::
+
+    - name: Gather facts for Hypervisor
+      hosts: hypervisor
+      gather_facts: yes
+      any_errors_fatal: true

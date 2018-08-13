@@ -1,0 +1,102 @@
+- name: delete failed node from the server list
+  shell: |
+      pcs cluster localnode remove {{ install.controller.to.remove }}
+      pcs cluster reload corosync
+  become: yes
+  delegate_to: "{{ item }}"
+  with_items: "{{ rc_valid_controller_nodes }}"
+  tags: skip_ansible_lint
+
+- name: delete node from cluster with crm_node
+  command: "crm_node -R {{ install.controller.to.remove }} --force"
+  become: yes
+  delegate_to: "{{ rc_valid_controller_nodes|first }}"
+
+- name: delete the failed node from the RabbitMQ cluster
+  shell: |
+      docker exec $(sudo docker ps -f name=rabbitmq-bundle -q) rabbitmqctl forget_cluster_node rabbit@{{ install.controller.to.remove }}
+  become: yes
+  delegate_to: "{{ rc_valid_controller_nodes|first }}"
+  when: install.version|default(undercloud_version)|openstack_release >= 12
+  tags: skip_ansible_lint
+  failed_when: false
+  changed_when: false
+
+- name: delete the failed node from the RabbitMQ cluster (non-containres)
+  command: "docker exec -it `(sudo docker ps -f name=rabbitmq-bundle -q)` rabbitmqctl forget_cluster_node rabbit@{{ install.controller.to.remove }}"
+  become: yes
+  delegate_to: "{{ rc_valid_controller_nodes|first }}"
+  when: install.version|default(undercloud_version)|openstack_release < 12
+  failed_when: false
+  changed_when: false
+
+- name: compile the map for galera cluster
+  set_fact:
+      galera_cluster_map_part1: "{{ galera_cluster_map_part1|default('') + item + ':' + item + '.internalapi.localdomain;' }}"
+  with_items: "{{ groups.controller|difference(groups.get('unused', []))|difference([install.controller.to.remove])|union([install.controller.to.add]) }}"
+
+- name: compile the map for galera cluster 2
+  set_fact:
+      galera_cluster_map_part2: "{{ galera_cluster_map_part2|default('') + item + '.internalapi.localdomain,' }}"
+  with_items: "{{ groups.controller|difference(groups.get('unused', []))|difference([install.controller.to.remove])|union([install.controller.to.add]) }}"
+
+- name: update list of nodes in the Galera cluster and refresh the cluster
+  shell: |
+      pcs resource update galera cluster_host_map="{{ galera_cluster_map_part1[0:-1] }}" wsrep_cluster_address="gcomm://{{ galera_cluster_map_part2[0:-1] }}"
+      pcs resource refresh galera
+      pcs resource manage galera
+  become: yes
+  delegate_to: "{{ rc_valid_controller_nodes|first }}"
+  tags: skip_ansible_lint
+
+# we can hit here these bugs:
+# https://bugzilla.redhat.com/show_bug.cgi?id=1600169
+# https://bugzilla.redhat.com/show_bug.cgi?id=1564218
+- name: add the new node to the cluster
+  command: "pcs cluster node add {{ install.controller.to.add }}{{ (rc_cluster_node_add_wait|int > 0) | ternary(' --wait=' + rc_cluster_node_add_wait|string, '') }}"
+  become: yes
+  register: cluster_node_add
+  failed_when: cluster_node_add.rc != 0 and 'node is already in a cluster' not in cluster_node_add.stderr
+  delegate_to: "{{ rc_valid_controller_nodes|first }}"
+
+- name: start the new controller node
+  command: "pcs cluster start {{ install.controller.to.add }}"
+  become: yes
+  delegate_to: "{{ rc_valid_controller_nodes|first }}"
+
+- name: remove the remove-controller.yaml from the deploy script
+  lineinfile:
+      dest: "{{ overcloud_deploy_script }}"
+      line: "-e /home/stack/remove-controller.yaml \\"
+      state: absent
+      backup: yes
+
+- name: print deploy command
+  command: "cat {{ overcloud_deploy_script }}"
+
+- name: rerun the overcloud deploy script
+  shell: |
+      source ~/stackrc
+      bash {{ overcloud_deploy_script }} &> overcloud_replace_controller_rerun.log
+  register: overcloud_replace
+  ignore_errors: yes
+  tags: skip_ansible_lint
+
+- name: print the last few lines of the output to spot failures
+  command: tail -n60 overcloud_replace_controller_rerun.log
+
+- name: print stack failures
+  shell: |
+      source ~/stackrc
+      openstack stack failures list {{ install.overcloud.stack }} --long 2>&1 | tee openstack_failures_replace_rerun.log
+  when: overcloud_replace.rc != 0 and undercloud_version|openstack_release >= 10
+  tags: skip_ansible_lint
+
+- name: fail on failure
+  fail:
+      msg: "Controller replacement failed. Check logs above."
+  when:
+      - rc_fail_on_replace == True
+      - overcloud_replace is defined
+      - overcloud_replace.rc != 0
+
