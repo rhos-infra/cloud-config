@@ -157,7 +157,7 @@
   vars:
     jq_old: jq -r -c '.[]|select(.Field == "status").Value'
     jq_current: jq -r -c .status
-    jq_query: "{{ (install.version|default(undercloud_version)|openstack_release > 9)|ternary(jq_current, jq_old) }}"
+    jq_query: "{{ (install.version|default(undercloud_version)|openstack_release >= 9)|ternary(jq_current, jq_old) }}"
   shell: |
       source ~/{{ install.overcloud.stack }}rc
       openstack server show workload_instance_{{ step }} -f json | \
