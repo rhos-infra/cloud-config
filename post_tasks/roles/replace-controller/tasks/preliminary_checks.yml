@@ -44,14 +44,25 @@
   changed_when: false
   register: openstack_nova_compute_status
 
+- name: get nova status in case of containerized undercloud
+  shell: |
+      docker inspect -f '{{ "{{.State.Running }}" }}' nova_compute
+  failed_when: false
+  changed_when: false
+  register: nova_compute_docker_status
+  tags: skip_ansible_lint
+
 - name: general asserts
+  vars:
+      non_containers_nova_status: "{{ openstack_nova_compute_status|succeeded and openstack_nova_compute_status.rc == 0 }}"
+      containers_nova_status: "{{ nova_compute_docker_status|succeeded and nova_compute_docker_status.rc == 0 and nova_compute_docker_status.stdout == 'true' }}"
   assert:
       that:
           - "groups.controller|length > 1"
           - "stack_status.stdout in ['CREATE_COMPLETE', 'UPDATE_COMPLETE']"
           - "pcs_cluster_active.rc > 0"
           - "pcs_stopped_nodes.rc > 0 or install.controller.to.remove in pcs_stopped_nodes.stdout"
-          - "openstack_nova_compute_status|succeeded and openstack_nova_compute_status.rc == 0"
+          - "non_containers_nova_status|bool or containers_nova_status|bool"
 
 - name: verify pacemaker online nodes
   assert:
