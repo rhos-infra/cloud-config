@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "89034df1_a6eedf4b",
+        "filename": "post_tasks/roles/replace-controller/tasks/preliminary_checks.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1001189
+      },
+      "writtenOn": "2018-09-20T07:35:02Z",
+      "side": 1,
+      "message": "may i ask why it is double wrapped in {}?\n\nin my case it works with single wrapping but not double:\n\n  % docker inspect -f \"{{ .State.Running }}\" 0c10c40c4e0a    \n  true\n  \n  % docker inspect -f \u0027{{ \"{{ .State.Running }}\" }}\u0027 0c10c40c4e0a\n  {{ .State.Running }}\n\nbut that\u0027s on F28 with docker 1.13.1\n(or am i missing something related to ansible variable templating here?)",
+      "revId": "1786b6b65dde15a1155202fe7fab726a2bf7a5ee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
