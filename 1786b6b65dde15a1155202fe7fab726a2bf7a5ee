@@ -16,6 +16,24 @@
       "revId": "1786b6b65dde15a1155202fe7fab726a2bf7a5ee",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80f4aac3_1c1cc25c",
+        "filename": "post_tasks/roles/replace-controller/tasks/preliminary_checks.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1006589
+      },
+      "writtenOn": "2018-09-20T07:38:42Z",
+      "side": 1,
+      "message": "Exactly. This is related to ansible variables. Simple {{ ... }} inside shell block are treated as variable. Also, there\u0027s no easy way to escape those \u0027{\u0027. So the easiest solution for me was to use {{ isnside another {{ }}.",
+      "parentUuid": "89034df1_a6eedf4b",
+      "revId": "1786b6b65dde15a1155202fe7fab726a2bf7a5ee",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
