@@ -19,13 +19,6 @@
       failed_when: false
       changed_when: false
 
-    - name: get pacemaker stopped nodes
-      vars:
-          search_pattern: "{{ (install.version|default(undercloud_version)|int > 12) | ternary('Stopped', 'Stopped:') }}"
-      shell: "pcs status | grep -w {{ search_pattern }}"
-      register: pcs_stopped_nodes
-      failed_when: false
-      changed_when: false
   become: true
   delegate_to: "{{ rc_valid_controller_nodes|first }}"
 
@@ -61,7 +54,6 @@
           - "groups.controller|length > 1"
           - "stack_status.stdout in ['CREATE_COMPLETE', 'UPDATE_COMPLETE']"
           - "pcs_cluster_active.rc > 0"
-          - "pcs_stopped_nodes.rc > 0 or install.controller.to.remove in pcs_stopped_nodes.stdout"
           - "non_containers_nova_status|bool or containers_nova_status|bool"
 
 - name: verify pacemaker online nodes
