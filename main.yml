@@ -4,71 +4,9 @@
   tags:
       - always
 
-- name: Fetch tempest deployer input file
-  import_playbook: post_tasks/tempest_deployer_input.yml
-  when: "'tempest_deployer_input' in install.tasks"
-
-- name: Include task "External network creation"
-  import_playbook: post_tasks/create_external_network.yml
-  when: "'create_external_network' in install.tasks"
-
-- name: Forward Overcloud Dashboard from Hypervisor
-  import_playbook: post_tasks/forward_overcloud_dashboard.yml
-  when:
-      - '"forward_overcloud_dashboard" in install.tasks'
-      - '"hypervisor" in groups'
-
-- name: Include task "LBaas v2"
-  import_playbook: post_tasks/lbaas_v2.yml
-  when: "'lbaas_v2' in install.tasks"
-
-- name: Include task "Octavia"
-  import_playbook: post_tasks/octavia.yml
-  when: "'octavia' in install.tasks"
-
-- name: Include task "Compute SSH"
-  import_playbook: post_tasks/compute_ssh.yml
-  when: '"compute_ssh" in install.tasks'
-
-- name: Include task "Scale down"
-  import_playbook: post_tasks/scale_down.yml
-  when: '"scale_down" in install.tasks'
-
-- name: Include task "Scale up"
-  import_playbook: post_tasks/scale_up.yml
-  when: '"scale_up" in install.tasks'
-
-- name: Include task "Add overcloud hosts"
-  import_playbook: post_tasks/add_overcloud_hosts.yml
-  when: '"add_overcloud_hosts" in install.tasks'
-
-- name: Configure fencing
-  import_playbook: post_tasks/fencing.yml
-  when: '"fencing" in install.tasks'
-
-- name: Configure instance high-availability
-  import_playbook: post_tasks/instance_ha.yml
-  when: '"instance_ha" in install.tasks'
-
-- name: Setup libvirt debug log filters
-  import_playbook: post_tasks/libvirt_log_filters.yml
-  when: '"libvirt_log_filters" in install.tasks'
-
-- name: Launch overcloud workload
-  import_playbook: post_tasks/launch_workload.yml
-  when: '"launch_workload" in install.tasks'
-
-- name: Edit /etc/manila/manila.conf
-  import_playbook: post_tasks/manila.yml
-  when: '"manila" in install.tasks'
-
-- name: Check and correct time diff after deployment on controllers
-  import_playbook: post_tasks/network_time.yml
-  when: '"network_time" in install.tasks'
-
-- name: Check and correct time diff after deployment on controllers
-  import_playbook: post_tasks/replace_controller.yml
-  when: '"replace_controller" in install.tasks'
+- name: Run post tasks
+  import_playbook: "{{ item }}"
+  with_items: "{{ install.tasks.split() }}"
 
 - name: Run workarounds
   import_playbook: workarounds.yml
