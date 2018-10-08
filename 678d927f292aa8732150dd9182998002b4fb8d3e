@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "59bb4559_0c18b99c",
+        "filename": "main.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1010448
+      },
+      "writtenOn": "2018-10-08T09:51:04Z",
+      "side": 0,
+      "message": "The only concern is this playbook is valid for environments with \u0027hypervisor\u0027 group. So either we leave this task as is or wrap all tasks from that playbook in block that has this extra check - when: \u0027\"hypervisor\" in groups\u0027",
+      "range": {
+        "startLine": 16,
+        "startChar": 19,
+        "endLine": 16,
+        "endChar": 61
+      },
+      "revId": "678d927f292aa8732150dd9182998002b4fb8d3e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
