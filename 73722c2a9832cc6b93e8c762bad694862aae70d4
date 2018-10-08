@@ -22,6 +22,30 @@
       "revId": "73722c2a9832cc6b93e8c762bad694862aae70d4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d9f724ab_7b31bf5c",
+        "filename": "main.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1004788
+      },
+      "writtenOn": "2018-10-08T10:23:07Z",
+      "side": 1,
+      "message": "Yup (it worries me that the gate didn\u0027t catch such critical mistake...)\n\nI\u0027ll give it a manual verification.",
+      "parentUuid": "18f09dbd_4f0d493c",
+      "range": {
+        "startLine": 8,
+        "startChar": 20,
+        "endLine": 8,
+        "endChar": 31
+      },
+      "revId": "73722c2a9832cc6b93e8c762bad694862aae70d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
