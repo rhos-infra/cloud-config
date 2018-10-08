@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "18f09dbd_4f0d493c",
+        "filename": "main.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1010448
+      },
+      "writtenOn": "2018-10-08T10:16:39Z",
+      "side": 1,
+      "message": "Shouldn\u0027t it be \"post_tasks/{{ item }}.yml\" ?",
+      "range": {
+        "startLine": 8,
+        "startChar": 20,
+        "endLine": 8,
+        "endChar": 31
+      },
+      "revId": "73722c2a9832cc6b93e8c762bad694862aae70d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}

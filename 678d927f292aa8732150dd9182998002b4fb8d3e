@@ -46,6 +46,30 @@
       "revId": "678d927f292aa8732150dd9182998002b4fb8d3e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6fd15a30_e4017eaf",
+        "filename": "main.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1010448
+      },
+      "writtenOn": "2018-10-08T10:16:39Z",
+      "side": 0,
+      "message": "Indeed, thanks",
+      "parentUuid": "fe8e8288_f9297af0",
+      "range": {
+        "startLine": 16,
+        "startChar": 19,
+        "endLine": 16,
+        "endChar": 61
+      },
+      "revId": "678d927f292aa8732150dd9182998002b4fb8d3e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
