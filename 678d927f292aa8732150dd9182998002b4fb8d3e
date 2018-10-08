@@ -22,6 +22,30 @@
       "revId": "678d927f292aa8732150dd9182998002b4fb8d3e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe8e8288_f9297af0",
+        "filename": "main.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1004788
+      },
+      "writtenOn": "2018-10-08T09:53:37Z",
+      "side": 0,
+      "message": "I think it\u0027s redundant because in post_tasks/forward_overcloud_dashboard.yml you have the line:\n\nhosts: hypervisor\n\nso it will run only on hosts in this group and if there are no hosts in this group it will not run at all. so everything should be fine.",
+      "parentUuid": "59bb4559_0c18b99c",
+      "range": {
+        "startLine": 16,
+        "startChar": 19,
+        "endLine": 16,
+        "endChar": 61
+      },
+      "revId": "678d927f292aa8732150dd9182998002b4fb8d3e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
