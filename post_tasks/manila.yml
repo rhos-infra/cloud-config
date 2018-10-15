@@ -1,4 +1,100 @@
 ---
+- name: Ceph for rhos10
+  hosts: ceph
+  become: true
+  gather_facts: no
+  any_errors_fatal: true
+  vars:
+      node_name: "ceph-0.external"
+  tasks:
+      - block:
+
+            - name: Generate SSH keys
+              shell: ssh-keygen -t rsa -f ~/.ssh/id_rsa -q -N ''
+              args:
+                creates: ~/.ssh/id_rsa
+
+            - name: Copy id_rsa.pub to authorized_keys
+              shell: cat ~/.ssh/id_rsa.pub  >> ~/.ssh/authorized_keys
+
+            - name: PermitRootLogin
+              lineinfile:
+                dest: /etc/ssh/sshd_config
+                regexp: '^PermitRootLogin'
+                line: "PermitRootLogin yes"
+
+            - name: PubkeyAuthentication
+              lineinfile:
+                dest: /etc/ssh/sshd_config
+                regexp: '^PubkeyAuthentication'
+                line: "PubkeyAuthentication yes"
+
+
+            - name: Restart service httpd, in all cases
+              service:
+                name: httpd
+                state: restarted
+
+            - name: install the ceph-deploy
+              yum: name={{ item }} state=latest
+              with_items:
+              - ceph-deploy
+
+            - name: purge ceph
+              shell: ceph-deploy purge "{{ node_name }}"
+
+            - name: ceph purgedata
+              shell: ceph-deploy purgedata "{{ node_name }}"
+
+            - name: ceph-deploy install
+              shell: ceph-deploy install "{{ node_name }}"
+
+            - name: ceph-deploy new
+              shell: ceph-deploy new "{{ node_name }}"
+
+            - name: ceph-deploy mon
+              shell: ceph-deploy mon create-initial
+
+            - name: ceph-deploy admin
+              shell: ceph-deploy admin "{{ node_name }}"
+
+            - name: create osd.img
+              shell: dd if=/dev/zero of=osd.img count=1024 bs=10M
+
+            - name: Set up a loop device along with osd preparation and activation
+              shell: export FIRST_UNUSED=$(losetup -f); losetup $FIRST_UNUSED osd.img; ceph-disk  prepare $FIRST_UNUSED
+
+            - name: Workaround. Fix ceph cluster health by reducing the number of replicas in each pool 
+              shell: ceph osd pool set rbd size 1
+
+            - name: ceph version
+              shell: ceph version | awk '{print $3; }' | tr '.' ' ' | awk '{print $1 "." $2; }'
+              register: ceph_version
+
+            - debug: msg="{{ ceph_version.stdout }}"
+
+            - name: Fail if wrong version of ceph was installed
+              fail: msg="Wrong ceph version"
+              when: ceph_version.stdout != "10.2"
+
+
+            - name: record ceph cluster health status
+              shell:  ceph -s | grep health | awk '{print $2; }'
+              register: ceph_health_status
+
+
+            - debug: msg="{{ ceph_health_status.stdout }}"
+
+            - name: Fail if ceph cluster is not healthy
+              fail: msg="Ceph cluster is not healthy"
+              when: ceph_health_status.stdout != "HEALTH_OK"
+
+        when: install.version|default(undercloud_version)|openstack_release == 10
+
+#                  ceph-deploy install --mgr "{{ node_name }}"
+#                  ceph-deploy mgr create "{{ node_name }}"
+
+
 - name: Edit /etc/manila/manila.conf
   hosts: controller
   become: true
