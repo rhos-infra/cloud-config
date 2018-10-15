@@ -103,6 +103,22 @@
         ignore_errors: yes
         tags: skip_ansible_lint
 
+      - name: get nodes data file location
+        shell: cat ~/overcloud_deploy.sh | grep -E 'nodes_data.yaml|nodes.yaml|ctrlplane-template.yml' | awk '{print $2}'
+        ignore_errors: true
+        register: nodes_data_path
+
+      - name: get current scale for nodes
+        shell: cat {{ nodes_data_path.stdout }} | egrep -i '{{ install.node.name.split('-')[0] }}.*Count:' | awk '{print $2}'
+        register: current_node_count
+
+      - name: Update scale count in overcloud deploy script
+        replace:
+            path: "{{ nodes_data_path.stdout }}"
+            regexp: "(?i)^(\\s+{{ install.node.name.split('-')[0] }}.*Count:) {{ current_node_count.stdout }}"
+            replace: "\\1 {{ current_node_count.stdout|int - 1 }}"
+            backup: yes
+
 - name: Try to update inventory
   import_playbook: add_overcloud_hosts.yml
   tags:
