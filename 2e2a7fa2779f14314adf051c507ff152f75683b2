@@ -22,6 +22,30 @@
       "revId": "2e2a7fa2779f14314adf051c507ff152f75683b2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c77fc2e_f101b554",
+        "filename": "post_tasks/scale_down.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1005418
+      },
+      "writtenOn": "2018-10-16T16:09:31Z",
+      "side": 1,
+      "message": "The \u0027not splitack|default(False)\u0027 condition ensures that the \u0027get nodes data file location\u0027 task will always return something because all non split stack deployments have either nodes.yaml or nodes_data.yaml passed to the deploy command(at least with more recent versions that we actively test this scenario for).",
+      "parentUuid": "bb2c02fb_e6a35a78",
+      "range": {
+        "startLine": 112,
+        "startChar": 18,
+        "endLine": 112,
+        "endChar": 45
+      },
+      "revId": "2e2a7fa2779f14314adf051c507ff152f75683b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
