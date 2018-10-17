@@ -46,6 +46,30 @@
       "revId": "2e2a7fa2779f14314adf051c507ff152f75683b2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f7a924f6_78405a24",
+        "filename": "post_tasks/scale_down.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1010448
+      },
+      "writtenOn": "2018-10-17T06:08:56Z",
+      "side": 1,
+      "message": "so it\u0027s safe to remove ignore_errors from that task and fail there if smth is wrong",
+      "parentUuid": "3c77fc2e_f101b554",
+      "range": {
+        "startLine": 112,
+        "startChar": 18,
+        "endLine": 112,
+        "endChar": 45
+      },
+      "revId": "2e2a7fa2779f14314adf051c507ff152f75683b2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
