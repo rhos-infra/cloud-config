@@ -203,7 +203,7 @@
       - name: Update scale count in overcloud deploy script
         replace:
             path: "{{ nodes_data_path.stdout }}"
-            regexp: "(?i)^(\\s+{{ item.item.key }}.*Count:) {{ item.stdout }}"
+            regexp: "(?i)^(\\s+.*{{ item.item.key }}.*Count:) {{ item.stdout }}"
             replace: "\\1 {{ item.stdout|int + new_nodes_count[item.item.key]|int }}"
             backup: yes
         with_items: "{{ current_node_count.results }}"
