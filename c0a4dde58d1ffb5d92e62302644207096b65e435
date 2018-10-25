@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d845ceb6_3cfbb288",
+        "filename": "post_tasks/scale_down.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1010448
+      },
+      "writtenOn": "2018-10-25T06:26:43Z",
+      "side": 1,
+      "message": "Cannot we use item.key here ?",
+      "range": {
+        "startLine": 132,
+        "startChar": 62,
+        "endLine": 132,
+        "endChar": 71
+      },
+      "revId": "c0a4dde58d1ffb5d92e62302644207096b65e435",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "622087ad_344a96d2",
+        "filename": "post_tasks/scale_down.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1010448
+      },
+      "writtenOn": "2018-10-25T06:26:43Z",
+      "side": 1,
+      "message": "How/when is \u0027--control-scale\u0027 handled ?",
+      "range": {
+        "startLine": 141,
+        "startChar": 32,
+        "endLine": 141,
+        "endChar": 45
+      },
+      "revId": "c0a4dde58d1ffb5d92e62302644207096b65e435",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
