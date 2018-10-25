@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3b7997af_df428330",
+        "filename": "post_tasks/scale_down.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1005418
+      },
+      "writtenOn": "2018-10-25T15:53:01Z",
+      "side": 1,
+      "message": "We can, I updated it.",
+      "parentUuid": "d845ceb6_3cfbb288",
+      "range": {
+        "startLine": 132,
+        "startChar": 62,
+        "endLine": 132,
+        "endChar": 71
+      },
+      "revId": "c0a4dde58d1ffb5d92e62302644207096b65e435",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "622087ad_344a96d2",
         "filename": "post_tasks/scale_down.yml",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2018-10-25T06:26:43Z",
       "side": 1,
       "message": "How/when is \u0027--control-scale\u0027 handled ?",
+      "range": {
+        "startLine": 141,
+        "startChar": 32,
+        "endLine": 141,
+        "endChar": 45
+      },
+      "revId": "c0a4dde58d1ffb5d92e62302644207096b65e435",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "77bec7f5_2b06e025",
+        "filename": "post_tasks/scale_down.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1005418
+      },
+      "writtenOn": "2018-10-25T15:53:01Z",
+      "side": 1,
+      "message": "We only use this for compute roles scale down for now. Also I don\u0027t think scaling down controller roles is supported.",
+      "parentUuid": "622087ad_344a96d2",
       "range": {
         "startLine": 141,
         "startChar": 32,
