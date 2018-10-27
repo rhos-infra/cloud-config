@@ -10,23 +10,32 @@
   vars:
       node_name: "{{ install.node.name }}.localdomain"
   tasks:
-      - name: get all nova compute nodes
+      - name: check if overcloud compute service is available
         shell: |
             source ~/{{ install.overcloud.stack }}rc
-            openstack compute service list -f value -c Host --service nova-compute
-        register: nova_computes
-        tags: skip_ansible_lint
+            openstack compute service list
+        failed_when: false
+        register: ov_compute
 
-      - name: fail if we don't have "{{ node_name }}"
-        fail:
-            msg: "There is no such node {{ node_name }}"
-        when: node_name not in nova_computes.stdout_lines
+      - block:
+          - name: get all nova compute nodes
+            shell: |
+                source ~/{{ install.overcloud.stack }}rc
+                openstack compute service list -f value -c Host --service nova-compute
+            register: nova_computes
+            tags: skip_ansible_lint
 
-      - name: disable nova services on the node "{{ node_name }}"
-        shell: |
-            source ~/{{ install.overcloud.stack }}rc
-            openstack compute service set "{{ node_name }}" nova-compute --disable
-        tags: skip_ansible_lint
+          - name: fail if we don't have "{{ node_name }}"
+            fail:
+                msg: "There is no such node {{ node_name }}"
+            when: node_name not in nova_computes.stdout_lines
+
+          - name: disable nova services on the node "{{ node_name }}"
+            shell: |
+                source ~/{{ install.overcloud.stack }}rc
+                openstack compute service set "{{ node_name }}" nova-compute --disable
+            tags: skip_ansible_lint
+        when: ov_compute.rc == 0
 
       - name: get the deployed stack-id
         shell: |
