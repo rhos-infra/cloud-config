@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "473200fa_f643b8b3",
+        "filename": "post_tasks/scale_down.yml",
+        "patchSetId": 5
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1005418
+      },
+      "writtenOn": "2018-10-31T04:22:41Z",
+      "side": 1,
+      "message": "This should cover both names such as:\n - compute-0\n - openshift-worker-0\n\nwhere the role names are:\n - Compute\n - OpenshiftWorker",
+      "range": {
+        "startLine": 126,
+        "startChar": 67,
+        "endLine": 126,
+        "endChar": 110
+      },
+      "revId": "61e5bd5ef6a686b3179ebe8d945f568e7967d150",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
