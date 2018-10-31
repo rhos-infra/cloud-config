@@ -123,13 +123,13 @@
             register: nodes_data_path
 
           - name: get current scale for nodes
-            shell: cat {{ nodes_data_path.stdout }} | egrep -i '{{ install.node.name.split('-')[0] }}.*Count:' | awk '{print $2}'
+            shell: cat {{ nodes_data_path.stdout }} | egrep -i '{{ ''.join(install.node.name.split('-')[0:-1]) }}.*Count:' | awk '{print $2}'
             register: current_node_count
 
           - name: Update scale count in overcloud deploy script
             replace:
                 path: "{{ nodes_data_path.stdout }}"
-                regexp: "(?i)^(\\s+{{ install.node.name.split('-')[0] }}.*Count:) {{ current_node_count.stdout }}"
+                regexp: "(?i)^(\\s+.*{{ install.node.name.split('-')[0] }}.*Count:) {{ current_node_count.stdout }}"
                 replace: "\\1 {{ current_node_count.stdout|int - 1 }}"
                 backup: yes
         when:
@@ -183,34 +183,54 @@
             msg: "Scale operation has failed... :("
         when: overcloud_scale is defined and overcloud_scale.rc != 0
 
-      - name: get service-id of the node "{{ node_name }}"
+      - name: check if overcloud compute service is available
         shell: |
             source ~/{{ install.overcloud.stack }}rc
-            openstack compute service list -c ID -f value --host {{ node_name }}
-        register: service_id
-        tags: skip_ansible_lint
+            openstack compute service list
+        failed_when: false
+        register: ov_compute
 
-      - name: delete compute service for node "{{ node_name }}"
-        shell: |
-            source ~/{{ install.overcloud.stack }}rc
-            openstack compute service delete {{ service_id.stdout }}
-        tags: skip_ansible_lint
-        ignore_errors: yes
+      - block:
+          - name: get service-id of the node "{{ node_name }}"
+            shell: |
+                source ~/{{ install.overcloud.stack }}rc
+                openstack compute service list -c ID -f value --host {{ node_name }}
+            register: service_id
+            tags: skip_ansible_lint
 
-      # (todo) OSPD 10 doesn't support --host paramater
-      - name: get openvswitch-agent-id of the node "{{ node_name }}"
-        shell: |
-            source ~/{{ install.overcloud.stack }}rc
-            #openstack network agent list -c ID -f value --host {{ node_name }}
-            neutron agent-list -f value | grep {{ node_name }} | awk '{print $1}'
-        register: openwsitch_agent_id
-        tags: skip_ansible_lint
+          - name: delete compute service for node "{{ node_name }}"
+            shell: |
+                source ~/{{ install.overcloud.stack }}rc
+                openstack compute service delete {{ service_id.stdout }}
+            tags: skip_ansible_lint
+            ignore_errors: yes
 
-      # (todo) have to use deprecated 'neutron' call because of #BZ1430338
-      - name: delete openvswitch agent for node "{{ node_name }}"
-        shell: |
-            source ~/{{ install.overcloud.stack }}rc
-            #openstack network agent delete {{ openwsitch_agent_id.stdout }}
-            neutron agent-delete {{ openwsitch_agent_id.stdout }}
-        tags: skip_ansible_lint
-        ignore_errors: yes
+          # (todo) OSPD 10 doesn't support --host paramater
+          - name: get openvswitch-agent-id of the node "{{ node_name }}"
+            shell: |
+                source ~/{{ install.overcloud.stack }}rc
+                #openstack network agent list -c ID -f value --host {{ node_name }}
+                neutron agent-list -f value | grep {{ node_name }} | awk '{print $1}'
+            register: openwsitch_agent_id
+            tags: skip_ansible_lint
+
+          # (todo) have to use deprecated 'neutron' call because of #BZ1430338
+          - name: delete openvswitch agent for node "{{ node_name }}"
+            shell: |
+                source ~/{{ install.overcloud.stack }}rc
+                #openstack network agent delete {{ openwsitch_agent_id.stdout }}
+                neutron agent-delete {{ openwsitch_agent_id.stdout }}
+            tags: skip_ansible_lint
+            ignore_errors: yes
+        when: ov_compute.rc == 0
+
+- name: Remove Openshift scaled down node
+  hosts: openshift-master[0]
+  gather_facts: no
+  any_errors_fatal: true
+  become: true
+  vars:
+      node_name: "{{ install.node.name }}"
+  tasks:
+      - name: remove {{ node_name }}
+        shell: "oc delete node {{ node_name }}"
