@@ -138,17 +138,15 @@
 
       - block:
           - name: get current scale for nodes
-            shell: cat ~/overcloud_deploy.sh | egrep '^\-\-{{ item.key }}(-.*)?-scale' | awk '{print $2}'
-            with_dict: "{{ new_nodes_count }}"
+            shell: cat ~/overcloud_deploy.sh | egrep '^\-\-{{ install.node.name.split('-')[0] }}(-.*)?-scale' | awk '{print $2}'
             register: current_node_count
 
           - name: Update scale count in overcloud deploy script
             replace:
                 path: "~/overcloud_deploy.sh"
-                regexp: "^(--{{ item.item.key }}(-.*)?-scale) {{ item.stdout }}"
-                replace: "\\1 {{ item.stdout|int - 1 }}"
+                regexp: "^(--{{ install.node.name.split('-')[0] }}(-.*)?-scale) {{ current_node_count.stdout }}"
+                replace: "\\1 {{ current_node_count.stdout|int - 1 }}"
                 backup: yes
-            with_items: "{{ current_node_count.results }}"
         when:
             - not install.splitstack|default(False)
             - is_node_data.rc != 0
