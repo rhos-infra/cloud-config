@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa7f14a8_4f50b0de",
+        "filename": "post_tasks/scale_down.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1010448
+      },
+      "writtenOn": "2018-11-16T12:09:30Z",
+      "side": 1,
+      "message": "LGTM, though could be shorten(though not critical to this patch):\nawk \u0027/--{{node.name.split(\"-\")[0]}}-scale/ {print $2}\u0027 deploy.sh",
+      "range": {
+        "startLine": 141,
+        "startChar": 19,
+        "endLine": 141,
+        "endChar": 128
+      },
+      "revId": "9cf6a9d31e7ff7272de465075707e18d2cce79b8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
