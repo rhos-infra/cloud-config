@@ -122,6 +122,11 @@
             ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
             # It's cleaner to define top defaults first
             pool: "{{ subnet.allocation_pool|default({}) }}"
+            # try using variables from network_template file first, if not present then use default values from this plugin (i.e.: 'pool' var above)
+            network_template_pool_start: "{{ network_template.parameter_defaults.ExternalAllocationPools[0].start | default(omit) }}"
+            network_template_pool_end: "{{ network_template.parameter_defaults.ExternalAllocationPools[0].end | default(omit) }}"
+            network_template_gateway: "{{ network_template.parameter_defaults.ExternalInterfaceDefaultRoute | default(omit) }}"
+            network_template_cidr: "{{ network_template.parameter_defaults.ExternalNetCidr | default(omit) }}"
         os_subnet:
             # Required for SSL
             validate_certs: no
@@ -129,10 +134,10 @@
             name: external_subnet
             network_name: "{{ net_create.network.name }}"
             enable_dhcp: no
-            cidr: "{{ subnet.cidr }}"
-            gateway_ip: "{{ subnet.gateway }}"
-            allocation_pool_start: "{{ pool.start | default(omit) }}"
-            allocation_pool_end: "{{ pool.end | default(omit) }}"
+            cidr: "{{ network_template_cidr | default(subnet.cidr) }}"
+            gateway_ip: "{{ network_template_gateway | default(subnet.gateway) }}"
+            allocation_pool_start: "{{ network_template_pool_start | default(pool.start) | default(omit) }}"
+            allocation_pool_end: "{{ network_template_pool_end | default(pool.end) | default(omit) }}"
         register: subnet_create
         delegate_to: "{{ groups.shade | first }}"
 
