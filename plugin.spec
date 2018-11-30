@@ -178,6 +178,16 @@ subparsers:
                             NOTE: When you scale up splitstack deployment, you can use all "OSP version parameters" to
                             control rhos_release options.
 
+                 image_direct_deploy:
+                     type: Value
+                     help: |
+                         This option (when set to direct) sets the direct deploy flag on nodes in ironic, instead of the default
+                         iscsi method.
+                     default: iscsi
+                     choices:
+                         - iscsi
+                         - direct
+
             - title: Ironic Configuration
               options:
                   vbmc-username:

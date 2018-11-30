@@ -52,6 +52,15 @@
   tags: skip_ansible_lint
   when: not install.specific.node.ids
 
+- name: set deploy_interface option to direct
+  shell: |
+      source ~/stackrc
+      openstack baremetal node set --deploy-interface direct {{ item.stdout }}
+  with_items: "{{ nodes_uuid_info.results }}"
+  when:
+      - install.image_direct_deploy != 'iscsi'
+      - undercloud_version | openstack_release > 13
+
 - block:
     - name: get baremetal info about new UUIDs
       shell: |
