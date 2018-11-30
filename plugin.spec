@@ -212,6 +212,15 @@ subparsers:
                               --resource-class-override name=baremetal-ctr,flavor=controller,node=controller
                               --resource-class-override name=baremetal-cmp,flavor=compute,node=compute-0
                               --resource-class-override name=baremetal-other,flavor=compute,node=swift-0:baremetal
+                  image_direct_deploy:
+                      type: Value
+                      help: |
+                          This option (when set to direct) sets the direct deploy flag on nodes in ironic, instead of the default
+                          iscsi method.
+                      default: iscsi
+                      choices:
+                          - iscsi
+                          - direct
             - title: Workload Launch
               options:
                   workload-image-url:

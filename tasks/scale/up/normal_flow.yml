@@ -29,6 +29,16 @@
   with_items: "{{ install.scale.nodes }}"
   register: nodes_uuid_info
 
+- name: set deploy_interface option to direct
+  shell: |
+      source ~/stackrc
+      NODE_UUID=$({{ ironic_cli }} | awk '/{{ item.name | default(item) }}/ {print $2}' )
+      openstack baremetal node set --deploy-interface direct ${NODE_UUID}
+  with_items: "{{ nodes_uuid_info.results }}"
+  when:
+      - install.image_direct_deploy != 'iscsi'
+      - install.version|default(undercloud_version) | openstack_release > 13
+
 - name: provision state of baremetal node to manage
   shell: |
       source ~/stackrc
