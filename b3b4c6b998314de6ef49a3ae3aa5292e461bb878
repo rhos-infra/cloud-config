@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "072bebbf_0408d8bc",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1005418
+      },
+      "writtenOn": "2018-11-30T21:23:50Z",
+      "side": 1,
+      "message": "no need for this",
+      "range": {
+        "startLine": 35,
+        "startChar": 6,
+        "endLine": 35,
+        "endChar": 89
+      },
+      "revId": "b3b4c6b998314de6ef49a3ae3aa5292e461bb878",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "00f9e638_8e21c46c",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1005418
+      },
+      "writtenOn": "2018-11-30T21:23:50Z",
+      "side": 1,
+      "message": "this should be {{ item.stdout }}",
+      "range": {
+        "startLine": 36,
+        "startChar": 61,
+        "endLine": 36,
+        "endChar": 73
+      },
+      "revId": "b3b4c6b998314de6ef49a3ae3aa5292e461bb878",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cfd4181f_29a1b0ef",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1005418
+      },
+      "writtenOn": "2018-11-30T21:23:50Z",
+      "side": 1,
+      "message": "version is autodiscovered so this should be \u0027undercloud_version | openstack_release \u003e 13\u0027",
+      "range": {
+        "startLine": 40,
+        "startChar": 8,
+        "endLine": 40,
+        "endChar": 76
+      },
+      "revId": "b3b4c6b998314de6ef49a3ae3aa5292e461bb878",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
