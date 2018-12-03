@@ -22,6 +22,30 @@
       "revId": "1d37587f50799ce9acb5792dbba0640528d2becb",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bbbee44e_7848281a",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1009538
+      },
+      "writtenOn": "2018-12-03T14:14:46Z",
+      "side": 1,
+      "message": "the command itself was supported. but the required configuration was not done by tripleo.\n\u003eOSP13 is on purpose",
+      "parentUuid": "cfadcee6_59d4751a",
+      "range": {
+        "startLine": 39,
+        "startChar": 29,
+        "endLine": 39,
+        "endChar": 51
+      },
+      "revId": "1d37587f50799ce9acb5792dbba0640528d2becb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
