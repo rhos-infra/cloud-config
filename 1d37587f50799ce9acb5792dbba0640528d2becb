@@ -1,0 +1,8 @@
+Code-Review+2: Marius Cornea <mcornea@redhat.com>
+Code-Review+2: Yurii Prokulevych <yprokule@redhat.com>
+Verified+1: rhosqeauto <obaranov+rhosqeauto@redhat.com>
+Submitted-by: Yurii Prokulevych <yprokule@redhat.com>
+Submitted-at: Mon, 03 Dec 2018 15:16:59 +0000
+Reviewed-on: https://review.gerrithub.io/435704
+Project: rhos-infra/cloud-config
+Branch: refs/heads/master
