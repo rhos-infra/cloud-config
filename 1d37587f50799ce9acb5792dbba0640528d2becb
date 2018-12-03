@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cfadcee6_59d4751a",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1010448
+      },
+      "writtenOn": "2018-12-03T08:58:37Z",
+      "side": 1,
+      "message": "Hi Sasha, could U please address this comment:\n  Condition -\u003e openstack_release \u003e 13 is not correct\n  It should be supported in OSP 13\nSetting weak -1 to get reply before merging, thanks.",
+      "range": {
+        "startLine": 39,
+        "startChar": 29,
+        "endLine": 39,
+        "endChar": 51
+      },
+      "revId": "1d37587f50799ce9acb5792dbba0640528d2becb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
