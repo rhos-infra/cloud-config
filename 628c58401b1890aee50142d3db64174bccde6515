@@ -25,6 +25,47 @@
     },
     {
       "key": {
+        "uuid": "ab0f10bd_1a4d8ed4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1015537
+      },
+      "writtenOn": "2018-12-04T23:29:45Z",
+      "side": 1,
+      "message": "This workaround based on documentation\nhttps://docs.openstack.org/tripleo-docs/latest/install/advanced_deployment/ansible_deploy_interface.html\nand my test results.",
+      "parentUuid": "68d83704_9baf876c",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 31
+      },
+      "revId": "628c58401b1890aee50142d3db64174bccde6515",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c111887_7e2b5e38",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1015537
+      },
+      "writtenOn": "2018-12-04T23:29:45Z",
+      "side": 1,
+      "message": "Should remove \"for OSP 13\" from  the end of line",
+      "revId": "628c58401b1890aee50142d3db64174bccde6515",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6c6ae059_0b4cd6f8",
         "filename": "tasks/scale/up/normal_flow.yml",
         "patchSetId": 2
@@ -36,6 +77,30 @@
       "writtenOn": "2018-12-04T23:04:39Z",
       "side": 1,
       "message": "Is this required for the initial deployment as well or only during scale out? In case this is required from the initial deployment I suggest adding it to tripleo-overcloud instead:\n\nhttps://github.com/redhat-openstack/infrared/blob/31370846e54bec15d816cf3f3e923f0d74fa16a5/plugins/tripleo-overcloud/introspect.yml#L211-L219",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 51
+      },
+      "revId": "628c58401b1890aee50142d3db64174bccde6515",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "49870fd7_24f6599b",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1015537
+      },
+      "writtenOn": "2018-12-04T23:29:45Z",
+      "side": 1,
+      "message": "It is required only for scale up.",
+      "parentUuid": "6c6ae059_0b4cd6f8",
       "range": {
         "startLine": 32,
         "startChar": 0,
@@ -71,6 +136,30 @@
     },
     {
       "key": {
+        "uuid": "cee170e6_f3342f7d",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1015537
+      },
+      "writtenOn": "2018-12-04T23:29:45Z",
+      "side": 1,
+      "message": "When we run on OSP 13 \n$ openstack baremetal node set 98ca4231-4651-4979-8600-603a31feb6d3 --deploy-interface direct\nWe got error:\nFor node 98ca4231-4651-4979-8600-603a31feb6d3 with driver pxe_ipmitool, these node fields must be set to None: deploy_interface. (HTTP 400)",
+      "parentUuid": "e7cf7b61_cfa1c26a",
+      "range": {
+        "startLine": 44,
+        "startChar": 34,
+        "endLine": 44,
+        "endChar": 48
+      },
+      "revId": "628c58401b1890aee50142d3db64174bccde6515",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ceb43f45_9618b429",
         "filename": "tasks/scale/up/normal_flow.yml",
         "patchSetId": 2
@@ -91,6 +180,30 @@
       "revId": "628c58401b1890aee50142d3db64174bccde6515",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea5abcd2_c8c48433",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1015537
+      },
+      "writtenOn": "2018-12-04T23:29:45Z",
+      "side": 1,
+      "message": "Previous 2 commands should  be run only once\nWhile $ openstack baremetal node set will run for all baremetal nodes in loop",
+      "parentUuid": "ceb43f45_9618b429",
+      "range": {
+        "startLine": 32,
+        "startChar": 1,
+        "endLine": 48,
+        "endChar": 51
+      },
+      "revId": "628c58401b1890aee50142d3db64174bccde6515",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }

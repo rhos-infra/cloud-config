@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "9aaed24a_e97001f9",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1015537
+      },
+      "writtenOn": "2018-12-04T23:29:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af72d82a_408ce5a0",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 130
+      },
+      "revId": "4e49354cfa079d1f851c3673cac14c0c992ebc77",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4d238adc_12ecde2b",
         "filename": "tasks/scale/up/normal_flow.yml",
         "patchSetId": 1
@@ -140,6 +164,30 @@
       "revId": "4e49354cfa079d1f851c3673cac14c0c992ebc77",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82556733_2dfb376f",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1015537
+      },
+      "writtenOn": "2018-12-04T23:29:45Z",
+      "side": 1,
+      "message": "--driver ipmi --deploy-interface direct for OSP 13",
+      "parentUuid": "2f300050_c5963833",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 51
+      },
+      "revId": "4e49354cfa079d1f851c3673cac14c0c992ebc77",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
