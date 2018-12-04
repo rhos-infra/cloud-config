@@ -2,6 +2,7 @@
       name: vbmc
   vars:
       vbmc_nodes: "{{ install.scale.nodes }}"
+      use_driver: "{{ '--driver ipmi' if undercloud_version|openstack_release == 13 else '' }}"
   when: undercloud_version | openstack_release >= 11
 
 - name: discover provsion network name
@@ -28,6 +29,22 @@
       openstack baremetal node show  {{ item }} -c uuid | grep 'uuid' | awk '{print $4}'
   with_items: "{{ install.scale.nodes }}"
   register: nodes_uuid_info
+
+- block:
+    - name: enable the admin user access to other Swift accounts and enabling temporary URL for OSP 13
+      shell: |
+          source ~/stackrc
+          openstack role add --user admin --project service ResellerAdmin
+          openstack --os-project-name service object store account set --property Temp-URL-Key=$(uuidgen | sha1sum | awk '{print $1}')
+
+    - name: set deploy_interface option to direct for OSP 13
+      shell: |
+          source ~/stackrc
+          openstack baremetal node set {{ use_driver }} --deploy-interface direct {{ item.stdout }}
+      with_items: "{{ nodes_uuid_info.results }}"
+  when:
+      - install.image_direct_deploy != 'iscsi'
+      - undercloud_version | openstack_release == 13
 
 - name: set deploy_interface option to direct
   shell: |
