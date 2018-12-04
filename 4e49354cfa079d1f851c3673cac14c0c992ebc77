@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cb2100dc_625c9102",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1009538
+      },
+      "writtenOn": "2018-12-04T22:40:06Z",
+      "side": 1,
+      "message": "Empty space",
+      "range": {
+        "startLine": 32,
+        "startChar": 87,
+        "endLine": 32,
+        "endChar": 88
+      },
+      "revId": "4e49354cfa079d1f851c3673cac14c0c992ebc77",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11eedd85_47afbbff",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1009538
+      },
+      "writtenOn": "2018-12-04T22:40:06Z",
+      "side": 1,
+      "message": "Is this required for OSP13 only?",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 130
+      },
+      "revId": "4e49354cfa079d1f851c3673cac14c0c992ebc77",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d238adc_12ecde2b",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1009538
+      },
+      "writtenOn": "2018-12-04T22:40:06Z",
+      "side": 1,
+      "message": "Instead just change line 57 to \u003e\u003d13",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 51
+      },
+      "revId": "4e49354cfa079d1f851c3673cac14c0c992ebc77",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
