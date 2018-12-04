@@ -29,6 +29,24 @@
   with_items: "{{ install.scale.nodes }}"
   register: nodes_uuid_info
 
+- name: enable the admin user access to other Swift accounts and enabling temporary URL 
+  shell: |
+      source ~/stackrc
+      openstack role add --user admin --project service ResellerAdmin for OSP 13
+      openstack --os-project-name service object store account set --property Temp-URL-Key=$(uuidgen | sha1sum | awk '{print $1}')
+  when:
+      - install.image_direct_deploy != 'iscsi'
+      - undercloud_version | openstack_release = 13
+
+- name: set deploy_interface option to direct for OSP 13
+  shell: |
+      source ~/stackrc
+      openstack baremetal node set --driver ipmi --deploy-interface direct {{ item.stdout }}
+  with_items: "{{ nodes_uuid_info.results }}"
+  when:
+      - install.image_direct_deploy != 'iscsi'
+      - undercloud_version | openstack_release = 13
+
 - name: set deploy_interface option to direct
   shell: |
       source ~/stackrc
