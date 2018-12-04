@@ -2,6 +2,75 @@
   "comments": [
     {
       "key": {
+        "uuid": "68d83704_9baf876c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1005418
+      },
+      "writtenOn": "2018-12-04T23:04:39Z",
+      "side": 1,
+      "message": "A more detailed description would be helpful, e.g. why the workaround is needed for OSP13 with a BZ or documentation reference.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 31
+      },
+      "revId": "628c58401b1890aee50142d3db64174bccde6515",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6c6ae059_0b4cd6f8",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1005418
+      },
+      "writtenOn": "2018-12-04T23:04:39Z",
+      "side": 1,
+      "message": "Is this required for the initial deployment as well or only during scale out? In case this is required from the initial deployment I suggest adding it to tripleo-overcloud instead:\n\nhttps://github.com/redhat-openstack/infrared/blob/31370846e54bec15d816cf3f3e923f0d74fa16a5/plugins/tripleo-overcloud/introspect.yml#L211-L219",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 51
+      },
+      "revId": "628c58401b1890aee50142d3db64174bccde6515",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e7cf7b61_cfa1c26a",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1005418
+      },
+      "writtenOn": "2018-12-04T23:04:39Z",
+      "side": 1,
+      "message": "I think this is not needed since the nodes should have ipmi driver from the template in OSP13. You can instead adjust the conditional at line 57.",
+      "range": {
+        "startLine": 44,
+        "startChar": 34,
+        "endLine": 44,
+        "endChar": 48
+      },
+      "revId": "628c58401b1890aee50142d3db64174bccde6515",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ceb43f45_9618b429",
         "filename": "tasks/scale/up/normal_flow.yml",
         "patchSetId": 2
