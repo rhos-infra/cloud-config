@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ceb43f45_9618b429",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1009538
+      },
+      "writtenOn": "2018-12-04T22:54:36Z",
+      "side": 1,
+      "message": "Since the condition is the same for both, I\u0027d suggest placing in block with the condition listed once.",
+      "range": {
+        "startLine": 32,
+        "startChar": 1,
+        "endLine": 48,
+        "endChar": 51
+      },
+      "revId": "628c58401b1890aee50142d3db64174bccde6515",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
