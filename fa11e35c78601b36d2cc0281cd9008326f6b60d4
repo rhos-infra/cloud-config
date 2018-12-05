@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "74e9d728_69ac3042",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1009538
+      },
+      "writtenOn": "2018-12-05T22:25:45Z",
+      "side": 1,
+      "message": "ATM, seems like this isn\u0027t needed even for OSP13\n\nThe above step is needed for ansible deploy:\nhttps://docs.openstack.org/tripleo-docs/latest/install/advanced_deployment/ansible_deploy_interface.html\n\nFor direct deploy it probably isn\u0027t needed:\nhttps://docs.openstack.org/ironic/queens/admin/interfaces/deploy.html\n\nBut... seems like direct deploy (although not officially supported) works in OSP13.\n\n\nI ran on OSP13 without ^ commands the following:\nopenstack baremetal node set --driver ipmi --deploy-interface direct 62f840d0-3bef-4b57-924f-18016ed103bf\n\nand it worked:\n\n(undercloud) [stack@undercloud76 ~]$ openstack baremetal node show 62f840d0-3bef-4b57-924f-18016ed103bf|grep deploy_interface\n| deploy_interface       | direct                                                                                                                                                                                                           |\n(undercloud) [stack@undercloud76 ~]$",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 52
+      },
+      "revId": "fa11e35c78601b36d2cc0281cd9008326f6b60d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
