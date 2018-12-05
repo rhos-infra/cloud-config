@@ -68,6 +68,54 @@
       "revId": "0c2f64300225dcf4b1b17435bbb4821200223d67",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b3808eaf_a3f48737",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1015537
+      },
+      "writtenOn": "2018-12-05T14:55:24Z",
+      "side": 1,
+      "message": "Thanks for script improvements.",
+      "parentUuid": "21cccef4_512a3063",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 51
+      },
+      "revId": "0c2f64300225dcf4b1b17435bbb4821200223d67",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e45b7a0c_cd93495c",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1015537
+      },
+      "writtenOn": "2018-12-05T14:55:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "119777c8_0d6ceaa6",
+      "range": {
+        "startLine": 48,
+        "startChar": 47,
+        "endLine": 48,
+        "endChar": 48
+      },
+      "revId": "0c2f64300225dcf4b1b17435bbb4821200223d67",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }

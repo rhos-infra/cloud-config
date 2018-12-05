@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "3f27bd29_02a4b367",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1015537
+      },
+      "writtenOn": "2018-12-05T14:55:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c111887_7e2b5e38",
+      "revId": "628c58401b1890aee50142d3db64174bccde6515",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6c6ae059_0b4cd6f8",
         "filename": "tasks/scale/up/normal_flow.yml",
         "patchSetId": 2
@@ -125,6 +143,30 @@
       "side": 1,
       "message": "It is required only for scale up.",
       "parentUuid": "6c6ae059_0b4cd6f8",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 51
+      },
+      "revId": "628c58401b1890aee50142d3db64174bccde6515",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce9fe49a_306936e7",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1015537
+      },
+      "writtenOn": "2018-12-05T14:55:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49870fd7_24f6599b",
       "range": {
         "startLine": 32,
         "startChar": 0,
@@ -208,6 +250,30 @@
     },
     {
       "key": {
+        "uuid": "c7e4d661_1d791f4a",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1015537
+      },
+      "writtenOn": "2018-12-05T14:55:24Z",
+      "side": 1,
+      "message": "I think, I have to test first before removing this argument.",
+      "parentUuid": "7d259e11_67d27901",
+      "range": {
+        "startLine": 44,
+        "startChar": 34,
+        "endLine": 44,
+        "endChar": 48
+      },
+      "revId": "628c58401b1890aee50142d3db64174bccde6515",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ceb43f45_9618b429",
         "filename": "tasks/scale/up/normal_flow.yml",
         "patchSetId": 2
@@ -276,6 +342,30 @@
       "revId": "628c58401b1890aee50142d3db64174bccde6515",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95fa8ac0_6e2a5ed4",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1015537
+      },
+      "writtenOn": "2018-12-05T14:55:24Z",
+      "side": 1,
+      "message": "You are right. That is my fault. Added block.",
+      "parentUuid": "55485bba_73476103",
+      "range": {
+        "startLine": 32,
+        "startChar": 1,
+        "endLine": 48,
+        "endChar": 51
+      },
+      "revId": "628c58401b1890aee50142d3db64174bccde6515",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
