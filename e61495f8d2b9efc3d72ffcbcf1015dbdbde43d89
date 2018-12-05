@@ -22,6 +22,30 @@
       "revId": "e61495f8d2b9efc3d72ffcbcf1015dbdbde43d89",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2c0dada6_180fa816",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1015537
+      },
+      "writtenOn": "2018-12-05T15:04:36Z",
+      "side": 1,
+      "message": "You are right.\nI don\u0027t need block in that case.\nThanks",
+      "parentUuid": "8d4d950c_eefc49e4",
+      "range": {
+        "startLine": 40,
+        "startChar": 1,
+        "endLine": 44,
+        "endChar": 49
+      },
+      "revId": "e61495f8d2b9efc3d72ffcbcf1015dbdbde43d89",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
