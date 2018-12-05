@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8d4d950c_eefc49e4",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1010448
+      },
+      "writtenOn": "2018-12-05T14:59:22Z",
+      "side": 1,
+      "message": "this is duplicate, please remove task on line 49, and adjust your condition to be \u003e\u003d 13",
+      "range": {
+        "startLine": 40,
+        "startChar": 1,
+        "endLine": 44,
+        "endChar": 49
+      },
+      "revId": "e61495f8d2b9efc3d72ffcbcf1015dbdbde43d89",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
