@@ -228,6 +228,30 @@
       "revId": "628c58401b1890aee50142d3db64174bccde6515",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "55485bba_73476103",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1009538
+      },
+      "writtenOn": "2018-12-05T14:22:21Z",
+      "side": 1,
+      "message": "The block is for condition (when), not for iteration of items. Iteration isn\u0027t supported with block.",
+      "parentUuid": "ea5abcd2_c8c48433",
+      "range": {
+        "startLine": 32,
+        "startChar": 1,
+        "endLine": 48,
+        "endChar": 51
+      },
+      "revId": "628c58401b1890aee50142d3db64174bccde6515",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
