@@ -184,6 +184,30 @@
     },
     {
       "key": {
+        "uuid": "7d259e11_67d27901",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1005418
+      },
+      "writtenOn": "2018-12-05T14:41:49Z",
+      "side": 1,
+      "message": "https://review.gerrithub.io/#/c/rhos-infra/cloud-config/+/435705/ is merged now so this shouldn\u0027t be needed.",
+      "parentUuid": "cee170e6_f3342f7d",
+      "range": {
+        "startLine": 44,
+        "startChar": 34,
+        "endLine": 44,
+        "endChar": 48
+      },
+      "revId": "628c58401b1890aee50142d3db64174bccde6515",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ceb43f45_9618b429",
         "filename": "tasks/scale/up/normal_flow.yml",
         "patchSetId": 2
