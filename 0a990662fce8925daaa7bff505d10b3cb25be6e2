@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4f543d73_97dd0124",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 5
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1005418
+      },
+      "writtenOn": "2018-12-05T17:34:53Z",
+      "side": 1,
+      "message": "The nodes have ipmi driver set in the instackenv template so I think there\u0027s no need for this after https://review.gerrithub.io/#/c/rhos-infra/cloud-config/+/435705/ got merged.",
+      "range": {
+        "startLine": 5,
+        "startChar": 23,
+        "endLine": 5,
+        "endChar": 36
+      },
+      "revId": "0a990662fce8925daaa7bff505d10b3cb25be6e2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
