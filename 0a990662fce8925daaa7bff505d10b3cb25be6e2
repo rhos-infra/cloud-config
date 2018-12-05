@@ -22,6 +22,30 @@
       "revId": "0a990662fce8925daaa7bff505d10b3cb25be6e2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "177ed530_b3a20b7f",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 5
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1015537
+      },
+      "writtenOn": "2018-12-05T18:36:15Z",
+      "side": 1,
+      "message": "Just tested with latest instackenv.json.j2 template.\nEverything works great.\nSo, use_driver will be removed.\nThank you for comment.",
+      "parentUuid": "4f543d73_97dd0124",
+      "range": {
+        "startLine": 5,
+        "startChar": 23,
+        "endLine": 5,
+        "endChar": 36
+      },
+      "revId": "0a990662fce8925daaa7bff505d10b3cb25be6e2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
