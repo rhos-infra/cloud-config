@@ -22,6 +22,30 @@
       "revId": "fa11e35c78601b36d2cc0281cd9008326f6b60d4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f69cfd01_79312a5a",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1015537
+      },
+      "writtenOn": "2018-12-06T00:42:54Z",
+      "side": 1,
+      "message": "Well, \nit works to set deploy-interface to direct on baremetal node only.\nHowever, deployment failed with WAN emulation.\nThat means that direct deployment really doesn\u0027t work without previous commands. \nI\u0027m not expertise in ironic, but this is practical result.\nProbably, we need to add somebody from Ironic to review this patch.\nThanks a lot",
+      "parentUuid": "74e9d728_69ac3042",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 52
+      },
+      "revId": "fa11e35c78601b36d2cc0281cd9008326f6b60d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
