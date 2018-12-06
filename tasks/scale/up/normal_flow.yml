@@ -36,7 +36,7 @@
   with_items: "{{ nodes_uuid_info.results }}"
   when:
       - install.image_direct_deploy != 'iscsi'
-      - undercloud_version | openstack_release > 13
+      - undercloud_version | openstack_release >= 13
 
 - name: provision state of baremetal node to manage
   shell: |
