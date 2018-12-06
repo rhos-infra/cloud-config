@@ -126,7 +126,7 @@
             # Required for SSL
             validate_certs: no
             cloud: overcloud
-            name: external_subnet
+            name: "{{ subnet.name | default('external_subnet') }}"
             network_name: "{{ net_create.network.name }}"
             enable_dhcp: no
             cidr: "{{ subnet.cidr }}"
