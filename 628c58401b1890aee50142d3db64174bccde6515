@@ -203,6 +203,30 @@
     },
     {
       "key": {
+        "uuid": "42dfc3fb_2667a36a",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1015537
+      },
+      "writtenOn": "2018-12-07T21:19:43Z",
+      "side": 1,
+      "message": "Correct. I\u0027ve added verifications before apply those changes",
+      "parentUuid": "616e07f8_0983dc76",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 51
+      },
+      "revId": "628c58401b1890aee50142d3db64174bccde6515",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e7cf7b61_cfa1c26a",
         "filename": "tasks/scale/up/normal_flow.yml",
         "patchSetId": 2
