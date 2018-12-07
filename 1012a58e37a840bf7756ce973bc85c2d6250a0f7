@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae6993a9_7b1f64c5",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 8
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1009538
+      },
+      "writtenOn": "2018-12-07T21:51:22Z",
+      "side": 1,
+      "message": "Maybe worth piping to \"wc -l\", i.e.\nopenstack role list --project service -c Name -f value|grep ResellerAdmin|wc -l\nregister: check_rolename\n\nAnd then the condition would be:\n\nThis way you won\u0027t have to ignore errors and the condition would be:\n\nwhen: \n - check_rolename.stdout.find(\"1\") \u003e -1\n\n\n\nIgnoring errors may miss actual failure running \u0027openstack role list --project service -c Name -f value\u0027 for whatever reason.",
+      "range": {
+        "startLine": 35,
+        "startChar": 6,
+        "endLine": 35,
+        "endChar": 85
+      },
+      "revId": "1012a58e37a840bf7756ce973bc85c2d6250a0f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2df8fb4f_3698423a",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 8
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1009538
+      },
+      "writtenOn": "2018-12-07T21:51:22Z",
+      "side": 1,
+      "message": "Same.",
+      "range": {
+        "startLine": 52,
+        "startChar": 6,
+        "endLine": 52,
+        "endChar": 102
+      },
+      "revId": "1012a58e37a840bf7756ce973bc85c2d6250a0f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87af49a4_f9acb2ce",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 8
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1009538
+      },
+      "writtenOn": "2018-12-07T21:51:22Z",
+      "side": 1,
+      "message": "All this should be in a block with the same condition:\n  when:\n      - install.image_direct_deploy !\u003d \u0027iscsi\u0027\t\n      - undercloud_version | openstack_release \u003d\u003d 13",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 52
+      },
+      "revId": "1012a58e37a840bf7756ce973bc85c2d6250a0f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
