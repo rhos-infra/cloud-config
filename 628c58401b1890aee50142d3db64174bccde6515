@@ -179,6 +179,30 @@
     },
     {
       "key": {
+        "uuid": "616e07f8_0983dc76",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1012138
+      },
+      "writtenOn": "2018-12-07T14:57:29Z",
+      "side": 1,
+      "message": "It\u0027s required for initial deployment too.",
+      "parentUuid": "ce9fe49a_306936e7",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 51
+      },
+      "revId": "628c58401b1890aee50142d3db64174bccde6515",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e7cf7b61_cfa1c26a",
         "filename": "tasks/scale/up/normal_flow.yml",
         "patchSetId": 2
