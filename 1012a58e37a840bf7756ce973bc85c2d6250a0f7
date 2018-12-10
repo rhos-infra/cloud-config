@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4c3a4781_204b4cf2",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 8
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1015537
+      },
+      "writtenOn": "2018-12-10T15:01:18Z",
+      "side": 1,
+      "message": "Indeed, that is the best way.\nThanks",
+      "parentUuid": "ae6993a9_7b1f64c5",
+      "range": {
+        "startLine": 35,
+        "startChar": 6,
+        "endLine": 35,
+        "endChar": 85
+      },
+      "revId": "1012a58e37a840bf7756ce973bc85c2d6250a0f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2df8fb4f_3698423a",
         "filename": "tasks/scale/up/normal_flow.yml",
         "patchSetId": 8
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "26341c5c_fd7e1e33",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 8
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1015537
+      },
+      "writtenOn": "2018-12-10T15:01:18Z",
+      "side": 1,
+      "message": "Unfortunately, this is not similar to previous condition because Temp-Url-Key is always existed without UUID, so we have check if it has value into the \u0027\u0027.\nSee example:\n(undercloud) [stack@undercloud-0 ~]$  openstack object store account show -c properties\n+------------+-------------------------------------------------+\n| Field      | Value                                           |\n+------------+-------------------------------------------------+\n| properties | Temp-Url-Key\u003d\u00275c417a430641f22e6bca80395376faa3\u0027 |\n+------------+-------------------------------------------------+\nI think, the current verification is good enough.",
+      "parentUuid": "2df8fb4f_3698423a",
+      "range": {
+        "startLine": 52,
+        "startChar": 6,
+        "endLine": 52,
+        "endChar": 102
+      },
+      "revId": "1012a58e37a840bf7756ce973bc85c2d6250a0f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "87af49a4_f9acb2ce",
         "filename": "tasks/scale/up/normal_flow.yml",
         "patchSetId": 8
@@ -68,6 +116,30 @@
       "revId": "1012a58e37a840bf7756ce973bc85c2d6250a0f7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df1788d0_12c89691",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 8
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1015537
+      },
+      "writtenOn": "2018-12-10T15:01:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87af49a4_f9acb2ce",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 52
+      },
+      "revId": "1012a58e37a840bf7756ce973bc85c2d6250a0f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
