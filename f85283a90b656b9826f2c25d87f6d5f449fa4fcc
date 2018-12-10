@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3770473a_8137bdad",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 9
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1009538
+      },
+      "writtenOn": "2018-12-10T20:05:57Z",
+      "side": 1,
+      "message": "Running the command on OSP13, where I didn\u0027t enable temporary URL:\n(undercloud) [stack@undercloud76 ~]$ openstack object store account show -c properties -f value \n\nThe output is:\nTemp-Url-Key\u003d\u0027cbf2d4e4e45201690f8a4050dea7dd9b\u0027\n\n\nHence, I think you can just leave:\nopenstack object store account show -c properties -f value\n\nand NOT ignore failure here.\n\n\nwhen: check_tempurlkey.rc \u003d\u003d 0 in the next task becomes redundant.\n\n################################################################################\n\nOtherwise, what happens if the command \u0027openstack object store account show -c properties -f value\u0027  returns a failure?\nYou continue further and will only be skipping the next task. The result of the whole job will take more time and will be useless.",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 25
+      },
+      "revId": "f85283a90b656b9826f2c25d87f6d5f449fa4fcc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "576e7aa2_ab354b4f",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 9
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1009538
+      },
+      "writtenOn": "2018-12-10T20:05:57Z",
+      "side": 1,
+      "message": "This becomes redundant if you don\u0027t ignore the error above.",
+      "range": {
+        "startLine": 57,
+        "startChar": 6,
+        "endLine": 57,
+        "endChar": 36
+      },
+      "revId": "f85283a90b656b9826f2c25d87f6d5f449fa4fcc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
