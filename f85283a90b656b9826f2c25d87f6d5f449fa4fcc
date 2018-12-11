@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f3a7577b_2bf74a1e",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 9
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1015537
+      },
+      "writtenOn": "2018-12-11T21:54:46Z",
+      "side": 1,
+      "message": "I\u0027m agreed. Just recheck it with latest puddle 2018-12-07.1",
+      "parentUuid": "3770473a_8137bdad",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 25
+      },
+      "revId": "f85283a90b656b9826f2c25d87f6d5f449fa4fcc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "576e7aa2_ab354b4f",
         "filename": "tasks/scale/up/normal_flow.yml",
         "patchSetId": 9
@@ -45,6 +69,30 @@
       "revId": "f85283a90b656b9826f2c25d87f6d5f449fa4fcc",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cfa79720_be9edc5d",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 9
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1015537
+      },
+      "writtenOn": "2018-12-11T21:54:46Z",
+      "side": 1,
+      "message": "Yep, removed condition.",
+      "parentUuid": "576e7aa2_ab354b4f",
+      "range": {
+        "startLine": 57,
+        "startChar": 6,
+        "endLine": 57,
+        "endChar": 36
+      },
+      "revId": "f85283a90b656b9826f2c25d87f6d5f449fa4fcc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
