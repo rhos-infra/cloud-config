@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5712e2f7_4b432987",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 10
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1010448
+      },
+      "writtenOn": "2018-12-12T08:41:10Z",
+      "side": 1,
+      "message": "why is this needed?",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 32
+      },
+      "revId": "4da03fd53c37ea718a4b6f5196f8616eb13b89e9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
