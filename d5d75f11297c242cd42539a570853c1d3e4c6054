@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2136637c_cdef1dc1",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 11
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1009538
+      },
+      "writtenOn": "2018-12-12T14:26:37Z",
+      "side": 1,
+      "message": "This one just outputs value. The registered variable isn\u0027t used anywhere.",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 32
+      },
+      "revId": "d5d75f11297c242cd42539a570853c1d3e4c6054",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
