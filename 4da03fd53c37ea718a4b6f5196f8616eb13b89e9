@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "2042de26_0b8b4185",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 10
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1015537
+      },
+      "writtenOn": "2018-12-12T13:37:14Z",
+      "side": 1,
+      "message": "Should be find(\"1\") \u003d\u003d -1",
+      "range": {
+        "startLine": 43,
+        "startChar": 4,
+        "endLine": 43,
+        "endChar": 48
+      },
+      "revId": "4da03fd53c37ea718a4b6f5196f8616eb13b89e9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5712e2f7_4b432987",
         "filename": "tasks/scale/up/normal_flow.yml",
         "patchSetId": 10
