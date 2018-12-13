@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b90701e6_bf8dddfe",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 11
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1015537
+      },
+      "writtenOn": "2018-12-13T12:34:09Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "7247dfa2_a4dd01c6",
+      "range": {
+        "startLine": 45,
+        "startChar": 12,
+        "endLine": 45,
+        "endChar": 51
+      },
+      "revId": "d5d75f11297c242cd42539a570853c1d3e4c6054",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "41fa7d46_838f57dc",
         "filename": "tasks/scale/up/normal_flow.yml",
         "patchSetId": 11
@@ -36,6 +60,30 @@
       "writtenOn": "2018-12-12T17:40:22Z",
       "side": 1,
       "message": "This fails if the properties column doesn\u0027t exist. I\u0027m assuming you want to run the task at line 51 based on this task\u0027s result?",
+      "range": {
+        "startLine": 48,
+        "startChar": 10,
+        "endLine": 48,
+        "endChar": 68
+      },
+      "revId": "d5d75f11297c242cd42539a570853c1d3e4c6054",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2cbaf46c_e1f23ee0",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 11
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1015537
+      },
+      "writtenOn": "2018-12-13T12:34:09Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "41fa7d46_838f57dc",
       "range": {
         "startLine": 48,
         "startChar": 10,
@@ -92,6 +140,30 @@
       "revId": "d5d75f11297c242cd42539a570853c1d3e4c6054",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e03fcef2_0015266a",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 11
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1015537
+      },
+      "writtenOn": "2018-12-13T12:34:09Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "04b063af_a06a066c",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 32
+      },
+      "revId": "d5d75f11297c242cd42539a570853c1d3e4c6054",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
