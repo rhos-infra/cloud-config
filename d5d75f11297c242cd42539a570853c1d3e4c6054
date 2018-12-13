@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "7247dfa2_a4dd01c6",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 11
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1010448
+      },
+      "writtenOn": "2018-12-13T07:15:16Z",
+      "side": 1,
+      "message": "This isn\u0027t a check rather debug",
+      "range": {
+        "startLine": 45,
+        "startChar": 12,
+        "endLine": 45,
+        "endChar": 51
+      },
+      "revId": "d5d75f11297c242cd42539a570853c1d3e4c6054",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "41fa7d46_838f57dc",
         "filename": "tasks/scale/up/normal_flow.yml",
         "patchSetId": 11
@@ -36,6 +59,30 @@
       "writtenOn": "2018-12-12T14:26:37Z",
       "side": 1,
       "message": "This one just outputs value. The registered variable isn\u0027t used anywhere.",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 32
+      },
+      "revId": "d5d75f11297c242cd42539a570853c1d3e4c6054",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04b063af_a06a066c",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 11
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1010448
+      },
+      "writtenOn": "2018-12-13T07:15:16Z",
+      "side": 1,
+      "message": "exactly, so why question still valid - why this task needed?",
+      "parentUuid": "2136637c_cdef1dc1",
       "range": {
         "startLine": 45,
         "startChar": 0,
