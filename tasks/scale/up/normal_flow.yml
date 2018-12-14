@@ -221,3 +221,38 @@
         command: "cat {{ nodes_data_path.stdout }}"
 
   when: is_node_data.rc == 0
+
+- name: check docker-images.yaml in deploy script
+  shell: |
+      grep 'docker-images.yaml' {{ overcloud_deploy_script }}
+  ignore_errors: true
+  register: legacy_img_file
+  when: undercloud_version | openstack_release == 14
+
+- name: update container image file
+  block:
+      - name: check containers-prepare-parameter.yaml exists
+        find:
+            paths: "{{ overcloud_deploy_script|dirname }}"
+            recurse: yes
+            use_regex: yes
+            patterns: 'containers-prepare-parameter.(yaml|yml)'
+        register: current_img_file
+
+      - name: fail when legacy file exists and current misses
+        fail:
+            msg: Legacy docker-images.yaml exist and containers-prepare-parameter.yaml is missing
+        when:
+            - current_img_file.files|length == 0
+
+      - name: replace docker-images.yaml with containers-prepare-parameter.yaml
+        vars:
+            current_img: "{{ (current_img_file.files|sort(attribute='path'))[0].path }}"
+        replace:
+            path: "{{ overcloud_deploy_script }}"
+            regexp: "(.*) ([a-zA-Z0-9/]+docker-images.yaml)(.*)"
+            replace: "\\1 {{ current_img }} \\3"
+
+  when:
+      - legacy_img_file.rc == 0
+      - undercloud_version | openstack_release == 14
