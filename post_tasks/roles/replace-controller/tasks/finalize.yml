@@ -60,6 +60,7 @@
       with_items: "{{ all_deprecated_agents.stdout_lines }}"
       tags: skip_ansible_lint
   remote_user: stack
+  ignore_errors: yes
 
 - name: remove the compute services for the removed node
   shell: |
@@ -69,3 +70,4 @@
       done
   tags: skip_ansible_lint
   remote_user: stack
+  ignore_errors: yes
