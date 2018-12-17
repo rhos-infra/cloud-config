@@ -59,6 +59,8 @@
           neutron agent-delete {{ item }}
       with_items: "{{ all_deprecated_agents.stdout_lines }}"
       tags: skip_ansible_lint
+  ignore_errors: yes
+
 
 - name: remove the compute services for the removed node
   shell: |
@@ -67,3 +69,4 @@
           openstack compute service delete $SERVICE
       done
   tags: skip_ansible_lint
+  ignore_errors: yes
