@@ -36,11 +36,6 @@
       an_ignore_nodes:
           - "{{ install.controller.to.remove }}"
 
-- name: unmanage galera service
-  command: pcs resource unmanage galera
-  become: yes
-  delegate_to: "{{ rc_valid_controller_nodes|first }}"
-
 - name: create template with controller index to remove
   template:
       dest: "/home/stack/remove-controller.yaml"
@@ -74,3 +69,9 @@
   when: overcloud_replace.rc != 0 and undercloud_version|openstack_release >= 10
   tags: skip_ansible_lint
 
+- name: fail on failure
+  fail:
+      msg: "Controller replacement failed. Check logs above."
+  when:
+      - overcloud_replace is defined
+      - overcloud_replace.rc != 0
