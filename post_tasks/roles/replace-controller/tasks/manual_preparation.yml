@@ -1,0 +1,39 @@
+- name: stop pacemaker cluster on old controller node
+  shell: |
+      pcs cluster stop {{ install.controller.to.remove }}
+  become: yes
+  delegate_to: "{{ rc_valid_controller_nodes|first }}"
+  ignore_errors: yes
+  tags: skip_ansible_lint
+
+- name: wait for pacemaker cluster to be stopped on the old node
+  shell: |
+      pcs status | grep -w Online | grep -w {{ install.controller.to.remove }}
+  become: yes
+  delegate_to: "{{ rc_valid_controller_nodes|first }}"
+  ignore_errors: yes
+  register: tmp_output
+  retries: 18
+  delay: 10
+  until: tmp_output.rc != 0
+  tags: skip_ansible_lint
+
+- name: delete failed node from the server list
+  shell: |
+      pcs cluster localnode remove {{ install.controller.to.remove }}
+      pcs cluster reload corosync
+  become: yes
+  delegate_to: "{{ item }}"
+  with_items: "{{ rc_valid_controller_nodes }}"
+  tags: skip_ansible_lint
+
+- name: delete node from cluster with crm_node
+  command: "crm_node -R {{ install.controller.to.remove }} --force"
+  become: yes
+  delegate_to: "{{ rc_valid_controller_nodes|first }}"
+
+- name: unmanage galera-bundle pacemaker resource
+  shell: |
+      pcs resource unmanage galera-bundle
+  become: yes
+  delegate_to: "{{ rc_valid_controller_nodes|first }}"

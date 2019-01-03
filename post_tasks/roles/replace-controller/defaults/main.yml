@@ -3,6 +3,7 @@ rc_preliminary_checks: yes
 rc_perform_undercloud_db_backup: yes
 rc_remove_ceph_monitor: yes
 rc_replace_node: yes
+rc_manual_preparation: yes
 rc_manual_intervention: yes
 rc_finalize: yes
 
@@ -16,6 +17,11 @@ rc_fail_on_replace: no
 rc_valid_controller_nodes: "{{ groups.controller|difference(groups.get('unused', []))|difference([install.controller.to.remove, install.controller.to.add]) }}"
 rc_corosync_retries: 5
 overcloud_deploy_script: "~/overcloud_deploy.sh"
+
+# new instackenv file
+instackenv_file_name: "~/newnodes.json"
+# old instackenv file
+orig_instackenv_file_name: "~/instackenv.json"
 
 # the timeout to wait while adding new controller to the cluster
 # may work workaround for https://bugzilla.redhat.com/show_bug.cgi?id=1600169

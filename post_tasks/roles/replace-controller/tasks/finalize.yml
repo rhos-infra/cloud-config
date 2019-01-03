@@ -1,17 +1,29 @@
-- name: finalizing overcloud services
-  block:
-    - name: allow pacemaker to run controller services on the newly added node
-      shell: |
-          for i in $(sudo pcs property | grep "{{ rc_valid_controller_nodes|first }}:" | cut -d' ' -f 3- | tr  ' ' '\n' | grep role); do
-              sudo pcs property set --node {{ install.controller.to.add }} $i
-          done
-      delegate_to: "{{ rc_valid_controller_nodes|first }}"
-      tags: skip_ansible_lint
-
-    - name: check pcs status
-      command: pcs status
-      delegate_to: "{{ rc_valid_controller_nodes|first }}"
+- name: refresh the cluster and manage galera-bundle resource
+  shell: |
+      pcs resource refresh galera-bundle
+      pcs resource manage galera-bundle
   become: yes
+  delegate_to: "{{ rc_valid_controller_nodes|first }}"
+  tags: skip_ansible_lint
+
+- name: wait for galera cluster to stabilize
+  shell: |
+      crm_mon --as-xml | xmllint --xpath \
+      'count(//resource[@resource_agent="ocf::heartbeat:galera" and @role="Master" and @active="true" and @orphaned="false" and @blocked="false" and @managed="true" and @failed="false"])' -
+  become: yes
+  delegate_to: "{{ rc_valid_controller_nodes|first }}"
+  ignore_errors: yes
+  register: galera_status
+  retries: 18
+  delay: 10
+  until: galera_status.stdout == "3"
+  tags: skip_ansible_lint
+
+- name: check pcs status
+  command: pcs status
+  delegate_to: "{{ rc_valid_controller_nodes|first }}"
+  become: yes
+  ignore_errors: yes
 
 - name: finalizing l3 agent router hosting
   block:
@@ -58,6 +70,7 @@
           source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
           neutron agent-delete {{ item }}
       with_items: "{{ all_deprecated_agents.stdout_lines }}"
+      when: all_deprecated_agents.stdout_lines != ''
       tags: skip_ansible_lint
   remote_user: stack
 
