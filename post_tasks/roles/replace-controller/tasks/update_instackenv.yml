@@ -1,0 +1,17 @@
+- command: "cat {{ orig_instackenv_file_name }}"
+  register: instackenv
+
+- command: "cat {{ instackenv_file_name }}"
+  register: newnodes
+
+- set_fact:
+      original_instackenv: "{{ instackenv.stdout }}"
+      new_added_node: "{{ newnodes.stdout }}"
+
+- set_fact:
+      updated_instackenv: { "nodes" : "{{ original_instackenv.nodes + new_added_node.nodes }}"}
+
+- copy:
+      content: "{{ updated_instackenv }}"
+      dest: "{{ orig_instackenv_file_name }}"
+
