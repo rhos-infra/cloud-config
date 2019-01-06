@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "37b53ada_e5509498",
+        "filename": "post_tasks/roles/replace-controller/tasks/finalize.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1013090
+      },
+      "writtenOn": "2019-01-06T08:29:21Z",
+      "side": 1,
+      "message": "To use ignore_errors on almost all the tasks in the playbook is a bad practice. Is their a good reason for it?",
+      "revId": "6e910193a520002578109fa24ae71ca25a01456c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
