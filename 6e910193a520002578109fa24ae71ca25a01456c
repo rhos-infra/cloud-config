@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "895587b2_00ebd629",
+        "filename": "post_tasks/roles/replace-controller/tasks/finalize.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1012952
+      },
+      "writtenOn": "2019-01-06T12:32:08Z",
+      "side": 1,
+      "message": "Yes there is, \nWe are following the documentation, \nIn the documentation they state that \"IF\" there are resources to be moved to the new node , they should be moved.\n\nsee : \nhttp://file.bne.redhat.com/~dmacpher/Red_Hat_OpenStack_Platform/dmacpher-osp14-controller-replacement/doc-Director_Installation_and_Usage/replacing-controller-nodes.html\n#section : 12.6. Cleaning up after Controller node replacement: \n 7.If any agents appear for the old node, remove them: ...\n8.If necessary, add your hosting router to the L3 agent on the new node. \netc...",
+      "parentUuid": "37b53ada_e5509498",
+      "revId": "6e910193a520002578109fa24ae71ca25a01456c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1b071631_8dc2902c",
         "filename": "post_tasks/roles/replace-controller/tasks/main.yml",
         "patchSetId": 1
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "ee92db7a_cc0b3c26",
+        "filename": "post_tasks/roles/replace-controller/tasks/main.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1012952
+      },
+      "writtenOn": "2019-01-06T12:32:08Z",
+      "side": 1,
+      "message": "This is fine, \nyou are looking at the old doc , \nthe new one states that these steps should happen before: \nhttp://file.bne.redhat.com/~dmacpher/Red_Hat_OpenStack_Platform/dmacpher-osp14-controller-replacement/doc-Director_Installation_and_Usage/replacing-controller-nodes.html\n\nWe should use the new doc on this since after the first redeployment it no longer fails.\nsee Damien\u0027 comment on this : \nhttps://bugzilla.redhat.com/show_bug.cgi?id\u003d1647748#c6\n\nIn section : 12.3. Preparing the cluster for Controller replacement",
+      "parentUuid": "1b071631_8dc2902c",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 35
+      },
+      "revId": "6e910193a520002578109fa24ae71ca25a01456c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "82062e19_e5fc9059",
         "filename": "post_tasks/roles/replace-controller/templates/remove-controller.yaml.j2",
         "patchSetId": 1
@@ -53,6 +95,30 @@
       "writtenOn": "2019-01-06T10:07:08Z",
       "side": 1,
       "message": "If this is no longer needed maybe you can remove it instead of comment it?",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 50
+      },
+      "revId": "6e910193a520002578109fa24ae71ca25a01456c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17d228b4_f87dbe71",
+        "filename": "post_tasks/roles/replace-controller/templates/remove-controller.yaml.j2",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1012952
+      },
+      "writtenOn": "2019-01-06T12:32:08Z",
+      "side": 1,
+      "message": "I think we can safely remove this , \nthis was needed when the first deployment failed\n(to help fail faster and speed up the process)",
+      "parentUuid": "82062e19_e5fc9059",
       "range": {
         "startLine": 5,
         "startChar": 0,
