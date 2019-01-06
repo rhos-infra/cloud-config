@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dc949441_8fd5a157",
+        "filename": "post_tasks/roles/replace-controller/tasks/manual_intervention.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1012221
+      },
+      "writtenOn": "2019-01-06T10:07:08Z",
+      "side": 0,
+      "message": "why did you remove this task?\nI see that the 2 tasks above were moved to manual preparation steps, but I don\u0027t see this task anywhere.",
+      "range": {
+        "startLine": 15,
+        "startChar": 8,
+        "endLine": 15,
+        "endChar": 56
+      },
+      "revId": "701c93b372e671f1588488d9b6b948dba6977d24",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61db0afe_7bdfb156",
+        "filename": "post_tasks/roles/replace-controller/tasks/replace_node.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1012221
+      },
+      "writtenOn": "2019-01-06T10:07:08Z",
+      "side": 0,
+      "message": "Why was this task removed? In the documentation, I see that it is needed.\nIs it because of the manual preparation steps that you\u0027ve added?",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 54
+      },
+      "revId": "701c93b372e671f1588488d9b6b948dba6977d24",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}

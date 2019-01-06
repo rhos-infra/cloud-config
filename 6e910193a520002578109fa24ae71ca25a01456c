@@ -16,6 +16,52 @@
       "revId": "6e910193a520002578109fa24ae71ca25a01456c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1b071631_8dc2902c",
+        "filename": "post_tasks/roles/replace-controller/tasks/main.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1012221
+      },
+      "writtenOn": "2019-01-06T10:07:08Z",
+      "side": 1,
+      "message": "Should those tasks be before the replace node or after?\nFrom documentation it seems to me like that tasks inside are executed after the replace.",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 35
+      },
+      "revId": "6e910193a520002578109fa24ae71ca25a01456c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82062e19_e5fc9059",
+        "filename": "post_tasks/roles/replace-controller/templates/remove-controller.yaml.j2",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1012221
+      },
+      "writtenOn": "2019-01-06T10:07:08Z",
+      "side": 1,
+      "message": "If this is no longer needed maybe you can remove it instead of comment it?",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 50
+      },
+      "revId": "6e910193a520002578109fa24ae71ca25a01456c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
