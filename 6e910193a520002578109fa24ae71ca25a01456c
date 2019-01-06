@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "4a789148_32293c9a",
+        "filename": "post_tasks/roles/replace-controller/tasks/finalize.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1012952
+      },
+      "writtenOn": "2019-01-06T13:05:31Z",
+      "side": 1,
+      "message": "After a discussion , I agree about this, \nThere should be some basic checks in this block that will \nreplace using ignore_errors:true\ni.e :\nonly if there are agents in the old nodes and only if there are routers on those , execute the tasks that remove and move them to the new controller.",
+      "parentUuid": "db4a12e0_4a18471b",
+      "revId": "6e910193a520002578109fa24ae71ca25a01456c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1b071631_8dc2902c",
         "filename": "post_tasks/roles/replace-controller/tasks/main.yml",
         "patchSetId": 1
