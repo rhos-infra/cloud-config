@@ -25,6 +25,52 @@
     },
     {
       "key": {
+        "uuid": "c4d3c0e8_6f5b4e14",
+        "filename": "post_tasks/roles/replace-controller/tasks/manual_intervention.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1012221
+      },
+      "writtenOn": "2019-01-06T12:52:11Z",
+      "side": 0,
+      "message": "Don\u0027t we need this for versions lower than 12?",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 21
+      },
+      "revId": "701c93b372e671f1588488d9b6b948dba6977d24",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3b350c0_840ee4ff",
+        "filename": "post_tasks/roles/replace-controller/tasks/manual_intervention.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1012221
+      },
+      "writtenOn": "2019-01-06T12:52:11Z",
+      "side": 0,
+      "message": "here also, don\u0027t we need this for versions lower than 13?",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 0
+      },
+      "revId": "701c93b372e671f1588488d9b6b948dba6977d24",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "61db0afe_7bdfb156",
         "filename": "post_tasks/roles/replace-controller/tasks/replace_node.yml",
         "patchSetId": 1
@@ -69,6 +115,30 @@
       "revId": "701c93b372e671f1588488d9b6b948dba6977d24",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31071e92_32c5cf5a",
+        "filename": "post_tasks/roles/replace-controller/tasks/replace_node.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1012221
+      },
+      "writtenOn": "2019-01-06T12:52:11Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "4c667244_0a2941c9",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 54
+      },
+      "revId": "701c93b372e671f1588488d9b6b948dba6977d24",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
