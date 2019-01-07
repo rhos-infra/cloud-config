@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "dcce250f_135be769",
+        "filename": "post_tasks/roles/replace-controller/tasks/manual_intervention.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1006843
+      },
+      "writtenOn": "2019-01-07T18:20:16Z",
+      "side": 0,
+      "message": "As mentioned below, The work was based on OSP14 guide which works now for OSP13 with only one exception of the two tasks fixing galera resource - we have a bug for Documentation to reflect that.",
+      "parentUuid": "dc949441_8fd5a157",
+      "range": {
+        "startLine": 15,
+        "startChar": 8,
+        "endLine": 15,
+        "endChar": 56
+      },
+      "revId": "701c93b372e671f1588488d9b6b948dba6977d24",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c4d3c0e8_6f5b4e14",
         "filename": "post_tasks/roles/replace-controller/tasks/manual_intervention.yml",
         "patchSetId": 1
@@ -107,6 +131,30 @@
       "side": 0,
       "message": "In terms of cloud-config\u0027s scope: \nIt is atated that it\u0027s not for \u003c\u003d12 versions (only 13,14):\nhttps://github.com/rhos-infra/cloud-config/tree/master/post_tasks/roles/replace-controller",
       "parentUuid": "d3b350c0_840ee4ff",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 0
+      },
+      "revId": "701c93b372e671f1588488d9b6b948dba6977d24",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d13f2486_586a4fe3",
+        "filename": "post_tasks/roles/replace-controller/tasks/manual_intervention.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1006843
+      },
+      "writtenOn": "2019-01-07T18:20:16Z",
+      "side": 0,
+      "message": "As Pini mentioned, the guide for controller replacement for OSP versions  older than 13 is quite different and this role was originally wrote for OSP13 and OSP14 but the procedure changed in OSP14 again and moreover some patches for OSP14 got backported to OSP13 which made OSP14 procedure more relevant even for OSP13 (It\u0027s discussed in the bug Pini put into the commit message). It\u0027s true that official OSP13 doc has not been updated yet but me and Pini are trying to make it happened.",
+      "parentUuid": "d22a8203_89348fe7",
       "range": {
         "startLine": 52,
         "startChar": 0,

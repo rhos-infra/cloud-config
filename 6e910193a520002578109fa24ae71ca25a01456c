@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "bb7a6caa_e7691add",
+        "filename": "post_tasks/roles/replace-controller/tasks/finalize.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1006843
+      },
+      "writtenOn": "2019-01-07T18:20:16Z",
+      "side": 1,
+      "message": "I will try to make it in a smarter way instead of just ignoring errors in next patchset.",
+      "parentUuid": "4a789148_32293c9a",
+      "revId": "6e910193a520002578109fa24ae71ca25a01456c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1b071631_8dc2902c",
         "filename": "post_tasks/roles/replace-controller/tasks/main.yml",
         "patchSetId": 1
@@ -179,6 +197,30 @@
       "side": 1,
       "message": "I think we can safely remove this , \nthis was needed when the first deployment failed\n(to help fail faster and speed up the process)",
       "parentUuid": "82062e19_e5fc9059",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 50
+      },
+      "revId": "6e910193a520002578109fa24ae71ca25a01456c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78a7c3e5_1ff7abad",
+        "filename": "post_tasks/roles/replace-controller/templates/remove-controller.yaml.j2",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1006843
+      },
+      "writtenOn": "2019-01-07T18:20:16Z",
+      "side": 1,
+      "message": "That\u0027s true I will remove it in next patchet.",
+      "parentUuid": "17d228b4_f87dbe71",
       "range": {
         "startLine": 5,
         "startChar": 0,
