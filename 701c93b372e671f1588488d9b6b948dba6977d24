@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "c02f0230_0aa9f77a",
+        "filename": "post_tasks/roles/replace-controller/tasks/manual_intervention.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1006843
+      },
+      "writtenOn": "2019-01-10T11:57:05Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "dcce250f_135be769",
+      "range": {
+        "startLine": 15,
+        "startChar": 8,
+        "endLine": 15,
+        "endChar": 56
+      },
+      "revId": "701c93b372e671f1588488d9b6b948dba6977d24",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c4d3c0e8_6f5b4e14",
         "filename": "post_tasks/roles/replace-controller/tasks/manual_intervention.yml",
         "patchSetId": 1
@@ -93,6 +117,30 @@
       "revId": "701c93b372e671f1588488d9b6b948dba6977d24",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e4d6a70_64bf0b7c",
+        "filename": "post_tasks/roles/replace-controller/tasks/manual_intervention.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1006843
+      },
+      "writtenOn": "2019-01-10T11:57:05Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "94ae7089_8ec88378",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 21
+      },
+      "revId": "701c93b372e671f1588488d9b6b948dba6977d24",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     },
     {
       "key": {
@@ -164,6 +212,30 @@
       "revId": "701c93b372e671f1588488d9b6b948dba6977d24",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7ea7236_09bb6654",
+        "filename": "post_tasks/roles/replace-controller/tasks/manual_intervention.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1006843
+      },
+      "writtenOn": "2019-01-10T11:57:05Z",
+      "side": 0,
+      "message": "I am going to resolve the comments with regards to older releases than OSP13 since originally the role was written for OSP13 and newer and frankly it does not seem anyone cares for older releases wrt controller replacement.",
+      "parentUuid": "d13f2486_586a4fe3",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 0
+      },
+      "revId": "701c93b372e671f1588488d9b6b948dba6977d24",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     },
     {
       "key": {

@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "78f9c8cb_2253921c",
+        "filename": "post_tasks/roles/replace-controller/tasks/finalize.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1006843
+      },
+      "writtenOn": "2019-01-10T11:57:05Z",
+      "side": 1,
+      "message": "I rethinhk it and I believe the ignore_errors is not needed, instead I added one more \"when\" condition additionally to the existing ones, so basically If no routers on old l3 agent are found then the task removing them will be skipped thanks to \"when\" condition. The same goes to the removal of old neutron agents. The code for removing potential compute service is written the wya that if none is find nothing will be done.",
+      "parentUuid": "bb7a6caa_e7691add",
+      "revId": "6e910193a520002578109fa24ae71ca25a01456c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1b071631_8dc2902c",
         "filename": "post_tasks/roles/replace-controller/tasks/main.yml",
         "patchSetId": 1
@@ -230,6 +248,30 @@
       "revId": "6e910193a520002578109fa24ae71ca25a01456c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc5d53fc_1308f28c",
+        "filename": "post_tasks/roles/replace-controller/templates/remove-controller.yaml.j2",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1006843
+      },
+      "writtenOn": "2019-01-10T11:57:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78a7c3e5_1ff7abad",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 50
+      },
+      "revId": "6e910193a520002578109fa24ae71ca25a01456c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
