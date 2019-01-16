@@ -25,6 +25,15 @@
         include_role:
             name: replace-controller
 
+- name: remove replaced controller from hosts
+  hosts: localhost
+  gather_facts: no
+  tags: always
+  roles:
+      - role: inventory-update
+        omit_hosts:
+          - "{{ install.controller.to.remove }}"
+
 - name: Try to update inventory even when deployment has failed
   import_playbook: add_overcloud_hosts.yml
   tags:
