@@ -1,0 +1,9 @@
+Code-Review+2: Avishay Mahluf <amachluf@redhat.com>
+Code-Review+2: Sergii Golovatiuk <sgolovat@redhat.com>
+Code-Review+1: Avi Talmor <atalmor@redhat.com>
+Verified+1: rhosqeauto <obaranov+rhosqeauto@redhat.com>
+Submitted-by: Avishay Mahluf <amachluf@redhat.com>
+Submitted-at: Mon, 21 Jan 2019 11:56:46 +0000
+Reviewed-on: https://review.gerrithub.io/c/rhos-infra/cloud-config/+/441350
+Project: rhos-infra/cloud-config
+Branch: refs/heads/master
