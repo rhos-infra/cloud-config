@@ -29,21 +29,21 @@
   block:
     - name: get l3 agent id for old node
       shell: |
-          source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
+          source /home/stack/overcloudrc
           neutron agent-list | grep "neutron-l3-agent" | grep {{ install.controller.to.remove }} | awk '{print $2}'
       register: l3_agent_old_id
       tags: skip_ansible_lint
 
     - name: get l3 agent id for new node
       shell: |
-          source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
+          source /home/stack/overcloudrc
           neutron agent-list | grep "neutron-l3-agent" | grep {{ install.controller.to.add }} | awk '{print $2}'
       register: l3_agent_new_id
       tags: skip_ansible_lint
 
     - name: get all routers on the old l3 agent
       shell: |
-          source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
+          source /home/stack/overcloudrc
           neutron router-list-on-l3-agent -c name -f json {{ l3_agent_old_id.stdout }}
       register: l3_routers
       when: l3_agent_old_id.stdout != ''
@@ -51,7 +51,7 @@
 
     - name: move all routers to the new l3 agent
       shell: |
-          source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
+          source /home/stack/overcloudrc
           neutron l3-agent-router-add {{ l3_agent_new_id.stdout }} {{ item.name }}
           neutron l3-agent-router-remove {{ l3_agent_new_id.stdout }} {{ item.name }}
       with_items: "{{ l3_routers.stdout|default('[]')|from_json }}"
@@ -60,25 +60,23 @@
 
     - name: get the list of agents on old node
       shell: |
-          source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
+          source /home/stack/overcloudrc
           neutron agent-list -F id -F host | grep {{ install.controller.to.remove }} | awk '{print $2}'
       register: all_deprecated_agents
       tags: skip_ansible_lint
 
     - name: remove agents from old node
       shell: |
-          source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
+          source /home/stack/overcloudrc
           neutron agent-delete {{ item }}
       with_items: "{{ all_deprecated_agents.stdout_lines }}"
       when: all_deprecated_agents.stdout_lines != ''
       tags: skip_ansible_lint
-  remote_user: stack
 
 - name: remove the compute services for the removed node
   shell: |
-      source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
+      source /home/stack/overcloudrc
       for SERVICE in $(openstack compute service list --host {{ install.controller.to.remove }}.localdomain -f value -c ID) ; do
           openstack compute service delete $SERVICE
       done
   tags: skip_ansible_lint
-  remote_user: stack
