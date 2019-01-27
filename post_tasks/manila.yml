@@ -22,7 +22,7 @@
 
       - name: fetch /etc/manila/manila.conf
         fetch:
-          src: /etc/manila/manila.conf"
+          src: /etc/manila/manila.conf
           dest: manila.conf
 
       - name: detect netapp installs
