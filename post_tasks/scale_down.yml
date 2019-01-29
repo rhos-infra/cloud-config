@@ -232,3 +232,11 @@
   tasks:
       - name: remove {{ node_name }}
         shell: "oc delete node {{ node_name }}"
+
+      - block:
+          - name: register {{ node_name }} etcd id
+            shell:
+
+          - name: remove {{ node_name }} from etcd
+            shell: "/usr/local/bin/master-exec etcd etcd etcdctl --cert-file /etc/etcd/peer.crt --key-file /etc/etcd/peer.key --ca-file /etc/etcd/ca.crt --endpoints https://{{ ansible_hostname }}:2379 member remove {{ removed_etcd_member.stdout }}"
+        when: "'master' in node_name"
