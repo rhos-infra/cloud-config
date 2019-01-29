@@ -224,7 +224,7 @@
 
 - name: Remove Openshift scaled down node
   hosts: openshift-master[0]
-  gather_facts: no
+  gather_facts: yes
   any_errors_fatal: true
   become: true
   vars:
@@ -232,3 +232,15 @@
   tasks:
       - name: remove {{ node_name }}
         shell: "oc delete node {{ node_name }}"
+
+      # mcornea: bz#1670513 workaround. to be removed when/if fixed
+      - block:
+          - name: register {{ node_name }} etcd id
+            shell: |
+                /usr/local/bin/master-exec etcd etcd etcdctl --cert-file /etc/etcd/peer.crt --key-file /etc/etcd/peer.key --ca-file /etc/etcd/ca.crt --endpoints https://{{ ansible_hostname }}:2379 member list | awk -F':' '/{{ node_name }}/ {print $1}'
+            register: removed_etcd_member
+
+          - name: remove {{ node_name }} from etcd
+            shell: |
+                /usr/local/bin/master-exec etcd etcd etcdctl --cert-file /etc/etcd/peer.crt --key-file /etc/etcd/peer.key --ca-file /etc/etcd/ca.crt --endpoints https://{{ ansible_hostname }}:2379 member remove {{ removed_etcd_member.stdout }}
+        when: "'master' in node_name"
