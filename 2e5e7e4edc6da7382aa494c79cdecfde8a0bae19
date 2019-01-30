@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5b1700bf_fb0c933a",
+        "filename": "post_tasks/scale_down.yml",
+        "patchSetId": 3
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1010448
+      },
+      "writtenOn": "2019-01-30T07:10:51Z",
+      "side": 1,
+      "message": "Nit: it can be still \u0027no\u0027 and we can have a dedicated task within block(L236-246) to gather them:\n  - name: gather facts\n    setup:",
+      "range": {
+        "startLine": 227,
+        "startChar": 16,
+        "endLine": 227,
+        "endChar": 19
+      },
+      "revId": "2e5e7e4edc6da7382aa494c79cdecfde8a0bae19",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bb35af1d_7b38d3ea",
+        "filename": "post_tasks/scale_down.yml",
+        "patchSetId": 3
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1010448
+      },
+      "writtenOn": "2019-01-30T07:10:51Z",
+      "side": 1,
+      "message": "too long line",
+      "revId": "2e5e7e4edc6da7382aa494c79cdecfde8a0bae19",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "490b0674_e1695b70",
+        "filename": "post_tasks/scale_down.yml",
+        "patchSetId": 3
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1010448
+      },
+      "writtenOn": "2019-01-30T07:10:51Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "2e5e7e4edc6da7382aa494c79cdecfde8a0bae19",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
