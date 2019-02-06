@@ -256,3 +256,8 @@
                     --ca-file /etc/etcd/ca.crt \
                     --endpoints https://{{ ansible_hostname }}:2379 member remove {{ removed_etcd_member.stdout }}
         when: "'master' in node_name"
+
+      - name: try to find unused nodes to scale and add them into a new unused group
+        add_host:
+            name: "{{ node_name }}"
+            groups: unused

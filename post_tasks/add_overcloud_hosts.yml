@@ -78,10 +78,25 @@
             - item.key not in openstack_servers|map(attribute='name')|list
             - item.key in groups.all
             - (ironic_node_dict|default({})).get(item.value.original_name|default(''), item.value).instance_uuid|default('undefined') == ''
+            - not install.splitstack|default(False)
         add_host:
             name: "{{ item.key }}"
             # groups can only be added
             groups: unused
+
+      - block:
+            - name: try to find unused nodes to scale and add them into a new unused group
+              vars:
+                  scale_node_name: "{{ install.node.name }}"
+              when:
+                  - scale_node_name not in openstack_servers|map(attribute='name')|list
+                  - scale_node_name in groups.all
+              add_host:
+                  name: "{{ scale_node_name }}"
+                  groups: unused
+        when:
+            - install.splitstack|default(False)
+            - install.node.name is defined
 
       # Connection for baremetals must be forwarded through UC as OC nodes
       # lie on ctplane not accessible from anywhere else.
