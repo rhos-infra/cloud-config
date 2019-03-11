@@ -1,0 +1,36 @@
+---
+ - block:
+     - set_fact:
+         controller_virsh_node='{{ hostvars[controller].original_name|default(controller)}}'
+
+     - name: get xml file of controller
+       virt:
+         command: get_xml
+         name: '{{ controller_virsh_node }}'
+       register: virsh_xml
+
+     - name: get xml attribute content
+       xml:
+         xmlstring: "{{ virsh_xml['get_xml'] }}"
+         xpath: /domain/devices/disk/source
+         content: attribute
+         attribute: file
+       register: qcow2
+
+     - set_fact:
+         virsh_qcow2_path='{{ qcow2.matches[0].source.file }}'
+
+     - name: get size of the disk for {{ controller }}
+       command: stat --format=%s '{{ virsh_qcow2_path }}'
+       register: disk_size_before_corruption
+
+     - name: Corrupt the disk for {{ controller }}
+       command: /usr/bin/dd if=/dev/zero of='{{ virsh_qcow2_path }}' bs=600M count=5
+
+     - name: check that disk size was change for {{ controller }} after dd command
+       command: stat --format=%s '{{ virsh_qcow2_path }}'
+       register: disk_size_after_corruption
+       failed_when: disk_size_before_corruption.stdout == disk_size_after_corruption.stdout
+
+   vars:
+     controller: '{{ install.controller.to.remove }}'

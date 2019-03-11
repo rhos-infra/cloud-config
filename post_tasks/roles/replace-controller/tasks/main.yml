@@ -1,3 +1,6 @@
+- import_tasks: corrupt_controller_disk
+  when: rc_corrupt_controller_disk == True
+
 - import_tasks: preliminary_checks.yml
   when: rc_preliminary_checks == True
 

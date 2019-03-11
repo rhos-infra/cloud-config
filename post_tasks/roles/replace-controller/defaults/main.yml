@@ -27,3 +27,6 @@ orig_instackenv_file_name: "~/instackenv.json"
 # may work workaround for https://bugzilla.redhat.com/show_bug.cgi?id=1600169
 # by checning it from 0 to 1000.
 rc_cluster_node_add_wait: 0
+
+# specify if we going to replace controller after disk outage
+rc_corrupt_controller_disk: no
