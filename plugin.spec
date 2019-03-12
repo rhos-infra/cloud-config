@@ -302,3 +302,7 @@ subparsers:
                       help: |
                           The controller node name to be added instead the old one.
                           Example: --controller-to-add="controller-1"
+                  use-the-same-node:
+                      type: Bool
+                      help: Specifies do we need to re-use the same node for replacement
+                      default: no
