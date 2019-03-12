@@ -37,3 +37,4 @@
   when:
     - overcloud_replace is defined
     - overcloud_replace.rc == 0
+    - install.use.the.same.node is undefined
