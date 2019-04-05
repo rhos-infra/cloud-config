@@ -22,10 +22,6 @@
   import_playbook: post_tasks/lbaas_v2.yml
   when: "'lbaas_v2' in install.tasks"
 
-- name: Include task "Octavia"
-  import_playbook: post_tasks/octavia.yml
-  when: "'octavia' in install.tasks"
-
 - name: Include task "Compute SSH"
   import_playbook: post_tasks/compute_ssh.yml
   when: '"compute_ssh" in install.tasks'
