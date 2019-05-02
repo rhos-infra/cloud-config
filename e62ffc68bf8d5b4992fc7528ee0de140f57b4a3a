@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "31ecb7cc_a3e566ac",
+        "filename": "tasks/scale/up/splitstack/prepare_nodes.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1010448
+      },
+      "writtenOn": "2019-05-02T06:43:09Z",
+      "side": 1,
+      "message": "We can use variable to not duplicate task:\nvars:\n  pkg_ver: \"{{ (install.version \u003c15)|ternary(\u0027python\u0027, \u0027python3\u0027)}}\"\n\nThough not blocking review",
+      "range": {
+        "startLine": 67,
+        "startChar": 15,
+        "endLine": 67,
+        "endChar": 22
+      },
+      "revId": "e62ffc68bf8d5b4992fc7528ee0de140f57b4a3a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
