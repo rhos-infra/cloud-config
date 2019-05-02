@@ -22,6 +22,30 @@
       "revId": "e62ffc68bf8d5b4992fc7528ee0de140f57b4a3a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edd82b9_2ff0738e",
+        "filename": "tasks/scale/up/splitstack/prepare_nodes.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1005418
+      },
+      "writtenOn": "2019-05-02T13:44:56Z",
+      "side": 1,
+      "message": "Thanks, I\u0027ll propose it in a follow up patch so I can get unblocked for now with this one.",
+      "parentUuid": "31ecb7cc_a3e566ac",
+      "range": {
+        "startLine": 67,
+        "startChar": 15,
+        "endLine": 67,
+        "endChar": 22
+      },
+      "revId": "e62ffc68bf8d5b4992fc7528ee0de140f57b4a3a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
