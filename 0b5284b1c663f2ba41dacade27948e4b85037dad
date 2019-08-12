@@ -1,0 +1,7 @@
+Verified+1: rhosqeauto <amachluf+rhosqeauto@redhat.com>
+Code-Review+2: Marius Cornea <mcornea@redhat.com>
+Submitted-by: Marius Cornea <mcornea@redhat.com>
+Submitted-at: Mon, 12 Aug 2019 20:33:17 +0000
+Reviewed-on: https://review.gerrithub.io/c/rhos-infra/cloud-config/+/464938
+Project: rhos-infra/cloud-config
+Branch: refs/heads/master
