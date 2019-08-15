@@ -22,6 +22,14 @@
   become: true
   delegate_to: "{{ rc_valid_controller_nodes|first }}"
 
+- name: install mysql client
+  package:
+    name: mysql
+    state: present
+  become: yes
+  delegate_to: "{{ item }}"
+  with_items: "{{ rc_valid_controller_nodes }}"
+
 - name: get maria DB cluster variables
   shell: |
       mysql -p$(hiera -c /etc/puppet/hiera.yaml mysql::server::root_password) \
