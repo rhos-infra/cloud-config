@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9768d36d_75199b05",
+        "filename": "post_tasks/network_time.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1004639
+      },
+      "writtenOn": "2019-08-26T15:24:17Z",
+      "side": 1,
+      "message": "Well we sync with ntp server, whether it\u0027s ntpdate or chronyc. I thus think that ntp is more appropriate than time.",
+      "parentUuid": "252e586b_223142dd",
+      "revId": "141b859a02c962f64748ea2cde0a91612d676ff1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7d4101fd_aafaaf7c",
         "filename": "post_tasks/network_time.yml",
         "patchSetId": 1
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "6900af70_00279c8d",
+        "filename": "post_tasks/network_time.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1004639
+      },
+      "writtenOn": "2019-08-26T15:24:17Z",
+      "side": 1,
+      "message": "In the infrared context, rhel8 means ops \u003e\u003d 15.  Using ansible_distribution has the disadvantage of needing gather_facts true, and add no real check in that context.  I would rather keep it as it is.",
+      "parentUuid": "6548b7b3_c00ddd11",
+      "revId": "141b859a02c962f64748ea2cde0a91612d676ff1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c331683e_39a8135c",
         "filename": "post_tasks/network_time.yml",
         "patchSetId": 1
@@ -64,6 +100,30 @@
       "writtenOn": "2019-08-26T15:10:16Z",
       "side": 1,
       "message": "s/ntp/time/",
+      "range": {
+        "startLine": 40,
+        "startChar": 43,
+        "endLine": 40,
+        "endChar": 46
+      },
+      "revId": "141b859a02c962f64748ea2cde0a91612d676ff1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad84c098_cc9dd40a",
+        "filename": "post_tasks/network_time.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1004639
+      },
+      "writtenOn": "2019-08-26T15:24:17Z",
+      "side": 1,
+      "message": "same reasoning than before, we sync with a ntp server.",
+      "parentUuid": "c331683e_39a8135c",
       "range": {
         "startLine": 40,
         "startChar": 43,
