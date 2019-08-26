@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "252e586b_223142dd",
+        "filename": "post_tasks/network_time.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1011165
+      },
+      "writtenOn": "2019-08-26T15:10:16Z",
+      "side": 1,
+      "message": "s/ntp/time/",
+      "revId": "141b859a02c962f64748ea2cde0a91612d676ff1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d4101fd_aafaaf7c",
+        "filename": "post_tasks/network_time.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1011165
+      },
+      "writtenOn": "2019-08-26T15:10:16Z",
+      "side": 1,
+      "message": "s/ntp sync/time sync/",
+      "revId": "141b859a02c962f64748ea2cde0a91612d676ff1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6548b7b3_c00ddd11",
+        "filename": "post_tasks/network_time.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1011165
+      },
+      "writtenOn": "2019-08-26T15:10:16Z",
+      "side": 1,
+      "message": "I guess we need to differentiate OS and RHOSP. This change is specific to RHEL8 thus it might be better to use \n{% if ansible_distribution_major_version \u003c 8 %}\n\nAlternatively, I would use 2 tasks with when condition\n when:\n     - ansible_distribution in [\u0027CentOS\u0027, \u0027RedHat\u0027]\n     - ansible_distribution_major_version \u003d\u003d \u00278\u0027",
+      "revId": "141b859a02c962f64748ea2cde0a91612d676ff1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c331683e_39a8135c",
+        "filename": "post_tasks/network_time.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1011165
+      },
+      "writtenOn": "2019-08-26T15:10:16Z",
+      "side": 1,
+      "message": "s/ntp/time/",
+      "range": {
+        "startLine": 40,
+        "startChar": 43,
+        "endLine": 40,
+        "endChar": 46
+      },
+      "revId": "141b859a02c962f64748ea2cde0a91612d676ff1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
