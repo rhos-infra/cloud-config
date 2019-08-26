@@ -4,7 +4,7 @@
   gather_facts: no
   any_errors_fatal: true
   tasks:
-      - name: clockdiff to each peer before ntpdate
+      - name: clockdiff to each peer before forced ntp sync.
         shell: |
             extra_log_root=/var/log/extra
             mkdir -p "$extra_log_root"
@@ -22,16 +22,22 @@
         changed_when: false
         tags: skip_ansible_lint
 
-      - name: ntp date
-        shell: "ntpdate -bu -p 8 {{ install.ntp.server }} && hwclock -w"
-        register: ntpdate_out
+      - name: ntp sync.
+        shell: |
+          {% if install.version|default(undercloud_version) |openstack_release < 15 %}
+          ntpdate -bu -p 8 {{ install.ntp.server }} && hwclock -w
+          {% else %}
+          chronyc waitsync 20 && hwclock -w
+          {% endif %}
+
+        register: ntp_sync_out
         ignore_errors: true
 
       - debug:
-           msg: "ntpdate: out:{{ntpdate_out.stdout}} err:{{ntpdate_out.stderr}}"
+           msg: "ntp sync: out:{{ntp_sync_out.stdout}} err:{{ntp_sync_out.stderr}}"
         ignore_errors: true
 
-      - name: clockdiff to each peer before ntpdate
+      - name: clockdiff to each peer after ntp sync.
         shell: |
             extra_log_root=/var/log/extra
             mkdir -p "$extra_log_root"
