@@ -27,3 +27,10 @@ orig_instackenv_file_name: "~/instackenv.json"
 # may work workaround for https://bugzilla.redhat.com/show_bug.cgi?id=1600169
 # by checning it from 0 to 1000.
 rc_cluster_node_add_wait: 0
+
+# set correct container runtime
+container_runtime: "{{ (install.version | default(undercloud_version) | openstack_release > 14) | ternary('podman', 'docker') }}"
+
+#set correct nova service
+nova_compute_service: "{{ (install.version | default(undercloud_version) | openstack_release > 14) | ternary('tripleo_nova_compute', 'openstack-nova-compute') }}"
+

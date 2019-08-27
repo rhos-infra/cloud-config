@@ -40,14 +40,14 @@
   with_items: "{{ rc_valid_controller_nodes }}"
 
 - name: get openstack-nova-compute status
-  command: systemctl status openstack-nova-compute
+  command: systemctl status {{ nova_compute_service }}
   failed_when: false
   changed_when: false
   register: openstack_nova_compute_status
 
 - name: get nova status in case of containerized undercloud
   shell: |
-      docker inspect -f '{{ "{{.State.Running }}" }}' nova_compute
+      {{ container_runtime }} inspect -f '{{ "{{.State.Running }}" }}' nova_compute
   failed_when: false
   changed_when: false
   register: nova_compute_docker_status
