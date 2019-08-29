@@ -141,6 +141,7 @@ subparsers:
                       choices:
                           - ipv4
                           - ipv6
+                          - ipv6-all
 
                   public-net-name:
                       type: Value
