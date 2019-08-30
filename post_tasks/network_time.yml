@@ -24,7 +24,7 @@
 
       - name: ntp sync.
         shell: |
-          {% if install.version|default(undercloud_version) |openstack_release < 15 %}
+          {% if install.version|default(hostvars[groups['undercloud'] | first]['undercloud_version']) | openstack_release < 15 %}
           ntpdate -bu -p 8 {{ install.ntp.server }} && hwclock -w
           {% else %}
           chronyc waitsync 20 && hwclock -w
