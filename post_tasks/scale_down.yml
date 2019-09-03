@@ -8,7 +8,7 @@
   gather_facts: no
   any_errors_fatal: true
   vars:
-      node_name: "{{ install.node.name }}.localdomain"
+      node_name: "{{ install.node.name }}.{{ install.overcloud.domain }}"
   tasks:
       - name: check if overcloud compute service is available
         shell: |
@@ -161,7 +161,7 @@
   gather_facts: no
   any_errors_fatal: true
   vars:
-      node_name: "{{ install.node.name }}.localdomain"
+      node_name: "{{ install.node.name }}.{{ install.overcloud.domain }}"
   tasks:
       - name: Print the last few lines of the output to spot failures
         command: tail -n60 overcloud_scale.log

@@ -98,6 +98,13 @@ subparsers:
                       help: The overcloud stack name
                       default: overcloud
 
+                  overcloud-domain:
+                      type: Value
+                      help: |
+                          Set the CloudDomain parameter. The value for CloudDomain must match the value
+                          for overcloud_domain_name that was configured in undercloud.conf if set.
+                      default: 'redhat.local'
+
                   splitstack:
                       type: Bool
                       default: no
