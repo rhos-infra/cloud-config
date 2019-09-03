@@ -7,8 +7,6 @@
   hosts: undercloud
   gather_facts: no
   any_errors_fatal: true
-  vars:
-      node_name: "{{ install.node.name }}.localdomain"
   tasks:
       - name: check if overcloud compute service is available
         shell: |
@@ -18,6 +16,16 @@
         register: ov_compute
 
       - block:
+          - name: register nova service hostname
+            shell: |
+                source ~/{{ install.overcloud.stack }}rc
+                openstack compute service list -f json | jq -r .[0].Host
+            register: nova_hostname
+
+          - name: set node_name fact
+            set_fact:
+              node_name: "{{ install.node.name }}.{{ '.'.join((nova_hostname.stdout.split('.')[1:])) }}"
+
           - name: get all nova compute nodes
             shell: |
                 source ~/{{ install.overcloud.stack }}rc
@@ -160,8 +168,6 @@
   hosts: undercloud
   gather_facts: no
   any_errors_fatal: true
-  vars:
-      node_name: "{{ install.node.name }}.localdomain"
   tasks:
       - name: Print the last few lines of the output to spot failures
         command: tail -n60 overcloud_scale.log
@@ -189,6 +195,16 @@
         register: ov_compute
 
       - block:
+          - name: register nova service hostname
+            shell: |
+                source ~/{{ install.overcloud.stack }}rc
+                openstack compute service list -f json | jq -r .[0].Host
+            register: nova_hostname
+
+          - name: set node_name fact
+            set_fact:
+              node_name: "{{ install.node.name }}.{{ '.'.join((nova_hostname.stdout.split('.')[1:])) }}"
+
           - name: get service-id of the node "{{ node_name }}"
             shell: |
                 source ~/{{ install.overcloud.stack }}rc
@@ -227,9 +243,17 @@
   gather_facts: false
   any_errors_fatal: true
   become: true
-  vars:
-      node_name: "{{ install.node.name }}"
   tasks:
+      - name: register nova hostname
+        shell: |
+            source ~/{{ install.overcloud.stack }}rc
+            openstack compute service list -f json | jq -r .[0].Host
+        register: nova_hostname
+
+      - name: set node_name fact
+        set_fact:
+          node_name: "{{ install.node.name }}.{{ '.'.join((nova_hostname.stdout.split('.')[1:])) }}"
+
       - name: remove {{ node_name }}
         shell: "oc delete node {{ node_name }}"
 
