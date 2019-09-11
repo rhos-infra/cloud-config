@@ -2,10 +2,12 @@ Info
 ----
 
 The replace controller role that implements this: https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html/director_installation_and_usage/sect-scaling_the_overcloud#sect-Replacing_Controller_Nodes
+The replace controller role that implements this: https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/15-beta/html/director_installation_and_usage/replacing-controller-nodes#preparing-for-controller-replacement
 
 Supported product versions:
     - OSP13
     - OSP14
+    - OSP15
 
 
 Pre-requirements
