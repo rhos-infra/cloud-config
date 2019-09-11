@@ -22,15 +22,19 @@
   shell: |
       pcs cluster localnode remove {{ install.controller.to.remove }}
       pcs cluster reload corosync
+      pcs cluster node remove {{ install.controller.to.remove }}
   become: yes
-  delegate_to: "{{ item }}"
-  with_items: "{{ rc_valid_controller_nodes }}"
+  delegate_to: "{{ rc_valid_controller_nodes|first }}"
   tags: skip_ansible_lint
 
 - name: delete node from cluster with crm_node
   command: "crm_node -R {{ install.controller.to.remove }} --force"
+- name: remove failed node from pcsd
+  shell: |
+      pcs host deauth {{ install.controller.to.remove }}
   become: yes
   delegate_to: "{{ rc_valid_controller_nodes|first }}"
+  tags: skip_ansible_lint
 
 - name: unmanage galera-bundle pacemaker resource
   shell: |
