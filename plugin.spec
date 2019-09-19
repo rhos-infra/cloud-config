@@ -307,3 +307,10 @@ subparsers:
                       type: Bool
                       help: Specifies do we need to re-use the same node for replacement
                       default: no
+            - title: Octavia tempest setup
+              options:
+                  octavia-networks:
+                      type: VarFile
+                      help: |
+                          __LISTYAMLS__
+                      default: default

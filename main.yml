@@ -66,5 +66,9 @@
   import_playbook: post_tasks/replace_controller.yml
   when: '"replace_controller" in install.tasks'
 
+- name: Prepare Octavia tempest tests
+  import_playbook: post_tasks/prepare_octavia_tempest.yml
+  when: '"prepare_octavia_tempest" in install.tasks'
+
 - name: Run workarounds
   import_playbook: workarounds.yml

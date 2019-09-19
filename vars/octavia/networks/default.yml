@@ -1,0 +1,13 @@
+---
+public:
+    ipv6_subnet:
+        name: external_ipv6_subnet
+        cidr: 2620:52:0:13b8::/64
+        gateway: 2620:52:0:13b8::fe
+router:
+    name: router1
+private:
+    ipv6_subnet:
+        # 2001:f00::/64 via 2620:52:0:13b8::35f
+        name: ipv6-private-subnet
+        cidr: 2001:f00::/64

@@ -1,0 +1,134 @@
+---
+- name: Prepare Octavia tempest tests
+  hosts: undercloud
+  gather_facts: yes
+  any_errors_fatal: true
+  vars_files:
+      - "{{ install.octavia.networks }}"
+      - "{{ install.public.subnet }}"
+  tasks:
+      - name: get the default floating ip pool name from the server
+        shell: |
+            test -f /etc/nova/nova.conf && \
+                grep -oP "(?<=default_floating_pool=)(.*$)" /etc/nova/nova.conf || \
+                awk -F'\"' '/default_floating_pool/ {print $4}' /etc/puppet/hieradata/service_configs.json
+        register: pool_name
+        delegate_to: "{{ groups.nova_scheduler | first }}"
+        changed_when: false
+        become: yes
+
+      - name: create the external IPv6 subnet
+        vars:
+            # Here can't be used {{ path_venv }}, because it's not a Jinja template
+            ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
+        os_subnet:
+            # Required for SSL
+            validate_certs: no
+            cloud: overcloud
+            name: "{{ public.ipv6_subnet.name | default('external_ipv6_subnet') }}"
+            network_name: "{{ install.public.get('net', {}).name|default(pool_name.stdout_lines|last) }}"
+            ip_version: 6
+            enable_dhcp: no
+            cidr: "{{ public.ipv6_subnet.cidr }}"
+            gateway_ip: "{{ public.ipv6_subnet.gateway }}"
+        register: subnet_create
+        delegate_to: "{{ groups.shade | first }}"
+
+      - name: print subnet details to console
+        shell: |
+            source ~/{{ install.overcloud.stack }}rc
+            neutron subnet-show {{ subnet_create.subnet.name }}
+        tags: skip_ansible_lint
+        changed_when: false
+
+      - name: create the private network
+        vars:
+            # Here can't be used {{ path_venv }}, because it's not a Jinja template
+            ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
+            network_name: private
+        os_network:
+            # Required for SSL
+            validate_certs: no
+            cloud: overcloud
+            name: "{{ network_name }}"
+            external: no
+            shared: no
+        register: private_net_create
+        delegate_to: "{{ groups.shade | first }}"
+
+      - name: print network details to console
+        shell: |
+            source ~/{{ install.overcloud.stack }}rc
+            neutron net-show {{ private_net_create.network.name }}
+        tags: skip_ansible_lint
+        changed_when: false
+
+      - name: create the private IPv6 subnet
+        vars:
+            # Here can't be used {{ path_venv }}, because it's not a Jinja template
+            ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
+        os_subnet:
+            # Required for SSL
+            validate_certs: no
+            cloud: overcloud
+            name: "{{ private.ipv6_subnet.name | default('external_ipv6_subnet') }}"
+            network_name: "private"
+            ip_version: 6
+            cidr: "{{ private.ipv6_subnet.cidr }}"
+            ipv6_ra_mode: slaac
+            ipv6_address_mode: slaac
+        register: private_subnet_create
+        delegate_to: "{{ groups.shade | first }}"
+
+      - name: print subnet details to console
+        shell: |
+            source ~/{{ install.overcloud.stack }}rc
+            neutron subnet-show {{ private_subnet_create.subnet.name }}
+        tags: skip_ansible_lint
+        changed_when: false
+
+      - name: create router
+        vars:
+            # Here can't be used {{ path_venv }}, because it's not a Jinja template
+            ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
+        os_router:
+            # Required for SSL
+            validate_certs: no
+            cloud: overcloud
+            name: "{{ router.name }}"
+            network: "{{ install.public.get('net', {}).name|default(pool_name.stdout_lines|last) }}"
+            interfaces:
+                - "{{ private.ipv6_subnet.name }}"
+        register: router_create
+        delegate_to: "{{ groups.shade | first }}"
+
+      - name: print subnet details to console
+        shell: |
+            source ~/{{ install.overcloud.stack }}rc
+            openstack router show {{ router_create.router.name }}
+        tags: skip_ansible_lint
+        changed_when: false
+
+      - name: get router public IPv6 address
+        shell: |
+            source ~/{{ install.overcloud.stack }}rc
+            openstack router show -f value -c external_gateway_info \
+                {{ router_create.router.name }} | \
+                jq -r ".external_fixed_ips[].ip_address" | grep ::
+        register: router_public_address
+
+      - name: add a route to the private ipv6 subnet from the undercloud
+        shell: |
+            if ! ip route get {{ private.ipv6_subnet.cidr }} 2> /dev/null; then
+                ip route add {{ private.ipv6_subnet.cidr }} \
+                    via {{ router_public_address.stdout }}
+            fi
+        become: true
+
+      - name: set up ssh proxy command for Octavia tests
+        shell: |
+            if ! grep -q '^# Octavia ProxyCommand' ~/.ssh/config 2> /dev/null; then
+                ip_address=$(. ~/stackrc; openstack server show controller-0 -f value -c addresses | cut -d= -f2)
+                echo -e "# Octavia ProxyCommand\nHost 172.24.*\n  ProxyCommand ssh heat-admin@$ip_address nc %h %p\n  StrictHostkeyChecking no\n  UserKnownHostsFile /dev/null" \
+                         >> ~/.ssh/config
+            fi
