@@ -49,11 +49,10 @@
                   option: vendor_name
                   value: NetApp
                   condition: "{{ storage_backend.startswith('netapp') }}"
-                # "Swiftoperator" role is required to workaround RHBZ#1484419 cinder-backup permission to swift
-                # "Creator" role is required by tempest plugins that create Barbican resources (e.g. Octavia TLS-terminated load balancers)
+                # Workaround RHBZ#1484419 cinder-backup permission to swift
                 - section: auth
                   option: tempest_roles
-                  value: "swiftoperator,creator"
+                  value: swiftoperator
                   condition: true
                 # Set of Sahara plugins - required until https://bugs.launchpad.net/bugs/1560111 is fixed
                 - section: data-processing-feature-enabled
