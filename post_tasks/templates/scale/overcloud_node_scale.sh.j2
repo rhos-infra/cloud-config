@@ -1,6 +1,7 @@
 #!/bin/bash
 
-openstack overcloud node delete --stack {{ stack_id.stdout }} \
+openstack overcloud node delete {% if openstack_release >= 16 %}--yes{% endif %} \
+--stack {{ stack_id.stdout }} \
 --templates \
 {% for env_import in env_imports.stdout_lines %}
 {{ env_import }}
