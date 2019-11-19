@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7b54448d_5e0b40ae",
+        "filename": "post_tasks/roles/replace-controller/tasks/manual_preparation.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1006223
+      },
+      "writtenOn": "2019-11-19T20:46:24Z",
+      "side": 1,
+      "message": "If this is versioned and doesn\u0027t exist prior to OSP15, we need to handle both cases depending on osp version i guess.",
+      "revId": "fd669e28143eb62ffb7814be7dbe6de7d6a2032a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
