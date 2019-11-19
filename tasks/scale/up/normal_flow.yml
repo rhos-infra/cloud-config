@@ -146,25 +146,29 @@
       openstack image show bm-deploy-kernel -c id | grep 'id' | awk '{print $4}'
   register: kernel_uuid
 
-- name: get ramdisk image uuid
-  shell: |
-      source ~/stackrc
-      openstack image show bm-deploy-ramdisk -c id | grep 'id' | awk '{print $4}'
-  register: ramdisk_uuid
+# note this changed in OSP16. See rhbz#1773760 for context
+- name: Set baremetal node driver options
+  when: install.version|default(undercloud_version)|openstack_release < 16
+  block:
+    - name: get ramdisk image uuid
+      shell: |
+          source ~/stackrc
+          openstack image show bm-deploy-ramdisk -c id | grep 'id' | awk '{print $4}'
+      register: ramdisk_uuid
 
-- name: set kernel image
-  shell: |
-      source ~/stackrc
-      openstack baremetal node set --driver-info deploy_kernel='{{ kernel_uuid.stdout }}' {{ item.stdout }}
-  with_items: "{{ nodes_uuid_info.results }}"
-  tags: skip_ansible_lint
+    - name: set kernel image
+      shell: |
+          source ~/stackrc
+          openstack baremetal node set --driver-info deploy_kernel='{{ kernel_uuid.stdout }}' {{ item.stdout }}
+      with_items: "{{ nodes_uuid_info.results }}"
+      tags: skip_ansible_lint
 
-- name: set ramdisk image
-  shell: |
-      source ~/stackrc
-      openstack baremetal node set --driver-info deploy_ramdisk='{{ ramdisk_uuid.stdout }}' {{ item.stdout }}
-  with_items: "{{ nodes_uuid_info.results }}"
-  tags: skip_ansible_lint
+    - name: set ramdisk image
+      shell: |
+          source ~/stackrc
+          openstack baremetal node set --driver-info deploy_ramdisk='{{ ramdisk_uuid.stdout }}' {{ item.stdout }}
+      with_items: "{{ nodes_uuid_info.results }}"
+      tags: skip_ansible_lint
 
 - name: calculate new nodes count
   set_fact:
