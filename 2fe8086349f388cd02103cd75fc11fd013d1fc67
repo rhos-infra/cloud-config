@@ -22,6 +22,30 @@
       "revId": "2fe8086349f388cd02103cd75fc11fd013d1fc67",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89c84cfe_d22abcc0",
+        "filename": "post_tasks/templates/scale/overcloud_node_scale.sh.j2",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1006223
+      },
+      "writtenOn": "2019-11-19T17:44:38Z",
+      "side": 1,
+      "message": "ok that\u0027s terrible to understand but i\u0027ll change it",
+      "parentUuid": "21dc8bd4_95689297",
+      "range": {
+        "startLine": 3,
+        "startChar": 38,
+        "endLine": 3,
+        "endChar": 55
+      },
+      "revId": "2fe8086349f388cd02103cd75fc11fd013d1fc67",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
