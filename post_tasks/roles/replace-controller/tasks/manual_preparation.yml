@@ -1,6 +1,10 @@
 - name: stop pacemaker cluster on old controller node
-  shell: |
-      pcs cluster stop {{ install.controller.to.remove }}
+  shell: >-
+      pcs cluster stop
+      {% if install.version|default(undercloud_version)|openstack_release >= 16 %}
+      --force
+      {% endif %}
+      {{ install.controller.to.remove }}
   become: yes
   delegate_to: "{{ rc_valid_controller_nodes|first }}"
   ignore_errors: yes
