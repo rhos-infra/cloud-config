@@ -1,0 +1,8 @@
+Code-Review+2: Alex Schultz <aschultz@next-development.com>
+Code-Review+2: Marius Cornea <mcornea@redhat.com>
+Verified+1: Marius Cornea <mcornea@redhat.com>
+Submitted-by: Marius Cornea <mcornea@redhat.com>
+Submitted-at: Wed, 20 Nov 2019 18:34:54 +0000
+Reviewed-on: https://review.gerrithub.io/c/rhos-infra/cloud-config/+/475120
+Project: rhos-infra/cloud-config
+Branch: refs/heads/master
