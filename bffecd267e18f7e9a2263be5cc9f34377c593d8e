@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d8b1473b_1b9327a0",
+        "filename": "post_tasks/roles/replace-controller/tasks/manual_preparation.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1006223
+      },
+      "writtenOn": "2019-11-20T14:42:08Z",
+      "side": 1,
+      "message": "Wonder if this also affects 15. we can follow up with that later",
+      "range": {
+        "startLine": 4,
+        "startChar": 77,
+        "endLine": 4,
+        "endChar": 79
+      },
+      "revId": "bffecd267e18f7e9a2263be5cc9f34377c593d8e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
