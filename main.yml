@@ -66,5 +66,9 @@
   import_playbook: post_tasks/replace_controller.yml
   when: '"replace_controller" in install.tasks'
 
+- name: Create costomized flavors
+  import_playbook: post_tasks/create_customized_flavors.yml
+  when: '"create_customized_flavors" in install.tasks'
+
 - name: Run workarounds
   import_playbook: workarounds.yml
