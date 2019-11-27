@@ -244,6 +244,11 @@ subparsers:
                       default: '5'
                       help: |
                         Disk size allocated to test workload flavor
+                  workload-flavorid:
+                      type: Value
+                      default: '100'
+                      help: |
+                        Unique id of the new flavor
                   workload-index:
                       type: Value
                       default: '1'
