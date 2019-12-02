@@ -24,9 +24,9 @@
 
 - name: delete failed node from the server list
   shell: |
-      pcs cluster localnode remove {{ install.controller.to.remove }}
+      pcs cluster localnode remove {% if install.version|default(undercloud_version)|openstack_release >= 16 %}--force{% endif %} {{ install.controller.to.remove }}
       pcs cluster reload corosync
-      pcs cluster node remove {{ install.controller.to.remove }}
+      pcs cluster node remove {% if install.version|default(undercloud_version)|openstack_release >= 16 %}--force{% endif %} {{ install.controller.to.remove }}
   become: yes
   delegate_to: "{{ rc_valid_controller_nodes|first }}"
   tags: skip_ansible_lint
