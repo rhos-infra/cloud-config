@@ -87,7 +87,7 @@
       - block:
             - name: try to find unused nodes to scale and add them into a new unused group
               vars:
-                  scale_node_name: "{{ install.node.name }}"
+                  scale_node_name: "{{ install.get('node', {}).get('name', {}) }}"
               when:
                   - scale_node_name not in openstack_servers|map(attribute='name')|list
                   - scale_node_name in groups.all
@@ -96,7 +96,7 @@
                   groups: unused
         when:
             - install.splitstack|default(False)
-            - install.node.name is defined
+            - install.get('node', {}).get('name', {}) is defined
 
       # Connection for baremetals must be forwarded through UC as OC nodes
       # lie on ctplane not accessible from anywhere else.
