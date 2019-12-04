@@ -1,0 +1,8 @@
+Code-Review+2: Ilan Gersht <igersht@redhat.com>
+Code-Review+2: Avi Talmor <atalmor@redhat.com>
+Verified+1: Vadim G <vgriner@redhat.com>
+Submitted-by: Vadim G <vgriner@redhat.com>
+Submitted-at: Wed, 04 Dec 2019 09:46:18 +0000
+Reviewed-on: https://review.gerrithub.io/c/rhos-infra/cloud-config/+/476720
+Project: rhos-infra/cloud-config
+Branch: refs/heads/master
