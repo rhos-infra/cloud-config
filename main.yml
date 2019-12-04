@@ -12,6 +12,10 @@
   import_playbook: post_tasks/create_external_network.yml
   when: "'create_external_network' in install.tasks"
 
+- name: Include task "Private network creation"
+  import_playbook: post_tasks/create_private_network.yml
+  when: "'create_private_network' in install.tasks"
+
 - name: Forward Overcloud Dashboard from Hypervisor
   import_playbook: post_tasks/forward_overcloud_dashboard.yml
   when:
