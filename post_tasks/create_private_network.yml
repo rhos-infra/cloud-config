@@ -1,0 +1,183 @@
+# Create basic network resources, similar to a devstack env
+---
+- name: Private network creation
+  hosts: undercloud
+  gather_facts: yes
+  any_errors_fatal: true
+  vars_files:
+      - "{{ install.private.subnet }}"
+  tasks:
+      - name: create the private network
+        vars:
+            # Here can't be used {{ path_venv }}, because it's not a Jinja template
+            ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
+            network_name: "private"
+        os_network:
+            # Required for SSL
+            validate_certs: no
+            cloud: overcloud
+            name: "{{ network_name }}"
+            external: no
+            shared: no
+        register: net_create
+        delegate_to: "{{ groups.shade | first }}"
+
+      - name: print network details to console
+        shell: |
+            source ~/{{ install.overcloud.stack }}rc
+            neutron net-show {{ net_create.network.name }}
+        tags: skip_ansible_lint
+        changed_when: false
+
+      - name: create ipv4 subnet pool
+        vars:
+            subnetpool_name: shared-default-subnetpool-v4
+        shell: |
+            source ~/{{ install.overcloud.stack }}rc
+            if ! openstack subnet pool show {{ subnetpool_name }} -f value -c id; then
+                openstack subnet pool create {{ subnetpool_name }} \
+                    --default-prefix-length 26 \
+                    --pool-prefix {{ subnetpool.cidr }} \
+                    --share --default \
+                    -f value -c id
+            fi
+        register: subnetpool_create
+        when: subnetpool is defined
+
+      - name: print subnet pool details to console
+        shell: |
+            source ~/{{ install.overcloud.stack }}rc
+            openstack subnet pool show {{ subnetpool_create.stdout }}
+        tags: skip_ansible_lint
+        changed_when: false
+        when: subnetpool is defined
+
+      - name: create the external subnet
+        vars:
+            # Here can't be used {{ path_venv }}, because it's not a Jinja template
+            ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
+            # It's cleaner to define top defaults first
+            pool: "{{ subnet.allocation_pool|default({}) }}"
+        os_subnet:
+            # Required for SSL
+            validate_certs: no
+            cloud: overcloud
+            name: "{{ subnet.name | default('private_subnet') }}"
+            network_name: "{{ net_create.network.name }}"
+            use_default_subnetpool: "{{ 'no' if 'cidr' in subnet else 'yes' }}"
+            cidr: "{{ subnet.cidr | default(omit) }}"
+            allocation_pool_start: "{{ pool.start | default(omit) }}"
+            allocation_pool_end: "{{ pool.end | default(omit) }}"
+        register: subnet_create
+        delegate_to: "{{ groups.shade | first }}"
+
+      - name: print subnet details to console
+        shell: |
+            source ~/{{ install.overcloud.stack }}rc
+            neutron subnet-show {{ subnet_create.subnet.name }}
+        tags: skip_ansible_lint
+        changed_when: false
+
+      - name: create ipv6 subnet pool
+        vars:
+            subnetpool_name: shared-default-subnetpool-v6
+        shell: |
+            source ~/{{ install.overcloud.stack }}rc
+            if ! openstack subnet pool show {{ subnetpool_name }} -f value -c id; then
+                openstack subnet pool create {{ subnetpool_name }} \
+                    --default-prefix-length 64 \
+                    --pool-prefix {{ ipv6_subnetpool.cidr }} \
+                    --share --default \
+                    -f value -c id
+            fi
+        register: ipv6_subnetpool_create
+        when: ipv6_subnetpool is defined
+
+      - name: print subnet pool details to console
+        shell: |
+            source ~/{{ install.overcloud.stack }}rc
+            openstack subnet pool show {{ ipv6_subnetpool_create.stdout }}
+        tags: skip_ansible_lint
+        changed_when: false
+        when: ipv6_subnetpool is defined
+
+      - name: create the external ipv6 subnet
+        vars:
+            # Here can't be used {{ path_venv }}, because it's not a Jinja template
+            ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
+            # It's cleaner to define top defaults first
+            pool: "{{ ipv6_subnet.allocation_pool|default({}) }}"
+        os_subnet:
+            # Required for SSL
+            validate_certs: no
+            cloud: overcloud
+            name: "{{ ipv6_subnet.name | default('private_ipv6_subnet') }}"
+            network_name: "{{ net_create.network.name }}"
+            use_default_subnetpool: "{{ 'no' if 'cidr' in subnet else 'yes' }}"
+            ip_version: 6
+            cidr: "{{ ipv6_subnet.cidr | default(omit) }}"
+            allocation_pool_start: "{{ pool.start | default(omit) }}"
+            allocation_pool_end: "{{ pool.end | default(omit) }}"
+            ipv6_address_mode: "{{ ipv6_subnet.address_mode | default('slaac') }}"
+            ipv6_ra_mode: "{{ ipv6_subnet.ra_mode | default('slaac') }}"
+        register: ipv6_subnet_create
+        when: ipv6_subnet is defined
+        delegate_to: "{{ groups.shade | first }}"
+
+      - name: print subnet details to console
+        shell: |
+            source ~/{{ install.overcloud.stack }}rc
+            neutron subnet-show {{ ipv6_subnet_create.subnet.name }}
+        tags: skip_ansible_lint
+        changed_when: false
+
+      - name: get the default floating ip pool name from the server
+        shell: |
+            test -f /etc/nova/nova.conf && \
+                grep -oP "(?<=default_floating_pool=)(.*$)" /etc/nova/nova.conf || \
+                awk -F'\"' '/default_floating_pool/ {print $4}' /etc/puppet/hieradata/service_configs.json
+        register: pool_name
+        delegate_to: "{{ groups.nova_scheduler | first }}"
+        changed_when: false
+        become: yes
+
+      - name: create router
+        vars:
+            # Here can't be used {{ path_venv }}, because it's not a Jinja template
+            ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
+        os_router:
+            # Required for SSL
+            validate_certs: no
+            cloud: overcloud
+            name: "{{ router.name | default('router1') }}"
+            network: "{{ install.public.get('net', {}).name|default(pool_name.stdout_lines|last) }}"
+            interfaces:
+                - "{{ subnet_create.subnet.name }}"
+                - "{{ ipv6_subnet_create.subnet.name }}"
+        register: router_create
+        delegate_to: "{{ groups.shade | first }}"
+
+      - name: print router details to console
+        shell: |
+            source ~/{{ install.overcloud.stack }}rc
+            openstack router show {{ router_create.router.name }}
+        tags: skip_ansible_lint
+        changed_when: false
+
+      - name: get router public IPv6 address
+        shell: |
+            source ~/{{ install.overcloud.stack }}rc
+            openstack router show -f value -c external_gateway_info \
+                {{ router_create.router.name }} | \
+                jq -r ".external_fixed_ips[].ip_address" | grep ::
+        register: router_public_address
+
+      - name: add a route to the private ipv6 subnet from the undercloud
+        vars:
+            cidr: "{{ ipv6_subnetpool.cidr if subnetpool is defined else ipv6_subnet_create.subnet.cidr }}"
+        shell: |
+            if ! ip route get {{ cidr }} 2> /dev/null; then
+                ip route add {{ cidr }} \
+                    via {{ router_public_address.stdout }}
+            fi
+        become: true

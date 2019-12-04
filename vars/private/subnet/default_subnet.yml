@@ -1,0 +1,18 @@
+---
+subnetpool:
+    name: default_shared_subnetpool
+    cidr: 10.0.64.0/22
+
+subnet:
+    name: private_subnet
+
+ipv6_subnetpool:
+    name: default_shared_ipv6_subnetpool
+    cidr: fd47:e41c:f56e::/56
+
+ipv6_subnet:
+    name: private_ipv6_subnet
+
+router:
+    name: router1
+    external_network: public
