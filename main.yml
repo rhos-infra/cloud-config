@@ -67,7 +67,7 @@
   when: '"replace_controller" in install.tasks'
 
 - name: Create customized flavors
-  import_playbook: post_tasks/create_customized_flavors.yml
+  import_playbook: post_tasks/create_flavors_image.yml
   when: '"create_customized_flavors" in install.tasks'
 
 - name: Run workarounds
