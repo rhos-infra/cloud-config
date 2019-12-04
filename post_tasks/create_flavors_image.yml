@@ -1,5 +1,5 @@
 ---
-- name: Create customized flavors
+- name: Create customized flavors and image
   hosts: undercloud
   gather_facts: no
   tasks:
@@ -18,3 +18,19 @@
             - { name: customized_flavor, flavorid: "{{ install.workload.flavorid }}" }
             - { name: customized_flavor_alt, flavorid: "{{ (install.workload.flavorid|int + 1 )|string }}" }
         delegate_to: "{{ groups.shade | first }}"
+
+      - name: Create image
+        block:
+            - name: Download image
+              get_url:
+                  url: "{{ install.image }}"
+                  dest: /tmp/image.qcow2
+            - name: Set hostname url
+              set_fact:
+                  hostname_url: "{{ install.image | basename }}"
+            - name: Upload {{ hostname_url }} image
+              shell: |
+                source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
+                openstack image create {{ hostname_url }} --disk-format qcow2 --container-format bare --file /tmp/image.qcow2
+        when: install.image is defined
+
