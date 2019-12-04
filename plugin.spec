@@ -162,6 +162,16 @@ subparsers:
                       help: |
                          An Optional external VLAN ID of the external network (Not to be confused with the Public API network)
 
+            - title: Private network
+              options:
+                  private-subnet:
+                      type: VarFile
+                      help: |
+                          Subnet detail for private network on the overcloud as post-install.
+                          (CIDR, Allocation Pool, Gateway)
+                          __LISTYAMLS__
+                      default: default_subnet
+
             - title: Scale down nodes
               options:
                   node-name:

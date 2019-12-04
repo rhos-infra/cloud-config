@@ -1,0 +1,8 @@
+---
+ipv6_subnet:
+    name: ipv6-private-subnet
+    cidr: fd47:e41c:f56e:1000::/64
+
+router:
+    name: router1
+    external_network: public
