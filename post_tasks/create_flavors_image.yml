@@ -1,0 +1,40 @@
+---
+- name: Create customized flavors and image
+  hosts: undercloud
+  gather_facts: no
+  tasks:
+      - name: Create compute flavors
+        vars:
+            ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
+        os_nova_flavor:
+            cloud: overcloud
+            state: present
+            name: "{{ item.name }}"
+            ram: "{{ install.workload.memory }}"
+            vcpus: "{{ install.workload.vcpu }}"
+            disk: "{{ install.workload.disk }}"
+            flavorid: "{{ item.flavorid }}"
+        loop:
+            - { name: customized_flavor, flavorid: "{{ install.workload.flavorid }}" }
+            - { name: customized_flavor_alt, flavorid: "{{ (install.workload.flavorid|int + 1 )|string }}" }
+        delegate_to: "{{ groups.shade | first }}"
+
+      - name: Create image
+        block:
+            - name: Set hostname url
+              set_fact:
+                  hostname_url: "{{ install.image | basename }}"
+            - name: Download image
+              get_url:
+                  url: "{{ install.image }}"
+                  dest: "/tmp/{{ hostname_url }}"
+            - name: Upload {{ hostname_url }} image
+              os_image:
+                  cloud: overcloud
+                  name: "{{ hostname_url }}"
+                  container_format: bare
+                  disk_format: qcow2
+                  state: present
+                  filename: "/tmp/{{ hostname_url }}"
+        when: install.image is defined
+        ignore_errors: yes
