@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "61d4e639_44591db8",
+        "filename": "post_tasks/add_overcloud_hosts.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1006223
+      },
+      "writtenOn": "2019-12-05T15:06:57Z",
+      "side": 1,
+      "message": "Pretty sure this will always be true here. It seems like perhaps this should have been\n\nwhen:\n  - install.splitstack|default(False)\n  - install.node is defined\n  - install.node.name is defined\n\nThat being said, the jobs failing are the split stack jobs but there\u0027s no install.node.name so what was this code supposed to do?",
+      "range": {
+        "startLine": 99,
+        "startChar": 14,
+        "endLine": 99,
+        "endChar": 64
+      },
+      "revId": "6f3970be80358192fec1c5dfe0cf84d636d5fae9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
