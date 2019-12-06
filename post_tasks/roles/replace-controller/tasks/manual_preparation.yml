@@ -24,21 +24,26 @@
 
 - name: delete failed node from the server list
   shell: |
-      pcs cluster localnode remove {% if install.version|default(undercloud_version)|openstack_release >= 16 %}--force{% endif %} {{ install.controller.to.remove }}
+      {% if install.version|default(undercloud_version)|openstack_release <= 14 %}
+      pcs cluster localnode remove {{ install.controller.to.remove }}
       pcs cluster reload corosync
-      pcs cluster node remove {% if install.version|default(undercloud_version)|openstack_release >= 16 %}--force{% endif %} {{ install.controller.to.remove }}
+      {% endif %}
+      pcs cluster node remove {% if install.version|default(undercloud_version)|openstack_release >= 15 %}--skip-offline --force{% endif %} {{ install.controller.to.remove }}
   become: yes
   delegate_to: "{{ rc_valid_controller_nodes|first }}"
   tags: skip_ansible_lint
 
 - name: delete node from cluster with crm_node
   command: "crm_node -R {{ install.controller.to.remove }} --force"
+  when: install.version|default(undercloud_version)|openstack_release <= 14
+
 - name: remove failed node from pcsd
   shell: |
       pcs host deauth {{ install.controller.to.remove }}
   become: yes
   delegate_to: "{{ rc_valid_controller_nodes|first }}"
   tags: skip_ansible_lint
+  when: install.version|default(undercloud_version)|openstack_release >= 15
 
 - name: unmanage galera-bundle pacemaker resource
   shell: |
