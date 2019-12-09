@@ -1,11 +1,71 @@
+- name: Mariadb block
+  become: true
+  delegate_to: "{{ rc_valid_controller_nodes | first }}"
+  block:
+    - name: install mysql client
+      package:
+        name: mariadb
+        state: present
+
+    - name: Get maria DB cluster variables
+      shell: >-
+        mysql -p$(hiera -c /etc/puppet/hiera.yaml mysql::server::root_password)
+              --execute="SHOW STATUS LIKE 'wsrep_local_state_comment'; SHOW STATUS LIKE 'wsrep_cluster_size';"
+      register: mariadb_status
+
+    - name: Create backup directory
+      file:
+        state: directory
+        path: /home/stack/backup
+        group: stack
+        owner: stack
+
+    - name: Perform undercloud db backup
+      shell: >-
+        mysqldump --all-databases --quick --single-transaction | gzip > /home/stack/backup/dump_db_undercloud.sql.gz
+      when:
+        - rc_perform_undercloud_db_backup | bool
+
+    - name: verify mariadb status
+      assert:
+        that:
+          - "'wsrep_local_state_comment\tSynced' in mariadb_status.stdout"
+
+- name: get openstack-nova-compute status
+  command: >-
+    systemctl status {{ nova_compute_service }}
+  failed_when: false
+  changed_when: false
+  register: openstack_nova_compute_status
+
+- name: get nova status in case of containerized undercloud
+  command: >-
+    {{ container_runtime }} inspect -f '{{ "{{.State.Running }}" }}' nova_compute
+  failed_when: false
+  changed_when: false
+  register: nova_compute_docker_status
+  tags: skip_ansible_lint
+
 - name: check stack status
-  shell: |
+  command: |-
       source ~/stackrc
       openstack stack list  -f value -c "Stack Status"
   register: stack_status
-  tags: skip_ansible_lint
+  tags:
+    - skip_ansible_lint
+
+- name: general asserts
+  vars:
+    non_containers_nova_status: "{{ openstack_nova_compute_status|succeeded and openstack_nova_compute_status.rc == 0 }}"
+    containers_nova_status: "{{ nova_compute_docker_status|succeeded and nova_compute_docker_status.rc == 0 and nova_compute_docker_status.stdout == 'true' }}"
+  assert:
+    that:
+      - "stack_status.stdout in ['CREATE_COMPLETE', 'UPDATE_COMPLETE']"
+      - "non_containers_nova_status|bool or containers_nova_status|bool"
 
 - name:  pacemaker checks
+  become: true
+  delegate_to: "{{ rc_valid_controller_nodes | first }}"
   block:
     - name: get pacemaker cluster status
       shell: pcs status 2>&1 | grep 'cluster is not currently running on this node'
@@ -13,73 +73,25 @@
       failed_when: false
       changed_when: false
 
+    - name: Verify pacemaker cluster is active
+      assert:
+        that:
+          - pcs_cluster_active.rc > 0
+
     - name: get pacemaker online nodes
       shell: pcs status | grep -w Online
       register: pcs_online_nodes
       failed_when: false
       changed_when: false
 
-  become: true
-  delegate_to: "{{ rc_valid_controller_nodes|first }}"
-
-- name: install mysql client
-  package:
-    name: mysql
-    state: present
-  become: yes
-  delegate_to: "{{ item }}"
-  with_items: "{{ rc_valid_controller_nodes }}"
-
-- name: get maria DB cluster variables
-  shell: |
-      mysql -p$(hiera -c /etc/puppet/hiera.yaml mysql::server::root_password) \
-            --execute="SHOW STATUS LIKE 'wsrep_local_state_comment'; SHOW STATUS LIKE 'wsrep_cluster_size';"
-  register: mariadb_status
-  become: yes
-  delegate_to: "{{ item }}"
-  with_items: "{{ rc_valid_controller_nodes }}"
-
-- name: get openstack-nova-compute status
-  command: systemctl status {{ nova_compute_service }}
-  failed_when: false
-  changed_when: false
-  register: openstack_nova_compute_status
-
-- name: get nova status in case of containerized undercloud
-  shell: |
-      {{ container_runtime }} inspect -f '{{ "{{.State.Running }}" }}' nova_compute
-  failed_when: false
-  changed_when: false
-  register: nova_compute_docker_status
-  tags: skip_ansible_lint
-
-- name: general asserts
-  vars:
-      non_containers_nova_status: "{{ openstack_nova_compute_status|succeeded and openstack_nova_compute_status.rc == 0 }}"
-      containers_nova_status: "{{ nova_compute_docker_status|succeeded and nova_compute_docker_status.rc == 0 and nova_compute_docker_status.stdout == 'true' }}"
+- name: Verify pacemaker online nodes
   assert:
-      that:
-          - "groups.controller|length > 1"
-          - "stack_status.stdout in ['CREATE_COMPLETE', 'UPDATE_COMPLETE']"
-          - "pcs_cluster_active.rc > 0"
-          - "non_containers_nova_status|bool or containers_nova_status|bool"
-
-- name: verify pacemaker online nodes
-  assert:
-      that:
-          - "item in pcs_online_nodes.stdout"
+    that:
+      - "item in pcs_online_nodes.stdout"
   with_items: "{{ rc_valid_controller_nodes }}"
-
-# todo(obaranov) check also wsrep_cluster_size value, not critical atm.
-# todo(obaranov) check rabbitmq cluster
-- name: verify mariadb status
-  assert:
-      that:
-          - "'wsrep_local_state_comment\tSynced' in item.stdout"
-  with_items: "{{ mariadb_status.results }}"
 
 - name: disable fencing
-  shell: |
-      pcs property set stonith-enabled=false
-  become: yes
+  become: true
   delegate_to: "{{ rc_valid_controller_nodes|first }}"
+  shell: |
+    pcs property set stonith-enabled=false
