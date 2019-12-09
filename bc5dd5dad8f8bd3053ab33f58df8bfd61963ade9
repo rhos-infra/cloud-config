@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5cb8f328_3fd627f1",
+        "filename": "post_tasks/roles/replace-controller/tasks/preliminary_checks.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1006223
+      },
+      "writtenOn": "2019-12-09T16:40:49Z",
+      "side": 1,
+      "message": "no this needs to be shell because we\u0027re sourcing and running an openstack command",
+      "range": {
+        "startLine": 50,
+        "startChar": 2,
+        "endLine": 50,
+        "endChar": 9
+      },
+      "revId": "bc5dd5dad8f8bd3053ab33f58df8bfd61963ade9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
