@@ -1,21 +1,15 @@
 - import_tasks: preliminary_checks.yml
-  when: rc_preliminary_checks == True
-
-- name: perform undercloud db backup
-  shell: |
-      mkdir -p /home/stack/backup
-      mysqldump --all-databases --quick --single-transaction | gzip > /home/stack/backup/dump_db_undercloud.sql.gz
-  become: yes
-  when: rc_perform_undercloud_db_backup == True
+  when:
+    - rc_preliminary_checks | bool
 
 - import_tasks: remove_ceph_monitor.yml
   when:
-      - rc_remove_ceph_monitor == True
+      - rc_remove_ceph_monitor | bool
       - "'ceph' in groups"
 
 - import_tasks: manual_preparation.yml
   when:
-    - rc_manual_preparation == True
+    - rc_manual_preparation | bool
 
 - import_tasks: replace_node.yml
   when: rc_replace_node
@@ -24,12 +18,12 @@
 # This step is valid on OSP releases older than 14
 - import_tasks: manual_intervention.yml
   when:
-    - rc_manual_intervention == True
+    - rc_manual_intervention | bool
     - install.version|default(undercloud_version)|openstack_release < 14
 
 - import_tasks: finalize.yml
   when:
-    - rc_finalize == True
+    - rc_finalize | bool
 
 # Add new replaced controller node to instackenv file for future use
 # (i.e. The file is used for fencing configuration)
