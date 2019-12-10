@@ -1,73 +1,34 @@
-- name: Mariadb block
+- name: Install the database client tools
+  become: true
+  package:
+    name: mariadb
+    state: present
+
+- name: Configure root user access to the database
+  become: true
+  copy:
+    remote_src: true
+    src: /var/lib/config-data/puppet-generated/mysql/root/.my.cnf
+    dest: /root/.my.cnf
+
+- name: Make backup directory
+  become: true
+  file:
+    state: directory
+    path: /home/stack/backup
+    owner: stack
+
+- name: Perform a backup of the undercloud databases
+  become: true
+  shell: >-
+    mysqldump --all-databases --quick --single-transaction | gzip > /home/stack/backup/dump_db_undercloud.sql.gz
+
+- name: PCS block
   become: true
   delegate_to: "{{ rc_valid_controller_nodes | first }}"
   block:
-    - name: install mysql client
-      package:
-        name: mariadb
-        state: present
-
-    - name: Get maria DB cluster variables
-      shell: >-
-        mysql -p$(hiera -c /etc/puppet/hiera.yaml mysql::server::root_password)
-              --execute="SHOW STATUS LIKE 'wsrep_local_state_comment'; SHOW STATUS LIKE 'wsrep_cluster_size';"
-      register: mariadb_status
-
-    - name: Create backup directory
-      file:
-        state: directory
-        path: /home/stack/backup
-        group: stack
-        owner: stack
-
-    - name: Perform undercloud db backup
-      shell: >-
-        mysqldump --all-databases --quick --single-transaction | gzip > /home/stack/backup/dump_db_undercloud.sql.gz
-      when:
-        - rc_perform_undercloud_db_backup | bool
-
-    - name: verify mariadb status
-      assert:
-        that:
-          - "'wsrep_local_state_comment\tSynced' in mariadb_status.stdout"
-
-- name: get openstack-nova-compute status
-  command: >-
-    systemctl status {{ nova_compute_service }}
-  failed_when: false
-  changed_when: false
-  register: openstack_nova_compute_status
-
-- name: get nova status in case of containerized undercloud
-  command: >-
-    {{ container_runtime }} inspect -f '{{ "{{.State.Running }}" }}' nova_compute
-  failed_when: false
-  changed_when: false
-  register: nova_compute_docker_status
-
-- name: check stack status
-  shell: |-
-      source ~/stackrc
-      openstack stack list  -f value -c "Stack Status"
-  register: stack_status
-  tags:
-    - skip_ansible_lint
-
-- name: general asserts
-  vars:
-    non_containers_nova_status: "{{ openstack_nova_compute_status|succeeded and openstack_nova_compute_status.rc == 0 }}"
-    containers_nova_status: "{{ nova_compute_docker_status|succeeded and nova_compute_docker_status.rc == 0 and nova_compute_docker_status.stdout == 'true' }}"
-  assert:
-    that:
-      - "stack_status.stdout in ['CREATE_COMPLETE', 'UPDATE_COMPLETE']"
-      - "non_containers_nova_status|bool or containers_nova_status|bool"
-
-- name:  pacemaker checks
-  become: true
-  delegate_to: "{{ rc_valid_controller_nodes | first }}"
-  block:
-    - name: get pacemaker cluster status
-      shell: pcs status 2>&1 | grep 'cluster is not currently running on this node'
+    - name: Check the status of Pacemaker on the running Controller nodes
+      shell: pcs status
       register: pcs_cluster_active
       failed_when: false
       changed_when: false
@@ -75,22 +36,50 @@
     - name: Verify pacemaker cluster is active
       assert:
         that:
+          - "'cluster is not currently running on this node' in pcs_cluster_active.stdout"
           - pcs_cluster_active.rc > 0
 
-    - name: get pacemaker online nodes
-      shell: pcs status | grep -w Online
-      register: pcs_online_nodes
-      failed_when: false
-      changed_when: false
+    - name: Verify pacemaker online nodes
+      assert:
+        that:
+          - "item in pcs_online_nodes.stdout"
+      with_items: "{{ rc_valid_controller_nodes }}"
 
-- name: Verify pacemaker online nodes
-  assert:
-    that:
-      - "item in pcs_online_nodes.stdout"
-  with_items: "{{ rc_valid_controller_nodes }}"
-
-- name: disable fencing
+- name: Mariadb block
+  delegate_to: "{{ rc_valid_controller_nodes | first }}"
   become: true
-  delegate_to: "{{ rc_valid_controller_nodes|first }}"
-  shell: |
+  block:
+    - name: Check parameters on each node of the overcloud MariaDB cluster
+      shell: >-
+        podman exec $(sudo podman ps --filter name=galera-bundle -q)
+        mysql --disable-column-names --batch
+        -e "SHOW STATUS LIKE 'wsrep_local_state_comment'; SHOW STATUS LIKE 'wsrep_cluster_size';"
+      register: mariadb_check_script
+
+    - name: Verify output
+      assert:
+        that:
+          - "'wsrep_local_state_comment\tSynced' in mariadb_check_script.stdout"
+
+- name: Check the RabbitMQ status
+  become: true
+  delegate_to: "{{ rc_valid_controller_nodes | first }}"
+  shell: >-
+    podman exec $(sudo podman ps -f name=rabbitmq-bundle -q) rabbitmqctl cluster_status
+
+- name: Run the following command to disable fencing
+  become: true
+  delegate_to: "{{ rc_valid_controller_nodes | first }}"
+  shell: >-
     pcs property set stonith-enabled=false
+
+- name: Check the Compute services are active on the director node
+  become: true
+  become_user: stack
+  shell: |-
+    source /home/stack/stackrc
+    openstack hypervisor list
+
+- name: Ensure all undercloud containers are running
+  become: true
+  command: podman ps
