@@ -2,34 +2,36 @@
   become: true
   delegate_to: "{{ rc_valid_controller_nodes | first }}"
   block:
-    - name: install mysql client
-      package:
-        name: mariadb
-        state: present
+    - name: Generate mariadb check script
+      copy:
+        content: |
+          #!/usr/bin/env bash
+          if ! podman exec -ti -u root "$(podman ps | awk '/galera/ || /mysql/ {print $1}')" \
+              mysql --disable-column-names \
+                    --batch \
+                    --execute="SHOW STATUS LIKE 'wsrep_local_state_comment'; SHOW STATUS LIKE 'wsrep_cluster_size';" | \
+                    grep -e 'wsrep_local_state_comment\tSynced'; then
+            echo -e 'Database out of sync'
+            exit 1
+          fi
 
-    - name: Get maria DB cluster variables
-      shell: >-
-        mysql -p$(hiera -c /etc/puppet/hiera.yaml mysql::server::root_password)
-              --execute="SHOW STATUS LIKE 'wsrep_local_state_comment'; SHOW STATUS LIKE 'wsrep_cluster_size';"
-      register: mariadb_status
+          {% if rc_perform_undercloud_db_backup | bool %}
+          podman exec -ti -u root "$(podman ps | awk '/galera/ || /mysql/ {print $1}')" \
+          mysqldump --all-databases \
+                    --quick \
+                    --single-transaction | gzip > {{ ansible_env.HOME }}/backup/dump_db_undercloud.sql.gz
+          {% endif %}
+        dest: "{{ ansible_env.HOME }}/check-db.sh"
+        mode: "0755"
 
     - name: Create backup directory
       file:
         state: directory
-        path: /home/stack/backup
-        group: stack
-        owner: stack
+        path: "{{ ansible_env.HOME }}/backup"
+        owner: "{{ ansible_env.USER }}"
 
-    - name: Perform undercloud db backup
-      shell: >-
-        mysqldump --all-databases --quick --single-transaction | gzip > /home/stack/backup/dump_db_undercloud.sql.gz
-      when:
-        - rc_perform_undercloud_db_backup | bool
-
-    - name: verify mariadb status
-      assert:
-        that:
-          - "'wsrep_local_state_comment\tSynced' in mariadb_status.stdout"
+    - name: Run mariadb check script
+      command: "{{ ansible_env.HOME }}/check-db.sh"
 
 - name: get openstack-nova-compute status
   command: >-
