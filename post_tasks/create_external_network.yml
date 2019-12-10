@@ -41,15 +41,29 @@
       physnet_name: datacentre
       template_base: "{{ ansible_user_dir }}/{{ source_dir | basename }}"
   tasks:
-      - name: get the default floating ip pool name from the server
+      - name: OSP version < 12 - get the default floating ip pool name from the server
         shell: |
             test -f /etc/nova/nova.conf && \
+                crudini --get /etc/nova/nova.conf neutron default_floating_pool || \
                 grep -oP "(?<=default_floating_pool=)(.*$)" /etc/nova/nova.conf || \
                 awk -F'\"' '/default_floating_pool/ {print $4}' /etc/puppet/hieradata/service_configs.json
         register: pool_name
         delegate_to: "{{ groups.nova_scheduler | first }}"
         changed_when: false
         become: yes
+        when: install.version|default(undercloud_version)|openstack_release < 12
+
+      - name: OSP version >= 12 - get the default floating ip pool name from the server
+        shell: |
+          test -f /var/lib/config-data/puppet-generated/nova/etc/nova/nova.conf && \
+              crudini --get /var/lib/config-data/puppet-generated/nova/etc/nova/nova.conf neutron default_floating_pool || \
+              grep -oP "(?<=default_floating_pool=)(.*$)" /var/lib/config-data/puppet-generated/nova/etc/nova/nova.conf || \
+              awk -F'\"' '/default_floating_pool/ {print $4}' /etc/puppet/hieradata/service_configs.json
+        register: pool_name
+        delegate_to: "{{ groups.nova_scheduler | first }}"
+        changed_when: false
+        become: yes
+        when: install.version|default(undercloud_version)|openstack_release >= 12
 
 # FIXME(yfried): this is commented because virthost solution is misconfiguring vlan. Need to reevaluate the vlan indicators
 #      - name: Check if vlan is enabled for public network - get vlan trunks
