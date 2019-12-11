@@ -36,7 +36,6 @@
     - name: Verify pacemaker cluster is active
       assert:
         that:
-          - "'cluster is not currently running on this node' in pcs_cluster_active.stdout"
           - pcs_cluster_active.rc > 0
 
     - name: Verify pacemaker online nodes
