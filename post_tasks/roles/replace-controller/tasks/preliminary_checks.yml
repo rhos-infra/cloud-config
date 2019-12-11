@@ -36,14 +36,7 @@
     - name: Verify pacemaker cluster is active
       assert:
         that:
-          - "'cluster is not currently running on this node' in pcs_cluster_active.stdout"
-          - pcs_cluster_active.rc > 0
-
-    - name: Verify pacemaker online nodes
-      assert:
-        that:
-          - "item in pcs_online_nodes.stdout"
-      with_items: "{{ rc_valid_controller_nodes }}"
+          - pcs_cluster_active.rc == 0
 
 - name: Mariadb block
   delegate_to: "{{ rc_valid_controller_nodes | first }}"
