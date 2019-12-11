@@ -41,10 +41,22 @@
       physnet_name: datacentre
       template_base: "{{ ansible_user_dir }}/{{ source_dir | basename }}"
   tasks:
+      - name: Set nova.conf path
+        set_fact:
+            nova_conf: "{{ (install.version|default(undercloud_version)|openstack_release >= 12)|ternary('/var/lib/config-data/puppet-generated/nova/etc/nova/nova.conf', '/etc/nova/nova.conf') }}"
+
+      - name: Install crudini package
+        package:
+            name: crudini
+            state: present
+        delegate_to: "{{ groups.nova_scheduler | first }}"
+        become: yes
+
       - name: get the default floating ip pool name from the server
         shell: |
-            test -f /etc/nova/nova.conf && \
-                grep -oP "(?<=default_floating_pool=)(.*$)" /etc/nova/nova.conf || \
+            test -f {{ nova_conf }} && \
+                crudini --get {{ nova_conf }} neutron default_floating_pool || \
+                grep -oP "(?<=default_floating_pool=)(.*$)" {{ nova_conf }} || \
                 awk -F'\"' '/default_floating_pool/ {print $4}' /etc/puppet/hieradata/service_configs.json
         register: pool_name
         delegate_to: "{{ groups.nova_scheduler | first }}"
