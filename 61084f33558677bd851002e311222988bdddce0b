@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "af5b6619_704e66bb",
+        "filename": "post_tasks/roles/replace-controller/tasks/preliminary_checks.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1007436
+      },
+      "writtenOn": "2019-12-11T21:07:38Z",
+      "side": 0,
+      "message": "removed because nothing defines `pcs_online_nodes`",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 51
+      },
+      "revId": "61084f33558677bd851002e311222988bdddce0b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
