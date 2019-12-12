@@ -1,7 +1,17 @@
+- name: Set Ceph executable for running on the host
+  set_fact:
+    ceph_exec: "ceph"
+  when: openstack_release < 16
+
+- name: Set Ceph executable for running in a container
+  set_fact:
+    ceph_exec: "podman exec -it ceph-container ceph"
+  when: openstack_release >= 16
+
 # need to use raw module here, because with shell and command the 'ceph' command
 # cannot be found
 - name: get mon stats
-  raw: ceph mon stat
+  raw: "{{ ceph_exec }} mon stat"
   register: ceph_mon_stat
   delegate_to: "{{ rc_valid_controller_nodes|first }}"
 
@@ -18,7 +28,7 @@
         when: rc_controller_is_reachable
 
       - name: remove the monitor from the cluster
-        raw: "ceph mon remove {{ install.controller.to.remove }}"
+        raw: "{{ ceph_exec }} mon remove {{ install.controller.to.remove }}"
         when: install.controller.to.remove in ceph_mon_stat.stdout
         delegate_to: "{{ rc_valid_controller_nodes|first }}"
         become: no
