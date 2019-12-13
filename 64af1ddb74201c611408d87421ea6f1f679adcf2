@@ -16,6 +16,24 @@
       "revId": "64af1ddb74201c611408d87421ea6f1f679adcf2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9bbe9b6_61df186e",
+        "filename": "post_tasks/roles/replace-controller/tasks/remove_ceph_monitor.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1017294
+      },
+      "writtenOn": "2019-12-13T16:22:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64d8710e_12c110e5",
+      "revId": "64af1ddb74201c611408d87421ea6f1f679adcf2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
