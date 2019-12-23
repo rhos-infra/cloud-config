@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a1f9949c_d0462f15",
+        "filename": "post_tasks/roles/replace-controller/tasks/remove_ceph_monitor.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1007436
+      },
+      "writtenOn": "2019-12-23T20:36:27Z",
+      "side": 1,
+      "message": "nit: \u0027/yes/true/\u0027",
+      "range": {
+        "startLine": 37,
+        "startChar": 16,
+        "endLine": 37,
+        "endChar": 19
+      },
+      "revId": "75c63524a32f7369d51a493b1564f55f3ff438ce",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
