@@ -1,7 +1,20 @@
 # need to use raw module here, because with shell and command the 'ceph' command
 # cannot be found
+
+- name: Set container cli for <= OSP14
+  set_fact:
+    _container_cli: docker
+  when: install.version|default(undercloud_version)|openstack_release <= 14
+
+- name: Set container cli for >= OSP15
+  set_fact:
+    _container_cli: podman
+  when: install.version|default(undercloud_version)|openstack_release >= 15
+
+
 - name: get mon stats
-  raw: ceph mon stat
+  command: "{{ _container_cli }}" exec -it ceph-mon-{{ ansible_hostname }} ceph mon stat"
+  become: true
   register: ceph_mon_stat
   delegate_to: "{{ rc_valid_controller_nodes|first }}"
 
@@ -18,10 +31,10 @@
         when: rc_controller_is_reachable
 
       - name: remove the monitor from the cluster
-        raw: "ceph mon remove {{ install.controller.to.remove }}"
+        command: "{{ _container_cli }} exec -it ceph-mon-{{ ansible_hostname }} ceph mon remove {{ install.controller.to.remove }}"
         when: install.controller.to.remove in ceph_mon_stat.stdout
         delegate_to: "{{ rc_valid_controller_nodes|first }}"
-        become: no
+        become: yes
 
       - name: remove monitor entry from /etc/ceph/ceph.conf
         replace:
