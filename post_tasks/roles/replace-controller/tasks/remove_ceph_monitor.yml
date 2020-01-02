@@ -13,7 +13,7 @@
 
 
 - name: get mon stats
-  command: "{{ _container_cli }}" exec -it ceph-mon-{{ ansible_hostname }} ceph mon stat"
+  command: "{{ _container_cli }} exec -it ceph-mon-{{ ansible_hostname }} ceph mon stat"
   become: true
   register: ceph_mon_stat
   delegate_to: "{{ rc_valid_controller_nodes|first }}"
