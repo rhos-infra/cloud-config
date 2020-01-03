@@ -1,0 +1,9 @@
+Code-Review+2: Kevin Carter <kevin@cloudnull.com>
+Code-Review+2: Emilien Macchi <emilien@redhat.com>
+Verified+1: Emilien Macchi <emilien@redhat.com>
+Verified+1: Kevin Carter <kevin@cloudnull.com>
+Submitted-by: Emilien Macchi <emilien@redhat.com>
+Submitted-at: Fri, 03 Jan 2020 15:11:31 +0000
+Reviewed-on: https://review.gerrithub.io/c/rhos-infra/cloud-config/+/479231
+Project: rhos-infra/cloud-config
+Branch: refs/heads/master
