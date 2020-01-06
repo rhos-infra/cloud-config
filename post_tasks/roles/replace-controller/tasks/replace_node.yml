@@ -26,7 +26,8 @@
       openstack baremetal {{ 'node' if install.version|default(undercloud_version)|openstack_release >= 10 else '' }} maintenance set {{ replace_node_baremetal_uuid }}
   register: node_uuid_info
   tags: skip_ansible_lint
-  when: install.use.the.same.node
+  when:
+    - not install.use.the.same.node|bool
 
 - name: call add node role
   include_role:
@@ -36,7 +37,8 @@
           - "{{ install.controller.to.add }}"
       an_ignore_nodes:
           - "{{ install.controller.to.remove }}"
-  when: install.use.the.same.node
+  when:
+    - not install.use.the.same.node|bool
 
 - name: create template with controller index to remove
   template:
