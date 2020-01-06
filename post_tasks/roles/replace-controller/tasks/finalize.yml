@@ -58,10 +58,13 @@
       when: l3_agent_old_id.stdout != ''
       tags: skip_ansible_lint
 
+    # TODO(aschultz): evidently you can't delete ovn agents so we exclude them
+    # here. This needs to get fixed at some point.
+    # https://github.com/openstack/networking-ovn/blob/master/networking_ovn/ml2/mech_driver.py#L1144-L1147
     - name: get the list of agents on old node
       shell: |
           source /home/stack/overcloudrc
-          neutron agent-list -F id -F host | grep {{ install.controller.to.remove }} | awk '{print $2}'
+          neutron agent-list -F id -F host | grep {{ install.controller.to.remove }} | grep -v 'OVN ' | awk '{print $2}'
       register: all_deprecated_agents
       tags: skip_ansible_lint
 
