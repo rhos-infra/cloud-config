@@ -1,5 +1,6 @@
 ---
 - block:
+  become: true
   - name: TMP repos.d for overcloud
     file:
         name: "{{ tmp_oc_repos_dir }}"
