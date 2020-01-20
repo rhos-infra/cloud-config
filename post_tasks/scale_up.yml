@@ -42,7 +42,6 @@
       - block:
             - name: Prepare splitstack nodes
               include_tasks: ../tasks/scale/up/splitstack/prepare_nodes.yml
-              become: true
               with_items: "{{ install.scale.nodes }}"
               loop_control:
                 loop_var: scale_node

@@ -4,6 +4,7 @@
     file:
         name: "{{ tmp_oc_repos_dir }}"
         state: directory
+    become: true
 
   - include_role:
         name: rhos-release
@@ -20,33 +21,38 @@
 
   - name: Backup old repo data
     command: mv -v /etc/yum.repos.d /etc/yum.repos.d_old
+    become: true
 
   - name: Make new repo dir active
     command: mv -fu "{{ tmp_oc_repos_dir }}" /etc/
+    become: true
 
   - name: Sudoers no tty
     lineinfile:
         dest: /etc/sudoers
         state: absent
         regexp: 'Defaults\s+requiretty'
+    become: true
 
   - name: Create default user
     user:
         name: "{{ install.user.name }}"
         state: present
         password: "{{ install.user.password | password_hash('sha512') }}"
+    become: true
 
   - name: Add user to sudoers
     lineinfile:
         dest: "/etc/sudoers"
         line: "{{ install.user.name }} ALL=(root) NOPASSWD:ALL"
+    become: true
 
   - name: Create .ssh direcotry for non-root user
     file:
         path: "{{ default_privatekey | dirname }}"
         state: directory
     become_user: "{{ install.user.name }}"
-    become: yes
+    become: true
 
   - set_fact:
         uc_publickey: "{{ lookup('file', local_undercloud_pubkey) }}"
@@ -55,16 +61,20 @@
     authorized_key:
         user: "{{ install.user.name }}"
         key: "{{ uc_publickey }}"
+    become_user: "{{ install.user.name }}"
+    become: true
 
   - name: Install python-heat-agent package
     package:
         name: 'python-heat-agent'
         state: latest
     when: install.version|default(undercloud_version) |openstack_release < 15
+    become: true
 
   - name: Install python3-heat-agent package
     package:
         name: 'python3-heat-agent'
         state: latest
     when: install.version|default(undercloud_version) |openstack_release >= 15
+    become: true
   delegate_to: "{{ scale_node }}"
