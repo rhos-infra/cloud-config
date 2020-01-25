@@ -101,7 +101,7 @@
           name: "{{ item.rstrip('1234567890-').split('-')[-1] }}"
       set_fact:
           default_resource_class: "{{ default_resource_class | default([]) + [{ 'name': name, 'flavor': name, 'node': item }] }}"
-      with_items: "{{ install.scale.nodes | default([])}}"
+      with_items: "{{ install.scale.nodes | default([]) }}"
       tags: skip_ansible_lint
 
     - name: Merge default and override resource class parameters
@@ -227,8 +227,7 @@
   when: is_node_data.rc == 0
 
 - name: check docker-images.yaml in deploy script
-  shell: |
-      grep 'docker-images.yaml' {{ overcloud_deploy_script }}
+  command: grep 'docker-images.yaml' {{ overcloud_deploy_script }}
   ignore_errors: true
   register: legacy_img_file
   when: undercloud_version | openstack_release == 14
