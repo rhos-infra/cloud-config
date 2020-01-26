@@ -31,9 +31,9 @@
 - name: prepare instackenv.json file
   vars:
       # json file shouldn't hold newlines
-      undercloud_private_key: "{{ uc_pkey_result.stdout_lines | join('\\n')}}"
+      undercloud_private_key: "{{ uc_pkey_result.stdout_lines | join('\\n') }}"
   template:
-      src: ../../templates/instackenv.json.j2
+      src: instackenv.json.j2
       dest: "{{ instackenv_file_name }}"
 
 - name: power off overcloud nodes

@@ -5,7 +5,7 @@
 
 - fail:
       msg: "Overcloud deployment script not found. Expected path: ~/overcloud_deploy.sh "
-  when: overcloud_deploy_file.stat.exists == False
+  when: not overcloud_deploy_file.stat.exists
 
 - fail:
       msg: "--scale-nodes is required"

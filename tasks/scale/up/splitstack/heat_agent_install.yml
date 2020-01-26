@@ -20,7 +20,7 @@
 
 - name: Calculate total nodes per role
   set_fact:
-      scale_up_dict: "{{ scale_up_dict|combine({role_title: {'count': scale_up_dict.get(role_title, {}).get('count', 0) + 1}}, recursive=True) }}"
+      scale_up_dict: "{{ scale_up_dict|combine({role_title: {'count': scale_up_dict.get(role_title, {}).get('count', 0) + 1 }}, recursive=True) }}"
   vars:
       role_title: "{{ item.rstrip('1234567890-').split('-')[-1].title() }}"
   with_items: "{{ groups.overcloud_nodes }}"
@@ -34,7 +34,7 @@
 
 - name: Set rg_stack to scale_up_dict
   set_fact:
-      scale_up_dict: "{{ scale_up_dict|combine({role_title: {'rg_stack': item.stdout}}, recursive=True) }}"
+      scale_up_dict: "{{ scale_up_dict|combine({role_title: {'rg_stack': item.stdout }}, recursive=True) }}"
   vars:
       role_title: "{{ item.item.key }}"
   with_items: "{{ rg_stack_info.results }}"
@@ -48,7 +48,7 @@
 
 - name: Set stacks to scale_up_dict
   set_fact:
-      scale_up_dict: "{{ scale_up_dict|combine({role_title: {'stacks': item.stdout_lines}}, recursive=True) }}"
+      scale_up_dict: "{{ scale_up_dict|combine({role_title: {'stacks': item.stdout_lines }}, recursive=True) }}"
   vars:
       role_title: "{{ item.item.key }}"
   with_items: "{{ stacks_info.results }}"
