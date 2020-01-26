@@ -1,0 +1,7 @@
+Verified+1: rhosqeauto <vgriner+rhosqeauto@redhat.com>
+Code-Review+2: Arie Bregman <abregman@redhat.com>
+Submitted-by: Arie Bregman <abregman@redhat.com>
+Submitted-at: Sun, 26 Jan 2020 13:03:55 +0000
+Reviewed-on: https://review.gerrithub.io/c/rhos-infra/cloud-config/+/476793
+Project: rhos-infra/cloud-config
+Branch: refs/heads/master
