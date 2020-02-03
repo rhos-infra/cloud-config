@@ -79,7 +79,7 @@
         changed_when: false
         when: subnetpool is defined
 
-      - name: create the external subnet
+      - name: create the private subnet
         vars:
             # Here can't be used {{ path_venv }}, because it's not a Jinja template
             ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
@@ -130,7 +130,7 @@
         changed_when: false
         when: ipv6_subnetpool is defined
 
-      - name: create the external ipv6 subnet
+      - name: create the private ipv6 subnet
         vars:
             # Here can't be used {{ path_venv }}, because it's not a Jinja template
             ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
@@ -169,7 +169,7 @@
             # Required for SSL
             validate_certs: no
             cloud: overcloud
-            name: "{{ router.name | default('router1') }}"
+            name: "{{ router.name | default('router-private') }}"
             network: "{{ install.public.get('net', {}).name|default(pool_name.stdout_lines|last) }}"
             interfaces:
                 - "{{ subnet.name }}"
@@ -204,9 +204,10 @@
       - name: get router public IPv6 address
         shell: |
             source ~/{{ install.overcloud.stack }}rc
+            # Use jq twice to parse OSP13 and OSP16 output format
             openstack router show -f json -c external_gateway_info \
                 {{ router_create.router.name }} | \
-                jq -r ".external_gateway_info.external_fixed_ips[].ip_address" | grep ::
+                jq -r ".external_gateway_info" | jq -r ".external_fixed_ips[].ip_address" | grep ::
         register: router_public_address
         when: ipv6_subnet is defined
 

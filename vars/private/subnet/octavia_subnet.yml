@@ -4,5 +4,5 @@ ipv6_subnet:
     cidr: fd47:e41c:f56e:1000::/64
 
 router:
-    name: router1
+    name: router-private
     external_network: public

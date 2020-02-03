@@ -14,5 +14,5 @@ ipv6_subnet:
     name: private_ipv6_subnet
 
 router:
-    name: router1
+    name: router-private
     external_network: public
