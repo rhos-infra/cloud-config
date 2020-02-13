@@ -128,9 +128,6 @@
           state: present
           name: workload_key_{{ step }}
           public_key: "{{ pub_key.stdout }}"
-  delegate_to: "{{ groups.shade | first }}"
-  vars:
-    ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
 
 # Create instance from undercloud via Openstack cli as the os_server module fails with
 # ShadeAdapter' object has no attribute 'get_api_major_version': RHOSINFRA-1562
@@ -199,10 +196,6 @@
           cloud: overcloud
           server: workload_instance_{{ step }}
       when: openstack_servers[0].addresses.iteritems() | list | first | last | length == 1
-  delegate_to: "{{ groups.shade | first }}"
-  vars:
-    ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
-
 
 - name: Wait for port 22 to become open on workload instance
   wait_for:
