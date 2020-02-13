@@ -4,8 +4,6 @@
   gather_facts: no
   tasks:
       - name: Create compute flavors
-        vars:
-            ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
         os_nova_flavor:
             cloud: overcloud
             state: present
@@ -17,7 +15,6 @@
         loop:
             - { name: customized_flavor, flavorid: "{{ install.workload.flavorid }}" }
             - { name: customized_flavor_alt, flavorid: "{{ (install.workload.flavorid|int + 1 )|string }}" }
-        delegate_to: "{{ groups.shade | first }}"
 
       - name: Create image
         block:

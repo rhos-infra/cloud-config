@@ -22,14 +22,10 @@
             mode: 0600
 
       - name: update IP of overcloud nodes
-        vars:
-            # Here can't be used {{ path_venv }}, because it's not a Jinja template
-            ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
         os_server_facts:
             cloud: undercloud
             # Required for SSL
             validate_certs: no
-        delegate_to: "{{ groups.shade | first }}"
 
       - name: add overcloud host
         include_tasks: ../tasks/add_overcloud_host.yml
