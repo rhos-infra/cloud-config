@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "13e09dd0_b1d1adc1",
+        "filename": "tasks/scale/up/splitstack/prepare_nodes.yml",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1001189
+      },
+      "writtenOn": "2020-02-14T14:16:32Z",
+      "side": 1,
+      "message": "does this step need to be done as root?\nshouldn\u0027t it be better as \u0027install.user.name? so that the ~/.ssh{,/authorized_keys} belongs properly to that user if being created during this step?",
+      "revId": "ac073327cd29138fb0719b17e76cf44a3a7a7abb",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
