@@ -215,9 +215,31 @@
         vars:
             cidr: "{{ ipv6_subnetpool.cidr if ipv6_subnetpool is defined else ipv6_subnet.cidr }}"
         shell: |
-            if ! ip route | grep '^{{ cidr }}' 2> /dev/null; then
+            if ! ip -6 route | grep '^{{ cidr }}' 2> /dev/null; then
                 ip route add {{ cidr }} \
                     via {{ router_public_address.stdout }}
             fi
+        become: true
+        when: ipv6_subnet is defined
+
+      - name: get ipv6 route interface
+        vars:
+            cidr: "{{ ipv6_subnetpool.cidr if ipv6_subnetpool is defined else ipv6_subnet.cidr }}"
+        shell: |
+            ip -6 route show {{ cidr }} | \
+                awk '{for(i=1;i<NF;i++)if($i=="dev")print($(i+1))}'
+        register: ipv6_interface
+        become: true
+        when: ipv6_subnet is defined
+
+      - name: add persistent route to private ipv6 subnet
+        vars:
+            cidr: "{{ ipv6_subnetpool.cidr if ipv6_subnetpool is defined else ipv6_subnet.cidr }}"
+            interface: "{{ ipv6_interface.stdout_lines[0] }}"
+            gateway: "{{ router_public_address.stdout_lines[0] }}"
+        copy:
+            content: |
+                {{ cidr }} via {{ gateway }} dev {{ interface }}
+            dest: "/etc/sysconfig/network-scripts/route6-{{ interface }}"
         become: true
         when: ipv6_subnet is defined
