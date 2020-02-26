@@ -19,6 +19,7 @@
 
     - name: Update quotas RHOS-10+
       shell: |
+          unset OS_COMPUTE_API_VERSION # w/a bz1780787
           source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
           openstack quota set --cores -1 --instances -1 --volumes -1 \
                     --networks -1 --subnets -1 --ports -1 --routers -1 \
