@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "62b7f856_6966ea2e",
+        "filename": "post_tasks/launch_workload.yml",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1004788
+      },
+      "writtenOn": "2020-02-26T09:59:16Z",
+      "side": 1,
+      "message": "can we put this on separate line for readability?",
+      "range": {
+        "startLine": 24,
+        "startChar": 8,
+        "endLine": 24,
+        "endChar": 36
+      },
+      "revId": "c07f8dafa0b5c249690368ccac81208a91ecc650",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
