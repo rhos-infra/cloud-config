@@ -232,12 +232,14 @@ subparsers:
                       choices:
                           - iscsi
                           - direct
+
             - title: Tempest
               options:
                   image:
                       type: Value
                       help: |
                           An image to be uploaded to glance and used for testing. Path have to be a url.
+
             - title: Workload Launch
               options:
                   workload-image-url:
