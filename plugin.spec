@@ -285,7 +285,7 @@ subparsers:
               options:
                   storage-external:
                       type: Bool
-                      help: Whether to use an external storage rather than setting it up with the director
+                      help: Whether to use an external storage rather than setting it up with the director.
                       default: no
 
                   storage-backend:
