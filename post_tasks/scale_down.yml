@@ -218,6 +218,9 @@
                 openstack compute service delete {{ service_id.stdout }}
             tags: skip_ansible_lint
             ignore_errors: yes
+            when: 
+                undercloud_version|openstack_release < 16 or
+                undercloud_version|openstack_release >= 16 and install.splitstack|default(False)
 
           # (todo) OSPD 10 doesn't support --host paramater
           - name: get openvswitch-agent-id of the node "{{ node_name }}"
