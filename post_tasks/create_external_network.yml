@@ -145,7 +145,7 @@
             cloud: overcloud
             name: "{{ subnet.name | default('external_subnet') }}"
             network_name: "{{ net_create.network.name }}"
-            enable_dhcp: no
+            enable_dhcp: "{{ install.external.dhcp | default(no)}}"
             cidr: "{{ subnet.cidr }}"
             gateway_ip: "{{ subnet.gateway }}"
             allocation_pool_start: "{{ pool.start | default(omit) }}"
@@ -172,7 +172,7 @@
             cloud: overcloud
             name: "{{ ipv6_subnet.name | default('external_ipv6_subnet') }}"
             network_name: "{{ net_create.network.name }}"
-            enable_dhcp: no
+            enable_dhcp: "{{ install.external.dhcp | default(no)}}"
             ip_version: 6
             cidr: "{{ ipv6_subnet.cidr }}"
             gateway_ip: "{{ ipv6_subnet.gateway }}"

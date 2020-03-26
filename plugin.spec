@@ -162,6 +162,12 @@ subparsers:
                       help: |
                          An Optional external VLAN ID of the external network (Not to be confused with the Public API network)
 
+                  external-dhcp:
+                      type: Bool
+                      default: False
+                      help: |
+                         DHCP can be enabled for external subnets optionally
+
             - title: Private network
               options:
                   private-subnet:
