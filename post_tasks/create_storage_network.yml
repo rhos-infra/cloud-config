@@ -1,0 +1,76 @@
+---
+# This playbook is used to enable storage network access to an instance.
+# For CephFS-NFS scenario tests we need to create a shared network mapping
+# to the underlying VLAN network on the overcloud.
+# On CephFS environmet the name of the network is 'storage' and on Ceph-NFS
+# is 'StorageNFS'.
+# In addition to each network, a subnet is created.
+- name: Create storage network
+  hosts: undercloud
+  gather_facts: no
+  vars:
+      source_dir: "{{ install.deployment.files }}"
+      template_base: "{{ ansible_user_dir }}/{{ source_dir | basename }}"
+  tasks:
+      - name: Try to discover storage storage
+        include_tasks: ../tasks/storage/discover_backend.yml
+
+      - name: Read network-environment.yaml
+        command: "cat {{ template_base }}/network/network-environment.yaml"
+        register: network_template_out
+        ignore_errors: yes
+
+      - name: Load deployment storage network
+        set_fact:
+            network_template: "{{ network_template_out.stdout | from_yaml }}"
+        ignore_errors: yes
+
+      - name: Set facts for cephfs environment
+        set_fact:
+            AllocationPools: "{{ network_template.parameter_defaults.StorageAllocationPools|default('') }}"
+            network_name: 'storage'
+            subnet_name: 'storage-subnet'
+        when: storage_backend == 'ceph'
+        ignore_errors: yes
+
+      - name: Set facts for ceph-nfs environment
+        set_fact:
+            AllocationPools: "{{ network_template.parameter_defaults.StorageNFSAllocationPools|default('') }}"
+            network_name: 'StorageNFS'
+            subnet_name: 'StorageNFSSubnet'
+        when: storage_backend == 'ceph-nfs'
+        ignore_errors: yes
+
+      - name: Create {{ network_name }} network
+        vars:
+            ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
+            NeutronNetworkVLANRanges: "{{ network_template.parameter_defaults.NeutronNetworkVLANRanges|default('') }}"
+            StorageNetworkVlanID: "{{ network_template.parameter_defaults.StorageNetworkVlanID|default('') }}"
+            StorageNFSNetworkVlanID: "{{ network_template.parameter_defaults.StorageNFSNetworkVlanID|default('') }}"
+        os_network:
+            cloud: overcloud
+            state: present
+            name: "{{ network_name }}"
+            validate_certs: no
+            provider_network_type: vlan
+            provider_physical_network: "{{ NeutronNetworkVLANRanges.split(':')[0] }}"
+            provider_segmentation_id: "{{ (storage_backend == 'ceph-nfs') | ternary(StorageNFSNetworkVlanID, StorageNetworkVlanID) }}"
+            external: no
+            shared: yes
+        ignore_errors: yes
+
+      - name: Create {{ subnet_name }} subnet
+        vars:
+            ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
+            StorageNetCidr: "{{ network_template.parameter_defaults.StorageNetCidr|default('') }}"
+            StorageNFSNetCidr: "{{ network_template.parameter_defaults.StorageNFSNetCidr|default('') }}"
+        os_subnet:
+            validate_certs: no
+            cloud: overcloud
+            name: "{{ subnet_name }}"
+            network_name: "{{ network_name }}"
+            enable_dhcp: yes
+            allocation_pool_start: "{{ AllocationPools[0]['start'] }}"
+            allocation_pool_end: "{{ AllocationPools[0]['end'] }}"
+            cidr: "{{ (storage_backend == 'ceph-nfs') | ternary(StorageNFSNetCidr, StorageNetCidr) }}"
+        ignore_errors: yes
