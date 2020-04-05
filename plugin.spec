@@ -298,6 +298,8 @@ subparsers:
                       type: Value
                       choices:
                           - ceph
+                          - cephfs-native
+                          - cephfs-nfs
                           - swift
                           - netapp-iscsi
                           - netapp-nfs

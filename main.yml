@@ -74,5 +74,9 @@
   import_playbook: post_tasks/create_flavors_image.yml
   when: '"create_flavors_image" in install.tasks'
 
+- name: Create storage network
+  import_playbook: post_tasks/create_storage_network.yml
+  when: '"create_storage_network" in install.tasks'
+
 - name: Run workarounds
   import_playbook: workarounds.yml
