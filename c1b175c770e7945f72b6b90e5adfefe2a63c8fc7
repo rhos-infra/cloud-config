@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c4bfc68_09024514",
+        "filename": "post_tasks/create_external_network.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1004788
+      },
+      "writtenOn": "2020-04-30T23:22:04Z",
+      "side": 1,
+      "message": "is that empty on purpose?",
+      "range": {
+        "startLine": 43,
+        "startChar": 6,
+        "endLine": 43,
+        "endChar": 23
+      },
+      "revId": "c1b175c770e7945f72b6b90e5adfefe2a63c8fc7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
