@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c0f253a3_8eeba30c",
+        "filename": "post_tasks/scale_down.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1004460
+      },
+      "writtenOn": "2020-05-05T14:21:26Z",
+      "side": 0,
+      "message": "How was it working for deployed server in earlier versions? AFAIK using physical_resource_id would never work.",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 124
+      },
+      "revId": "1187b588c433c33e066c7d1b007b10913470b607",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
