@@ -6,4 +6,4 @@ openstack overcloud node delete {% if install.version|default(undercloud_version
 {% for env_import in env_imports.stdout_lines %}
 {{ env_import }}
 {% endfor %}
-{{ node_uuid }}
+{{ node_name }}

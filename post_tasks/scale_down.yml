@@ -53,26 +53,6 @@
         tags: skip_ansible_lint
 
       - block:
-            - name: get nodes UUID
-              shell: |
-                  source ~/stackrc
-                  openstack stack resource list overcloud -n5 --filter type=OS::TripleO::ComputeDeployedServerServer -f json
-              register: splitstack_nodes_ids
-              tags: skip_ansible_lint
-
-            - name: Create node_ids list
-              set_fact:
-                  node_ids: "{{ splitstack_nodes_ids.stdout|from_json }}"
-
-            - name: Set node_uuid from physical_resource_id
-              set_fact:
-                  node_uuid: "{{ item.physical_resource_id }}"
-              when: node_index|int == stack_index|int
-              vars:
-                  node_index: "{{ install.node.name.split('-')[-1] }}"
-                  stack_index: "{{ item.stack_name.split('-')[-2] }}"
-              with_items: "{{ node_ids }}"
-
             - name: Find ctrlplane-template.yml location
               shell: cat ~/overcloud_deploy.sh | grep ctrlplane-template.yml | awk '{print $2}'
               register: ctrlplane_template_location
@@ -85,21 +65,6 @@
                   force: yes
 
         when: install.splitstack|default(False)
-
-      - block:
-            - name: get the UUID of "{{ install.node.name }}"
-              shell: |
-                  source ~/stackrc
-                  openstack server list --name {{ install.node.name }} -f value -c ID
-
-              register: node_uuid_info
-              tags: skip_ansible_lint
-
-            - name: Set node_uuid
-              set_fact:
-                  node_uuid: "{{ node_uuid_info.stdout }}"
-
-        when: not install.splitstack|default(False)
 
       - name: get imports from depployment file
         shell: cat ~/overcloud_deploy.sh | grep -e "^-e" -e "^--environment-file"
