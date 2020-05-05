@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29edb67e_e1e2486f",
+        "filename": "post_tasks/templates/scale/overcloud_node_scale.sh.j2",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1006223
+      },
+      "writtenOn": "2020-05-05T13:41:38Z",
+      "side": 1,
+      "message": "Since this is used for multiple versions. I think we need a version check to use UUID for versions less than 16",
+      "range": {
+        "startLine": 9,
+        "startChar": 3,
+        "endLine": 9,
+        "endChar": 12
+      },
+      "revId": "1e5e5ddf4d66c17a0d9d2c383241fbe1c5facc76",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
