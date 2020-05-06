@@ -53,31 +53,34 @@
         tags: skip_ansible_lint
 
       - block:
-      {% if install.version|default(undercloud_version) | openstack_release < 16 %}
             - name: get nodes UUID
               shell: |
                   source ~/stackrc
                   openstack stack resource list overcloud -n5 --filter type=OS::TripleO::ComputeDeployedServerServer -f json
               register: splitstack_nodes_ids
               tags: skip_ansible_lint
+              when: install.version|default(undercloud_version) | openstack_release < 16
 
             - name: Create node_ids list
               set_fact:
                   node_ids: "{{ splitstack_nodes_ids.stdout|from_json }}"
+              when: install.version|default(undercloud_version) | openstack_release < 16
 
             - name: Set node_uuid from physical_resource_id
               set_fact:
                   node_uuid: "{{ item.physical_resource_id }}"
-              when: node_index|int == stack_index|int
+              when: 
+                  - node_index|int == stack_index|int
+                  - install.version|default(undercloud_version) | openstack_release < 16
               vars:
                   node_index: "{{ install.node.name.split('-')[-1] }}"
                   stack_index: "{{ item.stack_name.split('-')[-2] }}"
               with_items: "{{ node_ids }}"
-      {% else %}
+
             - name: Set node_name as node_uuid
               set_fact:
                   node_uuid: "{{ node_name }}"
-      {% endif %}
+              when: install.version|default(undercloud_version) | openstack_release >= 16
 
             - name: Find ctrlplane-template.yml location
               shell: cat ~/overcloud_deploy.sh | grep ctrlplane-template.yml | awk '{print $2}'
