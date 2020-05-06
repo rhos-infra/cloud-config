@@ -53,7 +53,6 @@
         tags: skip_ansible_lint
 
       - block:
-      {% if install.version|default(undercloud_version) | openstack_release < 16 %}
             - name: get nodes UUID
               shell: |
                   source ~/stackrc
@@ -73,11 +72,6 @@
                   node_index: "{{ install.node.name.split('-')[-1] }}"
                   stack_index: "{{ item.stack_name.split('-')[-2] }}"
               with_items: "{{ node_ids }}"
-      {% else %}
-            - name: Set node_name as node_uuid
-              set_fact:
-                  node_uuid: "{{ node_name }}"
-      {% endif %}
 
             - name: Find ctrlplane-template.yml location
               shell: cat ~/overcloud_deploy.sh | grep ctrlplane-template.yml | awk '{print $2}'
