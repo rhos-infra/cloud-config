@@ -53,29 +53,29 @@
         tags: skip_ansible_lint
 
       - block:
-            - name: get nodes UUID
-              shell: |
-                  source ~/stackrc
-                  openstack stack resource list overcloud -n5 --filter type=OS::TripleO::ComputeDeployedServerServer -f json
-              register: splitstack_nodes_ids
-              tags: skip_ansible_lint
-              when: install.version|default(undercloud_version) | openstack_release < 16
+            - block:
+                  - name: get nodes UUID
+                    shell: |
+                        source ~/stackrc
+                        openstack stack resource list overcloud -n5 --filter type=OS::TripleO::ComputeDeployedServerServer -f json
+                    register: splitstack_nodes_ids
+                    tags: skip_ansible_lint
 
-            - name: Create node_ids list
-              set_fact:
-                  node_ids: "{{ splitstack_nodes_ids.stdout|from_json }}"
-              when: install.version|default(undercloud_version) | openstack_release < 16
+                  - name: Create node_ids list
+                    set_fact:
+                        node_ids: "{{ splitstack_nodes_ids.stdout|from_json }}"
 
-            - name: Set node_uuid from physical_resource_id
-              set_fact:
-                  node_uuid: "{{ item.physical_resource_id }}"
-              when:
-                  - node_index|int == stack_index|int
-                  - install.version|default(undercloud_version) | openstack_release < 16
-              vars:
-                  node_index: "{{ install.node.name.split('-')[-1] }}"
-                  stack_index: "{{ item.stack_name.split('-')[-2] }}"
-              with_items: "{{ node_ids }}"
+                  - name: Set node_uuid from physical_resource_id
+                    set_fact:
+                        node_uuid: "{{ item.physical_resource_id }}"
+                    when:
+                        - node_index|int == stack_index|int
+                    vars:
+                        node_index: "{{ install.node.name.split('-')[-1] }}"
+                        stack_index: "{{ item.stack_name.split('-')[-2] }}"
+                    with_items: "{{ node_ids }}"
+
+              when: install.version|default(undercloud_version) | openstack_release < 16
 
             - name: Set node_name as node_uuid
               set_fact:
