@@ -1,33 +1,34 @@
-- import_tasks: preliminary_checks.yml
+- include_tasks: preliminary_checks.yml
   when:
     - rc_preliminary_checks | bool
 
-- import_tasks: remove_ceph_monitor.yml
+- include_tasks: remove_ceph_monitor.yml
   when:
       - rc_remove_ceph_monitor | bool
       - "'ceph' in groups"
 
-- import_tasks: manual_preparation.yml
+- include_tasks: manual_preparation.yml
   when:
     - rc_manual_preparation | bool
 
-- import_tasks: replace_node.yml
-  when: rc_replace_node
+- include_tasks: replace_node.yml
+  when:
+    - rc_replace_node | bool
 
 # Update galera pacemaker resource parameter manually
 # This step is valid on OSP releases older than 14
-- import_tasks: manual_intervention.yml
+- include_tasks: manual_intervention.yml
   when:
     - rc_manual_intervention | bool
     - install.version|default(undercloud_version)|openstack_release < 14
 
-- import_tasks: finalize.yml
+- include_tasks: finalize.yml
   when:
     - rc_finalize | bool
 
 # Add new replaced controller node to instackenv file for future use
 # (i.e. The file is used for fencing configuration)
-- import_tasks: update_instackenv.yml
+- include_tasks: update_instackenv.yml
   when:
     - overcloud_replace is defined
     - overcloud_replace.rc == 0
