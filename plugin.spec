@@ -42,6 +42,11 @@ subparsers:
                         - "11"
                         - "12"
                         - "13"
+                        - "14"
+                        - "15"
+                        - "16"
+                        - "16.1"
+                        - "17"
                         - kilo
                         - liberty
                         - mitaka
@@ -49,6 +54,9 @@ subparsers:
                         - ocata
                         - pike
                         - queens
+                        - rocky
+                        - stein
+                        - train
                   build:
                       help: |
                           String represents a timestamp of the OSP puddle.
