@@ -34,21 +34,6 @@ subparsers:
                           Numbers are for OSP releases
                           Names are for RDO releases
                           Note: It is not mandatory, if not provided plugin will use value from automatic version discovery
-                      choices:
-                        - "7"
-                        - "8"
-                        - "9"
-                        - "10"
-                        - "11"
-                        - "12"
-                        - "13"
-                        - kilo
-                        - liberty
-                        - mitaka
-                        - newton
-                        - ocata
-                        - pike
-                        - queens
                   build:
                       help: |
                           String represents a timestamp of the OSP puddle.
