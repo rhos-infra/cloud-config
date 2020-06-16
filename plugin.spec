@@ -202,6 +202,11 @@ subparsers:
                             Example: compute-3,compute-4,compute-5
                             NOTE: When you scale up splitstack deployment, you can use all "OSP version parameters" to
                             control rhos_release options.
+                 use-limit:
+                      type: Bool
+                      default: False
+                      help: |
+                            Use limit option when performing scale up
 
             - title: Ironic Configuration
               options:
