@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9469331_5ac430c7",
+        "filename": "post_tasks/scale_up.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1004057
+      },
+      "writtenOn": "2020-06-18T12:22:15Z",
+      "side": 1,
+      "message": "What if scale-node is not given? This string will be empty.\nI suggest adding install.scale.nodes to the block\u0027s \u0027when\u0027 condition, or to add \u0027required_when\u0027 to the scale-nodes in the plugin spec.",
+      "range": {
+        "startLine": 71,
+        "startChar": 27,
+        "endLine": 71,
+        "endChar": 43
+      },
+      "revId": "0403c95f2e4f8ceb304845162acc3169f9b3b41c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
