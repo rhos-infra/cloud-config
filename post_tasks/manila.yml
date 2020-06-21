@@ -82,19 +82,20 @@
         changed_when: "'Share Type {{ share_type_name }} already exists' not in result.stderr"
         tags: skip_ansible_lint
 
+      - name: enable snapshot_support
+        shell: |
+          test -f {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc.v3 && \
+            source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc.v3 || \
+            source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
+          manila type-key {{ share_type_name }} set snapshot_support=True
+          manila extra-specs-list
+        register: result
+        when: is_netapp or install.version|default(undercloud_version)|openstack_release >= 16
+        failed_when: "'snapshot_support : True' not in result.stdout"
+
       - name: netapp specific
         when: is_netapp
         block:
-        - name: enable snapshot_support for netapp jobs
-          shell: |
-              test -f {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc.v3 && \
-                source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc.v3 || \
-                source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
-              manila type-key {{ share_type_name }} set snapshot_support=True
-              manila extra-specs-list
-          register: result
-          failed_when: "'snapshot_support : True' not in result.stdout"
-
         - name: enable create_share_from_snapshot_support for rhos>=11 netapp jobs
           shell: |
               test -f {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc.v3 && \
