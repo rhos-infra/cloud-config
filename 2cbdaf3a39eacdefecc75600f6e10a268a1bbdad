@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f3d461d1_443b24d4",
+        "filename": "plugin.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1017725
+      },
+      "writtenOn": "2020-06-23T18:05:54Z",
+      "side": 1,
+      "message": "The scale-nodes parameter starting in line 198 isn\u0027t part of the code I\u0027m adding. The problem of it not being defined was already there before my change. Should I have to fix it as part of this change?",
+      "parentUuid": "985f2929_c6c19023",
+      "range": {
+        "startLine": 198,
+        "startChar": 17,
+        "endLine": 204,
+        "endChar": 57
+      },
+      "revId": "2cbdaf3a39eacdefecc75600f6e10a268a1bbdad",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f10a1fb8_40946285",
         "filename": "post_tasks/scale_up.yml",
         "patchSetId": 1
@@ -59,6 +83,54 @@
       "writtenOn": "2020-06-23T17:40:16Z",
       "side": 1,
       "message": "Personally, I prefer all conditions to be in a list:\nwhen:\n    - install.use.limit\n    - install.scale.nodes",
+      "range": {
+        "startLine": 73,
+        "startChar": 8,
+        "endLine": 73,
+        "endChar": 13
+      },
+      "revId": "2cbdaf3a39eacdefecc75600f6e10a268a1bbdad",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e932feff_3354a874",
+        "filename": "post_tasks/scale_up.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1017725
+      },
+      "writtenOn": "2020-06-23T18:05:54Z",
+      "side": 1,
+      "message": "Will change and update review.",
+      "parentUuid": "f10a1fb8_40946285",
+      "range": {
+        "startLine": 73,
+        "startChar": 31,
+        "endLine": 73,
+        "endChar": 46
+      },
+      "revId": "2cbdaf3a39eacdefecc75600f6e10a268a1bbdad",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "004f8634_5a82a87e",
+        "filename": "post_tasks/scale_up.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1017725
+      },
+      "writtenOn": "2020-06-23T18:05:54Z",
+      "side": 1,
+      "message": "Will change and update review.",
+      "parentUuid": "211866fe_b1708999",
       "range": {
         "startLine": 73,
         "startChar": 8,
