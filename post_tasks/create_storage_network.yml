@@ -15,8 +15,8 @@
       - name: Try to discover storage storage
         include_tasks: ../tasks/storage/discover_backend.yml
 
-      - name: Read network-environment.yaml
-        command: "cat {{ template_base }}/network/network-environment.yaml"
+      - name: Read network-environment{{ (install.network.protocol == 'ipv6') | ternary('-v6','') }}.yaml
+        command: "cat {{ template_base }}/network/network-environment{{ (install.network.protocol == 'ipv6') | ternary('-v6','') }}.yaml"
         register: network_template_out
         ignore_errors: yes
 
@@ -74,3 +74,24 @@
             allocation_pool_end: "{{ AllocationPools[0]['end'] }}"
             cidr: "{{ (storage_backend == 'cephfs-nfs') | ternary(StorageNFSNetCidr, StorageNetCidr) }}"
         ignore_errors: yes
+        when: install.network.protocol == 'ipv4'
+
+      - name: Create IPv6 {{ subnet_name }} subnet
+        vars:
+          ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
+          StorageNetCidr: "{{ network_template.parameter_defaults.StorageNetCidr|default('') }}"
+          StorageNFSNetCidr: "{{ network_template.parameter_defaults.StorageNFSNetCidr|default('') }}"
+        os_subnet:
+          validate_certs: no
+          cloud: overcloud
+          name: "{{ subnet_name }}"
+          network_name: "{{ network_name }}"
+          enable_dhcp: yes
+          allocation_pool_start: "{{ AllocationPools[0]['start'] }}"
+          allocation_pool_end: "{{ AllocationPools[0]['end'] }}"
+          cidr: "{{ (storage_backend == 'cephfs-nfs') | ternary(StorageNFSNetCidr, StorageNetCidr) }}"
+          ip_version: 6
+          ipv6_address_mode: dhcpv6-stateful
+          ipv6_ra_mode: dhcpv6-stateful
+        ignore_errors: yes
+        when: install.network.protocol == 'ipv6'
