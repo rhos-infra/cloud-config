@@ -123,6 +123,12 @@
         register: net_create
         delegate_to: "{{ groups.shade | first }}"
 
+      - name: set MTU for external network
+        shell: |
+            source ~/{{ install.overcloud.stack }}rc
+            openstack network set {{ net_create.network.name }} --mtu {{ install.external.mtu }}
+        when: install.external.mtu is defined
+
       - name: print network details to console
         shell: |
             source ~/{{ install.overcloud.stack }}rc

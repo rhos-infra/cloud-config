@@ -176,6 +176,11 @@ subparsers:
                       help: |
                          DHCP can be enabled for external subnets optionally
 
+                  external-mtu:
+                      type: Value
+                      help: |
+                         A custom MTU value can be set for external network optionally.
+
             - title: Private network
               options:
                   private-subnet:
