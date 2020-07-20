@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b51d4119_93c42fbb",
+        "filename": "post_tasks/create_storage_network.yml",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1006664
+      },
+      "writtenOn": "2020-07-20T13:13:02Z",
+      "side": 1,
+      "message": "{{ (install.network.protocol \u003d\u003d \u0027ipv6\u0027) | ternary(\u0027-v6\u0027,\u0027\u0027) }}.yaml duplication can be avoided e.g. by defining network_env_file variable under vars in line 11.",
+      "revId": "108377dad98fd23a5b857847afaec5a3128fa7af",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d16404e5_33e11e09",
+        "filename": "post_tasks/create_storage_network.yml",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1006664
+      },
+      "writtenOn": "2020-07-20T13:13:02Z",
+      "side": 1,
+      "message": "-v6 is for install.network.protocol \u003d\u003d \u0027ipv6\u0027\n\nIs install.network.protocol \u003d\u003d \u0027ipv6-all\u0027 also about to be handled (-v6-all.yaml)?",
+      "range": {
+        "startLine": 19,
+        "startChar": 120,
+        "endLine": 19,
+        "endChar": 124
+      },
+      "revId": "108377dad98fd23a5b857847afaec5a3128fa7af",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
