@@ -8,23 +8,29 @@
 
 # Upload image from undercloud via Openstack cli as the os_image module fails with
 # ShadeAdapter' object has no attribute 'get_api_major_version': RHOSINFRA-1562
-- name: Download image
-  get_url:
-      url: "{{ install.workload.image.url }}"
-      dest: /tmp/workload_image.qcow2
-
 - name: Check if workload image is present
   shell: |
       source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
       openstack image list -f value -c Name | grep workload_image_{{ step }}
   register: workload_image_present
-  ignore_errors: true
+  changed_when: false
+  failed_when: false
 
-- name: Upload image
-  shell: |
-      source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
-      openstack image create workload_image_{{ step }} --disk-format qcow2 --container-format bare --file /tmp/workload_image.qcow2
-  when: workload_image_present|failed
+- when: workload_image_present.rc != 0
+  block:
+    - name: Download image
+      get_url:
+          url: "{{ install.workload.image.url }}"
+          dest: /tmp/workload_image.qcow2
+      register: _download_image
+      retries: 10
+      delay: 5
+      until: _download_image is success
+
+    - name: Upload image into glance
+      shell: |
+          source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
+          openstack image create workload_image_{{ step }} --disk-format qcow2 --container-format bare --file /tmp/workload_image.qcow2
 
 - block:
     - name: Create flavor
@@ -134,24 +140,26 @@
 
 # Create instance from undercloud via Openstack cli as the os_server module fails with
 # ShadeAdapter' object has no attribute 'get_api_major_version': RHOSINFRA-1562
-- name: Check if instance already exists
+- name: Create instance if it does not already exist
   shell: |
+      return_code=0
       source ~/{{ install.overcloud.stack }}rc
-      openstack server list -f value -c Name | grep workload_instance_{{ step }}
+      if ! openstack server list -f value -c Name | grep workload_instance_{{ step }}; then
+          openstack server create \
+              --image workload_image_{{ step }} \
+              --flavor workload_flavor_{{ step }} \
+              --security-group workload_secgroup_{{ step }} \
+              --key-name  workload_key_{{ step }} \
+              --nic net-id={{ workload_internal_net.id }} \
+              workload_instance_{{ step }}
+          return_code=3
+      fi
+      exit ${return_code}
+  args:
+      executable: /bin/bash
   register: workload_instance_present
-  ignore_errors: true
-
-- name: Create instance
-  shell: |
-      source ~/{{ install.overcloud.stack }}rc
-      openstack server create \
-          --image workload_image_{{ step }} \
-          --flavor workload_flavor_{{ step }} \
-          --security-group workload_secgroup_{{ step }} \
-          --key-name  workload_key_{{ step }} \
-          --nic net-id={{ workload_internal_net.id }} \
-      workload_instance_{{ step }}
-  when: workload_instance_present|failed
+  failed_when: workload_instance_present.rc not in [0,3]
+  changed_when: workload_instance_present.rc == 3
 
 - name: Wait for instance to be in active state
   vars:
