@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bd447472_f85e4434",
+        "filename": "tasks/launch_workload_step.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1010634
+      },
+      "writtenOn": "2020-09-03T10:53:18Z",
+      "side": 1,
+      "message": "typo: should be \"changed\"",
+      "revId": "e916e5339daa5475c6c57bf214479ad78665feba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2dbe5056_cc23e596",
+        "filename": "tasks/launch_workload_step.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1010634
+      },
+      "writtenOn": "2020-09-03T10:53:18Z",
+      "side": 1,
+      "message": "the name of the block(\"Download the image and upload it into glance\"):\n1. doesn\u0027t appear in the output (at least the default one), \n2. is a repeat of the tasks from within a block\n\nI\u0027m ok to leave it as is yet (it\u0027s a personal preference really) consider removing the name and try the below (not the prettiest alternative, I know):\n- when: workload_image_present.rc !\u003d 0\n  block:\n...",
+      "range": {
+        "startLine": 19,
+        "startChar": 8,
+        "endLine": 19,
+        "endChar": 51
+      },
+      "revId": "e916e5339daa5475c6c57bf214479ad78665feba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cdbc1706_db224c21",
+        "filename": "tasks/launch_workload_step.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1010634
+      },
+      "writtenOn": "2020-09-03T10:53:18Z",
+      "side": 1,
+      "message": "if we misuse shell builtins (will not probably happen here really) or permissions problems then the exit code will also be 2 (marking the task as successful where in fact it wasnt - as per https://tldp.org/LDP/abs/html/exitcodes.html)\n\nI prefer to use something unused/high enough so it won\u0027t be used by someone else\u0027s picking custom codes (over-cautious I know)",
+      "range": {
+        "startLine": 156,
+        "startChar": 22,
+        "endLine": 156,
+        "endChar": 23
+      },
+      "revId": "e916e5339daa5475c6c57bf214479ad78665feba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
