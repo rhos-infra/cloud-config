@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1be3a8a5_0736f48e",
+        "filename": "post_tasks/create_external_network.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1001189
+      },
+      "writtenOn": "2020-09-10T11:22:00Z",
+      "side": 1,
+      "message": "since you are already setting physnet_type statically in vars: above, i think you can keep it simplified here (and line above, and same applied in rescue: block below)\n\ni also wonder if original block\u0027s vars: exist in rescue part - maybe you do not need to evaluate vlan_id / interpreter / network_name again in both cases?\nbut i don\u0027t know, you possibly already tried that and now it\u0027s needed twice",
+      "range": {
+        "startLine": 117,
+        "startChar": 47,
+        "endLine": 117,
+        "endChar": 69
+      },
+      "revId": "820276d9ab0f658aaaa74bff3025d4461e5e98ed",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
