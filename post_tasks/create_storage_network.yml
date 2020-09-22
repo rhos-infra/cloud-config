@@ -71,8 +71,8 @@
             name: "{{ subnet_name }}"
             network_name: "{{ network_name }}"
             enable_dhcp: yes
-            allocation_pool_start: "{{ AllocationPools[0]['start'] }}"
-            allocation_pool_end: "{{ AllocationPools[0]['end'] }}"
+            allocation_pool_start: "{{ AllocationPools[0]['start'].split('.')[0:3] | join('.')  }}.150"
+            allocation_pool_end: "{{ AllocationPools[0]['end'].split('.')[0:3] | join('.')  }}.200"
             cidr: "{{ (storage_backend == 'cephfs-nfs') | ternary(StorageNFSNetCidr, StorageNetCidr) }}"
         ignore_errors: yes
         when: install.network.protocol == 'ipv4'
@@ -88,8 +88,8 @@
           name: "{{ subnet_name }}"
           network_name: "{{ network_name }}"
           enable_dhcp: yes
-          allocation_pool_start: "{{ AllocationPools[0]['start'] }}"
-          allocation_pool_end: "{{ AllocationPools[0]['end'] }}"
+          allocation_pool_start: "{{ AllocationPools[0]['start'].split(':')[0:4] | join(':') }}::fb:10"
+          allocation_pool_end: "{{ AllocationPools[0]['end'].split(':')[0:4] | join(':')  }}::fb:fe"
           cidr: "{{ (storage_backend == 'cephfs-nfs') | ternary(StorageNFSNetCidr, StorageNetCidr) }}"
           ip_version: 6
           ipv6_address_mode: dhcpv6-stateful
