@@ -37,6 +37,8 @@
       when: install.version|default(undercloud_version)|openstack_release < 10
 
     - include_tasks: ../tasks/launch_workload_step.yml
+      vars:
+        workload_instance: {{ install.workload.name }}
       loop_control:
           loop_var: step
       with_sequence: start=0 end={{ install.workload.index|int - 1 }}
