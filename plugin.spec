@@ -296,6 +296,11 @@ subparsers:
                       default: '1'
                       help: |
                         Number of workload objects to be created
+                  workload-name:
+                      type: Value
+                      default: 'workload_instance'
+                      help: |
+                        Name of the workload instance
 
             - title: Deployment Description
               options:
