@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "92f9847d_01581cc5",
+        "filename": "post_tasks/launch_workload.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1016895
+      },
+      "writtenOn": "2020-10-13T11:24:37Z",
+      "side": 1,
+      "message": "This should actually be quoted, like:\n\n\"{{ install.workload.name }}\"",
+      "range": {
+        "startLine": 41,
+        "startChar": 27,
+        "endLine": 41,
+        "endChar": 54
+      },
+      "revId": "9dac97ff8f96683c78ce593716b7234bce4b738e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cfcb017e_c5fea718",
+        "filename": "tasks/launch_workload_step.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1016895
+      },
+      "writtenOn": "2020-10-13T11:24:37Z",
+      "side": 1,
+      "message": "This should actually be quoted, like:\n\n\"{{ workload_instance }}_{{ step }}\"",
+      "range": {
+        "startLine": 187,
+        "startChar": 18,
+        "endLine": 187,
+        "endChar": 52
+      },
+      "revId": "9dac97ff8f96683c78ce593716b7234bce4b738e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2dc9e284_7dacb81b",
+        "filename": "tasks/launch_workload_step.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1016895
+      },
+      "writtenOn": "2020-10-13T11:24:37Z",
+      "side": 1,
+      "message": "This should actually be quoted, like:\n\n\"{{ workload_instance }}_{{ step }}\"",
+      "range": {
+        "startLine": 197,
+        "startChar": 18,
+        "endLine": 197,
+        "endChar": 52
+      },
+      "revId": "9dac97ff8f96683c78ce593716b7234bce4b738e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df98dfaa_35af01c9",
+        "filename": "tasks/launch_workload_step.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1016895
+      },
+      "writtenOn": "2020-10-13T11:24:37Z",
+      "side": 1,
+      "message": "This should actually be quoted, like:\n\n\"{{ workload_instance }}_{{ step }}\"",
+      "range": {
+        "startLine": 208,
+        "startChar": 18,
+        "endLine": 208,
+        "endChar": 52
+      },
+      "revId": "9dac97ff8f96683c78ce593716b7234bce4b738e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
