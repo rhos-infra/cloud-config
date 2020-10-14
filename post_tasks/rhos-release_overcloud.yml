@@ -1,0 +1,18 @@
+- name: Install rhos repos on overcloud nodes
+  hosts: overcloud_nodes
+  gather_facts: no
+  any_errors_fatal: true
+  vars:
+      rhos_release_rpm: "https://url.corp.redhat.com/rhos-release-latest-rpm"
+  roles:
+      - role: rhos-release
+        release: "{{ install.version }}"
+        rr_buildmods: "{{ install.buildmods }}"
+        build: "{{ install.build | default(omit) }}"
+        director_build: "{{ install.get('director', {}).build|default(omit) }}"
+        mirror: "{{ install.mirror | default(omit) }}"
+        rr_distro_version: "{{ install.osrelease|default(omit) }}"
+        enable_testing_repos: "{{ install.get('enable', {}).get('testing', {}).repos|default(omit) }}"
+        without_ceph: "{{ not install.get('ceph', {}).repos|default(omit) }}"
+        when:
+            - "install.version|openstack_distribution == 'OSP'"

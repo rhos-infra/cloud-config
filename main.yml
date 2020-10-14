@@ -80,3 +80,7 @@
 
 - name: Run workarounds
   import_playbook: workarounds.yml
+
+- name: Include task "Install rhos-release on overcloud nodes"
+  import_playbook: post_tasks/rhos-release_overcloud.yml
+  when: "'rhos-release_overcloud' in install.tasks"
