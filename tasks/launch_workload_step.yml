@@ -6,33 +6,36 @@
   command: cat ~/.ssh/id_rsa.pub
   register: pub_key
 
-# Upload image from undercloud via Openstack cli as the os_image module fails with
-# ShadeAdapter' object has no attribute 'get_api_major_version': RHOSINFRA-1562
-- name: Check if workload image is present
-  shell: |
-      source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
-      openstack image list -f value -c Name | grep workload_image_{{ step }}
-  register: workload_image_present
-  changed_when: false
-  failed_when: false
-
-- when: workload_image_present.rc != 0
-  block:
-    - name: Download image
-      get_url:
-          url: "{{ install.workload.image.url }}"
-          dest: /tmp/workload_image.qcow2
-      register: _download_image
-      retries: 10
-      delay: 5
-      until: _download_image is success
-
-    - name: Upload image into glance
-      shell: |
-          source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
-          openstack image create workload_image_{{ step }} --disk-format qcow2 --container-format bare --file /tmp/workload_image.qcow2
-
 - block:
+    - name: Check if workload image is present
+      os_image_info:
+          # Required for SSL
+          validate_certs: no
+          cloud: overcloud
+          image: "workload_image_{{ step }}"
+      register: workload_image_info
+
+    - when: workload_image_info['openstack_image'] | length < 1
+      block:
+          - name: Download image
+            get_url:
+                url: "{{ install.workload.image.url }}"
+                dest: /tmp/workload_image.qcow2
+            register: _download_image
+            retries: 10
+            delay: 5
+            until: _download_image is success
+
+          - name: Upload image into glance
+            os_image:
+                # Required for SSL
+                validate_certs: no
+                cloud: overcloud
+                name: "workload_image_{{ step }}"
+                disk_format: qcow2
+                container_format: bare
+                filename: "/tmp/workload_image.qcow2"
+
     - name: Create flavor
       os_nova_flavor:
           # Required for SSL
