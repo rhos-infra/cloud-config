@@ -134,48 +134,39 @@
           state: present
           name: workload_key_{{ step }}
           public_key: "{{ pub_key.stdout }}"
-  delegate_to: "{{ groups.shade | first }}"
-  vars:
-    ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
 
-# Create instance from undercloud via Openstack cli as the os_server module fails with
-# ShadeAdapter' object has no attribute 'get_api_major_version': RHOSINFRA-1562
-- name: Create instance if it does not already exist
-  shell: |
-      return_code=0
-      source ~/{{ install.overcloud.stack }}rc
-      if ! openstack server list -f value -c Name | grep workload_instance_{{ step }}; then
-          openstack server create \
-              --image workload_image_{{ step }} \
-              --flavor workload_flavor_{{ step }} \
-              --security-group workload_secgroup_{{ step }} \
-              --key-name  workload_key_{{ step }} \
-              --nic net-id={{ workload_internal_net.id }} \
-              workload_instance_{{ step }}
-          return_code=3
-      fi
-      exit ${return_code}
-  args:
-      executable: /bin/bash
-  register: workload_instance_present
-  failed_when: workload_instance_present.rc not in [0,3]
-  changed_when: workload_instance_present.rc == 3
+    - name: Get information for any existing instance
+      os_server_facts:
+          # Required for SSL
+          validate_certs: no
+          cloud: overcloud
+          server: "workload_instance_{{ step }}"
+      register: _workload_instance_info
 
-- name: Wait for instance to be in active state
-  vars:
-    jq_old: jq -r -c '.[]|select(.Field == "status").Value'
-    jq_current: jq -r -c .status
-    jq_query: "{{ (install.version|default(undercloud_version)|openstack_release >= 9)|ternary(jq_current, jq_old) }}"
-  shell: |
-      source ~/{{ install.overcloud.stack }}rc
-      openstack server show workload_instance_{{ step }} -f json | \
-          {{ jq_query }}
-  register: instance_state
-  until: instance_state.stdout.find("ACTIVE") > -1
-  retries: 30
-  delay: 5
+    - name: Delete the instance if it is not active
+      os_server:
+          # Required for SSL
+          validate_certs: no
+          cloud: overcloud
+          server: "workload_instance_{{ step }}"
+          state: absent
+      when: _workload_instance_info[0].status != "ACTIVE"
 
-- block:
+    - name: Create the instance if it does not already exist
+      os_server:
+          # Required for SSL
+          validate_certs: no
+          cloud: overcloud
+          server: "workload_instance_{{ step }}"
+          state: present
+          image: "workload_image_{{ step }}"
+          flavor: "workload_flavor_{{ step }}"
+          security_groups: "workload_secgroup_{{ step }}"
+          key_name: "workload_key_{{ step }}"
+          nics:
+            - net-id: "{{ workload_internal_net.id }}"
+          wait: true
+
     ## register facts to check if floating IP is assigned
     ## os_floating_ip is not idempotent in some cases such
     ## as with the vlan jobs scenario
