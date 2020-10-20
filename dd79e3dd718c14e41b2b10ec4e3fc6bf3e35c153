@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "70e81b1c_ab865d8a",
+        "filename": "main.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1005097
+      },
+      "writtenOn": "2020-10-20T09:48:01Z",
+      "side": 1,
+      "message": "Imho this task should be before \"workarounds\" to make sure the flow is to do \"post-tasks\" first, known workaround later.\n\nAnother less suitable option for me would be adding this into workarounds.yml file since enabling this on OC nodes is some kind of hacking tripleo-deployed images...",
+      "revId": "dd79e3dd718c14e41b2b10ec4e3fc6bf3e35c153",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
