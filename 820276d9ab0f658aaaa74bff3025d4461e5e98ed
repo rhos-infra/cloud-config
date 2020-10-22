@@ -46,6 +46,30 @@
       "revId": "820276d9ab0f658aaaa74bff3025d4461e5e98ed",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0082a2d_91750578",
+        "filename": "post_tasks/create_external_network.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1001189
+      },
+      "writtenOn": "2020-10-22T07:50:40Z",
+      "side": 1,
+      "message": "Ack, ok, it does not matter much.\nWhat i meant was that when you know it\u0027s type\u003dvlan or type\u003dflat block, you do not need inside all the variables and conditions for \u0027type \u003d\u003d x\u0027 and such, it could be just statically there since you already know what the block is for. Anyway it\u0027s more cosmetic tweak then any much of practical change.",
+      "parentUuid": "a6cc0e33_47f88e02",
+      "range": {
+        "startLine": 117,
+        "startChar": 47,
+        "endLine": 117,
+        "endChar": 69
+      },
+      "revId": "820276d9ab0f658aaaa74bff3025d4461e5e98ed",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
