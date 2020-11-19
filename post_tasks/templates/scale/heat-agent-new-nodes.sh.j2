@@ -66,10 +66,10 @@ for role in $OVERCLOUD_ROLES; do
     role_total_count=
     eval role_total_count=\${${role}_total_hosts}
 
-    stacks_count=$(openstack stack resource list $rg_stack -c resource_name -c physical_resource_id -f value | wc -l)
+    stacks_count=$(openstack stack resource list $rg_stack -c physical_resource_id -f value | grep -v ^$ | wc -l)
     while [[ "$stacks_count" -ne "$role_total_count" ]]; do
         sleep $SLEEP_TIME
-        stacks_count=$(openstack stack resource list $rg_stack -c resource_name -c physical_resource_id -f value | wc -l)
+        stacks_count=$(openstack stack resource list $rg_stack -c physical_resource_id -f value | grep -v ^$ | wc -l)
     done
 
     stacks=$(openstack stack resource list $rg_stack -c resource_name -c physical_resource_id -f json | jq -r "sort_by(.resource_name) | .[] | .physical_resource_id")
