@@ -4,6 +4,10 @@
   tags:
       - always
 
+- name: fail for gerrit
+  fail:
+    msg: test fail
+
 - name: Fetch tempest deployer input file
   import_playbook: post_tasks/tempest_deployer_input.yml
   when: "'tempest_deployer_input' in install.tasks"
