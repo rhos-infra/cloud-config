@@ -1,9 +1,8 @@
-- name: Auto discover undercloud version
+- name: Auto discover undercloud version space
   import_playbook: "{{ auto_discover_undercloud_version | default('version.yml') }}"
   when: install.version is not defined
   tags:
       - always
-
 - name: Fetch tempest deployer input file
   import_playbook: post_tasks/tempest_deployer_input.yml
   when: "'tempest_deployer_input' in install.tasks"
