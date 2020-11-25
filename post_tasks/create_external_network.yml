@@ -111,7 +111,7 @@
                 cloud: overcloud
                 name: "{{ network_name }}"
                 external: yes
-                shared: no
+                shared: "{{ install.external.shared | default(no)}}"
                 provider_physical_network: "{{ physnet_name }}"
                 provider_network_type: "{{ physnet_type }}"
                 provider_segmentation_id: "{{ ('vlan' == physnet_type) | ternary(vlan_id, omit) }}"
@@ -132,7 +132,7 @@
                 cloud: overcloud
                 name: "{{ network_name }}"
                 external: yes
-                shared: no
+                shared: "{{ install.external.shared | default(no)}}"
                 provider_physical_network: "{{ physnet_name }}"
                 provider_network_type: "{{ physnet_type }}"
                 provider_segmentation_id: "{{ ('vlan' == physnet_type) | ternary(vlan_id, omit) }}"

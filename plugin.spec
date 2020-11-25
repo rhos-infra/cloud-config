@@ -177,6 +177,12 @@ subparsers:
                       help: |
                          DHCP can be enabled for external subnets optionally
 
+                  external-shared:
+                      type: Bool
+                      default: False
+                      help: |
+                         Make external network shared
+
                   external-mtu:
                       type: Value
                       help: |
