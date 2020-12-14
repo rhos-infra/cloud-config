@@ -1,7 +1,7 @@
 - name: Gather facts for Overcloud Nodes
   hosts: overcloud_nodes:!unused
   gather_facts: yes
-  any_errors_fatal: true
+  ignore_unreachable: true
 
 - name: Scale down
   hosts: undercloud
