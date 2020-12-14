@@ -43,6 +43,22 @@
                 source ~/{{ install.overcloud.stack }}rc
                 openstack compute service set "{{ node_name }}" nova-compute --disable
             tags: skip_ansible_lint
+
+          - name: Stop node "{{ install.node.name }}"
+            shell: |
+                source ~/stackrc
+                openstack server stop "{{ install.node.name }}"
+            when: install.shutdown
+
+          - name: wait for node "{{ install.node.name }}" to go down
+            shell: |
+                source ~/stackrc
+                openstack server list | grep {{ install.node.name }} | awk '{print $6}'
+            register: node_down
+            until: node_down.stdout == "SHUTOFF"
+            retries: 20
+            delay: 3
+            when: install.shutdown
         when: ov_compute.rc == 0
 
       - name: get the deployed stack-id

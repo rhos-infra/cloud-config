@@ -198,6 +198,11 @@ subparsers:
                       type: Value
                       help: |
                         Name of the node to remove
+                  shutdown:
+                      type: Bool
+                      default: False
+                      help: |
+                        Shut node before doing scale down so that is is unreachable
 
             - title: Scale up nodes
               options:
