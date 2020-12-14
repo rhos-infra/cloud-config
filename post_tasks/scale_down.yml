@@ -1,5 +1,5 @@
 - name: Gather facts for Overcloud Nodes
-  hosts: overcloud_nodes:!unused
+  hosts: overcloud_nodes:!unused:!compute
   gather_facts: yes
   any_errors_fatal: true
 
