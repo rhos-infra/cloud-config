@@ -1,0 +1,9 @@
+Code-Review+2: Arie Bregman <abregman@redhat.com>
+Code-Review+1: Eran Kuris  <ekuris@redhat.com>
+Code-Review+2: Avi Talmor <atalmor@redhat.com>
+Verified+1: rhosqeauto <vgriner+rhosqeauto@redhat.com>
+Submitted-by: Avi Talmor <atalmor@redhat.com>
+Submitted-at: Mon, 28 Dec 2020 15:57:44 +0000
+Reviewed-on: https://review.gerrithub.io/c/rhos-infra/cloud-config/+/507729
+Project: rhos-infra/cloud-config
+Branch: refs/heads/master
