@@ -16,6 +16,24 @@
       "message": "few ideas to consider:\n- if facts are gathered here for all those nodes, maybe they are needed/used later?\n-- won\u0027t it cause issue there / should the needed info (if any) be obtained in some other way then?\n- more precise would be to exclude the \u0027scaled-down\u0027 nodes from the hosts: targets here, to not even try gathering facts from those to-be-removed nodes, but still do so for all others / fail here/early if any of unexpected ones is unreachable",
       "revId": "ec1b077c7168080ee5cfbd815d00cf5dae87022f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0246d923_33817257",
+        "filename": "post_tasks/scale_down.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1017725
+      },
+      "writtenOn": "2021-01-04T21:44:20Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "cccf7dd7_75d72cf2",
+      "revId": "ec1b077c7168080ee5cfbd815d00cf5dae87022f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
