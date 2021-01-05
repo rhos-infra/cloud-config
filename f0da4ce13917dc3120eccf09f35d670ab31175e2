@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0f17f09_476ce702",
+        "filename": "post_tasks/scale_down.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1017725
+      },
+      "writtenOn": "2021-01-05T16:04:25Z",
+      "side": 1,
+      "message": "recheck",
+      "revId": "f0da4ce13917dc3120eccf09f35d670ab31175e2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
