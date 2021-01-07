@@ -34,6 +34,24 @@
       "parentUuid": "cccf7dd7_75d72cf2",
       "revId": "ec1b077c7168080ee5cfbd815d00cf5dae87022f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89579986_9ca8fe20",
+        "filename": "post_tasks/scale_down.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1017725
+      },
+      "writtenOn": "2021-01-07T03:11:21Z",
+      "side": 1,
+      "message": "Have found that excluding compute nodes when gathering facts works in standard deploys, but not splitstack. In splitstack deploys the facts gathered for compute nodes are used. Will look for another way.",
+      "parentUuid": "0246d923_33817257",
+      "revId": "ec1b077c7168080ee5cfbd815d00cf5dae87022f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
