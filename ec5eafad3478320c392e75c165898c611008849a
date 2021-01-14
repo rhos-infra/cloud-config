@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8220ab35_a149e36a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001189
+      },
+      "writtenOn": "2021-01-14T23:58:45Z",
+      "side": 1,
+      "message": "while i really like this approach, as it also covers handling the shutdown itself,\ni wonder if the facts are really-really needed for those nodes which can be down for the steps/action this is doing\n\n... maybe the places where it failed on missing facts of these nodes do not need to run at all for those nodes? i do not know any details about the where it failed though.",
+      "revId": "ec5eafad3478320c392e75c165898c611008849a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a6a27f6_5760d6f4",
+        "filename": "plugin.spec",
+        "patchSetId": 3
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1001189
+      },
+      "writtenOn": "2021-01-14T23:58:45Z",
+      "side": 1,
+      "message": "is there reason to name it in structured and shortened way? install.shut.node? why not just shutdown/poweroff or such?",
+      "revId": "ec5eafad3478320c392e75c165898c611008849a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
