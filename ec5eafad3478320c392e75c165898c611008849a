@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c07d2951_7b01ec86",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1017725
+      },
+      "writtenOn": "2021-01-15T14:17:20Z",
+      "side": 1,
+      "message": "Standard deploys work with !compute on the hosts line, but the splitstack job failed with this error: \nTASK [Create control plane network template] ***********************************\ntask path: /home/rhos-ci/jenkins/workspace/DFG-df-splitstack-16.2-virsh-3cont_3comp_1ceph-blacklist-1compute-scaledown/infrared/plugins/cloud-config/post_tasks/scale_down.yml:89\nWednesday 06 January 2021  21:15:53 +0000 (0:00:00.305)       0:00:49.766 ***** \nfatal: [undercloud-0]: FAILED! \u003d\u003e {\n    \"changed\": false\n}\n\nMSG:\n\nAnsibleUndefinedVariable: \u0027ansible.vars.hostvars.HostVarsVars object\u0027 has no attribute \u0027ansible_eth0\u0027\n\n\nIts creating a template and didn\u0027t have all the variables it needed. I liked the approach of powering off the node before removing better so I didn\u0027t pursue trying to work around the above error.",
+      "parentUuid": "8220ab35_a149e36a",
+      "revId": "ec5eafad3478320c392e75c165898c611008849a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8a6a27f6_5760d6f4",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-01-14T23:58:45Z",
       "side": 1,
       "message": "is there reason to name it in structured and shortened way? install.shut.node? why not just shutdown/poweroff or such?",
+      "revId": "ec5eafad3478320c392e75c165898c611008849a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b23028d9_d147cf62",
+        "filename": "plugin.spec",
+        "patchSetId": 3
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1017725
+      },
+      "writtenOn": "2021-01-15T14:17:20Z",
+      "side": 1,
+      "message": "Name was chosen that way because most of the other optional parameters near that line where in format of two words e.g.:external-dhcp, external-mtu, private-subnet, and node-name. I\u0027ll change to shutdown and add new diffs.",
+      "parentUuid": "8a6a27f6_5760d6f4",
       "revId": "ec5eafad3478320c392e75c165898c611008849a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
