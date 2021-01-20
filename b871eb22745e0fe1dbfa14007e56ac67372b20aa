@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b29099cf_5df8d119",
+        "filename": "post_tasks/scale_down.yml",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1017725
+      },
+      "writtenOn": "2021-01-20T22:02:36Z",
+      "side": 1,
+      "message": "This task is looking for the ping to stop working indicating that the node is down. The ignore_errors is needed because a failed ping causes an error which makes the task fail. I can use openstack server list command to look for the node reaching down state instead.",
+      "revId": "b871eb22745e0fe1dbfa14007e56ac67372b20aa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
