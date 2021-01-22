@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba6701e4_4fafb93c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1017725
+      },
+      "writtenOn": "2021-01-22T14:03:12Z",
+      "side": 1,
+      "message": "recheck infrared-pipeline",
+      "revId": "3fe97107645741fe407a8b3dffafff8c6826db7b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
