@@ -16,6 +16,29 @@
       "message": "recheck infrared-pipeline",
       "revId": "3fe97107645741fe407a8b3dffafff8c6826db7b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49474560_db7d8736",
+        "filename": "post_tasks/scale_down.yml",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1001189
+      },
+      "writtenOn": "2021-01-27T03:11:43Z",
+      "side": 1,
+      "message": "you may want to scope (anchor in terminology of regexp) the pattern match,\nto avoid mistakes/confusion ... in case like compute-1 and compute-10 both exist and such cases when one node-name could be subset of the server-list output one more then one line/entry\n\nor maybe do the direct querying/filtering like:\n`openstack server show -f value -c status \"{{ ... }}\"`\nor what seems to be fastest (notice the \u0027-n\u0027):\n`openstack server list -n --name\u003d\u0027^{{...}}$\u0027 -f value -c Status`",
+      "range": {
+        "startLine": 56,
+        "startChar": 40,
+        "endLine": 56,
+        "endChar": 68
+      },
+      "revId": "3fe97107645741fe407a8b3dffafff8c6826db7b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
