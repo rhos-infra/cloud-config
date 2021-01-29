@@ -43,7 +43,7 @@
                 - section: volume
                   option: storage_protocol
                   value: nfs
-                  condition: "{{ 'nfs' in storage_backend }}"
+                  condition: "{{ 'nfs' in storage_backend and not storage_backend.startswith('ceph') }}"
                 # Configure storage vendor for netapp: https://bugs.launchpad.net/tripleo/+bug/1642948
                 - section: volume
                   option: vendor_name
