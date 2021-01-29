@@ -93,6 +93,10 @@
       # for openstack v11 the OS_TENANT_NAME is replaced with OS_PROJECT_NAME
       # Trying to resolve OS_PROJECT_NAME and then OS_TENANT_NAME
 
+      - name: Set network name
+        set_fact:
+            network_name: "{{ install.public.get('net', {}).name|default(pool_name.stdout_lines|last) }}"
+
       # The best way to figure out is vlan or the flat the right value at this point is
       # trying both ..
       # Neutron will refuse the wrong one.
@@ -104,7 +108,6 @@
                 vlan_id: "{{ install.get('external', {}).vlan | default(((network_template|default({})).parameter_defaults|default({})).ExternalNetworkVlanID|default('')) }}"
                 # Here can't be used {{ path_venv }}, because it's not a Jinja template
                 ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
-                network_name: "{{ install.public.get('net', {}).name|default(pool_name.stdout_lines|last) }}"
             os_network:
                 # Required for SSL
                 validate_certs: no
@@ -115,8 +118,26 @@
                 provider_physical_network: "{{ physnet_name }}"
                 provider_network_type: "{{ physnet_type }}"
                 provider_segmentation_id: "{{ ('vlan' == physnet_type) | ternary(vlan_id, omit) }}"
-            register: net_create
             delegate_to: "{{ groups.shade | first }}"
+            when: not (install.external.transparent.vlan|default(false))
+
+          # Neither os_network nor openstack.cloud.network ansible modules
+          # support VLAN Transparency, so an opestack shell command needs to be
+          # used instead
+          - name: create the external network with vlan transparency
+            vars:
+                physnet_type: "vlan"
+                vlan_id: "{{ install.get('external', {}).vlan | default(((network_template|default({})).parameter_defaults|default({})).ExternalNetworkVlanID|default('')) }}"
+                share: "{{ (install.external.shared | default(no)) | ternary('--share', '--no-share') }}"
+            shell: |
+                source ~/{{ install.overcloud.stack }}rc
+                openstack network create {{ network_name }} \
+                    --external --transparent-vlan {{ share }} \
+                    --provider-network-type {{ physnet_type }} \
+                    --provider-segment {{ vlan_id }} \
+                    --provider-physical-network {{ physnet_name }}
+            delegate_to: "{{ groups.shade | first }}"
+            when: install.external.transparent.vlan|default(false)
 
         rescue:
           - name: create the external network
@@ -125,7 +146,6 @@
                 vlan_id: "{{ install.get('external', {}).vlan | default(((network_template|default({})).parameter_defaults|default({})).ExternalNetworkVlanID|default('')) }}"
                 # Here can't be used {{ path_venv }}, because it's not a Jinja template
                 ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
-                network_name: "{{ install.public.get('net', {}).name|default(pool_name.stdout_lines|last) }}"
             os_network:
                 # Required for SSL
                 validate_certs: no
@@ -136,19 +156,35 @@
                 provider_physical_network: "{{ physnet_name }}"
                 provider_network_type: "{{ physnet_type }}"
                 provider_segmentation_id: "{{ ('vlan' == physnet_type) | ternary(vlan_id, omit) }}"
-            register: net_create
             delegate_to: "{{ groups.shade | first }}"
+            when: not (install.external.vlan.transparent|default(false))
+
+          # Neither os_network nor openstack.cloud.network ansible modules
+          # support VLAN Transparency, so an opestack shell command needs to be
+          # used instead
+          - name: create the external network with vlan transparency
+            vars:
+                physnet_type: "flat"
+                share: "{{ (install.external.shared | default(no)) | ternary('--share', '--no-share') }}"
+            shell: |
+                source ~/{{ install.overcloud.stack }}rc
+                openstack network create {{ network_name }} \
+                    --external --transparent-vlan {{ share }} \
+                    --provider-network-type {{ physnet_type }} \
+                    --provider-physical-network {{ physnet_name }}
+            delegate_to: "{{ groups.shade | first }}"
+            when: install.external.vlan.transparent|default(false)
 
       - name: set MTU for external network
         shell: |
             source ~/{{ install.overcloud.stack }}rc
-            openstack network set {{ net_create.network.name }} --mtu {{ install.external.mtu }}
+            openstack network set {{ network_name }} --mtu {{ install.external.mtu }}
         when: install.external.mtu is defined
 
       - name: print network details to console
         shell: |
             source ~/{{ install.overcloud.stack }}rc
-            neutron net-show {{ net_create.network.name }}
+            neutron net-show {{ network_name }}
         tags: skip_ansible_lint
         changed_when: false
 
@@ -166,7 +202,7 @@
             validate_certs: no
             cloud: overcloud
             name: "{{ subnet.name | default('external_subnet') }}"
-            network_name: "{{ net_create.network.name }}"
+            network_name: "{{ network_name }}"
             enable_dhcp: "{{ install.external.dhcp | default(no)}}"
             cidr: "{{ subnet.cidr }}"
             gateway_ip: "{{ subnet.gateway }}"
@@ -193,7 +229,7 @@
             validate_certs: no
             cloud: overcloud
             name: "{{ ipv6_subnet.name | default('external_ipv6_subnet') }}"
-            network_name: "{{ net_create.network.name }}"
+            network_name: "{{ network_name }}"
             enable_dhcp: "{{ install.external.dhcp | default(no)}}"
             ip_version: 6
             cidr: "{{ ipv6_subnet.cidr }}"

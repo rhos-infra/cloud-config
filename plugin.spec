@@ -188,6 +188,12 @@ subparsers:
                       help: |
                          A custom MTU value can be set for external network optionally.
 
+                  external-transparent-vlan:
+                      type: Bool
+                      default: False
+                      help: |
+                         Enable VLAN transparency on the external network
+
             - title: Private network
               options:
                   private-subnet:
