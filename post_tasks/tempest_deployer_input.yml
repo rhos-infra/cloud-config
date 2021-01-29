@@ -58,7 +58,7 @@
                 - section: data-processing-feature-enabled
                   option: plugins
                   value: "ambari,cdh,mapr"
-                  condition: "{{ install.version|default(undercloud_version)|openstack_release >= 12 }}"
+                  condition: "{{ (install.version|default(undercloud_version)|openstack_release >= 12) and (install.version|default(undercloud_version)|openstack_release <= 15) }}"
         ini_file:
             dest: "{{ inventory_dir }}/{{ deployer_input | basename }}"
             section: "{{ item.section }}"
