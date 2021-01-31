@@ -1,0 +1,109 @@
+---
+# This playbook is used to enable the network access to the share networks.
+# For CephFS-NFS scenario tests we need to create a shared network mapping
+# to the underlying VLAN network on the overcloud.
+# On CephFS environmet the name of the network is 'storage' and on Ceph-NFS
+# is 'StorageNFS'.
+# In addition to each network, a subnet is created.
+- name: Create manila network
+  hosts: undercloud
+  gather_facts: no
+  vars:
+      source_dir: "{{ install.deployment.files }}"
+      template_base: "{{ ansible_user_dir }}/{{ source_dir | basename }}"
+      network_env_file: "network-environment{{ (install.network.protocol == 'ipv6') | ternary('-v6','') }}.yaml"
+  tasks:
+      # compatibility code until all users switch to "manila-backend"
+      - block:
+          - name: Try to discover storage backend
+            include_tasks: ../tasks/storage/discover_backend.yml
+          - name: set the manila backend
+            set_fact:
+                manila_backend: '{{ storage_backend }}'
+        when: install.manila.backend is not defined
+
+      - name: set the manila backend
+        set_fact:
+            manila_backend: '{{ install.manila.backend }}'
+        when: install.manila.backend is defined
+
+      - name: Read {{ network_env_file }}
+        command: "cat {{ template_base }}/network/{{ network_env_file }}"
+        register: network_template_out
+        ignore_errors: yes
+
+      - name: Load deployment manila-storage network
+        set_fact:
+            network_template: "{{ network_template_out.stdout | from_yaml }}"
+        ignore_errors: yes
+
+      - name: Set facts for cephfs-native environment
+        set_fact:
+            AllocationPools: "{{ network_template.parameter_defaults.StorageAllocationPools|default('') }}"
+            network_name: 'storage'
+            subnet_name: 'storage-subnet'
+        when: manila_backend == 'cephfs-native'
+        ignore_errors: yes
+
+      - name: Set facts for cephfs-nfs environment
+        set_fact:
+            AllocationPools: "{{ network_template.parameter_defaults.StorageNFSAllocationPools|default('') }}"
+            network_name: 'StorageNFS'
+            subnet_name: 'StorageNFSSubnet'
+        when: manila_backend == 'cephfs-nfs'
+        ignore_errors: yes
+
+      - name: Create {{ network_name }} network
+        vars:
+            ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
+            NeutronNetworkVLANRanges: "{{ network_template.parameter_defaults.NeutronNetworkVLANRanges|default('') }}"
+            StorageNetworkVlanID: "{{ network_template.parameter_defaults.StorageNetworkVlanID|default('') }}"
+            StorageNFSNetworkVlanID: "{{ network_template.parameter_defaults.StorageNFSNetworkVlanID|default('') }}"
+        os_network:
+            cloud: overcloud
+            state: present
+            name: "{{ network_name }}"
+            validate_certs: no
+            provider_network_type: vlan
+            provider_physical_network: "{{ NeutronNetworkVLANRanges.split(':')[0] }}"
+            provider_segmentation_id: "{{ (manila_backend == 'cephfs-nfs') | ternary(StorageNFSNetworkVlanID, StorageNetworkVlanID) }}"
+            external: no
+            shared: yes
+        ignore_errors: yes
+
+      - name: Create {{ subnet_name }} subnet
+        vars:
+            ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
+            StorageNetCidr: "{{ network_template.parameter_defaults.StorageNetCidr|default('') }}"
+            StorageNFSNetCidr: "{{ network_template.parameter_defaults.StorageNFSNetCidr|default('') }}"
+        os_subnet:
+            validate_certs: no
+            cloud: overcloud
+            name: "{{ subnet_name }}"
+            network_name: "{{ network_name }}"
+            enable_dhcp: yes
+            allocation_pool_start: "{{ AllocationPools[0]['start'].split('.')[0:3] | join('.')  }}.150"
+            allocation_pool_end: "{{ AllocationPools[0]['end'].split('.')[0:3] | join('.')  }}.250"
+            cidr: "{{ (manila_backend == 'cephfs-nfs') | ternary(StorageNFSNetCidr, StorageNetCidr) }}"
+        ignore_errors: yes
+        when: install.network.protocol == 'ipv4'
+
+      - name: Create IPv6 {{ subnet_name }} subnet
+        vars:
+          ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
+          StorageNetCidr: "{{ network_template.parameter_defaults.StorageNetCidr|default('') }}"
+          StorageNFSNetCidr: "{{ network_template.parameter_defaults.StorageNFSNetCidr|default('') }}"
+        os_subnet:
+          validate_certs: no
+          cloud: overcloud
+          name: "{{ subnet_name }}"
+          network_name: "{{ network_name }}"
+          enable_dhcp: yes
+          allocation_pool_start: "{{ AllocationPools[0]['start'].split(':')[0:4] | join(':') }}::fb:10"
+          allocation_pool_end: "{{ AllocationPools[0]['end'].split(':')[0:4] | join(':')  }}::fb:fe"
+          cidr: "{{ (manila_backend == 'cephfs-nfs') | ternary(StorageNFSNetCidr, StorageNetCidr) }}"
+          ip_version: 6
+          ipv6_address_mode: dhcpv6-stateful
+          ipv6_ra_mode: dhcpv6-stateful
+        ignore_errors: yes
+        when: install.network.protocol == 'ipv6'

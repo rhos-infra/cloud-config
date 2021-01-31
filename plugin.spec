@@ -331,10 +331,18 @@ subparsers:
                           - netapp-nfs
                           - lvm
                       help: |
-                        The storage that we would like to use.
+                        The storage (mainly cinder) that we would like to use.
                         If not supplied, Infrared will try to discover storage nodes and select appropriate backed.
                         The 'lvm' value will be used when storage nodes were not found.
                         NOTE: when not using external storage, this will set the default for "--storage-nodes" to 1.
+                  manila-backend:
+                      type: Value
+                      choices:
+                          - cephfs-native
+                          - cephfs-nfs
+                      help: |
+                        The manila backend that we would like to use.
+
             - title: Control Node Placement
               options:
                   specific-node-ids:
