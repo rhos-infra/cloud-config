@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2dc9ab82_70716223",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1017622
+      },
+      "writtenOn": "2021-02-02T15:53:52Z",
+      "side": 1,
+      "message": "I tested the patch in this job and it\u0027s working fine:\nhttps://rhos-ci-staging-jenkins.lab.eng.tlv2.redhat.com/job/DFG-network-networking-ovn-16.1_director-rhel-virthost-3cont_2comp_2net-ipv4-geneve-vlan-provider-network/10/",
+      "revId": "b6799bf5080971799c3df0c31e115767f1625686",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
