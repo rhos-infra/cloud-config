@@ -95,7 +95,7 @@
 
       - name: Set network name
         set_fact:
-            network_name: "{{ install.public.get('net', {}).name|default(pool_name.stdout_lines|last) }}"
+            external_network_name: "{{ install.public.get('net', {}).name|default(pool_name.stdout_lines|last) }}"
 
       # The best way to figure out is vlan or the flat the right value at this point is
       # trying both ..
@@ -112,7 +112,7 @@
                 # Required for SSL
                 validate_certs: no
                 cloud: overcloud
-                name: "{{ network_name }}"
+                name: "{{ external_network_name }}"
                 external: yes
                 shared: "{{ install.external.shared | default(no)}}"
                 provider_physical_network: "{{ physnet_name }}"
@@ -131,7 +131,7 @@
                 share: "{{ (install.external.shared | default(no)) | ternary('--share', '--no-share') }}"
             shell: |
                 source ~/{{ install.overcloud.stack }}rc
-                openstack network create {{ network_name }} \
+                openstack network create {{ external_network_name }} \
                     --external --transparent-vlan {{ share }} \
                     --provider-network-type {{ physnet_type }} \
                     --provider-segment {{ vlan_id }} \
@@ -150,7 +150,7 @@
                 # Required for SSL
                 validate_certs: no
                 cloud: overcloud
-                name: "{{ network_name }}"
+                name: "{{ external_network_name }}"
                 external: yes
                 shared: "{{ install.external.shared | default(no)}}"
                 provider_physical_network: "{{ physnet_name }}"
@@ -168,7 +168,7 @@
                 share: "{{ (install.external.shared | default(no)) | ternary('--share', '--no-share') }}"
             shell: |
                 source ~/{{ install.overcloud.stack }}rc
-                openstack network create {{ network_name }} \
+                openstack network create {{ external_network_name }} \
                     --external --transparent-vlan {{ share }} \
                     --provider-network-type {{ physnet_type }} \
                     --provider-physical-network {{ physnet_name }}
@@ -178,13 +178,13 @@
       - name: set MTU for external network
         shell: |
             source ~/{{ install.overcloud.stack }}rc
-            openstack network set {{ network_name }} --mtu {{ install.external.mtu }}
+            openstack network set {{ external_network_name }} --mtu {{ install.external.mtu }}
         when: install.external.mtu is defined
 
       - name: print network details to console
         shell: |
             source ~/{{ install.overcloud.stack }}rc
-            neutron net-show {{ network_name }}
+            neutron net-show {{ external_network_name }}
         tags: skip_ansible_lint
         changed_when: false
 
@@ -202,7 +202,7 @@
             validate_certs: no
             cloud: overcloud
             name: "{{ subnet.name | default('external_subnet') }}"
-            network_name: "{{ network_name }}"
+            network_name: "{{ external_network_name }}"
             enable_dhcp: "{{ install.external.dhcp | default(no)}}"
             cidr: "{{ subnet.cidr }}"
             gateway_ip: "{{ subnet.gateway }}"
@@ -229,7 +229,7 @@
             validate_certs: no
             cloud: overcloud
             name: "{{ ipv6_subnet.name | default('external_ipv6_subnet') }}"
-            network_name: "{{ network_name }}"
+            network_name: "{{ external_network_name }}"
             enable_dhcp: "{{ install.external.dhcp | default(no)}}"
             ip_version: 6
             cidr: "{{ ipv6_subnet.cidr }}"
