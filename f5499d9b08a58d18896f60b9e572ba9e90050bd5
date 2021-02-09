@@ -1,0 +1,10 @@
+Code-Review+1: Eran Kuris  <ekuris@redhat.com>
+Code-Review+2: <afazekas@redhat.com>
+Code-Review+2: Arie Bregman <abregman@redhat.com>
+Code-Review+2: Ariel Opincaru <aopincar@redhat.com>
+Verified+1: rhosqeauto <aopincar+rhosqeauto@redhat.com>
+Submitted-by: Ariel Opincaru <aopincar@redhat.com>
+Submitted-at: Tue, 09 Feb 2021 16:22:29 +0000
+Reviewed-on: https://review.gerrithub.io/c/rhos-infra/cloud-config/+/510453
+Project: rhos-infra/cloud-config
+Branch: refs/heads/master
