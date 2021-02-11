@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3822a3df_74fcf034",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1017622
+      },
+      "writtenOn": "2021-02-11T13:51:37Z",
+      "side": 1,
+      "message": "This patch is needed to fix the following tobiko failure: https://rhos-ci-staging-jenkins.lab.eng.tlv2.redhat.com/job/DFG-network-networking-ovn-16.1_director-rhel-virthost-3cont_2comp-ipv4-geneve-tobiko-neutron/lastCompletedBuild/testReport/tobiko.tests.scenario.neutron.test_port/ExternalPortTest/Tobiko___test_port_ips/\n\nAfter this patch is merged, tobiko downstream jobs will need to be modifed. I think this will be the required change (I have to test this):\nir_tripleo_overcloud_public_subnet: \u0027tobiko_subnet\u0027",
+      "revId": "d42a21b19918f7e47b12372fa5d8a91a6651a88e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
