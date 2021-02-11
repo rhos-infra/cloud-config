@@ -33,6 +33,23 @@
       "message": "Thanks for working on this",
       "revId": "d42a21b19918f7e47b12372fa5d8a91a6651a88e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ec23aaf_4b8768e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1017622
+      },
+      "writtenOn": "2021-02-11T15:45:54Z",
+      "side": 1,
+      "message": "I verified the following command works fine with this patch\n\n(.venv) ~/infrared (master) $ export EXTERNAL_NETWORK\u003d\" --deployment-files virt \\                                                                                                                                          --public-subnet tobiko_subnet \\                                                                                                                       \n--network-protocol ipv4\"\n(.venv) ~/infrared (master) $ ir cloud-config               -o cloud-config.yml               --tasks \u0027create_external_network,forward_overcloud_dashboard,network_time,tempest_deployer_input\u0027                                                                                                         --version 16.1               $EXTERNAL_NETWORK               --external-dhcp yes --external-shared yes\n",
+      "revId": "d42a21b19918f7e47b12372fa5d8a91a6651a88e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
