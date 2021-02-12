@@ -50,6 +50,23 @@
       "message": "I verified the following command works fine with this patch\n\n(.venv) ~/infrared (master) $ export EXTERNAL_NETWORK\u003d\" --deployment-files virt \\                                                                                                                                          --public-subnet tobiko_subnet \\                                                                                                                       \n--network-protocol ipv4\"\n(.venv) ~/infrared (master) $ ir cloud-config               -o cloud-config.yml               --tasks \u0027create_external_network,forward_overcloud_dashboard,network_time,tempest_deployer_input\u0027                                                                                                         --version 16.1               $EXTERNAL_NETWORK               --external-dhcp yes --external-shared yes\n",
       "revId": "d42a21b19918f7e47b12372fa5d8a91a6651a88e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9fc56d6_ba832ded",
+        "filename": "vars/public/subnet/tobiko_subnet.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1012952
+      },
+      "writtenOn": "2021-02-12T08:44:18Z",
+      "side": 1,
+      "message": "Hi Eduardo , you are using static subnets here , \nwon\u0027t they conflict with something else ?",
+      "revId": "d42a21b19918f7e47b12372fa5d8a91a6651a88e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
