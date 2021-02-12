@@ -67,6 +67,24 @@
       "message": "Hi Eduardo , you are using static subnets here , \nwon\u0027t they conflict with something else ?",
       "revId": "d42a21b19918f7e47b12372fa5d8a91a6651a88e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "370066b7_b09d9735",
+        "filename": "vars/public/subnet/tobiko_subnet.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1017622
+      },
+      "writtenOn": "2021-02-12T08:47:51Z",
+      "side": 1,
+      "message": "Hi Pini,\nThis file is copied from https://github.com/rhos-infra/cloud-config/blob/master/vars/public/subnet/default_subnet.yml, which is the file used by default on our d/s CI jobs.\n\nThe only changes are the last two lines. It should work fine.",
+      "parentUuid": "d9fc56d6_ba832ded",
+      "revId": "d42a21b19918f7e47b12372fa5d8a91a6651a88e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
