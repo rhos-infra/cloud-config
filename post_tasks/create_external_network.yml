@@ -236,6 +236,8 @@
             gateway_ip: "{{ ipv6_subnet.gateway }}"
             allocation_pool_start: "{{ pool.start | default(omit) }}"
             allocation_pool_end: "{{ pool.end | default(omit) }}"
+            ipv6_address_mode: "{{ ipv6_subnet.address_mode | default(omit) }}"
+            ipv6_ra_mode: "{{ ipv6_subnet.ra_mode | default(omit) }}"
         register: ipv6_subnet_create
         delegate_to: "{{ groups.shade | first }}"
         when: ipv6_subnet is defined
