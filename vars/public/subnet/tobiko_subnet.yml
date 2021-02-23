@@ -18,3 +18,4 @@ ipv6_subnet:
         end: 2620:52:0:13b8::1000:aa
     address_mode: slaac
     ra_mode: slaac
+    enable_dhcp: yes

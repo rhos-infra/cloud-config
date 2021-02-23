@@ -188,6 +188,21 @@
         tags: skip_ansible_lint
         changed_when: false
 
+      - name: Initialize external_dhcp values
+        set_fact:
+            external_dhcp: "{{ install.external.dhcp | default(no) }}"
+            ipv6_external_dhcp: "{{ install.external.dhcp | default(no) }}"
+
+      - name: Overwrite external_dhcp value when defined in the subnet template
+        set_fact:
+            external_dhcp: "{{ subnet.enable_dhcp }}"
+        when: subnet.enable_dhcp is defined
+
+      - name: Overwrite ipv6_external_dhcp value when defined in the subnet template
+        set_fact:
+            ipv6_external_dhcp: "{{ ipv6_subnet.enable_dhcp }}"
+        when: ipv6_subnet.enable_dhcp is defined
+
       # OSPD "External*" data can't be used to discover subnet details because:
       #     1) IPv6 public network is not supported as public network
       #     2) CIDR arithmetic is complicated. Only implement it when #1 is supported
@@ -203,7 +218,7 @@
             cloud: overcloud
             name: "{{ subnet.name | default('external_subnet') }}"
             network_name: "{{ external_network_name }}"
-            enable_dhcp: "{{ install.external.dhcp | default(no)}}"
+            enable_dhcp: "{{ external_dhcp }}"
             cidr: "{{ subnet.cidr }}"
             gateway_ip: "{{ subnet.gateway }}"
             allocation_pool_start: "{{ pool.start | default(omit) }}"
@@ -230,7 +245,7 @@
             cloud: overcloud
             name: "{{ ipv6_subnet.name | default('external_ipv6_subnet') }}"
             network_name: "{{ external_network_name }}"
-            enable_dhcp: "{{ install.external.dhcp | default(no)}}"
+            enable_dhcp: "{{ ipv6_external_dhcp }}"
             ip_version: 6
             cidr: "{{ ipv6_subnet.cidr }}"
             gateway_ip: "{{ ipv6_subnet.gateway }}"
