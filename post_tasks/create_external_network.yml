@@ -157,7 +157,7 @@
                 provider_network_type: "{{ physnet_type }}"
                 provider_segmentation_id: "{{ ('vlan' == physnet_type) | ternary(vlan_id, omit) }}"
             delegate_to: "{{ groups.shade | first }}"
-            when: not (install.external.vlan.transparent|default(false))
+            when: not (install.external.transparent.vlan|default(false))
 
           # Neither os_network nor openstack.cloud.network ansible modules
           # support VLAN Transparency, so an opestack shell command needs to be
@@ -173,7 +173,7 @@
                     --provider-network-type {{ physnet_type }} \
                     --provider-physical-network {{ physnet_name }}
             delegate_to: "{{ groups.shade | first }}"
-            when: install.external.vlan.transparent|default(false)
+            when: install.external.transparent.vlan|default(false)
 
       - name: set MTU for external network
         shell: |
