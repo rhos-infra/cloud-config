@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a391ff85_b9938b6d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000939
+      },
+      "writtenOn": "2021-03-02T16:07:08Z",
+      "side": 1,
+      "message": "We see the following error without this fix.\n\n```\n# infrared cloud-config --tasks create_external_network --deployment-files virt\ninstall:\n  buildmods: pin\n  deployment:\n    files: virt\n  external:\n    dhcp: false\n    shared: false\n    transparent:\n      vlan: false\n  hybrid: false\n  ...\n\n...\nTASK [create the external network] ***********************************************************************************************************************************************************************************************************\nfatal: [undercloud-0 -\u003e localhost]: FAILED! \u003d\u003e {\"changed\": false, \"msg\": \"BadRequestException: 400: Client Error for url: http://10.0.0.138:9696/v2.0/networks.json, Invalid input for operation: physical_network \u0027datacentre\u0027 unknown for VLAN provider network.\"}\n\nTASK [create the external network] ***********************************************************************************************************************************************************************************************************\nfatal: [undercloud-0]: FAILED! \u003d\u003e {\"msg\": \"The conditional check \u0027not (install.external.vlan.transparent|default(false))\u0027 failed. The error was: error while evaluating conditional (not (install.external.vlan.transparent|default(false))): \u0027dict object\u0027 has no attribute \u0027vlan\u0027\\n\\nThe error appears to have been in \u0027/root/.infrared/plugins/cloud-config/post_tasks/create_external_network.yml\u0027: line 143, column 13, but may\\nbe elsewhere in the file depending on the exact syntax problem.\\n\\nThe offending line appears to be:\\n\\n        rescue:\\n          - name: create the external network\\n            ^ here\\n\"}\n\nNO MORE HOSTS LEFT ***************************************************************************************************************************************************************************************************************************\n\tto retry, use: --limit @/root/.infrared/plugins/cloud-config/main.retry\n\nPLAY RECAP ***********************************************************************************************************************************************************************************************************************************\nlocalhost                  : ok\u003d2    changed\u003d1    unreachable\u003d0    failed\u003d0   \nundercloud-0               : ok\u003d19   changed\u003d0    unreachable\u003d0    failed\u003d2   \n\nERROR   Playbook \"/root/.infrared/plugins/cloud-config/main.yml\" failed!\n```\n",
+      "revId": "c575fd85d133815d6ac609546f1201f1c8554ef9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
