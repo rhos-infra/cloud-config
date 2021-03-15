@@ -16,6 +16,23 @@
       "message": "There was some issue with ospd_undercloud_all\n\nTASK [install dstat packages]\nMSG:\nFailed to download metadata for repo \u0027ansible\u0027: Cannot download repomd.xml: Cannot download repodata/repomd.xml: All mirrors were tried",
       "revId": "bc955846fb65c086591c96343421d0989e9251df",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6e6bf66_4e942c56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003250
+      },
+      "writtenOn": "2021-03-15T14:03:27Z",
+      "side": 1,
+      "message": "recheck",
+      "revId": "bc955846fb65c086591c96343421d0989e9251df",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
