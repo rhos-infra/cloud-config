@@ -50,6 +50,23 @@
       "message": "recheck",
       "revId": "bc955846fb65c086591c96343421d0989e9251df",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29aa7b61_2f1dedde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003043
+      },
+      "writtenOn": "2021-03-17T16:18:35Z",
+      "side": 1,
+      "message": "+V The dlrn test content is inconsistent ATM.\nWe can ignore the job this time.",
+      "revId": "bc955846fb65c086591c96343421d0989e9251df",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
