@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfade8d7_119839f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1017622
+      },
+      "writtenOn": "2021-03-30T08:45:19Z",
+      "side": 1,
+      "message": "Several tempest tests failed on the tobiko job with error \"No more IP addresses available on network\":\nhttp://rhos-ci-logs.lab.eng.tlv2.redhat.com/logs/rcj/DFG-network-networking-ovn-16.1_director-rhel-virthost-3cont_2comp-ipv4-geneve-tobiko-neutron/70/infrared/.workspaces/workspace_2021-03-28_03-26-12/tempest_results/tempest-results-neutron.1.html",
+      "revId": "10f703c171659eb6041f5ecce0364b4e83e03d36",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
