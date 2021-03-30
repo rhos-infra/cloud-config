@@ -7,8 +7,8 @@ subnet:
     # it explicitly also here for ext. net. purpose.
     gateway: 10.0.0.1
     allocation_pool:
-        start: 10.0.0.210
-        end: 10.0.0.250
+        start: 10.0.0.151
+        end: 10.0.0.254
 ipv6_subnet:
     cidr: 2620:52:0:13b8::/64
     name: external_ipv6_subnet
