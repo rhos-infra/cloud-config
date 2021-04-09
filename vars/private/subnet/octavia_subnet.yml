@@ -1,8 +1,20 @@
 ---
+subnetpool:
+    name: shared-default-subnetpool-v4
+    cidr: 10.0.64.0/22
+
+subnet:
+    name: private-subnet
+
+ipv6_subnetpool:
+    name: shared-default-subnetpool-v6
+    cidr: fd47:e41c:f56e::/56
+
+# The naming of the ipv6 subnet is important for older octavia-tempest-plugin
+# releases
 ipv6_subnet:
     name: ipv6-private-subnet
-    cidr: fd47:e41c:f56e:1000::/64
 
 router:
-    name: router-private
+    name: router1
     external_network: public

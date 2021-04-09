@@ -58,7 +58,7 @@
 
       - name: create ipv4 subnet pool
         vars:
-            subnetpool_name: shared-default-subnetpool-v4
+            subnetpool_name: "{{ subnetpool.name|default('shared-default-subnetpool-v4') }}"
         shell: |
             source ~/{{ install.overcloud.stack }}rc
             if ! openstack subnet pool show {{ subnetpool_name }} -f value -c id; then
@@ -109,7 +109,7 @@
 
       - name: create ipv6 subnet pool
         vars:
-            subnetpool_name: shared-default-subnetpool-v6
+            subnetpool_name: "{{ ipv6_subnetpool.name|default('shared-default-subnetpool-v6') }}"
         shell: |
             source ~/{{ install.overcloud.stack }}rc
             if ! openstack subnet pool show {{ subnetpool_name }} -f value -c id; then
