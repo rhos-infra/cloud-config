@@ -8,13 +8,14 @@
   gather_facts: no
   any_errors_fatal: true
   tasks:
-    - name: register the floating ip default pool
+    - name: get the default floating ip pool name from the server
       shell: |
-          test -f /etc/nova/nova.conf && \
-              grep -oP "(?<=default_floating_pool=)(.*$)" /etc/nova/nova.conf || \
+              crudini --get {{ nova_conf }} neutron default_floating_pool || \
+              grep -oP "(?<=default_floating_pool=)(.*$)" {{ nova_conf }} || \
               awk -F'\"' '/default_floating_pool/ {print $4}' /etc/puppet/hieradata/service_configs.json
       register: pool_name
       delegate_to: "{{ groups.nova_scheduler | first }}"
+      changed_when: false
       become: yes
 
     - name: Update quotas RHOS-10+
