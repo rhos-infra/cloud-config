@@ -16,6 +16,23 @@
       "message": "recheck",
       "revId": "72e176a67128e11c1127b3f03465cbc4e6e4b28b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d43ec233_feb8184a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1016895
+      },
+      "writtenOn": "2021-04-30T11:47:56Z",
+      "side": 1,
+      "message": "I\u0027m not particularly familiar with this code base and how it\u0027s used, but this seems fine to me at first glance.",
+      "revId": "72e176a67128e11c1127b3f03465cbc4e6e4b28b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
