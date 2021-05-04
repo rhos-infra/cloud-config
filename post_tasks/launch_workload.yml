@@ -8,6 +8,23 @@
   gather_facts: no
   any_errors_fatal: true
   tasks:
+    - name: Check if /var/lib/config-data/puppet-generated/nova/etc/nova/nova.conf exists
+      stat:
+          path: /var/lib/config-data/puppet-generated/nova/etc/nova/nova.conf
+      register: nova_conf_is_containerize
+      delegate_to: "{{ groups.nova_scheduler | first }}"
+
+    - name: Set nova.conf path
+      set_fact:
+          nova_conf: "{{ nova_conf_is_containerize.stat.exists|ternary('/var/lib/config-data/puppet-generated/nova/etc/nova/nova.conf', '/etc/nova/nova.conf') }}"
+
+    - name: Install crudini package
+      package:
+          name: crudini
+          state: present
+      delegate_to: "{{ groups.nova_scheduler | first }}"
+      become: yes
+
     - name: get the default floating ip pool name from the server
       shell: |
               crudini --get {{ nova_conf }} neutron default_floating_pool || \
