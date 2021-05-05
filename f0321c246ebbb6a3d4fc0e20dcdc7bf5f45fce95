@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edc1325f_079b610a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1008514
+      },
+      "writtenOn": "2021-05-05T11:31:19Z",
+      "side": 1,
+      "message": "Tested this and it makes it past the failure we were seeing previously.",
+      "revId": "f0321c246ebbb6a3d4fc0e20dcdc7bf5f45fce95",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11662e1d_0aaac495",
+        "filename": "post_tasks/launch_workload.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1008514
+      },
+      "writtenOn": "2021-05-05T11:31:19Z",
+      "side": 1,
+      "message": "Obviously drop the extra spaces :)",
+      "revId": "f0321c246ebbb6a3d4fc0e20dcdc7bf5f45fce95",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
