@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "856ff0ce_11f08561",
+        "filename": "post_tasks/launch_workload.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1004788
+      },
+      "writtenOn": "2021-05-05T15:44:47Z",
+      "side": 1,
+      "message": "Can\u0027t we replace it with one task that sets path based on the release variable?",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 162
+      },
+      "revId": "f0321c246ebbb6a3d4fc0e20dcdc7bf5f45fce95",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "11662e1d_0aaac495",
         "filename": "post_tasks/launch_workload.yml",
         "patchSetId": 1
