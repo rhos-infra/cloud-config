@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c53da5b2_8f48a383",
+        "filename": "post_tasks/launch_workload.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1008514
+      },
+      "writtenOn": "2021-05-06T14:31:11Z",
+      "side": 1,
+      "message": "If this is done the same way as other locations (followed existing pattern) then I think refactoring this is a task for another PR. The launch_workload is currently broken, so I\u0027d prefer to see this merge as-is, and handle refactoring across the code base in a separate MR / issue.",
+      "parentUuid": "e3c596e9_122b8f35",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 162
+      },
+      "revId": "f0321c246ebbb6a3d4fc0e20dcdc7bf5f45fce95",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "11662e1d_0aaac495",
         "filename": "post_tasks/launch_workload.yml",
         "patchSetId": 1
