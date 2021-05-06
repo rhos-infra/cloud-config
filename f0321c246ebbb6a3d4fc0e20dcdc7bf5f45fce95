@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e3c596e9_122b8f35",
+        "filename": "post_tasks/launch_workload.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1017759
+      },
+      "writtenOn": "2021-05-06T07:49:45Z",
+      "side": 1,
+      "message": "Never thought about it. The \u0027get default floating ip pool name\u0027 was changed to this way in three files out of four. This is the file this task was left untouched, which caused issues in certain use cases. I just brought it to the same default without thinking how can I optimize it.",
+      "parentUuid": "856ff0ce_11f08561",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 162
+      },
+      "revId": "f0321c246ebbb6a3d4fc0e20dcdc7bf5f45fce95",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "11662e1d_0aaac495",
         "filename": "post_tasks/launch_workload.yml",
         "patchSetId": 1
@@ -54,6 +78,24 @@
       "writtenOn": "2021-05-05T11:31:19Z",
       "side": 1,
       "message": "Obviously drop the extra spaces :)",
+      "revId": "f0321c246ebbb6a3d4fc0e20dcdc7bf5f45fce95",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aced4e08_e6752c7f",
+        "filename": "post_tasks/launch_workload.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1017759
+      },
+      "writtenOn": "2021-05-06T07:49:45Z",
+      "side": 1,
+      "message": "Will do :)",
+      "parentUuid": "11662e1d_0aaac495",
       "revId": "f0321c246ebbb6a3d4fc0e20dcdc7bf5f45fce95",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
