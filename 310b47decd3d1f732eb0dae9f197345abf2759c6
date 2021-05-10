@@ -1,0 +1,9 @@
+Verified+1: rhosqeauto <aopincar+rhosqeauto@redhat.com>
+Code-Review+2: Eduardo Olivares <eolivare@redhat.com>
+Code-Review+1: Eran Kuris  <ekuris@redhat.com>
+Code-Review+2: Ilan Gersht <igersht@redhat.com>
+Submitted-by: Ilan Gersht <igersht@redhat.com>
+Submitted-at: Mon, 10 May 2021 06:55:01 +0000
+Reviewed-on: https://review.gerrithub.io/c/rhos-infra/cloud-config/+/515822
+Project: rhos-infra/cloud-config
+Branch: refs/heads/master
