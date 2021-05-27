@@ -324,6 +324,20 @@ subparsers:
                       default: '1'
                       help: |
                         Number of workload objects to be created
+                  workload-flavor-extra-specs:
+                      type: NestedDict
+                      action: append
+                      default: {}
+                      help: |
+                        Metadata dictionary for flavor extra specs
+                        Usage: --workload-flavor-extra-specs "hw:mem_encryption"=True
+                  workload-image-properties:
+                      type: ListValue
+                      default: None
+                      help: |
+                         List of properties supplied to the image created with 'image' param
+                         Usage: --workload-image-properties="hw_firmware_type=uefi,hw_machine_type=q35"
+                         NOTE: 'image' param should be set
 
             - title: Deployment Description
               options:
