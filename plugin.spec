@@ -281,6 +281,13 @@ subparsers:
                       type: Value
                       help: |
                           An image to be uploaded to glance and used for testing. Path have to be a url.
+                  image-properties:
+                      type: ListValue
+                      default: None
+                      help: |
+                         List of properties supplied to the image created with 'image' param
+                         Usage: --image-properties="hw_firmware_type=uefi,hw_machine_type=q35"
+                         NOTE: above 'image' param should be set
             - title: Workload Launch
               options:
                   workload-image-url:
@@ -313,6 +320,11 @@ subparsers:
                       default: '1'
                       help: |
                         Number of workload objects to be created
+                  workload-flavor-extra-specs:
+                      type: NestedDict
+                      default: {}
+                      help: |
+                        Metadata dictionary for flavor extra specs
 
             - title: Deployment Description
               options:
