@@ -15,6 +15,7 @@
             vcpus: "{{ install.workload.vcpu }}"
             disk: "{{ install.workload.disk }}"
             flavorid: "{{ item.flavorid }}"
+            extra_specs: "{{ install.workload.flavor.extra.specs }}"
         loop:
             - { name: customized_flavor, flavorid: "{{ install.workload.flavorid }}" }
             - { name: customized_flavor_alt, flavorid: "{{ (install.workload.flavorid|int + 1 )|string }}" }
@@ -33,5 +34,15 @@
               shell: |
                   source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
                   openstack image create {{ hostname_url }} --disk-format qcow2 --container-format bare --file /tmp/{{ hostname_url }} --public
+            - name: Set image property
+              set_fact:
+                  image_properties: "{{ install.img.get('properties', []) }}"
+              when: install.image.properties is defined
+            - name: Upload {{ hostname_url }} image with extra specs
+              shell: |
+                  source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
+                  openstack image set {{ hostname_url }} --property {{ item }}
+              loop: "{{ image.get('properties', []) }}"
+              when: install.img.properties is defined
         when: install.image is defined
         ignore_errors: yes
