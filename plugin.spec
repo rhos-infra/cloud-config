@@ -285,7 +285,7 @@ subparsers:
               options:
                   workload-image-url:
                       type: Value
-                      default: 'https://download.cirros-cloud.net/0.4.0/cirros-0.4.0-x86_64-disk.img'
+                      default: 'https://download.cirros-cloud.net/0.5.2/cirros-0.5.2-x86_64-disk.img'
                       help: |
                         Image source URL that should be used for uploading the workload Glance image
                   workload-memory:
