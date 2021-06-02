@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1ce1503_023d5644",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005097
+      },
+      "writtenOn": "2021-06-02T08:24:55Z",
+      "side": 1,
+      "message": "Quickly checked the impact, seems to be only related to jobs using \"launch_workload\" cloud-config flows, its used in read, ffu and backup/restore defaults, so p1/p2 should be fine...",
+      "revId": "2b818d0de9cc6306d903a72fc8224233e9861095",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
