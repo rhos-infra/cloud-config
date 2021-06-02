@@ -1,0 +1,9 @@
+Verified+1: rhosqeauto <aopincar+rhosqeauto@redhat.com>
+Code-Review+2: Jesse Pretorius (odyssey4me) <jesse@odyssey4.me>
+Code-Review+1: Eliad Cohen <eliadcohen@redhat.com>
+Code-Review+1: Filip Hubík <fhubik@redhat.com>
+Submitted-by: Filip Hubík <fhubik@redhat.com>
+Submitted-at: Wed, 02 Jun 2021 08:25:18 +0000
+Reviewed-on: https://review.gerrithub.io/c/rhos-infra/cloud-config/+/515450
+Project: rhos-infra/cloud-config
+Branch: refs/heads/master
