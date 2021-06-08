@@ -16,6 +16,23 @@
       "message": "recheck",
       "revId": "638d76dc00ae8ca05e7bb6a1e9731847fc7583af",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bf40a34_5557f195",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010634
+      },
+      "writtenOn": "2021-06-08T11:32:29Z",
+      "side": 1,
+      "message": "guys, this param is required as per RHOSINFRA-3977 jira, there isn\u0027t a jenkins-way to test it (we don\u0027t support checking out gerrit changes to cloud-config plugin there) ... any review and/or +2s welcome",
+      "revId": "638d76dc00ae8ca05e7bb6a1e9731847fc7583af",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
