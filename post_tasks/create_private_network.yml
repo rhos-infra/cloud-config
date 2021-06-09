@@ -215,7 +215,7 @@
         vars:
             cidr: "{{ ipv6_subnetpool.cidr if ipv6_subnetpool is defined else ipv6_subnet.cidr }}"
         shell: |
-            if ! ip route | grep '^{{ cidr }}' 2> /dev/null; then
+            if ! ip -6 route | grep '^{{ cidr }}' 2> /dev/null; then
                 ip route add {{ cidr }} \
                     via {{ router_public_address.stdout }}
             fi
