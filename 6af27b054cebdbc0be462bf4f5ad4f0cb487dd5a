@@ -84,6 +84,41 @@
       "message": "recheck",
       "revId": "6af27b054cebdbc0be462bf4f5ad4f0cb487dd5a",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f031e4b_59e65d67",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003043
+      },
+      "writtenOn": "2021-06-09T14:49:31Z",
+      "side": 1,
+      "message": "BLUE jobs with packset6:\nhttps://rhos-ci-jenkins.lab.eng.tlv2.redhat.com/job/gate-infrared-cloud-config-tox/103/\nhttps://rhos-ci-jenkins.lab.eng.tlv2.redhat.com/job/gate-infrared-plugin-cloud-config/109/\nhttps://rhos-ci-jenkins.lab.eng.tlv2.redhat.com/job/compact-gate-dlrn-16.2_director-rhel-8.4-virthost-1cont_1comp_1ceph-ipv4-geneve-ceph/23/\n\nnot sure why jenkins does not responding.\n\n",
+      "revId": "6af27b054cebdbc0be462bf4f5ad4f0cb487dd5a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61aa5847_213422dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003043
+      },
+      "writtenOn": "2021-06-09T14:49:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd0bfec8_52cfa167",
+      "revId": "6af27b054cebdbc0be462bf4f5ad4f0cb487dd5a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
