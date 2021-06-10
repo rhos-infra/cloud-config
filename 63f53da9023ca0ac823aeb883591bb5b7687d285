@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eed0b85b_7a48cc73",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010634
+      },
+      "writtenOn": "2021-06-10T14:52:45Z",
+      "side": 1,
+      "message": "I\u0027ve tested this change by hand when I was rerunning this post_tasks couple of times in a row during troubleshooting of some issues",
+      "revId": "63f53da9023ca0ac823aeb883591bb5b7687d285",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
