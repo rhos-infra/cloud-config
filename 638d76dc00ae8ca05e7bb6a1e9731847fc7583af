@@ -33,6 +33,23 @@
       "message": "guys, this param is required as per RHOSINFRA-3977 jira, there isn\u0027t a jenkins-way to test it (we don\u0027t support checking out gerrit changes to cloud-config plugin there) ... any review and/or +2s welcome",
       "revId": "638d76dc00ae8ca05e7bb6a1e9731847fc7583af",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1102c11_d8aededa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1017989
+      },
+      "writtenOn": "2021-06-10T12:41:37Z",
+      "side": 1,
+      "message": "Tested and verified https://rhos-ci-staging-jenkins.lab.eng.tlv2.redhat.com/view/DFG/view/ceph/view/rhos/job/DFG-ceph-rhos-16.2_director-rhel-virthost-3cont_1_to_2comp_1_to_3ceph-ipv4-geneve-scale-up/",
+      "revId": "638d76dc00ae8ca05e7bb6a1e9731847fc7583af",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
