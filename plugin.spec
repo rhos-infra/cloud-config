@@ -244,6 +244,17 @@ subparsers:
                       default: password
                       help: |
                         VBMC password (Necessary when Ironic's driver is 'pxe_ipmitool' - OSP >= 11)
+                  vbmc-host:
+                      type: Value
+                      default: undercloud
+                      choices:
+                          - "hypervisor"
+                          - "undercloud"
+                      help: |
+                          Specifies on what server the virtualbmc service should be installed.
+                          NOTE: If you use non default value for the option, and you execute introspection
+                          and deploy (--introspect yes/--deploy yes) in different IR runs, you need to provide
+                          the option on both runs.
                   resource-class-enabled:
                       type: Bool
                       default: True
