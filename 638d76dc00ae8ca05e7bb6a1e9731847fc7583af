@@ -1,0 +1,9 @@
+Verified+1: rhosqeauto <aopincar+rhosqeauto@redhat.com>
+Verified+1: Waldemar Znoinski <wznoinsk@redhat.com>
+Code-Review+1: Alfredo Garcia <alfrgarc@redhat.com>
+Code-Review+2: Waldemar Znoinski <wznoinsk@redhat.com>
+Submitted-by: Waldemar Znoinski <wznoinsk@redhat.com>
+Submitted-at: Thu, 10 Jun 2021 13:20:21 +0000
+Reviewed-on: https://review.gerrithub.io/c/rhos-infra/cloud-config/+/518328
+Project: rhos-infra/cloud-config
+Branch: refs/heads/master
