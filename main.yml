@@ -76,7 +76,7 @@
 
 - name: Create Manila storage network
   import_playbook: post_tasks/create_manila_network.yml
-  when: '"create_manila_network" in install.tasks or "create_storage_network" in install.tasks'
+  when: '"create_manila_network" in install.tasks'
 
 - name: Run workarounds
   import_playbook: workarounds.yml
