@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fc06215_20128ba9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1012743
+      },
+      "writtenOn": "2021-07-12T17:21:00Z",
+      "side": 1,
+      "message": "Works successfully \nParameters passed:\nworkload-image-properties \"hw_firmware_type\u003duefi,hw_machine_type\u003dq35\" \nworkload-flavorid 301 \nworkload-flavor-extra-specs \"hw:mem_encryption\"\u003dTrue\n\nOutput:\n(overcloud) [stack@undercloud-0 tempest-dir]$ openstack flavor show 301\n+----------------------------+-------------------------------+\n| Field                      | Value                         |\n+----------------------------+-------------------------------+\n| extra_specs                | {\u0027hw:mem_encryption\u0027: \u0027True\u0027} |\n| id                         | 301                           |\n| name                       | customized_flavor             |\n| os-flavor-access:is_public | True                          |\n| properties                 | hw:mem_encryption\u003d\u0027True\u0027      |\n\n(overcloud) [stack@undercloud-0 ~]$ openstack image show customized_image\n| properties       | direct_url\u003d\u0027swift+config://ref1/glance/13bf7283-6b64-4551-9d3e-b1d249a483d1\u0027, hw_firmware_type\u003d\u0027uefi\u0027, hw_machine_type\u003d\u0027q35\u0027, os_hash_algo\u003d\u0027sha512\u0027, os_hash_value\u003d\u00276b813aa46bb90b4da216a4d19376593fa3f4fc7e617f03a92b7fe11e9a3981cbe8f0959dbebe36225e5f53dc4492341a4863cac4ed1ee0909f3fc78ef9c3e869\u0027, os_hidden\u003d\u0027False\u0027, stores\u003d\u0027default_backend\u0027 |\n",
+      "revId": "d7fe27fc9d21db6a85598835bcc941a93f056dba",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
