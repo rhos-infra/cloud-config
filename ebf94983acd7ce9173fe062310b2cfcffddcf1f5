@@ -16,6 +16,63 @@
       "message": "Hello, \nConfigure cinder vol types/backends task, needed for multipath on multibackend job.\nOnce this and new storage yaml merge:\nhttps://code.engineering.redhat.com/gerrit/c/rhos-infrared/+/253615\n\nI could switch to the next task of updating the CI job settings.",
       "revId": "ebf94983acd7ce9173fe062310b2cfcffddcf1f5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7164e21_85b3ef45",
+        "filename": "post_tasks/cinder_config_vol_types.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2021-07-15T09:11:15Z",
+      "side": 1,
+      "message": "You don\u0027t need both grep and awk: awk matches also patterns. I haven\u0027t tested it but it should work:\n\ncinder get-pools --detail | awk \u0027/volume_backend_name/ { print $4}\u0027",
+      "range": {
+        "startLine": 10,
+        "startChar": 57,
+        "endLine": 10,
+        "endChar": 87
+      },
+      "revId": "ebf94983acd7ce9173fe062310b2cfcffddcf1f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f868709e_3be1cd82",
+        "filename": "post_tasks/cinder_config_vol_types.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2021-07-15T09:11:15Z",
+      "side": 1,
+      "message": "I need probably some feedback from the other cores but I\u0027m not sure whether we can use (or should consistently use) the new syntax instead of the old one (just \"shell\").",
+      "revId": "ebf94983acd7ce9173fe062310b2cfcffddcf1f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f4e3e1c_8e6df7cf",
+        "filename": "post_tasks/cinder_config_vol_types.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2021-07-15T09:11:15Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be hardcoded, you probably need a parameter to be set in the main.yaml (which may be empty, and in that case this step will be skipped, so that the default behavior is unchanged).",
+      "revId": "ebf94983acd7ce9173fe062310b2cfcffddcf1f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
