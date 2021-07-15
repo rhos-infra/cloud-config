@@ -16,6 +16,24 @@
       "message": "Tests pass and images created as expected, okay to merge\n\n(overcloud) [stack@undercloud-0 ~]$ openstack image list\n+--------------------------------------+----------------------------------+--------+\n| ID                                   | Name                             | Status |\n+--------------------------------------+----------------------------------+--------+\n| cdd71767-63cb-4663-b68d-ce7a9a9ad79f | cirros-0.5.2-x86_64-disk.img     | active |\n| a0379a90-0d67-4d9b-a1b9-ffc146ae1735 | cirros-0.5.2-x86_64-disk.img_alt | active |",
       "revId": "f97d55ce7d3af1d9d985318987a24699c57701ae",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "717641c3_f6edbe83",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1012743
+      },
+      "writtenOn": "2021-07-15T15:20:09Z",
+      "side": 1,
+      "message": "Realated tempest patch also works,\nhttps://review.gerrithub.io/c/redhat-openstack/infrared/+/520752",
+      "parentUuid": "ec531537_d47e35d0",
+      "revId": "f97d55ce7d3af1d9d985318987a24699c57701ae",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
