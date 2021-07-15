@@ -1,0 +1,29 @@
+---
+# Iterate over existing cinder backends, configuring matching volume types.
+# Set backend for the default tripleo volume type.
+
+- name: Cinder backend config
+  hosts: undercloud
+
+  tasks:
+    - name: set the tripleo backend
+          set_fact:
+            cinder-tripleo-volume-backend: '{{ install.cinder.tripleo.volume.backend }}'
+          when: (install.tripleo.backend|default({})
+
+    - name: Detect existing Cinder backends
+      shell: cinder get-pools --detail | awk '/volume_backend_name/ { print $4}'
+      register: backend_list
+      ignore_errors: true
+
+    - name: Create volume types to fit backends
+      shell: cinder type-create "{{ item }}"
+      loop: "{{ backend_list.stdout_lines }}"
+
+    - name: Configure backend names per volume types
+      shell: cinder type-key "{{ item }}" set volume_backend_name="{{ item }}"
+      loop: "{{ backend_list.stdout_lines }}"
+
+    - name: Set tripleo's volume type backend if defined
+      shell: cinder type-key tripleo set volume_backend_name={{ cinder-tripleo-volume-backend }}
+      when: cinder-tripleo--volume-backend is defined
