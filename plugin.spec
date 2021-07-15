@@ -371,6 +371,13 @@ subparsers:
                         If not supplied, Infrared will try to discover storage nodes and select appropriate backed.
                         The 'lvm' value will be used when storage nodes were not found.
                         NOTE: when not using external storage, this will set the default for "--storage-nodes" to 1.
+
+                  cinder-tripleo-volume-backend:
+                     type: Value
+                     help: |
+                       In multibackend Cinder deployments, this parameter should be used to populate
+                       the default volume types backend, i.e. set the volume type for the 'tripleo' backend.
+
                   manila-backend:
                       type: Value
                       choices:
