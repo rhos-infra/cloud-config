@@ -1,0 +1,23 @@
+---
+# Iterate over existing cinder backends, configuring matching volume types.
+# Set backend for the default tripleo volume type.
+
+- name: Cinder backend config
+  hosts: undercloud
+
+  tasks:
+    - name: Detect existing Cinder backends
+      ansible.builtin.shell: cinder get-pools --detail | grep volume_backend_name | awk '{print $4}'
+      register: backend_list
+      ignore_errors: true
+
+    - name: Create volume types to fit backends
+      ansible.builtin.shell: cinder type-create "{{ item }}"
+      loop: "{{ backend_list.stdout_lines }}"
+
+    - name: Configure backend names per volume types
+      ansible.builtin.shell: cinder type-key "{{ item }}" set volume_backend_name="{{ item }}"
+      loop: "{{ backend_list.stdout_lines }}"
+
+    - name: Set tripleo's volume type backend name
+      ansible.builtin.shell: cinder type-key tripleo set volume_backend_name=tripleo_netapp
