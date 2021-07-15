@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46a63723_adbc72f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1018875
+      },
+      "writtenOn": "2021-07-15T09:00:09Z",
+      "side": 1,
+      "message": "Hello, \nConfigure cinder vol types/backends task, needed for multipath on multibackend job.\nOnce this and new storage yaml merge:\nhttps://code.engineering.redhat.com/gerrit/c/rhos-infrared/+/253615\n\nI could switch to the next task of updating the CI job settings.",
+      "revId": "ebf94983acd7ce9173fe062310b2cfcffddcf1f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
