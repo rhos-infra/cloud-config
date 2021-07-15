@@ -1,0 +1,8 @@
+Verified+1: rhosqeauto <aopincar+rhosqeauto@redhat.com>
+Code-Review+1: Archit Modi <amodi@redhat.com>
+Code-Review+2: Ariel Opincaru <aopincar@redhat.com>
+Submitted-by: Ariel Opincaru <aopincar@redhat.com>
+Submitted-at: Thu, 15 Jul 2021 19:50:43 +0000
+Reviewed-on: https://review.gerrithub.io/c/rhos-infra/cloud-config/+/520706
+Project: rhos-infra/cloud-config
+Branch: refs/heads/master
