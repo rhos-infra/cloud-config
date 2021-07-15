@@ -34,6 +34,23 @@
       "parentUuid": "ec531537_d47e35d0",
       "revId": "f97d55ce7d3af1d9d985318987a24699c57701ae",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ed62cc3_e73c21cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2021-07-15T15:32:11Z",
+      "side": 1,
+      "message": "This needs to be merged at the same time of https://review.gerrithub.io/c/redhat-openstack/infrared/+/520752",
+      "revId": "f97d55ce7d3af1d9d985318987a24699c57701ae",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
