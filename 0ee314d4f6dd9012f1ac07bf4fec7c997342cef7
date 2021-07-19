@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5b517f9_e3b6770a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2021-07-19T17:27:04Z",
+      "side": 1,
+      "message": "Change-Id must be last line, you may have left an empty line after Change-Id, gerrit didn\u0027t find it and added a new one.\n\nPlease restore the old change, edit this commit removing the new Change-Id and the blank line, making sure \n\nChange-Id: I3e6489aef21b303f1377ac790981a3230706cd1c \n\nis the last line, git review on that, and then you can abandon this one.",
+      "revId": "0ee314d4f6dd9012f1ac07bf4fec7c997342cef7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "166b41ea_73e2c756",
