@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "166b41ea_73e2c756",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1018875
+      },
+      "writtenOn": "2021-07-19T15:05:43Z",
+      "side": 1,
+      "message": "Wondering, I used git commit --amend, \nbut added more text to the original commit message, which probably explains why it didn\u0027t update my original change (y/n?) https://review.gerrithub.io/c/rhos-infra/cloud-config/+/520723.\n\nShould have I refrained from editing the commit message?\nIs there something I should do with my original 520723 change, maybe abandon it?\n\nPer this change, I\u0027m pretty sure I didn\u0027t nail everything correctly.\nHit me with your inputs oh wise one. \n\nThanks",
+      "revId": "0ee314d4f6dd9012f1ac07bf4fec7c997342cef7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
