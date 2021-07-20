@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24ebcd07_fda49d07",
+        "filename": "plugin.spec",
+        "patchSetId": 2
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2021-07-20T10:55:37Z",
+      "side": 1,
+      "message": "tripleo backend of what? 😊\n\nMaybe a better name could be  \ncinder-tripleo-volume-type\n\nor something like that",
+      "revId": "7cad23548640bc9b58d868874df14c9f19e68cbc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00bdfebe_4c388f2f",
+        "filename": "plugin.spec",
+        "patchSetId": 2
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2021-07-20T10:55:37Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be freefrom? We can set any value in the configuration.",
+      "revId": "7cad23548640bc9b58d868874df14c9f19e68cbc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99442c25_2ecd377d",
+        "filename": "plugin.spec",
+        "patchSetId": 2
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2021-07-20T10:55:37Z",
+      "side": 1,
+      "message": "i.e. set the volume type for the \u0027tripleo\u0027 backend",
+      "revId": "7cad23548640bc9b58d868874df14c9f19e68cbc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0321143e_6d82bcac",
+        "filename": "post_tasks/cinder_config_vol_types.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2021-07-20T10:55:37Z",
+      "side": 1,
+      "message": "facts are set globally, so this is a generic name (it should be more specific, see also the other comment about the parameter name)",
+      "revId": "7cad23548640bc9b58d868874df14c9f19e68cbc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5eaae08f_9df6a34c",
+        "filename": "post_tasks/cinder_config_vol_types.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2021-07-20T10:55:37Z",
+      "side": 1,
+      "message": "in the recent version of ansible  you should be able to only do install.foo.bar|default({})",
+      "revId": "7cad23548640bc9b58d868874df14c9f19e68cbc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
