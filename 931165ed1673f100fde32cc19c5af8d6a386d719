@@ -16,6 +16,23 @@
       "message": "Let\u0027s use the default default!",
       "revId": "931165ed1673f100fde32cc19c5af8d6a386d719",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fae8cd74_34596361",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1012743
+      },
+      "writtenOn": "2021-08-18T16:06:43Z",
+      "side": 1,
+      "message": "recheck infrared-pipeline",
+      "revId": "931165ed1673f100fde32cc19c5af8d6a386d719",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
