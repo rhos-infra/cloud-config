@@ -50,6 +50,23 @@
       "message": "recheck",
       "revId": "931165ed1673f100fde32cc19c5af8d6a386d719",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed619da9_12127cef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2021-08-19T09:15:53Z",
+      "side": 1,
+      "message": "Internally tested for the case when workload-image-properties is not defined; ask me for details, but the \"Upload manila-service-image-master image with extra specs\" is skipped:\n\n\n2021-08-18 22:43:49.687 | \n2021-08-18 22:43:49.689 | TASK [Upload manila-service-image-master image with extra specs] ***************\n2021-08-18 22:43:49.691 | task path: \u003credacted\u003e/infrared/plugins/cloud-config/post_tasks/create_flavors_image.yml:40\n2021-08-18 22:43:49.693 | Wednesday 18 August 2021  22:43:49 +0000 (0:01:17.363)       0:34:17.512 ****** \n2021-08-18 22:43:49.696 | META: ran handlers\n2021-08-18 22:43:49.698 | META: ran handlers\n2021-08-18 22:43:49.700 | \n2021-08-18 22:43:49.703 | PLAY [Create manila network] ***************************************************\n2021-08-18 22:43:49.710 | META: ran handlers\n2021-08-18 22:43:49.716 | ",
+      "revId": "931165ed1673f100fde32cc19c5af8d6a386d719",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
