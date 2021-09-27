@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fdb0162_5b443ee1",
+        "filename": "post_tasks/cinder_config_vol_types.yml",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2021-09-27T12:51:47Z",
+      "side": 1,
+      "message": "Probably better remove the duplications (if any), or even better, check if a type exists before calling type-create in the next task.",
+      "revId": "500cea228bc1ce3f3bd22c10b4dc5de8a096ed8c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89b7a423_bb541756",
+        "filename": "post_tasks/cinder_config_vol_types.yml",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2021-09-27T12:51:47Z",
+      "side": 1,
+      "message": "Probably not a problem in most cases, but in case the volume type already exists, this fails. It may check if that volume type exists (it doesn\u0027t prevent parallel processes creating it, but let\u0027s assume it doesn\u0027t happen in an infrared deployment)",
+      "revId": "500cea228bc1ce3f3bd22c10b4dc5de8a096ed8c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6dd31e6_6235e783",
+        "filename": "post_tasks/cinder_config_vol_types.yml",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2021-09-27T12:51:47Z",
+      "side": 1,
+      "message": "But right now it doesn\u0027t check whether the variable is defined, and it should probably do it.",
+      "revId": "500cea228bc1ce3f3bd22c10b4dc5de8a096ed8c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
