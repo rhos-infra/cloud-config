@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67ee5a4c_2158cab3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2021-09-27T12:54:55Z",
+      "side": 1,
+      "message": "All the users have been migrated to the --manila-backend parameter.",
+      "revId": "68c95cb2257864fcd516453c975bc1bb89ae298c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
