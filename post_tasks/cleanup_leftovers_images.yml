@@ -1,0 +1,17 @@
+---
+- name: Cleanup leftovers images
+  hosts: undercloud
+  gather_facts: no
+  tasks:
+      - name: Get glance images
+        shell: |
+            source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
+            openstack image list | awk '{print$2}' | grep -v ID | grep -v ^$
+        register: image_list
+
+      - name: Delete images
+        shell: |
+            source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
+            openstack image delete {{ item }}
+        loop: "{{ image_list.stdout_lines}}"
+        ignore_errors: yes

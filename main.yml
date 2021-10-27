@@ -74,6 +74,10 @@
   import_playbook: post_tasks/create_flavors_image.yml
   when: '"create_flavors_image" in install.tasks'
 
+- name: Cleanup leftovers glance images
+  import_playbook: post_tasks/cleanup_leftovers_images.yml
+  when: '"cleanup_leftovers_images" in install.tasks'
+
 - name: Create Manila storage network
   import_playbook: post_tasks/create_manila_network.yml
   when: '"create_manila_network" in install.tasks or "create_storage_network" in install.tasks'
