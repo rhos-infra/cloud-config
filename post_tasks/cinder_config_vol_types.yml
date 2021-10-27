@@ -16,8 +16,9 @@
     - name: Create volume types to fit backends
       shell: |
           source ~/{{ install.overcloud.stack }}rc
-          cinder type-create "{{ item }}"
+          [[ ! -z "$(cinder type-list | awk '/"{{ item }}"/ {print $4}')" ]] || cinder type-create "{{ item }}" 
       loop: "{{ backend_list.stdout_lines }}"
+      ignore_errors: true
 
     - name: Configure backend names per volume types
       shell: |
@@ -29,3 +30,4 @@
       shell: |
           source ~/{{ install.overcloud.stack }}rc
           cinder type-key tripleo set volume_backend_name={{ install.cinder.tripleo.volume.backend }}
+      when: install.cinder.tripleo.volume.backend is defined

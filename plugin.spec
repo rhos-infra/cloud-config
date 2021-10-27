@@ -333,7 +333,6 @@ subparsers:
                         Usage: --workload-flavor-extra-specs "hw:mem_encryption"=True
                   workload-image-properties:
                       type: ListValue
-                      default: None
                       help: |
                          List of properties supplied to the image created with 'image' param
                          Usage: --workload-image-properties="hw_firmware_type=uefi,hw_machine_type=q35"
