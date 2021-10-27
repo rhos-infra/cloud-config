@@ -58,6 +58,48 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a532243_ffdf4cab",
+        "filename": "post_tasks/cinder_config_vol_types.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1018875
+      },
+      "writtenOn": "2021-10-27T08:47:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7164e21_85b3ef45",
+      "range": {
+        "startLine": 10,
+        "startChar": 57,
+        "endLine": 10,
+        "endChar": 87
+      },
+      "revId": "ebf94983acd7ce9173fe062310b2cfcffddcf1f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70b00984_350d270a",
+        "filename": "post_tasks/cinder_config_vol_types.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1018875
+      },
+      "writtenOn": "2021-10-27T08:47:39Z",
+      "side": 1,
+      "message": "Other post tasks use only the older \"shell\" sytnax., \nthus for sake of consistency switched mine to \"shell:\" too.\nIf need be I can switch back.",
+      "parentUuid": "f868709e_3be1cd82",
+      "revId": "ebf94983acd7ce9173fe062310b2cfcffddcf1f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f4e3e1c_8e6df7cf",
@@ -71,6 +113,24 @@
       "writtenOn": "2021-07-15T09:11:15Z",
       "side": 1,
       "message": "This shouldn\u0027t be hardcoded, you probably need a parameter to be set in the main.yaml (which may be empty, and in that case this step will be skipped, so that the default behavior is unchanged).",
+      "revId": "ebf94983acd7ce9173fe062310b2cfcffddcf1f5",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdd606ba_a3726802",
+        "filename": "post_tasks/cinder_config_vol_types.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1018875
+      },
+      "writtenOn": "2021-10-27T08:47:39Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1f4e3e1c_8e6df7cf",
       "revId": "ebf94983acd7ce9173fe062310b2cfcffddcf1f5",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

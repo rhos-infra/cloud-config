@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f28be633_3849ac94",
+        "filename": "plugin.spec",
+        "patchSetId": 2
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1018875
+      },
+      "writtenOn": "2021-10-27T08:47:39Z",
+      "side": 1,
+      "message": "Agree, how about \"cinder-tripleo-volume-backend\"\nas we\u0027re setting it\u0027s backend rather than it\u0027s type?",
+      "parentUuid": "24ebcd07_fda49d07",
+      "revId": "7cad23548640bc9b58d868874df14c9f19e68cbc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00bdfebe_4c388f2f",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-07-20T10:55:37Z",
       "side": 1,
       "message": "shouldn\u0027t this be freefrom? We can set any value in the configuration.",
+      "revId": "7cad23548640bc9b58d868874df14c9f19e68cbc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbd39aad_2ee72b74",
+        "filename": "plugin.spec",
+        "patchSetId": 2
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1018875
+      },
+      "writtenOn": "2021-10-27T08:47:39Z",
+      "side": 1,
+      "message": "It can but why?\n\nWe would only use this for one or two multibackend (fc?) jobs.\nBackend names would be predefined via storage config yaml anyway. \nI don\u0027t see a use case where we\u0027d need to enter a new backend name do you?",
+      "parentUuid": "00bdfebe_4c388f2f",
       "revId": "7cad23548640bc9b58d868874df14c9f19e68cbc",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -52,6 +88,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d951f962_ddb115f3",
+        "filename": "plugin.spec",
+        "patchSetId": 2
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1018875
+      },
+      "writtenOn": "2021-10-27T08:47:39Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "99442c25_2ecd377d",
+      "revId": "7cad23548640bc9b58d868874df14c9f19e68cbc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0321143e_6d82bcac",
@@ -69,6 +123,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93033341_933b392c",
+        "filename": "post_tasks/cinder_config_vol_types.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1018875
+      },
+      "writtenOn": "2021-10-27T08:47:39Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0321143e_6d82bcac",
+      "revId": "7cad23548640bc9b58d868874df14c9f19e68cbc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5eaae08f_9df6a34c",
@@ -82,6 +154,24 @@
       "writtenOn": "2021-07-20T10:55:37Z",
       "side": 1,
       "message": "in the recent version of ansible  you should be able to only do install.foo.bar|default({})",
+      "revId": "7cad23548640bc9b58d868874df14c9f19e68cbc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c9c4e3f_9747bea2",
+        "filename": "post_tasks/cinder_config_vol_types.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1018875
+      },
+      "writtenOn": "2021-10-27T08:47:39Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5eaae08f_9df6a34c",
       "revId": "7cad23548640bc9b58d868874df14c9f19e68cbc",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
