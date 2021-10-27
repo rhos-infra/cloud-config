@@ -18,6 +18,41 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82fa1ced_fe24a737",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2021-10-27T13:09:58Z",
+      "side": 1,
+      "message": "but that one is a merge commit without commit message; please make sure to update this one instead.",
+      "parentUuid": "d676d319_3d7430ec",
+      "revId": "500cea228bc1ce3f3bd22c10b4dc5de8a096ed8c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03117e83_9d85be3f",
+        "filename": "main.yml",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2021-10-27T13:09:58Z",
+      "side": 1,
+      "message": "\"Create\" or \"Configure\", given that the task can also change an existing volume type?",
+      "revId": "500cea228bc1ce3f3bd22c10b4dc5de8a096ed8c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6fdb0162_5b443ee1",
@@ -49,6 +84,24 @@
       "side": 1,
       "message": "Replaced L19 with: \n\nif cinder type-show \"{{ item }}\"; then :; else cinder type-create \"{{ item }}\" ; fi\n\nHitting some syntax errors",
       "parentUuid": "6fdb0162_5b443ee1",
+      "revId": "500cea228bc1ce3f3bd22c10b4dc5de8a096ed8c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5864c09_734c9caf",
+        "filename": "post_tasks/cinder_config_vol_types.yml",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2021-10-27T13:09:58Z",
+      "side": 1,
+      "message": "I guess it could be \ncinder type-show \"{{ item }}\" \u0026\u003e/dev/null || cinder type-create \"{{ item }}\n\nwhich is cleaner",
+      "parentUuid": "6a4f7412_32050324",
       "revId": "500cea228bc1ce3f3bd22c10b4dc5de8a096ed8c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -88,6 +141,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8fe7fac_01a7e771",
+        "filename": "post_tasks/cinder_config_vol_types.yml",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2021-10-27T13:09:58Z",
+      "side": 1,
+      "message": "that \"then do nothing\" pattern is really not nice but it can be changed as described.",
+      "parentUuid": "20711cea_5b15965b",
+      "revId": "500cea228bc1ce3f3bd22c10b4dc5de8a096ed8c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e6dd31e6_6235e783",
@@ -119,6 +190,23 @@
       "side": 1,
       "message": "Fixed added and tested a when condition on L32:\n  when: install.cinder.tripleo.volume.backend is defined.",
       "parentUuid": "e6dd31e6_6235e783",
+      "revId": "500cea228bc1ce3f3bd22c10b4dc5de8a096ed8c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9295fcec_bf91c40f",
+        "filename": "post_tasks/cinder_config_vol_types.yml",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2021-10-27T13:09:58Z",
+      "side": 1,
+      "message": "Right now there is no check whether the value is set or not.\nWe may argue that if you enable this post task, then you are going to set this value, but it\u0027s better to check.",
       "revId": "500cea228bc1ce3f3bd22c10b4dc5de8a096ed8c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

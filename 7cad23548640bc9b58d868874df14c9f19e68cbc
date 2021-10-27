@@ -36,6 +36,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a96ac89a_57c85ad4",
+        "filename": "plugin.spec",
+        "patchSetId": 2
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2021-10-27T13:09:58Z",
+      "side": 1,
+      "message": "fine with me",
+      "parentUuid": "f28be633_3849ac94",
+      "revId": "7cad23548640bc9b58d868874df14c9f19e68cbc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00bdfebe_4c388f2f",
