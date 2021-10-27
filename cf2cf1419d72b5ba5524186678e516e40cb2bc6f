@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88fbf22c_7f70bda9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2021-10-27T13:09:51Z",
+      "side": 1,
+      "message": "Please really try to update the other review https://review.gerrithub.io/c/rhos-infra/cloud-config/+/520723",
+      "revId": "cf2cf1419d72b5ba5524186678e516e40cb2bc6f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
