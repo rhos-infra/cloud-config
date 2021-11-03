@@ -26,10 +26,12 @@
             - name: Set hostname url
               set_fact:
                   hostname_url: "{{ install.image | basename }}"
+
             - name: Download image
               get_url:
                   url: "{{ install.image }}"
                   dest: "/tmp/{{ hostname_url }}"
+
             - name: Upload {{ hostname_url }} image
               shell: |
                   source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
@@ -37,6 +39,7 @@
               loop:
                 - { name: "{{ hostname_url }}" }
                 - { name: "{{ hostname_url }}_alt" }
+
             - name: Upload {{ hostname_url }} image with extra specs
               shell: |
                   source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
@@ -44,5 +47,19 @@
                   openstack image set {{ hostname_url }}_alt --property {{ item }}
               loop: "{{ install.workload.image.get('properties', []) }}"
               when: install.workload.image.properties is defined
+
+            - name: Glance image list
+              vars:
+                  image_list: []
+              set_fact:
+                  image_list: "{{ image_list + [ item ] }}"
+              loop:
+                - "{{ hostname_url }}"
+                - "{{ hostname_url }}_alt"
+
+            - name: Create a yaml file containing image names
+              copy:
+                  content: "{{ image_list | to_nice_yaml(indent=2) }}"
+                  dest: "{{ ansible_user_dir }}/post_tasks_glance_images.yml"
         when: install.image is defined
         ignore_errors: yes
