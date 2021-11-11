@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e2545a4_1b0381bb",
+        "filename": "post_tasks/cinder_config_vol_types.yml",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2021-11-11T11:36:12Z",
+      "side": 1,
+      "message": "maybe it\u0027s easier to do \n\ncinder type-show \"{{ item }}\" \u0026\u003e/dev/null || cinder type-create \"{{ item }}\"\n\n?",
+      "revId": "202037c449e4bfd61ba37a5eb3607144c9b80cb3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
