@@ -48,18 +48,15 @@
               loop: "{{ install.workload.image.get('properties', []) }}"
               when: install.workload.image.properties is defined
 
-            - name: Glance image list
-              vars:
-                  image_list: []
-              set_fact:
-                  image_list: "{{ image_list + [ item ] }}"
-              loop:
-                - "{{ hostname_url }}"
-                - "{{ hostname_url }}_alt"
+            - name: Get glance image ids
+              shell: |
+                  source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
+                  openstack image list | grep {{ hostname_url }} | awk '{print$2}' | grep -v ID | grep -v ^$
+              register: image_list
 
             - name: Create a yaml file containing image names
               copy:
-                  content: "{{ image_list | to_nice_yaml(indent=2) }}"
+                  content: "{{ image_list.stdout_lines | to_nice_yaml(indent=2) }}"
                   dest: "{{ ansible_user_dir }}/post_tasks_glance_images.yml"
         when: install.image is defined
         ignore_errors: yes
