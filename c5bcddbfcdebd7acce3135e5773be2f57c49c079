@@ -67,6 +67,23 @@
       "message": "recheck",
       "revId": "c5bcddbfcdebd7acce3135e5773be2f57c49c079",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "127d4b83_ae6ae560",
+        "filename": "post_tasks/create_flavors_image.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2021-11-15T09:39:09Z",
+      "side": 1,
+      "message": "if you use awk, you don\u0027t need to use grep.\n\nMoreover, openstack image list already allows you to print just the needed images and you need neither awk nor grep It is one of the powerful points of the openstack command.\n\nTry:\n\nopenstack image list -f value -c ID",
+      "revId": "c5bcddbfcdebd7acce3135e5773be2f57c49c079",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
