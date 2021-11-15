@@ -102,6 +102,24 @@
       "parentUuid": "127d4b83_ae6ae560",
       "revId": "c5bcddbfcdebd7acce3135e5773be2f57c49c079",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62f94444_4094162d",
+        "filename": "post_tasks/create_flavors_image.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2021-11-15T13:03:56Z",
+      "side": 1,
+      "message": "The issue with the gates *may* be solved now",
+      "parentUuid": "9c05f245_1284dcfa",
+      "revId": "c5bcddbfcdebd7acce3135e5773be2f57c49c079",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
