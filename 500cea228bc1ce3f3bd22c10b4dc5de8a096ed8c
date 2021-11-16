@@ -209,6 +209,24 @@
       "message": "Right now there is no check whether the value is set or not.\nWe may argue that if you enable this post task, then you are going to set this value, but it\u0027s better to check.",
       "revId": "500cea228bc1ce3f3bd22c10b4dc5de8a096ed8c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d600e16_812dc54a",
+        "filename": "post_tasks/cinder_config_vol_types.yml",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2021-11-16T17:57:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9295fcec_bf91c40f",
+      "revId": "500cea228bc1ce3f3bd22c10b4dc5de8a096ed8c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }

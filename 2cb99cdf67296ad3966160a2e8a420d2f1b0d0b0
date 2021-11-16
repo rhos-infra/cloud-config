@@ -50,6 +50,23 @@
       "message": "recheck",
       "revId": "2cb99cdf67296ad3966160a2e8a420d2f1b0d0b0",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ba4fcc8_57f5a054",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2021-11-16T17:57:14Z",
+      "side": 1,
+      "message": "It should be clean enough, let\u0027s see how it works.\nExisting jobs are not affected because this change introduce a new optional code path.\nIt has been tested internally.",
+      "revId": "2cb99cdf67296ad3966160a2e8a420d2f1b0d0b0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
