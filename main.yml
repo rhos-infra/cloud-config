@@ -78,5 +78,9 @@
   import_playbook: post_tasks/create_manila_network.yml
   when: '"create_manila_network" in install.tasks or "create_storage_network" in install.tasks'
 
+- name: Create Cinder volume types
+  import_playbook: post_tasks/cinder_config_vol_types.yml
+  when: '"cinder_config_vol_types" in install.tasks'
+
 - name: Run workarounds
   import_playbook: workarounds.yml
