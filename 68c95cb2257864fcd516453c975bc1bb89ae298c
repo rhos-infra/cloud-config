@@ -1,0 +1,7 @@
+Verified+1: rhosqeauto <aopincar+rhosqeauto@redhat.com>
+Code-Review+2: <afazekas@redhat.com>
+Submitted-by: Luigi Toscano <ltoscano@redhat.com>
+Submitted-at: Fri, 19 Nov 2021 17:12:30 +0000
+Reviewed-on: https://review.gerrithub.io/c/rhos-infra/cloud-config/+/519876
+Project: rhos-infra/cloud-config
+Branch: refs/heads/master
