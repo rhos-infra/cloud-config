@@ -13,15 +13,6 @@
       template_base: "{{ ansible_user_dir }}/{{ source_dir | basename }}"
       network_env_file: "network-environment{{ (install.network.protocol == 'ipv6') | ternary('-v6','') }}.yaml"
   tasks:
-      # compatibility code until all users switch to "manila-backend"
-      - block:
-          - name: Try to discover storage backend
-            include_tasks: ../tasks/storage/discover_backend.yml
-          - name: set the manila backend
-            set_fact:
-                manila_backend: '{{ storage_backend }}'
-        when: not (install.manila|default({})).backend | default(False)
-
       - name: set the manila backend
         set_fact:
             manila_backend: '{{ install.manila.backend }}'
