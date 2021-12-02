@@ -61,6 +61,7 @@
             external: no
             shared: yes
         ignore_errors: yes
+        delegate_to: "{{ groups.shade | first }}"
 
       - name: Create {{ subnet_name }} subnet
         vars:
@@ -78,6 +79,7 @@
             cidr: "{{ (manila_backend == 'cephfs-nfs') | ternary(StorageNFSNetCidr, StorageNetCidr) }}"
         ignore_errors: yes
         when: install.network.protocol == 'ipv4'
+        delegate_to: "{{ groups.shade | first }}"
 
       - name: Create IPv6 {{ subnet_name }} subnet
         vars:
@@ -98,3 +100,4 @@
           ipv6_ra_mode: dhcpv6-stateful
         ignore_errors: yes
         when: install.network.protocol == 'ipv6'
+        delegate_to: "{{ groups.shade | first }}"
