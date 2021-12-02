@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc21b70d_c2517815",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2021-12-02T14:18:06Z",
+      "side": 1,
+      "message": "Requires some testing, but otherwise create_manila_network doesn\u0027t even start in some conditions (new job structure).",
+      "revId": "9cb2e5c405264ecc02803957a5bc44f0e8c2006b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
