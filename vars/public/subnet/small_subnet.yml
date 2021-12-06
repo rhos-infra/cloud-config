@@ -1,0 +1,15 @@
+---
+subnet:
+    cidr: 10.0.0.0/25
+    name: external_subnet
+    gateway: 10.0.0.1
+    allocation_pool:
+        start: 10.0.0.20
+        end: 10.0.0.126
+ipv6_subnet:
+    cidr: 2620:52:0:13b8::/64
+    name: external_ipv6_subnet
+    gateway: 2620:52:0:13b8::fe
+    allocation_pool:
+        start: 2620:52:0:13b8::1000:1
+        end: 2620:52:0:13b8::1000:aa
