@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa111d8a_1c57b23f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1016950
+      },
+      "writtenOn": "2021-12-06T16:54:56Z",
+      "side": 1,
+      "message": "We\u0027ll use this in conjunction with: https://review.gerrithub.io/c/redhat-openstack/infrared/+/528808 and tripleo-overcloud deploy parameters: \n--config-heat ExternalNetCidr\u003d10.0.0.0/25 \\\n--config-heat ExternalAllocationPools\u003d\u0027[{\"start\": \"10.0.0.3\", \"end\": \"10.0.0.19\"}]\u0027",
+      "revId": "8b758a3d7ca7574605d30e5c4b95c229320ea705",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
