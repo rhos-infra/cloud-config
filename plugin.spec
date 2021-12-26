@@ -292,6 +292,18 @@ subparsers:
                       type: Value
                       help: |
                           An image to be uploaded to glance and used for testing. Path have to be a url.
+                  imageid:
+                      type: Value
+                      help: |
+                          Predifined UUID for the image.
+                  imageid_alt:
+                      type: Value
+                      help: |
+                          Predifined UUID for the alternative image.
+                  image_packages:
+                      type: Value
+                      help: |
+                          Comma delimited list of packages to install in the image
             - title: Workload Launch
               options:
                   workload-image-url:

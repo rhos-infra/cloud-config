@@ -32,13 +32,40 @@
                   url: "{{ install.image }}"
                   dest: "/tmp/{{ hostname_url }}"
 
+            - name: Define backend settings
+              set_fact:
+                  libguestfs_backend: direct
+
+            - name: Install libguestfs-tools
+              become: yes
+              package:
+                  name: libguestfs-tools
+                  state: present
+
+            - name: Push repos to the image
+              environment:
+                  LIBGUESTFS_BACKEND: "{{ libguestfs_backend }}"
+              command: "virt-copy-in -a /tmp/{{ hostname_url }} /etc/yum.repos.d /etc/"
+
+            - name: Disable 'patched-rpms' yum repository in guest image
+              environment:
+                  LIBGUESTFS_BACKEND: "{{ libguestfs_backend }}"
+              command: "virt-customize -a /tmp/{{ hostname_url }} --run-command \"yum-config-manager --disable patched-rpms\""
+              failed_when: false
+
+            - name: Install packages in guest image tempest will use for testing
+              environment:
+                  LIBGUESTFS_BACKEND: "{{ libguestfs_backend }}"
+              command: "virt-customize -a /tmp/{{ hostname_url }} --install {{ install.image_packages }} --selinux-relabel"
+              when: install.image_packages is defined
+
             - name: Upload {{ hostname_url }} image
               shell: |
                   source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
-                  openstack image create {{ item.name }} --disk-format qcow2 --container-format bare --file /tmp/{{ hostname_url }} --public
+                  openstack image create {{ item.name }} --id {{ item.imageid }} --disk-format qcow2 --container-format bare --file /tmp/{{ hostname_url }} --public
               loop:
-                - { name: "{{ hostname_url }}" }
-                - { name: "{{ hostname_url }}_alt" }
+                  - { name: "{{ hostname_url }}", imageid: "{{ install.imageid | default(999999999 | random | to_uuid) }}" }
+                  - { name: "{{ hostname_url }}_alt", imageid: "{{ install.imageid_alt | default(99999999 | random | to_uuid) }}" }
 
             - name: Upload {{ hostname_url }} image with extra specs
               shell: |
