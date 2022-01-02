@@ -34,6 +34,23 @@
       "parentUuid": "69249022_6541382a",
       "revId": "9c2312f174a4bf271f7c4649142f8471e84635a7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8897b1cc_16c54c94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004788
+      },
+      "writtenOn": "2022-01-02T14:26:11Z",
+      "side": 1,
+      "message": "not big fan of this solution. I would prefer to introduce something like \"image:packages\" to support multiple packages within the same tempest plugin rather than introducing the same parameters in two separate plugins. But I understand this is the quickest approach to achieve what you need, so not blocking it.",
+      "revId": "9c2312f174a4bf271f7c4649142f8471e84635a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
