@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69249022_6541382a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004788
+      },
+      "writtenOn": "2022-01-02T13:59:21Z",
+      "side": 1,
+      "message": "isn\u0027t tempest plugin already supports installing packages in the image?",
+      "revId": "9c2312f174a4bf271f7c4649142f8471e84635a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
