@@ -16,6 +16,24 @@
       "message": "isn\u0027t tempest plugin already supports installing packages in the image?",
       "revId": "9c2312f174a4bf271f7c4649142f8471e84635a7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8faf6c2_7dcc89e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1017596
+      },
+      "writtenOn": "2022-01-02T14:13:58Z",
+      "side": 1,
+      "message": "Yes, it does. But it forces this image to be the default one.\nThe proposed patch makes it possible to prepare another image to be used [for example] as an advanced image in neutron-related tests [1]. So it will allow us to run jobs with cirros image (as a default one) together with ubuntu/centos/rhel (as an advanced one) that will decrease the execution time.\n\n[1] https://opendev.org/openstack/neutron-tempest-plugin/src/branch/master/neutron_tempest_plugin/scenario/test_mtu.py#L57",
+      "parentUuid": "69249022_6541382a",
+      "revId": "9c2312f174a4bf271f7c4649142f8471e84635a7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
