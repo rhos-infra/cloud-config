@@ -111,7 +111,7 @@
             os_network:
                 # Required for SSL
                 validate_certs: no
-                cloud: overcloud
+                cloud: "{{ install.overcloud.stack }}"
                 name: "{{ external_network_name }}"
                 external: yes
                 shared: "{{ install.external.shared | default(no)}}"
@@ -149,7 +149,7 @@
             os_network:
                 # Required for SSL
                 validate_certs: no
-                cloud: overcloud
+                cloud: "{{ install.overcloud.stack }}"
                 name: "{{ external_network_name }}"
                 external: yes
                 shared: "{{ install.external.shared | default(no)}}"
@@ -215,7 +215,7 @@
         os_subnet:
             # Required for SSL
             validate_certs: no
-            cloud: overcloud
+            cloud: "{{ install.overcloud.stack }}"
             name: "{{ subnet.name | default('external_subnet') }}"
             network_name: "{{ external_network_name }}"
             enable_dhcp: "{{ external_dhcp }}"
@@ -242,7 +242,7 @@
         os_subnet:
             # Required for SSL
             validate_certs: no
-            cloud: overcloud
+            cloud: "{{ install.overcloud.stack }}"
             name: "{{ ipv6_subnet.name | default('external_ipv6_subnet') }}"
             network_name: "{{ external_network_name }}"
             enable_dhcp: "{{ ipv6_external_dhcp }}"

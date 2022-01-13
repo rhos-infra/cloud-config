@@ -42,7 +42,7 @@
         os_network:
             # Required for SSL
             validate_certs: no
-            cloud: overcloud
+            cloud: "{{ install.overcloud.stack }}"
             name: "{{ network_name }}"
             external: no
             shared: no
@@ -88,7 +88,7 @@
         os_subnet:
             # Required for SSL
             validate_certs: no
-            cloud: overcloud
+            cloud: "{{ install.overcloud.stack }}"
             name: "{{ subnet.name | default('private_subnet') }}"
             network_name: "{{ net_create.network.name }}"
             use_default_subnetpool: "{{ 'no' if 'cidr' in subnet else 'yes' }}"
@@ -139,7 +139,7 @@
         os_subnet:
             # Required for SSL
             validate_certs: no
-            cloud: overcloud
+            cloud: "{{ install.overcloud.stack }}"
             name: "{{ ipv6_subnet.name | default('private_ipv6_subnet') }}"
             network_name: "{{ net_create.network.name }}"
             use_default_subnetpool: "{{ 'no' if 'cidr' in ipv6_subnet else 'yes' }}"
@@ -168,7 +168,7 @@
         os_router:
             # Required for SSL
             validate_certs: no
-            cloud: overcloud
+            cloud: "{{ install.overcloud.stack }}"
             name: "{{ router.name | default('router-private') }}"
             network: "{{ install.public.get('net', {}).name|default(pool_name.stdout_lines|last) }}"
             interfaces:
@@ -184,7 +184,7 @@
         os_router:
             # Required for SSL
             validate_certs: no
-            cloud: overcloud
+            cloud: "{{ install.overcloud.stack }}"
             name: "{{ router.name | default('router1') }}"
             network: "{{ install.public.get('net', {}).name|default(pool_name.stdout_lines|last) }}"
             interfaces:

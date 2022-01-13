@@ -37,7 +37,7 @@
       os_nova_flavor:
           # Required for SSL
           validate_certs: no
-          cloud: overcloud
+          cloud: "{{ install.overcloud.stack }}"
           state: present
           name: workload_flavor_{{ step }}
           ram: "{{ install.workload.memory }}"
@@ -48,7 +48,7 @@
       os_network:
           # Required for SSL
           validate_certs: no
-          cloud: overcloud
+          cloud: "{{ install.overcloud.stack }}"
           state: present
           name: workload_internal_net_{{ step }}
           external: false
@@ -58,7 +58,7 @@
       os_subnet:
           # Required for SSL
           validate_certs: no
-          cloud: overcloud
+          cloud: "{{ install.overcloud.stack }}"
           state: present
           network_name: workload_internal_net_{{ step }}
           name: workload_internal_net_subnet_{{ step }}
@@ -68,7 +68,7 @@
       os_networks_facts:
           # Required for SSL
           validate_certs: no
-          cloud: overcloud
+          cloud: "{{ install.overcloud.stack }}"
           filters:
               router:external: true
 
@@ -76,7 +76,7 @@
       os_router:
           # Required for SSL
           validate_certs: no
-          cloud: overcloud
+          cloud: "{{ install.overcloud.stack }}"
           state: present
           name: workload_router_{{ step }}
           network: "{{ openstack_networks[0].name }}"
@@ -87,7 +87,7 @@
       os_security_group:
           # Required for SSL
           validate_certs: no
-          cloud: overcloud
+          cloud: "{{ install.overcloud.stack }}"
           state: present
           name: workload_secgroup_{{ step }}
           description: security group for overcloud test workload
@@ -96,7 +96,7 @@
       os_security_group_rule:
           # Required for SSL
           validate_certs: no
-          cloud: overcloud
+          cloud: "{{ install.overcloud.stack }}"
           state: present
           security_group: workload_secgroup_{{ step }}
           protocol: icmp
@@ -106,7 +106,7 @@
       os_security_group_rule:
           # Required for SSL
           validate_certs: no
-          cloud: overcloud
+          cloud: "{{ install.overcloud.stack }}"
           state: present
           security_group: workload_secgroup_{{ step }}
           protocol: tcp
@@ -118,7 +118,7 @@
       os_security_group_rule:
           # Required for SSL
           validate_certs: no
-          cloud: overcloud
+          cloud: "{{ install.overcloud.stack }}"
           state: present
           security_group: workload_secgroup_{{ step }}
           protocol: tcp
@@ -130,7 +130,7 @@
       os_keypair:
           # Required for SSL
           validate_certs: no
-          cloud: overcloud
+          cloud: "{{ install.overcloud.stack }}"
           state: present
           name: workload_key_{{ step }}
           public_key: "{{ pub_key.stdout }}"
@@ -183,7 +183,7 @@
       os_server_facts:
           # Required for SSL
           validate_certs: no
-          cloud: overcloud
+          cloud: "{{ install.overcloud.stack }}"
           server: workload_instance_{{ step }}
 
     - name: Assign floating IP to workload instance
@@ -192,7 +192,7 @@
       os_floating_ip:
           # Required for SSL
           validate_certs: no
-          cloud: overcloud
+          cloud: "{{ install.overcloud.stack }}"
           network: "{{ network_name }}"
           server: workload_instance_{{ step }}
           wait: yes
@@ -204,7 +204,7 @@
       os_server_facts:
           # Required for SSL
           validate_certs: no
-          cloud: overcloud
+          cloud: "{{ install.overcloud.stack }}"
           server: workload_instance_{{ step }}
       when: openstack_servers[0].addresses.items() | list | first | last | length == 1
   delegate_to: "{{ groups.shade | first }}"

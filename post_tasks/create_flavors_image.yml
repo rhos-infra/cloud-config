@@ -8,7 +8,7 @@
             ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
         os_nova_flavor:
             validate_certs: no
-            cloud: overcloud
+            cloud: "{{ install.overcloud.stack }}"
             state: present
             name: "{{ item.name }}"
             ram: "{{ install.workload.memory }}"

@@ -51,7 +51,7 @@
             StorageNetworkVlanID: "{{ network_template.parameter_defaults.StorageNetworkVlanID|default('') }}"
             StorageNFSNetworkVlanID: "{{ network_template.parameter_defaults.StorageNFSNetworkVlanID|default('') }}"
         os_network:
-            cloud: overcloud
+            cloud: "{{ install.overcloud.stack }}"
             state: present
             name: "{{ network_name }}"
             validate_certs: no
@@ -70,7 +70,7 @@
             StorageNFSNetCidr: "{{ network_template.parameter_defaults.StorageNFSNetCidr|default('') }}"
         os_subnet:
             validate_certs: no
-            cloud: overcloud
+            cloud: "{{ install.overcloud.stack }}"
             name: "{{ subnet_name }}"
             network_name: "{{ network_name }}"
             enable_dhcp: yes
@@ -88,7 +88,7 @@
           StorageNFSNetCidr: "{{ network_template.parameter_defaults.StorageNFSNetCidr|default('') }}"
         os_subnet:
           validate_certs: no
-          cloud: overcloud
+          cloud: "{{ install.overcloud.stack }}"
           name: "{{ subnet_name }}"
           network_name: "{{ network_name }}"
           enable_dhcp: yes
