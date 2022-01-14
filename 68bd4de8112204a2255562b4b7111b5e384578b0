@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b1d8c42_e26868ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2022-01-14T11:15:48Z",
+      "side": 1,
+      "message": "No changes to the default behavior (the default value of overcloud-stack is, unsurprisingly, \u0027overcloud\u0027), and it uses a feature that should have been consistently used since the time it was added.",
+      "revId": "68bd4de8112204a2255562b4b7111b5e384578b0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
