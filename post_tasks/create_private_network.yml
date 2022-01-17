@@ -35,24 +35,14 @@
         become: yes
 
       - name: create the private network
-        vars:
-            # Here can't be used {{ path_venv }}, because it's not a Jinja template
-            ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
-            network_name: "private"
-        os_network:
-            # Required for SSL
-            validate_certs: no
-            cloud: "{{ install.overcloud.stack }}"
-            name: "{{ network_name }}"
-            external: no
-            shared: no
-        register: net_create
-        delegate_to: "{{ groups.shade | first }}"
+        shell: |
+            source ~/{{ install.overcloud.stack }}rc
+            openstack --insecure network create private
 
       - name: print network details to console
         shell: |
             source ~/{{ install.overcloud.stack }}rc
-            neutron net-show {{ net_create.network.name }}
+            neutron net-show {{ network_name }}
         tags: skip_ansible_lint
         changed_when: false
 
@@ -81,28 +71,21 @@
 
       - name: create the private subnet
         vars:
-            # Here can't be used {{ path_venv }}, because it's not a Jinja template
-            ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
             # It's cleaner to define top defaults first
             pool: "{{ subnet.allocation_pool|default({}) }}"
-        os_subnet:
-            # Required for SSL
-            validate_certs: no
-            cloud: "{{ install.overcloud.stack }}"
-            name: "{{ subnet.name | default('private_subnet') }}"
-            network_name: "{{ net_create.network.name }}"
-            use_default_subnetpool: "{{ 'no' if 'cidr' in subnet else 'yes' }}"
-            cidr: "{{ subnet.cidr | default(omit) }}"
-            allocation_pool_start: "{{ pool.start | default(omit) }}"
-            allocation_pool_end: "{{ pool.end | default(omit) }}"
-        register: subnet_create
-        delegate_to: "{{ groups.shade | first }}"
+            default_subnet_pool: "{{ '' if 'cidr' in subnet else '--use-default-subnet-pool' }}"
+            cidr: "{{ 'cidr' in subnet | ternary('--subnet-range ' + subnet.cidr|default(''), '' }}"
+        shell: |
+            source ~/{{ install.overcloud.stack }}rc
+            openstack --insecure subnet create {{ subnet.name | default('private_subnet') }} \
+            --network private {{ default_subnet_pool }} {{ cidr } \
+            {{ pool|ternary('--allocation-pool start=' + pool.start|string + ',end=' + pool.end|string, '') }} \
         when: subnet is defined
 
       - name: print subnet details to console
         shell: |
             source ~/{{ install.overcloud.stack }}rc
-            neutron subnet-show {{ subnet_create.subnet.name }}
+            openstack subnet show {{ subnet.name | default('private_subnet') }}
         tags: skip_ansible_lint
         changed_when: false
         when: subnet is defined
@@ -136,69 +119,48 @@
             ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
             # It's cleaner to define top defaults first
             pool: "{{ ipv6_subnet.allocation_pool|default({}) }}"
-        os_subnet:
-            # Required for SSL
-            validate_certs: no
-            cloud: "{{ install.overcloud.stack }}"
-            name: "{{ ipv6_subnet.name | default('private_ipv6_subnet') }}"
-            network_name: "{{ net_create.network.name }}"
-            use_default_subnetpool: "{{ 'no' if 'cidr' in ipv6_subnet else 'yes' }}"
-            ip_version: 6
-            cidr: "{{ ipv6_subnet.cidr | default(omit) }}"
-            allocation_pool_start: "{{ pool.start | default(omit) }}"
-            allocation_pool_end: "{{ pool.end | default(omit) }}"
+            cidr: "{{ 'cidr' in ipv6_subnet | ternary('--subnet-range ' + ipv6_subnet.cidr|default(''), '' }}"
+            default_subnet_pool: "{{ '' if 'cidr' in ipv6_subnet else '--use-default-subnet-pool' }}"
             ipv6_address_mode: "{{ ipv6_subnet.address_mode | default('slaac') }}"
             ipv6_ra_mode: "{{ ipv6_subnet.ra_mode | default('slaac') }}"
-        register: ipv6_subnet_create
-        delegate_to: "{{ groups.shade | first }}"
+        shell: |
+            source ~/{{ install.overcloud.stack }}rc
+            openstack --insecure subnet create {{ ipv6_subnet.name | default('private_ipv6_subnet') }} \
+            --network  {{ net_create.network.name }} --ip-version 6  \
+            {{ default_subnet_pool }} {{cidr}} \
+            {{ pool|ternary('--allocation-pool start=' + pool.start|string + ',end=' + pool.end|string, '') }} \
+            --ipv6-ra-mode {{ipv6_ra_mode}} --ipv6_address_mode {{ ipv6_address_mode }} \
         when: ipv6_subnet is defined
 
       - name: print subnet details to console
         shell: |
             source ~/{{ install.overcloud.stack }}rc
-            neutron subnet-show {{ ipv6_subnet_create.subnet.name }}
+            openstack subnet show {{ ipv6_subnet.name | default('private_ipv6_subnet') }}
         tags: skip_ansible_lint
         changed_when: false
         when: ipv6_subnet is defined
 
       - name: create router with IPv4 subnet
         vars:
-            # Here can't be used {{ path_venv }}, because it's not a Jinja template
-            ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
-        os_router:
-            # Required for SSL
-            validate_certs: no
-            cloud: "{{ install.overcloud.stack }}"
-            name: "{{ router.name | default('router-private') }}"
-            network: "{{ install.public.get('net', {}).name|default(pool_name.stdout_lines|last) }}"
-            interfaces:
-                - "{{ subnet.name }}"
-        register: router_create
-        delegate_to: "{{ groups.shade | first }}"
-        when: subnet is defined
-
-      - name: create/update router with IPv6 subnet
-        vars:
-            # Here can't be used {{ path_venv }}, because it's not a Jinja template
-            ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
-        os_router:
-            # Required for SSL
-            validate_certs: no
-            cloud: "{{ install.overcloud.stack }}"
-            name: "{{ router.name | default('router1') }}"
-            network: "{{ install.public.get('net', {}).name|default(pool_name.stdout_lines|last) }}"
-            interfaces:
-                - "{{ ipv6_subnet.name }}"
-        register: router_create
-        delegate_to: "{{ groups.shade | first }}"
-        when: ipv6_subnet is defined
-
-      - name: print router details to console
+            router_name: "{{ router.name | default('router-private') }}"
         shell: |
             source ~/{{ install.overcloud.stack }}rc
-            openstack router show {{ router_create.router.name }}
-        tags: skip_ansible_lint
-        changed_when: false
+            set -ex
+            openstack --insecure router create {{ router_name }}
+            openstack --insecure router set --external-gateway "{{ install.public.get('net', {}).name|default(pool_name.stdout_lines|last) }}" {{ router_name }}
+            openstack --insecure router add subnet {{ router_name }}
+            openstack --insecure router show {{ router_name }}
+        when: subnet is defined
+      - name: create/update router with IPv6 subnet
+        vars:
+            router_name: "{{ router.name | default('router1') }}"
+        shell: |
+            source ~/{{ install.overcloud.stack }}rc
+            set -ex
+            openstack --insecure router create {{ router_name }}
+            openstack --insecure router set --external-gateway "{{ install.public.get('net', {}).name|default(pool_name.stdout_lines|last) }}" {{ router_name }}
+            openstack --insecure router add subnet {{ router_name }}  {{ ipv6_subnet.name }}
+            openstack --insecure router show {{ router_name }}
         when: ipv6_subnet is defined
 
       - name: get router public IPv6 address
@@ -206,7 +168,7 @@
             source ~/{{ install.overcloud.stack }}rc
             # Use jq twice to parse OSP13 and OSP16 output format
             openstack router show -f json -c external_gateway_info \
-                {{ router_create.router.name }} | \
+                {{ router.name | default('router-private') }} | \
                 jq -r ".external_gateway_info" | jq -r ".external_fixed_ips[].ip_address" | grep ::
         register: router_public_address
         when: ipv6_subnet is defined
