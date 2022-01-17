@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d924f7a_77609f73",
+        "filename": "post_tasks/create_external_network.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1003043
+      },
+      "writtenOn": "2022-01-17T14:27:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d5d8494_699c89de",
+      "revId": "6f7ed4cb943a86bed37afd44f0d12731fc8d595e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fef11078_50b818c8",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-01-17T14:23:41Z",
       "side": 1,
       "message": "double {{",
+      "revId": "6f7ed4cb943a86bed37afd44f0d12731fc8d595e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b97eebf0_937921c8",
+        "filename": "post_tasks/create_external_network.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1003043
+      },
+      "writtenOn": "2022-01-17T14:27:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fef11078_50b818c8",
       "revId": "6f7ed4cb943a86bed37afd44f0d12731fc8d595e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
