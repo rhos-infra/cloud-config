@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d5d8494_699c89de",
+        "filename": "post_tasks/create_external_network.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1003043
+      },
+      "writtenOn": "2022-01-17T14:16:09Z",
+      "side": 1,
+      "message": "space should be after not before.",
+      "revId": "6f7ed4cb943a86bed37afd44f0d12731fc8d595e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff25864b_f9745be1",
+        "filename": "post_tasks/create_external_network.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1003043
+      },
+      "writtenOn": "2022-01-17T14:16:09Z",
+      "side": 1,
+      "message": "not exactly the same logic, but does it matter ?",
+      "revId": "6f7ed4cb943a86bed37afd44f0d12731fc8d595e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
