@@ -25,9 +25,6 @@
 # users responsibility.
 # This playbook gathers data from template_base used in ospd installer!
 # Playbook is idempotent
-# This playbook uses ansible openstack modules and assumes the undercloud already has
-# a virtualenv containing shade.
-# venv is created in playbooks/installer/ospd/ospd_inventory_update.yml as /var/tmp/venv_shade
 
 - name: External network creation
   hosts: undercloud
@@ -107,18 +104,12 @@
                 physnet_type: "vlan"
                 vlan_id: "{{ install.get('external', {}).vlan | default(((network_template|default({})).parameter_defaults|default({})).ExternalNetworkVlanID|default('')) }}"
                 # Here can't be used {{ path_venv }}, because it's not a Jinja template
-                ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
-            os_network:
-                # Required for SSL
-                validate_certs: no
-                cloud: "{{ install.overcloud.stack }}"
-                name: "{{ external_network_name }}"
-                external: yes
-                shared: "{{ install.external.shared | default(no)}}"
-                provider_physical_network: "{{ physnet_name }}"
-                provider_network_type: "{{ physnet_type }}"
-                provider_segmentation_id: "{{ ('vlan' == physnet_type) | ternary(vlan_id, omit) }}"
-            delegate_to: "{{ groups.shade | first }}"
+            shell: |
+                source ~/{{ install.overcloud.stack }}rc
+                openstack --insecure network create --name {{ external_network_name }} --external {{ install.external.shared | default(false) |ternary('--shared','--no-shared ') }} \
+                --provider-physical-network {{ physnet_name }} \
+                --provider-network-type {{ physnet_type }} \
+                 {{ ('vlan' == physnet_type) | ternary(' --provider-segment ' + vlan_id, omit) }}
             when: not (install.external.transparent.vlan|default(false))
 
           # Neither os_network nor openstack.cloud.network ansible modules
@@ -136,7 +127,6 @@
                     --provider-network-type {{ physnet_type }} \
                     --provider-segment {{ vlan_id }} \
                     --provider-physical-network {{ physnet_name }}
-            delegate_to: "{{ groups.shade | first }}"
             when: install.external.transparent.vlan|default(false)
 
         rescue:
@@ -144,19 +134,12 @@
             vars:
                 physnet_type: "flat"
                 vlan_id: "{{ install.get('external', {}).vlan | default(((network_template|default({})).parameter_defaults|default({})).ExternalNetworkVlanID|default('')) }}"
-                # Here can't be used {{ path_venv }}, because it's not a Jinja template
-                ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
-            os_network:
-                # Required for SSL
-                validate_certs: no
-                cloud: "{{ install.overcloud.stack }}"
-                name: "{{ external_network_name }}"
-                external: yes
-                shared: "{{ install.external.shared | default(no)}}"
-                provider_physical_network: "{{ physnet_name }}"
-                provider_network_type: "{{ physnet_type }}"
-                provider_segmentation_id: "{{ ('vlan' == physnet_type) | ternary(vlan_id, omit) }}"
-            delegate_to: "{{ groups.shade | first }}"
+            shell: |
+                source ~/{{ install.overcloud.stack }}rc
+                openstack --insecure network create --name {{ external_network_name }} --external {{ install.external.shared | default(false) |ternary('--shared', '--no-shared') }} \
+                --provider-physical-network {{ physnet_name }} \
+                --provider-network-type {{ physnet_type }} \
+                 {{ ('vlan' == physnet_type) | ternary(' --provider-segment ' + vlan_id, omit) }}
             when: not (install.external.transparent.vlan|default(false))
 
           # Neither os_network nor openstack.cloud.network ansible modules
@@ -172,7 +155,6 @@
                     --external --transparent-vlan {{ share }} \
                     --provider-network-type {{ physnet_type }} \
                     --provider-physical-network {{ physnet_name }}
-            delegate_to: "{{ groups.shade | first }}"
             when: install.external.transparent.vlan|default(false)
 
       - name: set MTU for external network
@@ -184,7 +166,7 @@
       - name: print network details to console
         shell: |
             source ~/{{ install.overcloud.stack }}rc
-            neutron net-show {{ external_network_name }}
+            openstack network show {{ external_network_name }}
         tags: skip_ansible_lint
         changed_when: false
 
@@ -208,59 +190,43 @@
       #     2) CIDR arithmetic is complicated. Only implement it when #1 is supported
       - name: create the external subnet
         vars:
-            # Here can't be used {{ path_venv }}, because it's not a Jinja template
-            ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
-            # It's cleaner to define top defaults first
             pool: "{{ subnet.allocation_pool|default({}) }}"
-        os_subnet:
-            # Required for SSL
-            validate_certs: no
-            cloud: "{{ install.overcloud.stack }}"
-            name: "{{ subnet.name | default('external_subnet') }}"
-            network_name: "{{ external_network_name }}"
-            enable_dhcp: "{{ external_dhcp }}"
-            cidr: "{{ subnet.cidr }}"
-            gateway_ip: "{{ subnet.gateway }}"
-            allocation_pool_start: "{{ pool.start | default(omit) }}"
-            allocation_pool_end: "{{ pool.end | default(omit) }}"
-        register: subnet_create
-        delegate_to: "{{ groups.shade | first }}"
+        shell: |
+            source ~/{{ install.overcloud.stack }}rc
+            openstack --insecure subnet create \
+            --network  {{ external_network_name }}  {{ (external_dhcp  | default(no)) | ternary('--dhcp', '--no-dhcp') }} \
+            --subnet-range {{ subnet.cidr }} \
+            --gateway  {{ subnet.gateway }} \
+            {{ pool|ternary('--allocation-pool start=' + pool.start + ',end='  pool.end, '') \
+            {{ subnet.name | default('external_subnet') }}
 
       - name: print subnet details to console
         shell: |
             source ~/{{ install.overcloud.stack }}rc
-            neutron subnet-show {{ subnet_create.subnet.name }}
+            openstack subnet show {{ subnet.name | default('external_subnet') }}
         tags: skip_ansible_lint
         changed_when: false
 
       - name: create the IPv6 external subnet
         vars:
-            # Here can't be used {{ path_venv }}, because it's not a Jinja template
-            ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
             # It's cleaner to define top defaults first
             pool: "{{ ipv6_subnet.allocation_pool|default({}) }}"
-        os_subnet:
-            # Required for SSL
-            validate_certs: no
-            cloud: "{{ install.overcloud.stack }}"
-            name: "{{ ipv6_subnet.name | default('external_ipv6_subnet') }}"
-            network_name: "{{ external_network_name }}"
-            enable_dhcp: "{{ ipv6_external_dhcp }}"
-            ip_version: 6
-            cidr: "{{ ipv6_subnet.cidr }}"
-            gateway_ip: "{{ ipv6_subnet.gateway }}"
-            allocation_pool_start: "{{ pool.start | default(omit) }}"
-            allocation_pool_end: "{{ pool.end | default(omit) }}"
-            ipv6_address_mode: "{{ ipv6_subnet.address_mode | default(omit) }}"
-            ipv6_ra_mode: "{{ ipv6_subnet.ra_mode | default(omit) }}"
-        register: ipv6_subnet_create
-        delegate_to: "{{ groups.shade | first }}"
+        shell: |
+            source ~/{{ install.overcloud.stack }}rc
+            openstack --insecure subnet create --ip-version 6 \
+            --network {{ external_network_name }}  {{ (external_dhcp  | default(no)) | ternary('--dhcp', '--no-dhcp') }} \
+            --subnet-range {{ ipv6_subnet.cidr }} \
+            --gateway  {{ subnet.gateway }} \
+            {{ pool|ternary('--allocation-pool start=' + pool.start + ',end='  pool.end, '') }} \
+            {{(ipv6_address_mode| default('') | ternary('--ipv6-address-mode ' + ipv6_address_mode, '') }} \
+            {{ ipv6_subnet.ra_mode|default('') | ternary('--ipv6-ra-mode ' + ipv6_subnet.ra_mode, '' }}
+            {{ ipv6_subnet.name | default('external_subnet') }}
         when: ipv6_subnet is defined
 
       - name: print subnet details to console
         shell: |
             source ~/{{ install.overcloud.stack }}rc
-            neutron subnet-show {{ ipv6_subnet_create.subnet.name }}
+            openstack subnet show {{ ipv6_subnet.name | default('external_subnet') }}
         tags: skip_ansible_lint
         changed_when: false
         when: ipv6_subnet is defined
