@@ -46,21 +46,15 @@
 
       - name: Create {{ network_name }} network
         vars:
-            ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
             NeutronNetworkVLANRanges: "{{ network_template.parameter_defaults.NeutronNetworkVLANRanges|default('') }}"
             StorageNetworkVlanID: "{{ network_template.parameter_defaults.StorageNetworkVlanID|default('') }}"
             StorageNFSNetworkVlanID: "{{ network_template.parameter_defaults.StorageNFSNetworkVlanID|default('') }}"
-        os_network:
-            cloud: "{{ install.overcloud.stack }}"
-            state: present
-            name: "{{ network_name }}"
-            validate_certs: no
-            provider_network_type: vlan
-            provider_physical_network: "{{ NeutronNetworkVLANRanges.split(':')[0] }}"
-            provider_segmentation_id: "{{ (manila_backend == 'cephfs-nfs') | ternary(StorageNFSNetworkVlanID, StorageNetworkVlanID) }}"
-            external: no
-            shared: yes
-        delegate_to: "{{ groups.shade | first }}"
+        shell: |
+            source ~/{{ install.overcloud.stack }}rc
+            openstack --insecure network create {{ external_network_name }} --shared \
+            --provider-physical-network {{ NeutronNetworkVLANRanges.split(':')[0] }} \
+            --provider-network-type vlan \
+            --provider-segment ' + (manila_backend == 'cephfs-nfs') | ternary(StorageNFSNetworkVlanID, StorageNetworkVlanID) | string }}
         ignore_errors: yes
 
       - name: Create {{ subnet_name }} subnet
@@ -68,16 +62,15 @@
             ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
             StorageNetCidr: "{{ network_template.parameter_defaults.StorageNetCidr|default('') }}"
             StorageNFSNetCidr: "{{ network_template.parameter_defaults.StorageNFSNetCidr|default('') }}"
-        os_subnet:
-            validate_certs: no
-            cloud: "{{ install.overcloud.stack }}"
-            name: "{{ subnet_name }}"
-            network_name: "{{ network_name }}"
-            enable_dhcp: yes
-            allocation_pool_start: "{{ AllocationPools[0]['start'].split('.')[0:3] | join('.')  }}.150"
-            allocation_pool_end: "{{ AllocationPools[0]['end'].split('.')[0:3] | join('.')  }}.250"
+            pool_start: "{{ AllocationPools[0]['start'].split('.')[0:3] | join('.')  }}.150"
+            pool_end: "{{ AllocationPools[0]['start'].split('.')[0:3] | join('.')  }}.150"
             cidr: "{{ (manila_backend == 'cephfs-nfs') | ternary(StorageNFSNetCidr, StorageNetCidr) }}"
-        delegate_to: "{{ groups.shade | first }}"
+        shell: |
+            source ~/{{ install.overcloud.stack }}rc
+            openstack --insecure subnet create {{ subnet_name }} --shared \
+            --network {{ network_name }} --dhcp \
+            --allocation-pool start={{pool_start|string}},end={{pool_end|string}} \
+            --subnet-range  {{cidr}}
         ignore_errors: yes
         when: install.network.protocol == 'ipv4'
 
@@ -86,18 +79,14 @@
           ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
           StorageNetCidr: "{{ network_template.parameter_defaults.StorageNetCidr|default('') }}"
           StorageNFSNetCidr: "{{ network_template.parameter_defaults.StorageNFSNetCidr|default('') }}"
-        os_subnet:
-          validate_certs: no
-          cloud: "{{ install.overcloud.stack }}"
-          name: "{{ subnet_name }}"
-          network_name: "{{ network_name }}"
-          enable_dhcp: yes
-          allocation_pool_start: "{{ AllocationPools[0]['start'].split(':')[0:4] | join(':') }}::fb:10"
-          allocation_pool_end: "{{ AllocationPools[0]['end'].split(':')[0:4] | join(':')  }}::fb:fe"
+          pool_start: "{{ AllocationPools[0]['start'].split(':')[0:4] | join(':') }}::fb:10"
+          pool_end: "{{ AllocationPools[0]['end'].split(':')[0:4] | join(':')  }}::fb:fe"
           cidr: "{{ (manila_backend == 'cephfs-nfs') | ternary(StorageNFSNetCidr, StorageNetCidr) }}"
-          ip_version: 6
-          ipv6_address_mode: dhcpv6-stateful
-          ipv6_ra_mode: dhcpv6-stateful
-        delegate_to: "{{ groups.shade | first }}"
+        shell:
+            openstack --insecure subnet create {{ subnet_name }} --ip-version 6 \
+            --network {{ network_name }}  --dhcp \
+            --subnet-range {{ cidr }} \
+            --allocation-pool start={{pool_start|string}},end={{pool_end|string}} \
+            --ipv6-address-mode dhcpv6-stateful --ipv6-ra-mode dhcpv6-stateful
         ignore_errors: yes
         when: install.network.protocol == 'ipv6'
