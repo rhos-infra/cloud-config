@@ -86,6 +86,24 @@
       "message": "not exactly the same logic, but does it matter ?",
       "revId": "6f7ed4cb943a86bed37afd44f0d12731fc8d595e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af011182_0e04da51",
+        "filename": "post_tasks/create_external_network.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1003043
+      },
+      "writtenOn": "2022-01-17T14:37:40Z",
+      "side": 1,
+      "message": "allocation pool when defined, always had start and end, so it should be good .",
+      "parentUuid": "ff25864b_f9745be1",
+      "revId": "6f7ed4cb943a86bed37afd44f0d12731fc8d595e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
