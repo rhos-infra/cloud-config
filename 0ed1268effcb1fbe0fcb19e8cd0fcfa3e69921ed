@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f24f38c4_3df6b8ea",
+        "filename": "post_tasks/create_external_network.yml",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1003043
+      },
+      "writtenOn": "2022-01-17T14:42:18Z",
+      "side": 1,
+      "message": "change to openstack",
+      "revId": "0ed1268effcb1fbe0fcb19e8cd0fcfa3e69921ed",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
