@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "964479fb_9a63b97e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003043
+      },
+      "writtenOn": "2022-01-18T06:33:21Z",
+      "side": 1,
+      "message": "--name not existing option, it is positional argument in both case.",
+      "revId": "8b9fb532f3a562199e9150f4807ade916d1ca6cf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
