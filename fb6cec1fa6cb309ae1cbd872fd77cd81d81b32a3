@@ -16,6 +16,24 @@
       "message": "is this called on 10, we might need to use neutron command for network arg there.",
       "revId": "fb6cec1fa6cb309ae1cbd872fd77cd81d81b32a3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "404bb335_db102533",
+        "filename": "post_tasks/create_private_network.yml",
+        "patchSetId": 12
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1003043
+      },
+      "writtenOn": "2022-01-25T09:39:28Z",
+      "side": 1,
+      "message": "neutron  router-gateway-set \u003crouter name/id\u003e  \u003cnetwork name/id\u003e",
+      "parentUuid": "bda3a314_b27cb12b",
+      "revId": "fb6cec1fa6cb309ae1cbd872fd77cd81d81b32a3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
