@@ -30,6 +30,10 @@
   import_playbook: post_tasks/compute_ssh.yml
   when: '"compute_ssh" in install.tasks'
 
+- name: Include task "Additional overcloud SSH keys"
+  import_playbook: post_tasks/add_extra_overcloud_ssh_keys.yml
+  when: '"add_extra_overcloud_ssh_keys" in install.tasks'
+
 - name: Include task "Scale down"
   import_playbook: post_tasks/scale_down.yml
   when: '"scale_down" in install.tasks'
