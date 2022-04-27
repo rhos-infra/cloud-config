@@ -86,6 +86,24 @@
       "parentUuid": "a18956aa_7616703a",
       "revId": "4f7076a562670ae30a45eb9ce564ce5d48ffe432",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca2871de_0e1d1809",
+        "filename": "post_tasks/add_extra_overcloud_ssh_keys.yml",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1003078
+      },
+      "writtenOn": "2022-04-27T13:14:13Z",
+      "side": 1,
+      "message": "ack not critical , thanks for your patch",
+      "parentUuid": "c688a3d1_2349656b",
+      "revId": "4f7076a562670ae30a45eb9ce564ce5d48ffe432",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
