@@ -16,6 +16,23 @@
       "message": "Based on the 17 unified job results this LGTM.  Also retriggered the run again against the whitebox bed and commit was also able to ssh to all computes/controllers.",
       "revId": "4f7076a562670ae30a45eb9ce564ce5d48ffe432",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25d892d4_8083664d",
+        "filename": "post_tasks/add_extra_overcloud_ssh_keys.yml",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003078
+      },
+      "writtenOn": "2022-04-27T11:18:36Z",
+      "side": 1,
+      "message": "Hi Luigi , why you changed the path ? \nit should be /home/stack/.ssh/id_ecdsa  and /home/stack/.ssh/id_ecdsa.pub\nssh-keygen -t ecdsa",
+      "revId": "4f7076a562670ae30a45eb9ce564ce5d48ffe432",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
