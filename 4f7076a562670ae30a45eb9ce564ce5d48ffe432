@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afd91b22_218b58c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1017127
+      },
+      "writtenOn": "2022-04-27T01:42:51Z",
+      "side": 1,
+      "message": "Based on the 17 unified job results this LGTM.  Also retriggered the run again against the whitebox bed and commit was also able to ssh to all computes/controllers.",
+      "revId": "4f7076a562670ae30a45eb9ce564ce5d48ffe432",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
