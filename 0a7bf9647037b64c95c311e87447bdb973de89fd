@@ -16,6 +16,23 @@
       "message": "It\u0027s now failing the gates but it\u0027s just a flaky test.\n\nI\u0027ve changed the code because ansible 2.9, when it uses ssh-keygen, it passes the -C option even with an empty string. For some reason the paramiko code doesn\u0027t like the key in that case.\nAs this is a workaround for the testing environment due to limitations in paramiko, and that newer version of ansible use the cryptography library by default which may also solve the issue, I\u0027d decided to just use ssh-keygen directly.",
       "revId": "0a7bf9647037b64c95c311e87447bdb973de89fd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d145aa29_596c3e68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1017127
+      },
+      "writtenOn": "2022-05-02T20:31:30Z",
+      "side": 1,
+      "message": "Follow up downstream test for ps5 successful.",
+      "revId": "0a7bf9647037b64c95c311e87447bdb973de89fd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
