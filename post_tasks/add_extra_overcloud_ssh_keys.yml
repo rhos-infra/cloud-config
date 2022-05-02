@@ -1,0 +1,32 @@
+---
+# Creates and setup an additional set of ECSDA keys on the overcloud nodes
+# Those can be used by paramiko-based code to connect to the nodes,
+# because the default paramiko version up to 17 does not support
+# the default RSA(-2) keys.
+
+- name: Create and distribute an alternative set of SSH keys
+  hosts: overcloud_nodes:!unused
+  vars:
+      alternative_overcloud_key_path: '/home/stack/.ssh/id_ecdsa_extra'
+  tasks:
+      # do not use openssh_keypair: it always add the -C option,
+      # which changes the format of the key in a way that makes it
+      # not working with the paramiko version we use (17)
+      - name: create a new key
+        shell: |
+            ssh-keygen -q -t ecdsa -N '' -q -f {{ alternative_overcloud_key_path }}
+        args:
+            creates: "{{ alternative_overcloud_key_path }}"
+        run_once: yes
+        delegate_to: "{{ groups['undercloud'][0] }}"
+
+      - name: register the new public key
+        shell: |
+            cat {{ alternative_overcloud_key_path }}.pub
+        register: alternative_overcloud_public_key
+        delegate_to: "{{ groups['undercloud'][0] }}"
+
+      - name: authorize the new key
+        authorized_key:
+            user: "heat-admin"
+            key: "{{ alternative_overcloud_public_key.stdout }}"
