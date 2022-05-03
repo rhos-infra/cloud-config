@@ -33,6 +33,23 @@
       "message": "Follow up downstream test for ps5 successful.",
       "revId": "0a7bf9647037b64c95c311e87447bdb973de89fd",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17b7fa70_df4c10c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003078
+      },
+      "writtenOn": "2022-05-03T04:12:33Z",
+      "side": 1,
+      "message": "Hi Luigi , \n#1 if you add extra key and the type is ecdsa and its hardcoded and you do not send the type as parameter, they yml name should reflect the ssh-key type\n\n#2 After you created the ecdsa keys, those should be authorized by controllers and computes or ssh-copy command . not sure if you cover it here .\n\nBenny",
+      "revId": "0a7bf9647037b64c95c311e87447bdb973de89fd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
