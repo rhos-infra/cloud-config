@@ -138,7 +138,7 @@
   when:
       - check_nodename.rc == 0
       - install.resource.class.enabled
-      - install.version|default(undercloud_version)|openstack_release >= 12
+      - install.version|default(undercloud_version)|openstack_release >= 12 and install.version|default(undercloud_version)|openstack_release < 17
 
 - name: get kernel image uuid
   shell: |
@@ -259,3 +259,48 @@
   when:
       - undercloud_version | openstack_release == 14
       - legacy_img_file.rc == 0
+
+- name: Update baremetal_deployment.yaml and provision new node
+  block:
+      - name: Check if composable roles being used
+        stat:
+            path: "{{ ansible_user_dir }}/composable_roles"
+        register: composable_roles_used
+
+      - name: set baremetal_deployment file path when composable roles used
+        set_fact:
+            baremetal_deployment_path: "{{ ansible_user_dir }}/composable_roles/network"
+        when: composable_roles_used.stat.exists
+
+      - name: set baremetal_deployment file path for non-composable roles deployments
+        set_fact:
+            baremetal_deployment_path: "{{ ansible_user_dir }}/virt/network"
+        when: not composable_roles_used.stat.exists
+
+      - name: get current scale for nodes from baremetal_deployment.yaml
+        shell: |
+            cat "{{ baremetal_deployment_path }}/baremetal_deployment.yaml" | grep -A1 {{ node_type | capitalize }} | grep count | awk '{print $2}'
+        vars:
+            node_type: "{{ item.key }}"
+        with_dict: "{{ new_nodes_count }}"
+        register: current_node_count
+
+      - name: Update scale count in baremetal_deployment.yaml
+        replace:
+            path: "{{ baremetal_deployment_path }}/baremetal_deployment.yaml"
+            regexp: "({{ item.item.key | capitalize }}\n.+count:) {{ item.stdout }}"
+            replace: "\\1 {{ item.stdout|int + new_nodes_count[item.item.key]|int }}"
+            backup: yes
+        with_items: "{{ current_node_count.results }}"
+
+      - name: Print baremetal_deployment.yaml
+        command: cat "{{ baremetal_deployment_path }}/baremetal_deployment.yaml"
+
+      - name: Provision the ("baremetal") nodes
+        shell: |
+            source ~/stackrc
+            set -o pipefail
+            openstack overcloud node provision -y --network-config --stack {{ install.overcloud.stack }} -o {{ ansible_user_dir }}/templates/overcloud-baremetal-deployed.yaml {{ baremetal_deployment_path }}/baremetal_deployment.yaml | \
+            tee -a {{ ansible_user_dir }}/overcloud_provision_nodes_scaleup.log
+  when:
+      - install.version|default(undercloud_version)|openstack_release >= 17
