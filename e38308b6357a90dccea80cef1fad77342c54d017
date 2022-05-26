@@ -16,6 +16,24 @@
       "message": "FYI: https://review.gerrithub.io/c/redhat-openstack/infrared/+/521502/8/plugins/tripleo-overcloud/update_inventory.yml we used metalsmith here instead of os_server_facts",
       "revId": "e38308b6357a90dccea80cef1fad77342c54d017",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a0ff73c_ee48454d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1017725
+      },
+      "writtenOn": "2022-05-26T17:17:07Z",
+      "side": 1,
+      "message": "Included something very similar in patchset 2. Had to make a few changes due to cloud-config expecting different names.",
+      "parentUuid": "766b11f2_dc365613",
+      "revId": "e38308b6357a90dccea80cef1fad77342c54d017",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
