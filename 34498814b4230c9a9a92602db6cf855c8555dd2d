@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "369db40e_56044cad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1016970
+      },
+      "writtenOn": "2022-06-10T12:35:30Z",
+      "side": 1,
+      "message": "Looks like the condition is the way to make OSP 16 and OSP 17 pass.\nThe workaround makes sense for RHBZ#1484419, when swift was the default. In 17 swift isn\u0027t the default anymore, which means we need to skip that task.",
+      "revId": "34498814b4230c9a9a92602db6cf855c8555dd2d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
