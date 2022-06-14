@@ -53,7 +53,7 @@
                 - section: auth
                   option: tempest_roles
                   value: swiftoperator
-                  condition: true
+                  condition: "{{ (install.version|default(undercloud_version)|openstack_release < 17) or (not storage_backend.startswith('ceph')) }}"
                 # Set of Sahara plugins - required until https://bugs.launchpad.net/bugs/1560111 is fixed
                 - section: data-processing-feature-enabled
                   option: plugins
