@@ -114,6 +114,11 @@ subparsers:
                         If customer has already provisioned nodes for an overcloud splitstack should be used to utilize these
                         nodes.(https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/11/html/director_installation_and_usage/chap-configuring_basic_overcloud_requirements_on_pre_provisioned_nodes)
 
+                  overcloud-ssh-user:
+                      type: Value
+                      help: Defines the overcloud ssh user name
+                      default: heat-admin
+
             - title: TripleO User
               options:
                   user-name:

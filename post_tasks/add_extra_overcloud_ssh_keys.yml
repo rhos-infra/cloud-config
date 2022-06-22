@@ -28,5 +28,5 @@
 
       - name: authorize the new key
         authorized_key:
-            user: "heat-admin"
+            user: "{{ install.overcloud.ssh.user }}"
             key: "{{ alternative_overcloud_public_key.stdout }}"
