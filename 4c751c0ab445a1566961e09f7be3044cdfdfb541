@@ -1,0 +1,11 @@
+Verified+1: rhosqeauto <aopincar+rhosqeauto@redhat.com>
+Code-Review+1: Eran Kuris  <ekuris@redhat.com>
+Code-Review+1: <jsilvahe@redhat.com>
+Code-Review+1: <mblue@redhat.com>
+Code-Review+2: Luigi Toscano <ltoscano@redhat.com>
+Code-Review+2: Adrian Fusco <adrianfuscoarnejo@gmail.com>
+Submitted-by: Avi Talmor <atalmor@redhat.com>
+Submitted-at: Thu, 23 Jun 2022 08:46:20 +0000
+Reviewed-on: https://review.gerrithub.io/c/rhos-infra/cloud-config/+/540411
+Project: rhos-infra/cloud-config
+Branch: refs/heads/master
