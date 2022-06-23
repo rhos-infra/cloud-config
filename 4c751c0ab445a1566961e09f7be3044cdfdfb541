@@ -33,6 +33,23 @@
       "message": "Nice addition",
       "revId": "4c751c0ab445a1566961e09f7be3044cdfdfb541",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b4a3d2f_b83c75af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2022-06-23T08:14:24Z",
+      "side": 1,
+      "message": "Less hardcoded variables, more parameters.\nFor the record, the overcloud tempest plugin part of infrared exposes an overcloud-ssh-user parameter.",
+      "revId": "4c751c0ab445a1566961e09f7be3044cdfdfb541",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
