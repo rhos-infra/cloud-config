@@ -16,6 +16,23 @@
       "message": "This patch needed in order to fix OSP17 composable roles ovs2ovn job which uses a custom overcloud ssh user for covering this BZ https://bugzilla.redhat.com/show_bug.cgi?id\u003d1948473",
       "revId": "4c751c0ab445a1566961e09f7be3044cdfdfb541",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07d563e3_4bb47170",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020026
+      },
+      "writtenOn": "2022-06-23T06:58:20Z",
+      "side": 1,
+      "message": "Nice addition",
+      "revId": "4c751c0ab445a1566961e09f7be3044cdfdfb541",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
