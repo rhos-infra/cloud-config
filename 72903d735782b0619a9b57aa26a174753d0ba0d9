@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7dbef48_254bdc10",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019772
+      },
+      "writtenOn": "2022-06-30T11:07:47Z",
+      "side": 1,
+      "message": "Gates passed effected stages, ready for review.",
+      "revId": "72903d735782b0619a9b57aa26a174753d0ba0d9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
