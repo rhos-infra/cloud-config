@@ -48,7 +48,9 @@
             shell: |
                 source ~/stackrc
                 openstack server stop "{{ install.node.name }}"
-            when: install.shutdown
+            when:
+                - install.shutdown
+                - install.version|default(undercloud_version) | openstack_release < 17
 
           - name: wait for node "{{ install.node.name }}" to go down
             shell: |
@@ -58,7 +60,29 @@
             until: node_down.stdout == "SHUTOFF"
             retries: 20
             delay: 3
-            when: install.shutdown
+            when:
+                - install.shutdown
+                - install.version|default(undercloud_version) | openstack_release < 17
+
+          - name: Stop node "{{ install.node.name }}"
+            shell: |
+                source ~/stackrc
+                openstack baremetal node power off "{{ install.node.name }}"
+            when:
+                - install.shutdown
+                - install.version|default(undercloud_version) | openstack_release >= 17
+
+          - name: wait for node "{{ install.node.name }}" to go down
+            shell: |
+                source ~/stackrc
+                openstack baremetal node show {{install.node.name}} -c power_state -f value
+            register: node_down
+            until: node_down.stdout == "power off"
+            retries: 20
+            delay: 3
+            when:
+                - install.shutdown
+                - install.version|default(undercloud_version) | openstack_release >= 17
         when: ov_compute.rc == 0
 
       - name: get the deployed stack-id
@@ -67,6 +91,7 @@
             openstack stack list -f value -c ID
         register: stack_id
         tags: skip_ansible_lint
+        when: install.version|default(undercloud_version) | openstack_release <= 16
 
       - block:
             - block:
@@ -124,26 +149,95 @@
               set_fact:
                   node_uuid: "{{ node_uuid_info.stdout }}"
 
-        when: not install.splitstack|default(False)
+        when: 
+            - not install.splitstack|default(False)
+            - install.version|default(undercloud_version) | openstack_release < 17
 
-      - name: get imports from depployment file
-        shell: cat ~/overcloud_deploy.sh | grep -e "^-e" -e "^--environment-file"
-        register: env_imports
-        tags: skip_ansible_lint
+      - block:
+          - name: get imports from depployment file
+            shell: cat ~/overcloud_deploy.sh | grep -e "^-e" -e "^--environment-file"
+            register: env_imports
+            tags: skip_ansible_lint
 
-      - name: generate scale down script
-        template:
-            src: scale/overcloud_node_scale.sh.j2
-            dest: ~/overcloud_node_scale.sh
+          - name: generate scale down script
+            template:
+                src: scale/overcloud_node_scale.sh.j2
+                dest: ~/overcloud_node_scale.sh
 
-      - name: run scale down script
-        shell: |
-            source ~/stackrc
-            #bash ~/overcloud_node_scale.sh &> overcloud_scale.log
-            bash ~/overcloud_node_scale.sh &> overcloud_scale.log || while ! ( [[ `openstack stack list  -f value -c "Stack Status"` == "UPDATE_COMPLETE" ]] || [[ `openstack stack list  -f value -c "Stack Status"` == "UPDATE_FAILED" ]] ); do echo "Querying the stack status"; sleep 60; done #BZ1499020 - temp workaround
-        register: overcloud_scale
-        ignore_errors: yes
-        tags: skip_ansible_lint
+          - name: run scale down script
+            shell: |
+                source ~/stackrc
+                #bash ~/overcloud_node_scale.sh &> overcloud_scale.log
+                bash ~/overcloud_node_scale.sh &> overcloud_scale.log || while ! ( [[ `openstack stack list  -f value -c "Stack Status"` == "UPDATE_COMPLETE" ]] || [[ `openstack stack list  -f value -c "Stack Status"` == "UPDATE_FAILED" ]] ); do echo "Querying the stack status"; sleep 60; done #BZ1499020 - temp workaround
+            register: overcloud_scale
+            ignore_errors: yes
+            tags: skip_ansible_lint
+        when: install.version|default(undercloud_version) | openstack_release < 17
+
+      - block:
+            - name: Check if composable roles being used
+              stat:
+                  path: "{{ ansible_user_dir }}/composable_roles"
+              register: composable_roles_used
+
+            - name: set baremetal_deployment file path when composable roles used
+              set_fact:
+                  baremetal_deployment_path: "{{ ansible_user_dir }}/composable_roles/network"
+              when: composable_roles_used.stat.exists
+
+            - name: set baremetal_deployment file path for non-composable roles deployments
+              set_fact:
+                  baremetal_deployment_path: "{{ ansible_user_dir }}/virt/network"
+              when: not composable_roles_used.stat.exists
+
+            - name: set node type
+              set_fact:
+                  node_type: "{{ install.node.name.rstrip('1234567890-').split('-')[-1] }}"
+
+            - name: get current scale for nodes from baremetal_deployment.yaml
+              shell: |
+                  cat "{{ baremetal_deployment_path }}/baremetal_deployment.yaml" | grep -A1 {{ node_type | capitalize }} | grep count | awk '{print $2}'
+              register: current_node_count
+
+            - name: Update scale count in baremetal_deployment.yaml
+              replace:
+                  path: "{{ baremetal_deployment_path }}/baremetal_deployment.yaml"
+                  regexp: "({{ node_type | capitalize }}\n.+count:) {{ current_node_count.stdout }}"
+                  replace: "\\1 {{ current_node_count.stdout|int -1 }}"
+                  backup: yes
+
+            - name: get scale down node uuid
+              shell: |
+                  source /home/stack/stackrc
+                  openstack baremetal node show {{ install.node.name }} -c uuid -f value
+              register: scale_node_uuid
+
+            - name: get scale down node hostname
+              shell: |
+                  source /home/stack/stackrc
+                  metalsmith -c Hostname -f value show {{ scale_node_uuid.stdout }}
+              register: scale_down_hostname
+
+            - name: get baremetal deployment add instance script
+              copy:
+                src: "files/insert_instance.sh"
+                dest: "insert_instance.sh"
+                mode: 0755
+
+            - name: add instance to baremetal deployment yaml
+              shell: |
+                  mv {{ baremetal_deployment_path }}/baremetal_deployment.yaml {{ baremetal_deployment_path }}/baremetal_deployment_preinstance.yaml
+                  ./insert_instance.sh {{ baremetal_deployment_path }}/baremetal_deployment_preinstance.yaml {{ node_type | capitalize }} {{ scale_down_hostname.stdout }} {{ install.node.name }} > {{ baremetal_deployment_path }}/baremetal_deployment.yaml
+
+            - name: Print baremetal_deployment.yaml
+              command: cat "{{ baremetal_deployment_path }}/baremetal_deployment.yaml"
+
+            - name: Execute delete command
+              shell: |
+                  source ~/stackrc
+                  set -o pipefail
+                  openstack overcloud node delete -y --stack {{ install.overcloud.stack }} --baremetal-deployment "{{ baremetal_deployment_path }}/baremetal_deployment.yaml" | tee -a {{ ansible_user_dir }}/overcloud_scaledown.log
+        when: install.version|default(undercloud_version) | openstack_release >= 17
 
       - name: check for nodes data
         shell: grep -E 'nodes_data.yaml|nodes.yaml' ~/overcloud_deploy.sh
@@ -194,23 +288,25 @@
   gather_facts: no
   any_errors_fatal: true
   tasks:
-      - name: Print the last few lines of the output to spot failures
-        command: tail -n60 overcloud_scale.log
+      - block:
+          - name: Print the last few lines of the output to spot failures
+            command: tail -n60 overcloud_scale.log
 
-      # List of failures is supported since RHOS10
-      - name: Print stack failures
-        shell: |
-            source ~/stackrc
-            openstack stack failures list overcloud
-        when:
-            - overcloud_scale is defined
-            - overcloud_scale.rc != 0
-            - install.version|default(undercloud_version)|openstack_release >= 10
-        tags: skip_ansible_lint
+          # List of failures is supported since RHOS10
+          - name: Print stack failures
+            shell: |
+                source ~/stackrc
+                openstack stack failures list overcloud
+            when:
+                - overcloud_scale is defined
+                - overcloud_scale.rc != 0
+                - install.version|default(undercloud_version)|openstack_release >= 10
+            tags: skip_ansible_lint
 
-      - fail:
-            msg: "Scale operation has failed... :("
-        when: overcloud_scale is defined and overcloud_scale.rc != 0
+          - fail:
+                msg: "Scale operation has failed... :("
+            when: overcloud_scale is defined and overcloud_scale.rc != 0
+        when: install.version|default(undercloud_version) | openstack_release < 17
 
       - name: check if overcloud compute service is available
         shell: |
@@ -261,7 +357,9 @@
                 neutron agent-delete {{ openwsitch_agent_id.stdout }}
             tags: skip_ansible_lint
             ignore_errors: yes
-        when: ov_compute.rc == 0
+        when:
+            - ov_compute.rc == 0
+            - install.version|default(undercloud_version) | openstack_release < 17
 
 - name: Remove Openshift scaled down node
   hosts: openshift-master[0]
