@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1466e682_56aeb9d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019635
+      },
+      "writtenOn": "2022-07-13T06:56:10Z",
+      "side": 1,
+      "message": "Tested extensively by David on staging. Here is a passed scale down job:\nhttps://rhos-ci-staging-jenkins.lab.eng.tlv2.redhat.com/view/DFG/view/df/view/rfe/job/DFG-df-rfe-17.0-virsh-3cont_3comp_1ceph-blacklist-1compute-scaledown/52/\nTo see the logs from the patch go to this file in the archive: ir-cloud-config-scale-down.log",
+      "revId": "2ed11c8a77cea4a901dc1488c6a0b7ae1c267c8a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
