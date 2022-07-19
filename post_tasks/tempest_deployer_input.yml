@@ -59,6 +59,12 @@
                   option: plugins
                   value: "ambari,cdh,mapr"
                   condition: "{{ (install.version|default(undercloud_version)|openstack_release >= 12) and (install.version|default(undercloud_version)|openstack_release <= 15) }}"
+                # Ceph RGW does not support sha256 (fips compliant) yet https://bugzilla.redhat.com/show_bug.cgi?id=2105950
+                # so for now with ceph/rgw tempest needs to be configured to sha1 as per https://bugzilla.redhat.com/show_bug.cgi?id=2107098 
+                - section: object-storage-feature-enabled
+                  option: tempurl_digest_hashlib
+                  value: "sha1"
+                  condition: "{{ (install.version|default(undercloud_version)|openstack_release >= 17) and storage_backend.startswith('ceph') }}"
         ini_file:
             dest: "{{ inventory_dir }}/{{ deployer_input | basename }}"
             section: "{{ item.section }}"
