@@ -5,7 +5,7 @@
 # the default RSA(-2) keys.
 
 - name: Create and distribute an alternative set of SSH keys
-  hosts: overcloud_nodes:!unused
+  hosts: undercloud
   vars:
       alternative_overcloud_key_path: '/home/stack/.ssh/id_extra_keys'
   tasks:
@@ -18,14 +18,21 @@
         args:
             creates: "{{ alternative_overcloud_key_path }}"
         run_once: yes
-        delegate_to: "{{ groups['undercloud'][0] }}"
 
       - name: register the new public key
         shell: |
             cat {{ alternative_overcloud_key_path }}.pub
         register: alternative_overcloud_public_key
-        delegate_to: "{{ groups['undercloud'][0] }}"
 
+      - name: authorize the new key
+        authorized_key:
+            user: "{{ install.user.name }}"
+            key: "{{ alternative_overcloud_public_key.stdout }}"
+
+
+- name: Authorize the new key on overcloud nodes
+  hosts: overcloud_nodes:!unused
+  tasks:
       - name: authorize the new key
         authorized_key:
             user: "{{ install.overcloud.ssh.user }}"
