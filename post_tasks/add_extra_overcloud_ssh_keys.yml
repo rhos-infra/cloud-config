@@ -5,7 +5,7 @@
 # the default RSA(-2) keys.
 
 - name: Create and distribute an alternative set of SSH keys
-  hosts: overcloud_nodes:!unused
+  hosts: overcloud_nodes:!unused:undercloud
   vars:
       alternative_overcloud_key_path: '/home/stack/.ssh/id_extra_keys'
   tasks:
