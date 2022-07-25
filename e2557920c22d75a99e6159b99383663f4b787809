@@ -16,6 +16,23 @@
       "message": "Verified Here:\nhttp://staging-jenkins2-qe-playground.usersys.redhat.com/job/DFG-network-networking-ovn-17.0_director-rhel-virthost-3cont_2comp-ipv4-geneve-gate-ovn-MAOR_TEST/3",
       "revId": "e2557920c22d75a99e6159b99383663f4b787809",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9cad914_2d34bdeb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2022-07-25T08:31:51Z",
+      "side": 1,
+      "message": "Still same condition, 17 only?",
+      "revId": "e2557920c22d75a99e6159b99383663f4b787809",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
