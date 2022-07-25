@@ -33,6 +33,24 @@
       "message": "Still same condition, 17 only?",
       "revId": "e2557920c22d75a99e6159b99383663f4b787809",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "403f4652_ebcb5d46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019772
+      },
+      "writtenOn": "2022-07-25T09:03:36Z",
+      "side": 1,
+      "message": "AFAIK we encountered this problem only on OSP17 jobs.\nI checked and didn\u0027t see such problem in our recent 16.1/16.2 job runs.",
+      "parentUuid": "a9cad914_2d34bdeb",
+      "revId": "e2557920c22d75a99e6159b99383663f4b787809",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
