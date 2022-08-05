@@ -49,8 +49,13 @@
             - name: Run heat agent script
               include_tasks: ../tasks/scale/up/splitstack/heat_agent_install.yml
 
+            - name: Perform baremetal scale up
+              include_tasks: ../tasks/scale/up/splitstack/baremetal_scale_up.yml
+              when: install.version|default(undercloud_version) | openstack_release >= 17
+
             - name: Scale up splitstack install
               include_tasks: ../tasks/scale/up/splitstack/templates_update.yml
+              when: install.version|default(undercloud_version) | openstack_release < 17
 
         when: install.splitstack|default(False)
 
@@ -73,6 +78,46 @@
         when:
             - install.use.limit
             - install.scale.nodes
+            - install.version|default(undercloud_version) | openstack_release < 17
+
+      - block:
+        - name: Concatenate list of nodes
+          set_fact:
+            scale_string: "{{ install.scale.nodes | join(',') }}"
+
+        - name: Add external_deploy_steps to deployment command
+          lineinfile:
+            path: "{{ overcloud_deploy_script }}"
+            insertafter: "openstack overcloud deploy"
+            line: "--tags external_deploy_steps \\"
+
+        - name: Execute the overcloud deploy script with tags external_deploy_steps
+          shell: |
+              source ~/stackrc
+              bash {{ overcloud_deploy_script }} &> overcloud_scale_up_external_deploy.log
+          register: overcloud_scale_tags
+          ignore_errors: yes
+
+        - name: Print the last few lines of the output to spot failures
+          command: tail -n60 overcloud_scale_up_external_deploy.log
+
+        - name: Verify stack update with just tags external_deploy_steps was successful
+          fail:
+            msg: "Overcloud scale up failed... :("
+          when:
+            - overcloud_scale_tags is defined
+            - overcloud_scale_tags.rc != 0
+
+        - name: Add limit to deployment command
+          lineinfile:
+            path: "{{ overcloud_deploy_script }}"
+            regexp: "--tags external_deploy_steps"
+            line: "--limit {{scale_string}} --skip-tags external_deploy_steps \\"
+
+        when:
+            - install.use.limit
+            - install.scale.nodes
+            - install.version|default(undercloud_version) | openstack_release >= 17
 
       - name: Print deploy command
         command: "cat {{ overcloud_deploy_script }}"
