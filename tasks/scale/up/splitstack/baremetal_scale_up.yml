@@ -1,0 +1,48 @@
+- name: set baremetal_deployment file path
+  set_fact:
+      baremetal_deployment_path: "{{ ansible_user_dir }}/composable_roles/network"
+
+- name: calculate new nodes count
+  set_fact:
+      new_nodes_count: "{{ new_nodes_count|default({})|combine({ node_type: (new_nodes_count|default({})).get(node_type)|default(0)|int + 1 }) }}"
+  vars:
+      node_type: "{{ item.rstrip('1234567890-').split('-')[-1] }}"
+  with_items: "{{ install.scale.nodes }}"
+
+- name: get current scale for nodes from baremetal_deployment.yaml
+  shell: |
+     cat "{{ baremetal_deployment_path }}/baremetal_deployment.yaml" | grep -A1 {{ node_type | capitalize }} | grep count | awk '{print $2}'
+  vars:
+      node_type: "{{ item.key }}"
+  with_dict: "{{ new_nodes_count }}"
+  register: current_node_count
+
+- name: Update scale count in baremetal_deployment.yaml
+  replace:
+      path: "{{ baremetal_deployment_path }}/baremetal_deployment.yaml"
+      regexp: "({{ item.item.key | capitalize }}\n.+count:) {{ item.stdout }}"
+      replace: "\\1 {{ item.stdout|int + new_nodes_count[item.item.key]|int }}"
+      backup: yes
+  with_items: "{{ current_node_count.results }}"
+
+- name: get splitstack baremetal deployment add instance script
+  copy:
+      src: "files/insert_splitstack_instance.sh"
+      dest: "insert_splitstack_instance.sh"
+      mode: 0755
+
+- name: add instance to baremetal deployment yaml
+  shell: |
+      mv {{ baremetal_deployment_path }}/baremetal_deployment.yaml {{ baremetal_deployment_path }}/baremetal_deployment_preinstance.yaml
+      ./insert_splitstack_instance.sh {{ baremetal_deployment_path }}/baremetal_deployment_preinstance.yaml {{ item.rstrip('1234567890-').split('-')[-1] | capitalize }} {{ item }} {{ hostvars[item].ansible_host| default(hostvars[item].ansible_ssh_host) }} > {{ baremetal_deployment_path }}/baremetal_deployment.yaml
+  with_items: "{{ install.scale.nodes }}"
+
+- name: Print baremetal_deployment.yaml
+  command: cat "{{ baremetal_deployment_path }}/baremetal_deployment.yaml"
+
+- name: Provision the ("baremetal") nodes
+  shell: |
+      source ~/stackrc
+      set -o pipefail
+      openstack overcloud node provision -y --overcloud-ssh-user {{ install.overcloud.ssh.user }} --network-config --stack {{ install.overcloud.stack }} -o {{ ansible_user_dir }}/templates/overcloud-baremetal-deployed.yaml {{ baremetal_deployment_path }}/baremetal_deployment.yaml | \
+      tee -a {{ ansible_user_dir }}/overcloud_provision_nodes_scaleup.log
