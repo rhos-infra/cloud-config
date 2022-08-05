@@ -77,4 +77,11 @@
         state: latest
     when: install.version|default(undercloud_version) |openstack_release >= 15
     become: true
+
+  - name: Install rhosp-release package
+    package:
+        name: 'rhosp-release'
+        state: latest
+    when: install.version|default(undercloud_version) |openstack_release >= 17
+    become: true
   delegate_to: "{{ scale_node }}"
