@@ -77,4 +77,17 @@
         state: latest
     when: install.version|default(undercloud_version) |openstack_release >= 15
     become: true
+
+  - name: Install packages
+    package:
+        name:
+          - containers-common
+          - podman
+          - rhosp-release
+          - tuned-profiles-cpu-partitioning
+        state: latest
+    when:
+       - install.use.limit
+       - install.version|default(undercloud_version) |openstack_release >= 17
+    become: true
   delegate_to: "{{ scale_node }}"

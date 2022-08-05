@@ -49,8 +49,13 @@
             - name: Run heat agent script
               include_tasks: ../tasks/scale/up/splitstack/heat_agent_install.yml
 
+            - name: Perform baremetal scale up
+              include_tasks: ../tasks/scale/up/splitstack/baremetal_scale_up.yml
+              when: install.version|default(undercloud_version) | openstack_release >= 17
+
             - name: Scale up splitstack install
               include_tasks: ../tasks/scale/up/splitstack/templates_update.yml
+              when: install.version|default(undercloud_version) | openstack_release < 17
 
         when: install.splitstack|default(False)
 
@@ -69,6 +74,16 @@
             path: "{{ overcloud_deploy_script }}"
             insertafter: "openstack overcloud deploy"
             line: "--limit {{scale_string}} --skip-tags external_deploy_steps --tags all \\"
+          when:
+              - install.version|default(undercloud_version) | openstack_release < 17
+
+        - name: Add limit to deployment command
+          lineinfile:
+            path: "{{ overcloud_deploy_script }}"
+            insertafter: "openstack overcloud deploy"
+            line: "--limit Undercloud,Controller,{{scale_string}} \\"
+          when:
+              - install.version|default(undercloud_version) | openstack_release >= 17
 
         when:
             - install.use.limit
