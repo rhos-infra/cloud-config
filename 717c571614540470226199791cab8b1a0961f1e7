@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "259f58d9_e32e200e",
+        "filename": "post_tasks/add_extra_overcloud_ssh_keys.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1003043
+      },
+      "writtenOn": "2022-08-18T13:45:51Z",
+      "side": 1,
+      "message": "\u0027",
+      "revId": "717c571614540470226199791cab8b1a0961f1e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
