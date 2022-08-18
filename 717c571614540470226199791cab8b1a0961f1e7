@@ -33,6 +33,23 @@
       "message": "\u0027",
       "revId": "717c571614540470226199791cab8b1a0961f1e7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02f302a4_21b81655",
+        "filename": "post_tasks/add_overcloud_hosts.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1003043
+      },
+      "writtenOn": "2022-08-18T15:34:38Z",
+      "side": 1,
+      "message": "install.version|default(undercloud_version)",
+      "revId": "717c571614540470226199791cab8b1a0961f1e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
