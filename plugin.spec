@@ -116,8 +116,7 @@ subparsers:
 
                   overcloud-ssh-user:
                       type: Value
-                      help: Defines the overcloud ssh user name
-                      default: heat-admin
+                      help: Defines the overcloud ssh user name (Deprecated)
 
             - title: TripleO User
               options:
