@@ -31,7 +31,7 @@
   tasks:
       - name: authorize the new key
         authorized_key:
-            user: "{{ install.overcloud.ssh.user }}"
+            user: "{{ install.overcloud.ssh.user|default( ((install.version | default(hostvars[groups['undercloud']|first].undercloud_version)) | openstack_release > 16 ) | ternary('tripleo-admin', 'heat-admin') ) }}"
             key: "{{ alternative_overcloud_public_key.stdout }}"
 
 - name: Authorize the new key on undercloud
