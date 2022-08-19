@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cea2fade_cb4d4d30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003043
+      },
+      "writtenOn": "2022-08-19T10:45:05Z",
+      "side": 1,
+      "message": "ops. swap the two expression",
+      "revId": "dcdde1b9f8d0ed1468aaa66bfafb98dda52a3059",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
