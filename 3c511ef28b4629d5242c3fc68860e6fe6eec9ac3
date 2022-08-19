@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49d84b4b_27ee56bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003043
+      },
+      "writtenOn": "2022-08-19T14:11:24Z",
+      "side": 1,
+      "message": "Probably dropping this and moving the 2th version immediately.",
+      "revId": "3c511ef28b4629d5242c3fc68860e6fe6eec9ac3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fa10182_189f4588",
+        "filename": "post_tasks/add_extra_overcloud_ssh_keys.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1003043
+      },
+      "writtenOn": "2022-08-19T14:11:24Z",
+      "side": 1,
+      "message": "cannot do it for other user.",
+      "revId": "3c511ef28b4629d5242c3fc68860e6fe6eec9ac3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
