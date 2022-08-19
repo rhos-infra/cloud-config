@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59e6eed7_87628f3b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2022-08-19T15:15:57Z",
+      "side": 1,
+      "message": "If the gates agree, it seems fine.",
+      "revId": "e39c0d3a0506d8a8ddca2e191d8d0c0fb9db4ce8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
