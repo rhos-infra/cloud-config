@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b3fee5e_312e8561",
+        "filename": "post_tasks/scale_up.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1010634
+      },
+      "writtenOn": "2022-08-22T13:22:16Z",
+      "side": 1,
+      "message": "this line param is the only thing that seems to differ between osp\u003c17 and osp\u003e\u003d17 hence I\u0027d suggest not to copy/paste the block of these tasks for osp\u003e\u003d17 but instead in the existing block set the var (i.e.: line_to_add) conditionally based on osp version",
+      "range": {
+        "startLine": 92,
+        "startChar": 12,
+        "endLine": 92,
+        "endChar": 30
+      },
+      "revId": "58fc8a9ada799b7394f1e58495d67500006ecc81",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
