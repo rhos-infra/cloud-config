@@ -22,6 +22,23 @@
       },
       "revId": "58fc8a9ada799b7394f1e58495d67500006ecc81",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce22f66e_c8f410a9",
+        "filename": "tasks/scale/up/splitstack/heat_agent_install.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1005097
+      },
+      "writtenOn": "2022-08-26T10:51:02Z",
+      "side": 1,
+      "message": "I wonder what changed that this code needs to be scoped now. It was previously executed in OSP17 deployments, right?",
+      "revId": "58fc8a9ada799b7394f1e58495d67500006ecc81",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
