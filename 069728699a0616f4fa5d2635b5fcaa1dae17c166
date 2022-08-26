@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e9a49bc_1f6440d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1017725
+      },
+      "writtenOn": "2022-08-26T13:48:42Z",
+      "side": 1,
+      "message": "Link to a passing splitstack scale up job: https://rhos-ci-staging-jenkins.lab.eng.tlv2.redhat.com/view/DFG/view/df/view/splitstack/job/DFG-df-splitstack-17.0-virsh-3cont_2comp_3ceph-scaleup/121/",
+      "revId": "069728699a0616f4fa5d2635b5fcaa1dae17c166",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}

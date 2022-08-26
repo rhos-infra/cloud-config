@@ -24,6 +24,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c471f5d_283c2907",
+        "filename": "post_tasks/scale_up.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1017725
+      },
+      "writtenOn": "2022-08-26T13:48:42Z",
+      "side": 1,
+      "message": "Patch set 3 was changed to not copy the block.",
+      "parentUuid": "1b3fee5e_312e8561",
+      "range": {
+        "startLine": 92,
+        "startChar": 12,
+        "endLine": 92,
+        "endChar": 30
+      },
+      "revId": "58fc8a9ada799b7394f1e58495d67500006ecc81",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce22f66e_c8f410a9",
@@ -37,6 +61,24 @@
       "writtenOn": "2022-08-26T10:51:02Z",
       "side": 1,
       "message": "I wonder what changed that this code needs to be scoped now. It was previously executed in OSP17 deployments, right?",
+      "revId": "58fc8a9ada799b7394f1e58495d67500006ecc81",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1e60637_27ccfbe5",
+        "filename": "tasks/scale/up/splitstack/heat_agent_install.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1017725
+      },
+      "writtenOn": "2022-08-26T13:48:42Z",
+      "side": 1,
+      "message": "The only place I see heat_agent_install.yml being executed in current jobs is in splitstack scale up. What is being done in OSP17 is the heat-agent-install is being skipped and the baremetal provision is being executed instead.",
+      "parentUuid": "ce22f66e_c8f410a9",
       "revId": "58fc8a9ada799b7394f1e58495d67500006ecc81",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
