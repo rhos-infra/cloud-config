@@ -1,0 +1,8 @@
+Code-Review+2: Szymon Datko <sdatko@redhat.com>
+Code-Review+2: Name of user not set #1020069
+Verified+1: Arie Bregman <abregman@redhat.com>
+Submitted-by: Arie Bregman <abregman@redhat.com>
+Submitted-at: Wed, 07 Sep 2022 11:14:16 +0000
+Reviewed-on: https://review.gerrithub.io/c/rhos-infra/cloud-config/+/543132
+Project: rhos-infra/cloud-config
+Branch: refs/heads/master
