@@ -5,9 +5,10 @@
 # the default RSA(-2) keys.
 
 - name: Create and distribute an alternative set of SSH keys
-  hosts: overcloud_nodes:!unused:undercloud
+  hosts: "overcloud_nodes:!unused:undercloud{{ (tester_node|length > 0) | ternary( ':' + tester_node, '') }}"
+  gather_facts: no
   vars:
-      alternative_overcloud_key_path: '/home/stack/.ssh/id_extra_keys'
+      alternative_overcloud_key_path: '~/.ssh/id_extra_keys'
   tasks:
       # do not use openssh_keypair: it always add the -C option,
       # which changes the format of the key in a way that makes it
@@ -18,26 +19,33 @@
         args:
             creates: "{{ alternative_overcloud_key_path }}"
         run_once: yes
-        delegate_to: "{{ groups['undercloud'][0] }}"
+        delegate_to: "{{ (tester_node|length > 0) | ternary(tester_node, groups['undercloud'][0]) }}"
 
       - name: register the new public key
         shell: |
             cat {{ alternative_overcloud_key_path }}.pub
         register: alternative_overcloud_public_key
-        delegate_to: "{{ groups['undercloud'][0] }}"
+        delegate_to: "{{ (tester_node|length > 0) | ternary(tester_node, groups['undercloud'][0]) }}"
 
 - name: Authorize the new key on overcloud nodes
   hosts: overcloud_nodes:!unused
+  gather_facts: no
   tasks:
       - name: authorize the new key
         authorized_key:
             user: "{{ install.overcloud.ssh.user|default(ansible_user) }}"
             key: "{{ alternative_overcloud_public_key.stdout }}"
 
-- name: Authorize the new key on undercloud
-  hosts: undercloud
+- name: Authorize the new key on undercloud and tester node
+  hosts: "undercloud{{ (tester_node|length > 0) | ternary( ':' + tester_node, '') }}"
+  gather_facts: no
   tasks:
-      - name: authorize the new key
+      - name: authorize the new key on the undercloud/tester node
+        vars:
+            username: >-
+              {{ (inventory_hostname != tester_node) |
+                  ternary(install.user.name,
+                          (tester_username|length > 0) | ternary(tester_username, ansible_user)) }}
         authorized_key:
-            user: "{{ install.user.name }}"
+            user: "{{ username }}"
             key: "{{ alternative_overcloud_public_key.stdout }}"
