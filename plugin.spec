@@ -313,6 +313,10 @@ subparsers:
                       type: Value
                       help: |
                           Password to be set in guest image for root user
+                  tester-node:
+                      type: Value
+                      help: |
+                        The name of the node from where to run the tests.
             - title: Workload Launch
               options:
                   workload-image-url:
