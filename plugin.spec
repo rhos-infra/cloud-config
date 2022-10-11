@@ -313,6 +313,19 @@ subparsers:
                       type: Value
                       help: |
                           Password to be set in guest image for root user
+                  tester-node:
+                      type: Value
+                      help: |
+                        The name of the node from where the tests will be run
+                        (tempest, tobiko, rally, etc) and the post/config tasks
+                        are performed.
+                        NOTE: currently the only tasks applied to this node is
+                        the generation of extra ssh keys and their exchange
+                        with overcloud nodes.
+                  tester-username:
+                      type: Value
+                      help: The installation user name that will be used on the tester-node.
+
             - title: Workload Launch
               options:
                   workload-image-url:
