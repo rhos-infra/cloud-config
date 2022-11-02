@@ -16,6 +16,23 @@
       "message": "A solution based on this would be more elegant:\nhttps://docs.ansible.com/ansible/devel/collections/ansible/utils/ipv6_filter.html\n\nBut:\n1) I don\u0027t know if ansible.utils collection is available in the CI nodes\n2) The output of the command is always IPv4 and or IPv6 addresses, so this grep should be enough",
       "revId": "873d5a1883431598d760276feab03ddb7783f7dc",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b123db3f_522c6db9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1016206
+      },
+      "writtenOn": "2022-11-02T15:50:46Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "873d5a1883431598d760276feab03ddb7783f7dc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
