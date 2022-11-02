@@ -207,7 +207,7 @@
             # Use jq twice to parse OSP13 and OSP16 output format
             openstack router show -f json -c external_gateway_info \
                 {{ router_create.router.name }} | \
-                jq -r ".external_gateway_info" | jq -r ".external_fixed_ips[].ip_address" | grep ::
+                jq -r ".external_gateway_info" | jq -r ".external_fixed_ips[].ip_address" | grep :
         register: router_public_address
         when: ipv6_subnet is defined
 
