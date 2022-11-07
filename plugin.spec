@@ -435,3 +435,10 @@ subparsers:
                       type: Bool
                       help: Specifies do we need to re-use the same node for replacement
                       default: no
+            - title: BGP
+              options:
+                  bgp:
+                      type: Bool
+                      help: |
+                          This flag determines whether OSP is installed with BGP functionality enabled
+                      default: no
