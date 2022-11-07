@@ -431,3 +431,13 @@ subparsers:
                       type: Bool
                       help: Specifies do we need to re-use the same node for replacement
                       default: no
+            - title: BGP
+              options:
+                  bgp-enabled:
+                      type: Bool
+                      help: |
+                          This flag should be enabled when running cloud-config
+                          tasks on an OSP environment with BGP functionality configured.
+                          When it is set to True, some tasks may be added or skipped
+                          For example: some routes may be skipped, since BGP adds them automatically
+                      default: no
