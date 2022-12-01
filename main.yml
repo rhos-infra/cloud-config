@@ -4,6 +4,13 @@
   tags:
       - always
 
+- host: something
+  tasks:
+   - command: chdir=/tmp executable=/bin/date date
+   - vars_prompt:
+     - name: unused
+       prompt: Tell me x:
+
 - name: Fetch tempest deployer input file
   import_playbook: post_tasks/tempest_deployer_input.yml
   when: "'tempest_deployer_input' in install.tasks"
