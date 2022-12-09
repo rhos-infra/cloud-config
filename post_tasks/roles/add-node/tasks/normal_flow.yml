@@ -51,7 +51,7 @@
       - skip_ansible_lint
       - an_introspection
 
-- name: set additional properties
+- name: set additional properties for non controller nodes
   shell: |
       source ~/stackrc
       openstack baremetal node set --property capabilities='profile:{{ item.item.rstrip('1234567890-').split('-')[-1] }},boot_option:local' {{ item.stdout }}
@@ -59,7 +59,21 @@
   tags:
       - skip_ansible_lint
       - an_tagging
-  when: not install.specific.node.ids
+  when:
+      - not install.specific.node.ids
+      - '"controller" not in item.item'
+
+- name: set additional properties for controller nodes
+  shell: |
+      source ~/stackrc
+      openstack baremetal node set --property capabilities='profile:control,boot_option:local' {{ item.stdout }}
+  with_items: "{{ nodes_uuid_info.results }}"
+  tags:
+      - skip_ansible_lint
+      - an_tagging
+  when:
+      - not install.specific.node.ids
+      - '"controller" in item.item'
 
 - block:
     - name: get baremetal info about new UUIDs
@@ -138,7 +152,7 @@
   when:
       - check_nodename.rc == 0
       - install.resource.class.enabled
-      - install.version|default(undercloud_version)|openstack_release >= 12
+      - install.version|default(undercloud_version)|openstack_release >= 12 and install.version|default(undercloud_version)|openstack_release < 17
 
 # note this changed in OSP16. See rhbz#1773760 for context
 - name: Set baremetal node driver options
@@ -232,3 +246,91 @@
         command: "cat {{ nodes_data_path.stdout }}"
 
   when: is_node_data.rc == 0
+
+- name: Update baremetal_deployment.yaml and provision new node
+  block:
+      - name: set source path variable when deployment files are defined
+        set_fact:
+            source_dir: "{{ install.deployment.files }}"
+        when: install.deployment.files is defined
+
+      - name: set source path variable when deployment files are not defined
+        set_fact:
+            source_dir: virt
+        when: install.deployment.files is not defined
+
+      - name: set baremetal_deployment file path
+        set_fact:
+            baremetal_deployment_path: "{{ ansible_user_dir }}/{{ source_dir | basename }}/network"
+
+      - name: get controller to remove uuid
+        shell: |
+            source /home/stack/stackrc
+            openstack baremetal node show {{ install.controller.to.remove }} -c uuid -f value
+        register: scale_node_uuid
+
+      - name: get controller to remove hostname
+        shell: |
+            source /home/stack/stackrc
+            metalsmith -c Hostname -f value show {{ scale_node_uuid.stdout }}
+        register: scale_down_hostname
+
+      - name: get baremetal deployment add instance script
+        copy:
+            src: "files/insert_instance.sh"
+            dest: "insert_instance.sh"
+            mode: 0755
+
+      - name: add instance to baremetal deployment yaml
+        shell: |
+            mv {{ baremetal_deployment_path }}/baremetal_deployment.yaml {{ baremetal_deployment_path }}/baremetal_deployment_preinstance.yaml
+            ./insert_instance.sh {{ baremetal_deployment_path }}/baremetal_deployment_preinstance.yaml {{ node_type | capitalize }} {{ scale_down_hostname.stdout }} {{ install.controller.to.remove }} > {{ baremetal_deployment_path }}/baremetal_deployment.yaml
+        vars:
+            node_type: "{{ install.controller.to.remove.rstrip('1234567890-').split('-')[-1] }}"
+
+      - name: Print baremetal_deployment.yaml
+        command: cat "{{ baremetal_deployment_path }}/baremetal_deployment.yaml"
+
+      - name: Execute delete command
+        shell: |
+            source ~/stackrc
+            set -o pipefail
+            openstack overcloud node delete -y --stack {{ install.overcloud.stack }} --baremetal-deployment "{{ baremetal_deployment_path }}/baremetal_deployment.yaml" | tee -a {{ ansible_user_dir }}/overcloud_scaledown.log
+
+      - name: Provision the ("baremetal") nodes
+        shell: |
+            source ~/stackrc
+            set -o pipefail
+            openstack overcloud node provision -y --network-config --stack {{ install.overcloud.stack }} -o {{ ansible_user_dir }}/templates/overcloud-baremetal-deployed.yaml {{ baremetal_deployment_path }}/baremetal_deployment.yaml | \
+            tee -a {{ ansible_user_dir }}/overcloud_provision_nodes_scaleup.log
+
+      - name: Add ceph admin user to new node
+        shell: |
+            source ~/stackrc
+            openstack overcloud ceph spec -y --stack {{ install.overcloud.stack }} {{ ansible_user_dir }}/templates/overcloud-baremetal-deployed.yaml -o ceph_spec_host.yaml
+            openstack overcloud ceph user enable --stack {{ install.overcloud.stack }} ceph_spec_host.yaml
+        when: "'ceph' in groups"
+
+      - name: Get uuid of new controller
+        shell: |
+            source /home/stack/stackrc
+            openstack baremetal node show {{ install.controller.to.add }} -c uuid -f value
+        register: new_controller_uuid
+        when: "'ceph' in groups"
+
+      - name: Get IP Address of new controller
+        shell: |
+            source /home/stack/stackrc
+            metalsmith -c "IP Addresses" -f value show {{ new_controller_uuid.stdout }} | grep -oe '\([0-9.]*\)'
+        register: new_controller_ip
+        when: "'ceph' in groups"
+
+      - name: Add new controller from an existing controller
+        shell: |
+            cephadm shell -- ceph orch host add {{ install.controller.to.add }} {{ new_controller_ip.stdout }} "_admin mon mgr"
+            cephadm shell -- ceph orch host ls
+        delegate_to: "{{ _target_controller }}"
+        become: true
+        when: "'ceph' in groups"
+  when:
+      - install.version|default(undercloud_version)|openstack_release >= 17

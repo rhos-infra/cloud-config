@@ -20,6 +20,14 @@
   become: true
   register: ceph_mon_stat
   delegate_to: "{{ _target_controller }}"
+  when: install.version|default(undercloud_version)|openstack_release < 17
+
+- name: get mon stats for release 17 and after
+  shell: "cephadm shell -- ceph mon stat 0> /dev/null"
+  become: true
+  register: ceph_mon_stat
+  delegate_to: "{{ _target_controller }}"
+  when: install.version|default(undercloud_version)|openstack_release >= 17
 
 - name: get ip address of the monitor to remove
   set_fact:
@@ -54,3 +62,128 @@
         with_items: "{{ rc_valid_controller_nodes }}"
         when: controller_remove_ip is defined
   become: yes
+  when: install.version|default(undercloud_version)|openstack_release < 17
+
+- name: remove mon service for release 17 and after
+  block:
+      - name: get ceph mon service name
+        shell: "systemctl --type=service |  grep -o 'ceph.*mon.*service'"
+        register: ceph_mon_name
+        delegate_to: "{{ install.controller.to.remove }}"
+        when:
+            - rc_controller_is_reachable
+
+      - name: stop ceph mon service when node is reachable
+        command: "systemctl stop {{ ceph_mon_name.stdout }}"
+        delegate_to: "{{ install.controller.to.remove }}"
+        when:
+            - rc_controller_is_reachable
+
+      - name: disable ceph mon service when node is reachable
+        command: "systemctl disable {{ ceph_mon_name.stdout }}"
+        delegate_to: "{{ install.controller.to.remove }}"
+        when:
+            - rc_controller_is_reachable
+
+      - name: export ceph spec on working controller
+        shell: "cephadm shell -- ceph orch ls --export > spec.yml"
+        when: install.controller.to.remove in ceph_mon_stat.stdout
+        delegate_to: "{{ _target_controller }}"
+
+      - name: remove the monitor from the cluster
+        shell: "cephadm shell -- ceph mon remove {{ install.controller.to.remove }}"
+        when: install.controller.to.remove in ceph_mon_stat.stdout
+        delegate_to: "{{ _target_controller }}"
+
+      - name: get ceph manager service name
+        shell: "systemctl --type=service |  grep -o 'ceph.*mgr.*service'"
+        register: ceph_mgr_name
+        delegate_to: "{{ install.controller.to.remove }}"
+        when:
+            - rc_controller_is_reachable
+
+      - name: stop ceph manager service when node is reachable
+        command: "systemctl stop {{ ceph_mgr_name.stdout }}"
+        delegate_to: "{{ install.controller.to.remove }}"
+        when:
+            - rc_controller_is_reachable
+
+      - name: disable ceph manager service when node is reachable
+        command: "systemctl disable {{ ceph_mgr_name.stdout }}"
+        delegate_to: "{{ install.controller.to.remove }}"
+        when:
+            - rc_controller_is_reachable
+
+      - name: wait for old controller to be removed from ceph status
+        shell: "cephadm shell ceph -s"
+        delegate_to: "{{ install.controller.to.remove }}"
+        register: ceph_remove_status
+        until: '"{{ install.controller.to.remove }}" not in ceph_remove_status.stdout'
+        retries: 20
+        delay: 3
+        when:
+            - rc_controller_is_reachable
+
+      - name: export spec.yml on controller being removed
+        shell: "cephadm shell ceph orch ls --export > spec.yml"
+        delegate_to: "{{ install.controller.to.remove }}"
+        when:
+            - rc_controller_is_reachable
+
+      - name: remove all instances of controller being removed from spec.yml
+        shell: sed -i "/{{ install.controller.to.remove }}/d" spec.yml
+        delegate_to: "{{ install.controller.to.remove }}"
+        when:
+            - rc_controller_is_reachable
+
+      - name: reapply the ceph storage specification
+        shell: "cat spec.yml | sudo cephadm shell -- ceph orch apply -i -"
+        delegate_to: "{{ install.controller.to.remove }}"
+        when:
+            - rc_controller_is_reachable
+
+      - name: wait for ceph daemons to be removed
+        shell: "cephadm shell ceph orch ps {{ install.controller.to.remove }}"
+        delegate_to: "{{ install.controller.to.remove }}"
+        register: ceph_daemon_status_predrain
+        until: ceph_daemon_status_predrain.stdout == "No daemons reported"
+        retries: 20
+        delay: 3
+        ignore_errors: True
+        when:
+            - rc_controller_is_reachable
+
+      - name: drain ceph daemons on host being removed
+        shell: |
+            cp /etc/ceph/ceph.conf /home/tripleo-admin
+            cp /etc/ceph/ceph.client.admin.keyring /home/tripleo-admin
+            cephadm shell ceph orch host drain {{ install.controller.to.remove }}
+            cp /home/tripleo-admin/ceph.conf /etc/ceph
+            cp /home/tripleo-admin/ceph.client.admin.keyring /etc/ceph
+            rm /home/tripleo-admin/ceph.conf
+            rm /home/tripleo-admin/ceph.client.admin.keyring
+        delegate_to: "{{ install.controller.to.remove }}"
+        when:
+            - rc_controller_is_reachable
+            - '"No daemons reported" not in ceph_daemon_status_predrain.stdout'
+
+      - name: verify ceph daemons were removed
+        shell: "cephadm shell ceph orch ps {{ install.controller.to.remove }}"
+        delegate_to: "{{ install.controller.to.remove }}"
+        register: ceph_daemon_status
+        until: ceph_daemon_status.stdout == "No daemons reported"
+        retries: 20
+        delay: 3
+        when:
+            - rc_controller_is_reachable
+            - '"No daemons reported" not in ceph_daemon_status_predrain.stdout'
+
+      - name: remove controller from ceph storage cluster
+        shell: "cephadm shell ceph orch host rm {{ install.controller.to.remove }}"
+        delegate_to: "{{ install.controller.to.remove }}"
+        register: host_remove_status
+        failed_when: '"Removed  host" not in host_remove_status.stdout'
+        when:
+            - rc_controller_is_reachable
+  become: yes
+  when: install.version|default(undercloud_version)|openstack_release >= 17

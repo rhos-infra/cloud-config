@@ -72,6 +72,8 @@
   shell: |-
     source /home/stack/stackrc
     openstack hypervisor list
+  when:
+    - install.version|default(undercloud_version)|openstack_release < 17
 
 - name: Ensure all undercloud containers are running
   become: true
