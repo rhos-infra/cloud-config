@@ -4,10 +4,29 @@
       openstack server list --name {{ install.controller.to.remove }} -f value -c ID
   register: node_uuid_info
   tags: skip_ansible_lint
+  when:
+      - install.version|default(undercloud_version)|openstack_release < 17
 
 - name: set node_uuid
   set_fact:
       replace_node_uuid: "{{ node_uuid_info.stdout }}"
+  when:
+      - install.version|default(undercloud_version)|openstack_release < 17
+
+- name: get the UUID of "{{ install.controller.to.remove }}"
+  shell: |
+      source ~/stackrc
+      metalsmith -c 'Allocation UUID' -f value show {{ install.controller.to.remove }}
+  register: node_uuid_info
+  tags: skip_ansible_lint
+  when:
+      - install.version|default(undercloud_version)|openstack_release >= 17
+
+- name: set node_uuid
+  set_fact:
+      replace_node_uuid: "{{ node_uuid_info.stdout }}"
+  when:
+      - install.version|default(undercloud_version)|openstack_release >= 17
 
 - name: get baremetal info
   shell: |
@@ -40,17 +59,20 @@
   when:
     - not install.use.the.same.node|bool
 
-- name: create template with controller index to remove
-  template:
-      dest: "/home/stack/remove-controller.yaml"
-      src: remove-controller.yaml.j2
+- block:
+    - name: create template with controller index to remove
+      template:
+          dest: "/home/stack/remove-controller.yaml"
+          src: remove-controller.yaml.j2
 
-- name: append script to the deploy script
-  lineinfile:
-      dest: "{{ overcloud_deploy_script }}"
-      line: "-e /home/stack/remove-controller.yaml \\"
-      insertbefore: "^--log-file.*"
-      backup: yes
+    - name: append script to the deploy script
+      lineinfile:
+          dest: "{{ overcloud_deploy_script }}"
+          line: "-e /home/stack/remove-controller.yaml \\"
+          insertbefore: "^--log-file.*"
+          backup: yes
+  when:
+      - install.version|default(undercloud_version)|openstack_release < 17
 
 - name: print deploy command
   command: "cat {{ overcloud_deploy_script }}"
@@ -70,7 +92,9 @@
   shell: |
       source ~/stackrc
       openstack stack failures list {{ install.overcloud.stack }} --long 2>&1 | tee openstack_failures_replace.log
-  when: overcloud_replace.rc != 0 and undercloud_version|openstack_release >= 10
+  when:
+      - overcloud_replace.rc != 0 and undercloud_version|openstack_release >= 10
+      - install.version|default(undercloud_version)|openstack_release < 17
   tags: skip_ansible_lint
 
 - name: fail on failure
@@ -79,3 +103,24 @@
   when:
       - overcloud_replace is defined
       - overcloud_replace.rc != 0
+
+- block:
+    - name: change each instance of removed controller to new controller in spec.yml
+      shell: sed -i "s/{{ install.controller.to.remove }}/{{ install.controller.to.add }}/g" spec.yml
+      delegate_to: "{{ _target_controller }}"
+
+    - name: reapply the ceph storage specification
+      shell: "cat spec.yml | sudo cephadm shell -- ceph orch apply -i -"
+      delegate_to: "{{ _target_controller }}"
+
+    - name: wait for new controller to be shown in ceph status
+      shell: "cephadm shell ceph -s"
+      delegate_to: "{{  _target_controller }}"
+      register: ceph_add_status
+      until: '"{{ install.controller.to.add }}" in ceph_add_status.stdout and "out of quorum" not in ceph_add_status.stdout'
+      retries: 20
+      delay: 3
+      become: yes
+  when:
+      - install.version|default(undercloud_version)|openstack_release >= 17
+      - "'ceph' in groups"
