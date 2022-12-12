@@ -88,6 +88,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "22d1686b_79722b46",
+        "filename": "post_tasks/roles/add-node/tasks/normal_flow.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1017725
+      },
+      "writtenOn": "2022-12-12T19:46:47Z",
+      "side": 1,
+      "message": "cloud-config plugin does not appear to be branched. At least view all branches does not show individual OSP branches like tripleo-overcloud plugin does. In that case I need to have this line like it is??",
+      "parentUuid": "eb62955b_f15d84db",
+      "revId": "472e9529b20f476871803fc53288aea355010e17",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c979e06c_29ab0e9b",
         "filename": "post_tasks/roles/add-node/tasks/normal_flow.yml",
         "patchSetId": 1
@@ -99,6 +117,24 @@
       "writtenOn": "2022-12-12T15:10:26Z",
       "side": 1,
       "message": "Please note there is more than just composable_roles or virt as options.\n\nThere is --deployment-files, see how it is used in plugins/tripleo-overcloud/build_templates.yml for example\n\n  vars:\n      source_dir: \"{{ install.deployment.files }}\"\n      [...]\n      template_base: \"{{ ansible_user_dir }}/{{ source_dir | basename }}\"",
+      "revId": "472e9529b20f476871803fc53288aea355010e17",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b060370c_eb3ed384",
+        "filename": "post_tasks/roles/add-node/tasks/normal_flow.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1017725
+      },
+      "writtenOn": "2022-12-12T19:46:47Z",
+      "side": 1,
+      "message": "The overcloud deploy stage includes options like these --deployment-files composable_roles or --deployment-files virt. However, existing cloud config stages do not include the --deployment-files option. The result is that {{ install.deployment.files }} isn\u0027t known to cloud-config. It seems that making cloud-config plugin aware of the template location may be outside scope of this review. What do you think? Is handling the most common options of virt and composable_roles enough?",
+      "parentUuid": "c979e06c_29ab0e9b",
       "revId": "472e9529b20f476871803fc53288aea355010e17",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -285,6 +321,24 @@
       "writtenOn": "2022-12-12T16:36:32Z",
       "side": 1,
       "message": "We expect the ceph.yaml to be present because it was created with the following task:\n\nhttps://review.gerrithub.io/c/rhos-infra/cloud-config/+/547322/1/post_tasks/roles/replace-controller/tasks/remove_ceph_monitor.yml#89\n\nIt might help readability of the playbook to state how this file was created. E.g.\n\n  # see remove_ceph_monitor.yml task \"export ceph spec on working controller\"\n  # for information on how spec.yml was created\n  \nOr you could have a task prior to this one which fails early if that file is missing and have the error message say where the file should have come from.",
+      "revId": "472e9529b20f476871803fc53288aea355010e17",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4964bc0e_255aa673",
+        "filename": "post_tasks/roles/replace-controller/tasks/replace_node.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1017725
+      },
+      "writtenOn": "2022-12-12T19:46:47Z",
+      "side": 1,
+      "message": "I will update diffs to include the comment or a new task that prints a message when spec.yml is not found.",
+      "parentUuid": "00356590_18bfd3b4",
       "revId": "472e9529b20f476871803fc53288aea355010e17",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
