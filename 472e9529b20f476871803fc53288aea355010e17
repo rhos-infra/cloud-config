@@ -154,6 +154,24 @@
       "message": "I think this line with `ceph orch host drain` is the only one necessary for this task. I don\u0027t expect the keyring or conf to change as a result of the drain so I don\u0027t think we need the extra cp\u0027s and rm\u0027s.\n\nThe ceph.conf for the ceph server becomes centralized in a DB under cephadm management and the \u0027ceph config\u0027 is authoritative (not ceph.conf). \n\n  https://docs.ceph.com/en/latest/man/8/ceph/#config\n\nceph.conf itself is used my ceph clients (nova) but if the IP if the mon to be replaced stays the same, then they don\u0027t need a new copy. The client ceph.conf is in a diff path defined by:\n\nhttps://github.com/openstack/tripleo-heat-templates/blob/stable/wallaby/deployment/cephadm/ceph-client.yaml#L61",
       "revId": "472e9529b20f476871803fc53288aea355010e17",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed0fb039_f881b763",
+        "filename": "post_tasks/roles/replace-controller/tasks/remove_ceph_monitor.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1017725
+      },
+      "writtenOn": "2022-12-12T15:47:28Z",
+      "side": 1,
+      "message": "I had a lot of trouble with this step. When doing the procedure manually I went into cephadm shell and then executed the host drain command. Worked with no problem. When doing the automation it was all one step i.e. automation executes the command: cephadm shell ceph orch host drain. After that command is executed all ceph commands failed with error: ObjectNotFound(\u0027RADOS object not found. After looking at it for a long time I saw the /etc/ceph/ceph.conf and /etc/ceph/ceph.client.admin.keyring were being deleted. After that I saved them, let them be deleted, and then replaced them. The automation worked after that. If you know of a way to do the ceph drain without it deleting those files then I would do it. I could not find a way.",
+      "parentUuid": "95954291_bc5fad3b",
+      "revId": "472e9529b20f476871803fc53288aea355010e17",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
