@@ -54,6 +54,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eb62955b_f15d84db",
+        "filename": "post_tasks/roles/add-node/tasks/normal_flow.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2022-12-12T15:10:26Z",
+      "side": 1,
+      "message": "Please note that infrared is now branched, so the code can support natively the new behavior. master currently targets OSP17.1 and OSP17 is for 17.0.",
+      "revId": "472e9529b20f476871803fc53288aea355010e17",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c979e06c_29ab0e9b",
+        "filename": "post_tasks/roles/add-node/tasks/normal_flow.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2022-12-12T15:10:26Z",
+      "side": 1,
+      "message": "Please note there is more than just composable_roles or virt as options.\n\nThere is --deployment-files, see how it is used in plugins/tripleo-overcloud/build_templates.yml for example\n\n  vars:\n      source_dir: \"{{ install.deployment.files }}\"\n      [...]\n      template_base: \"{{ ansible_user_dir }}/{{ source_dir | basename }}\"",
+      "revId": "472e9529b20f476871803fc53288aea355010e17",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "24197b63_5458a3d2",
         "filename": "post_tasks/roles/add-node/tasks/normal_flow.yml",
         "patchSetId": 1
