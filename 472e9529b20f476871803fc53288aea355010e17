@@ -50,6 +50,23 @@
       "message": "Controller replacement job passes when using these diffs:  https://rhos-ci-staging-jenkins.lab.eng.tlv2.redhat.com/view/DFG/view/df/view/controller_replacement/job/DFG-df-controller_replacement-17.0-virthost-3cont_3comp_3ceph-yes_UC_SSL-yes_OC_SSL-ceph-ipv4-geneve-replace_controller-RHELOSP-31864/47/",
       "revId": "472e9529b20f476871803fc53288aea355010e17",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24197b63_5458a3d2",
+        "filename": "post_tasks/roles/add-node/tasks/normal_flow.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1015563
+      },
+      "writtenOn": "2022-12-12T14:14:38Z",
+      "side": 1,
+      "message": "Should there not a an `openstack overcloud deploy` step here?",
+      "revId": "472e9529b20f476871803fc53288aea355010e17",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
