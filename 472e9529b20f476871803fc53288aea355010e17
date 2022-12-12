@@ -67,6 +67,24 @@
       "message": "Should there not a an `openstack overcloud deploy` step here?",
       "revId": "472e9529b20f476871803fc53288aea355010e17",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65071364_5108e4d6",
+        "filename": "post_tasks/roles/add-node/tasks/normal_flow.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1017725
+      },
+      "writtenOn": "2022-12-12T14:41:03Z",
+      "side": 1,
+      "message": "The plugin\u0027s existing overcloud deploy command is used which happens a few steps later than the comment. After normal_flow.yml completes the job executes replace_node.yml where the overcloud deploy is executed here: https://review.gerrithub.io/c/rhos-infra/cloud-config/+/547322/1/post_tasks/roles/replace-controller/tasks/replace_node.yml#80",
+      "parentUuid": "24197b63_5458a3d2",
+      "revId": "472e9529b20f476871803fc53288aea355010e17",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
