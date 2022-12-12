@@ -106,6 +106,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c8afd8f5_34cb7a43",
+        "filename": "post_tasks/roles/add-node/tasks/normal_flow.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2022-12-12T20:14:32Z",
+      "side": 1,
+      "message": "You are right, it is part of the plans but it\u0027s not the case yet.",
+      "parentUuid": "22d1686b_79722b46",
+      "revId": "472e9529b20f476871803fc53288aea355010e17",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c979e06c_29ab0e9b",
         "filename": "post_tasks/roles/add-node/tasks/normal_flow.yml",
         "patchSetId": 1
@@ -135,6 +153,24 @@
       "side": 1,
       "message": "The overcloud deploy stage includes options like these --deployment-files composable_roles or --deployment-files virt. However, existing cloud config stages do not include the --deployment-files option. The result is that {{ install.deployment.files }} isn\u0027t known to cloud-config. It seems that making cloud-config plugin aware of the template location may be outside scope of this review. What do you think? Is handling the most common options of virt and composable_roles enough?",
       "parentUuid": "c979e06c_29ab0e9b",
+      "revId": "472e9529b20f476871803fc53288aea355010e17",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a1acb39_f22b926b",
+        "filename": "post_tasks/roles/add-node/tasks/normal_flow.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2022-12-12T20:14:32Z",
+      "side": 1,
+      "message": "They don\u0027t include it but I think the option is injected somehow from the previous infrared calls using the environment variables. In fact at least post_tasks/create_external_network.yml uses it. Have you tried using it?",
+      "parentUuid": "b060370c_eb3ed384",
       "revId": "472e9529b20f476871803fc53288aea355010e17",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
