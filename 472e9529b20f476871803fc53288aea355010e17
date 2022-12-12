@@ -85,6 +85,24 @@
       "parentUuid": "24197b63_5458a3d2",
       "revId": "472e9529b20f476871803fc53288aea355010e17",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70ab2e17_4d339c0b",
+        "filename": "post_tasks/roles/add-node/tasks/normal_flow.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1015563
+      },
+      "writtenOn": "2022-12-12T14:50:03Z",
+      "side": 1,
+      "message": "Ack, thanks for explaining.",
+      "parentUuid": "65071364_5108e4d6",
+      "revId": "472e9529b20f476871803fc53288aea355010e17",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
