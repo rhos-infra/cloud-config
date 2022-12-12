@@ -139,6 +139,46 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d7b2897_429b5eb8",
+        "filename": "post_tasks/roles/replace-controller/tasks/remove_ceph_monitor.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1006992
+      },
+      "writtenOn": "2022-12-12T16:22:00Z",
+      "side": 1,
+      "message": "this procedure looks good to me",
+      "range": {
+        "startLine": 67,
+        "startChar": 8,
+        "endLine": 67,
+        "endChar": 51
+      },
+      "revId": "472e9529b20f476871803fc53288aea355010e17",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "853c5c04_eda869e8",
+        "filename": "post_tasks/roles/replace-controller/tasks/remove_ceph_monitor.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1006992
+      },
+      "writtenOn": "2022-12-12T16:22:00Z",
+      "side": 1,
+      "message": "Right, this task and the next happen not on the node being removed but on another node, e.g. controller-1 in the scratch doc we had.",
+      "revId": "472e9529b20f476871803fc53288aea355010e17",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "95954291_bc5fad3b",
