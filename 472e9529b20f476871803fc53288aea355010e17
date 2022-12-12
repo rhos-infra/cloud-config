@@ -52,6 +52,23 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9412d457_874c1890",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006992
+      },
+      "writtenOn": "2022-12-12T16:36:32Z",
+      "side": 1,
+      "message": "Thank you David. This all looks good to me. I have a minor suggestion for readability and to possibly make it easier to debug in the future.",
+      "revId": "472e9529b20f476871803fc53288aea355010e17",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb62955b_f15d84db",
@@ -82,6 +99,29 @@
       "writtenOn": "2022-12-12T15:10:26Z",
       "side": 1,
       "message": "Please note there is more than just composable_roles or virt as options.\n\nThere is --deployment-files, see how it is used in plugins/tripleo-overcloud/build_templates.yml for example\n\n  vars:\n      source_dir: \"{{ install.deployment.files }}\"\n      [...]\n      template_base: \"{{ ansible_user_dir }}/{{ source_dir | basename }}\"",
+      "revId": "472e9529b20f476871803fc53288aea355010e17",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f54a9de_eb8cc8ef",
+        "filename": "post_tasks/roles/add-node/tasks/normal_flow.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1006992
+      },
+      "writtenOn": "2022-12-12T16:36:32Z",
+      "side": 1,
+      "message": "Good. This will add the host, which is managable (over SSH) via the control-plane IP, to the ceph cluster. It will still bring up the storage service on the storage network by virtue of the ceph configuration of the cluster it joins.",
+      "range": {
+        "startLine": 331,
+        "startChar": 83,
+        "endLine": 331,
+        "endChar": 100
+      },
       "revId": "472e9529b20f476871803fc53288aea355010e17",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -228,6 +268,23 @@
       "side": 1,
       "message": "Interesting. OK, let\u0027s keep it as is for now. I\u0027ll look more into it and let you know and maybe it can be changed in a follow up patch if necessary.",
       "parentUuid": "ed0fb039_f881b763",
+      "revId": "472e9529b20f476871803fc53288aea355010e17",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00356590_18bfd3b4",
+        "filename": "post_tasks/roles/replace-controller/tasks/replace_node.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1006992
+      },
+      "writtenOn": "2022-12-12T16:36:32Z",
+      "side": 1,
+      "message": "We expect the ceph.yaml to be present because it was created with the following task:\n\nhttps://review.gerrithub.io/c/rhos-infra/cloud-config/+/547322/1/post_tasks/roles/replace-controller/tasks/remove_ceph_monitor.yml#89\n\nIt might help readability of the playbook to state how this file was created. E.g.\n\n  # see remove_ceph_monitor.yml task \"export ceph spec on working controller\"\n  # for information on how spec.yml was created\n  \nOr you could have a task prior to this one which fails early if that file is missing and have the error message say where the file should have come from.",
       "revId": "472e9529b20f476871803fc53288aea355010e17",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
