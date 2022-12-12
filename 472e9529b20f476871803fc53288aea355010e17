@@ -172,6 +172,24 @@
       "parentUuid": "95954291_bc5fad3b",
       "revId": "472e9529b20f476871803fc53288aea355010e17",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78a8805e_9a701656",
+        "filename": "post_tasks/roles/replace-controller/tasks/remove_ceph_monitor.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1006992
+      },
+      "writtenOn": "2022-12-12T16:08:33Z",
+      "side": 1,
+      "message": "Interesting. OK, let\u0027s keep it as is for now. I\u0027ll look more into it and let you know and maybe it can be changed in a follow up patch if necessary.",
+      "parentUuid": "ed0fb039_f881b763",
+      "revId": "472e9529b20f476871803fc53288aea355010e17",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
