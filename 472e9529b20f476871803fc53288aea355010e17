@@ -33,6 +33,23 @@
       "message": "recheck",
       "revId": "472e9529b20f476871803fc53288aea355010e17",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5a47aab_9e24cc02",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1017725
+      },
+      "writtenOn": "2022-12-12T13:21:34Z",
+      "side": 1,
+      "message": "Controller replacement job passes when using these diffs:  https://rhos-ci-staging-jenkins.lab.eng.tlv2.redhat.com/view/DFG/view/df/view/controller_replacement/job/DFG-df-controller_replacement-17.0-virthost-3cont_3comp_3ceph-yes_UC_SSL-yes_OC_SSL-ceph-ipv4-geneve-replace_controller-RHELOSP-31864/47/",
+      "revId": "472e9529b20f476871803fc53288aea355010e17",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
