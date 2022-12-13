@@ -175,6 +175,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0ec554f_2d6c3b4c",
+        "filename": "post_tasks/roles/add-node/tasks/normal_flow.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1017725
+      },
+      "writtenOn": "2022-12-13T00:30:38Z",
+      "side": 1,
+      "message": "Yes I tried using it. This task:\n      - name: set source path variable\n        set_fact:\n            source_dir: \"{{ install.deployment.files }}\"\nfails with error: The error was: \u0027dict object\u0027 has no attribute \u0027deployment\u0027\n\nThe normal_flow.yml is part of the roles directory while create_external_network.yml isn\u0027t. Maybe install.deployment.files isn\u0027t available every place in cloud-config.",
+      "parentUuid": "6a1acb39_f22b926b",
+      "revId": "472e9529b20f476871803fc53288aea355010e17",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "2f54a9de_eb8cc8ef",
