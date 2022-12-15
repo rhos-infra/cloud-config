@@ -400,6 +400,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c32f8f3_c5aea293",
+        "filename": "post_tasks/roles/replace-controller/tasks/remove_ceph_monitor.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1006992
+      },
+      "writtenOn": "2022-12-15T15:24:52Z",
+      "side": 1,
+      "message": "I think you could you avoid having to back up these files in /etc/ceph by delegating the rest of the tasks which run ceph commands to other controller nodes which are not being deleted.",
+      "parentUuid": "32c67d8a_4d8becb0",
+      "revId": "472e9529b20f476871803fc53288aea355010e17",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "00356590_18bfd3b4",
         "filename": "post_tasks/roles/replace-controller/tasks/replace_node.yml",
         "patchSetId": 1
