@@ -382,6 +382,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "32c67d8a_4d8becb0",
+        "filename": "post_tasks/roles/replace-controller/tasks/remove_ceph_monitor.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1006992
+      },
+      "writtenOn": "2022-12-15T15:17:20Z",
+      "side": 1,
+      "message": "I\u0027ve opened a bug based on what you described. Perhaps you could add a comment in this task which references that the extra steps are a workaround to BZ 2153827?\n\n  https://bugzilla.redhat.com/show_bug.cgi?id\u003d2153827",
+      "parentUuid": "78a8805e_9a701656",
+      "revId": "472e9529b20f476871803fc53288aea355010e17",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "00356590_18bfd3b4",
         "filename": "post_tasks/roles/replace-controller/tasks/replace_node.yml",
         "patchSetId": 1
