@@ -193,6 +193,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4bbf456_24939b7d",
+        "filename": "post_tasks/roles/add-node/tasks/normal_flow.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1017725
+      },
+      "writtenOn": "2022-12-15T15:13:10Z",
+      "side": 1,
+      "message": "deployment-files are not injected into cloud-config. To get them in cloud-config you have to include them in the jenkins job definition. In controller replacement job the option is ir_cloud_config_replace_controller_override_options: \u0027--deployment-files\u0027. What I did was add a check for existence of install.deployment.files and use it when defined. If its not defined the default of virt is used. This allows users to only have to define deployment-files in their job file when a non-default location is used.",
+      "parentUuid": "f0ec554f_2d6c3b4c",
+      "revId": "472e9529b20f476871803fc53288aea355010e17",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "2f54a9de_eb8cc8ef",
