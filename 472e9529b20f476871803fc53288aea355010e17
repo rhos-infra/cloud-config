@@ -418,6 +418,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4af0afd5_558de63e",
+        "filename": "post_tasks/roles/replace-controller/tasks/remove_ceph_monitor.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1017725
+      },
+      "writtenOn": "2022-12-16T13:35:40Z",
+      "side": 1,
+      "message": "yes, files don\u0027t need to be backed up if the steps after the drain are executed on a different controller. Uploaded new diffs with that change.",
+      "parentUuid": "2c32f8f3_c5aea293",
+      "revId": "472e9529b20f476871803fc53288aea355010e17",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "00356590_18bfd3b4",
         "filename": "post_tasks/roles/replace-controller/tasks/replace_node.yml",
         "patchSetId": 1
