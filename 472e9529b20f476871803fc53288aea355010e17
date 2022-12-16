@@ -436,6 +436,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1b5a5f08_7b7f01f0",
+        "filename": "post_tasks/roles/replace-controller/tasks/remove_ceph_monitor.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1006992
+      },
+      "writtenOn": "2022-12-16T13:53:16Z",
+      "side": 1,
+      "message": "Nice.",
+      "parentUuid": "4af0afd5_558de63e",
+      "revId": "472e9529b20f476871803fc53288aea355010e17",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "00356590_18bfd3b4",
         "filename": "post_tasks/roles/replace-controller/tasks/replace_node.yml",
         "patchSetId": 1
