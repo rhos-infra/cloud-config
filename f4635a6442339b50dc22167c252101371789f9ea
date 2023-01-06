@@ -1,4 +1,22 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3175884_5d951018",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010634
+      },
+      "writtenOn": "2023-01-06T14:22:51Z",
+      "side": 1,
+      "message": "backport to osp17 branch is needed for 17.0 if required ",
+      "revId": "f4635a6442339b50dc22167c252101371789f9ea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ],
   "submitRequirementResults": []
 }
