@@ -50,6 +50,23 @@
       "message": "Example of passing job with new baremetal_deployment.yaml format: https://rhos-ci-staging-jenkins.lab.eng.tlv2.redhat.com/view/DFG/view/df/view/rfe/job/DFG-df-rfe-17.0-virsh-3cont_3db_3msg_2net_2comp_3ceph-blacklist-2networker-compute-replacement/30/",
       "revId": "c695cf53380e467a972864d73210a652a24e52aa",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d754f3d_33737e81",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2023-01-09T13:19:14Z",
+      "side": 1,
+      "message": "This only affects a specific subset of use cases and the author of the patch is in charge of them, so let\u0027s go for it.\n\nNote for future change: should the logic need to be changed again (to support new use cases or because of other breakages) it\u0027d easier to rewrite this in python with PyYAML.",
+      "revId": "c695cf53380e467a972864d73210a652a24e52aa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
