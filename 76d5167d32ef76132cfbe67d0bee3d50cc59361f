@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a91d60c3_80d2929e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1017622
+      },
+      "writtenOn": "2023-02-03T18:13:42Z",
+      "side": 1,
+      "message": "setting code review to -1 until I verify last changes on the BGP job",
+      "revId": "76d5167d32ef76132cfbe67d0bee3d50cc59361f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}

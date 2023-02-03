@@ -24,6 +24,30 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "171a36f2_dc1ec9bc",
+        "filename": "plugin.spec",
+        "patchSetId": 9
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1017622
+      },
+      "writtenOn": "2023-02-03T18:13:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce099986_8185b45c",
+      "range": {
+        "startLine": 319,
+        "startChar": 24,
+        "endLine": 319,
+        "endChar": 73
+      },
+      "revId": "bbaad01bd1e5fd49a8df72dbaa1212491f8c9499",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5acaa627_20c34ee9",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-02-03T17:01:32Z",
       "side": 1,
       "message": "I would not want to break reliance on --user-name parameter of this plugin.\ncan you specify the user as the --user-name argument to this plugin at the commandline/job configuration?",
+      "range": {
+        "startLine": 45,
+        "startChar": 22,
+        "endLine": 45,
+        "endChar": 34
+      },
+      "revId": "bbaad01bd1e5fd49a8df72dbaa1212491f8c9499",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7b1f85d_c30866a3",
+        "filename": "post_tasks/add_extra_overcloud_ssh_keys.yml",
+        "patchSetId": 9
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1017622
+      },
+      "writtenOn": "2023-02-03T18:13:42Z",
+      "side": 1,
+      "message": "Ok, it makes sense.\n\nThe problem is that we may need two usernames, so --user-name will be used for the undercloud and --tester-username will be user for the tester-node.\nThe new one doesn\u0027t have a default value and in case it\u0027s not defined, it\u0027ll take the ansible_user for that node.\n\n\nI have to test it on the BGP job, since I\u0027m not sure if delegate_to works well here.",
+      "parentUuid": "5acaa627_20c34ee9",
       "range": {
         "startLine": 45,
         "startChar": 22,
