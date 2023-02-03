@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f38e09a_1b175c18",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1010634
+      },
+      "writtenOn": "2023-02-03T17:24:18Z",
+      "side": 1,
+      "message": "we need at least a brief, one/two sentece, summary of why this change is needed, preferably a reference of our jira ticket as well - ppl tend to see commits/titles/messages and not checking the topics in gerrit that this change was part of",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 39
+      },
+      "revId": "82b3e7383b435204d086edac3e308dc758de4281",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
