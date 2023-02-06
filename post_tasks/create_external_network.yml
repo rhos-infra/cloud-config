@@ -70,9 +70,9 @@
 
       - name: check the deployment network configuration file
         find:
-            paths: "{{ template_base }}"
+            paths: "{{ install.deployment.files }}"
             patterns: "{{ network_environment_file }}"
-            recurse: yes
+            recurse: no
         register: network_environment_file_path
 
       # do not fail on missing template file.
