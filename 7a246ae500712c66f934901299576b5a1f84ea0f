@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51ba8209_8547eb04",
+        "filename": "post_tasks/create_external_network.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1019809
+      },
+      "writtenOn": "2023-02-07T14:00:44Z",
+      "side": 1,
+      "message": "I think that recurse will still be needed for cases where the environment file is in a subfolder of the path where install.deployment.file points to",
+      "revId": "7a246ae500712c66f934901299576b5a1f84ea0f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
