@@ -1,0 +1,13 @@
+---
+subnet:
+    cidr: 172.24.100.0/24
+    name: external_subnet
+    gateway: 172.24.100.1
+ipv6_subnet:
+    cidr: 2001:db8::/64
+    name: external_ipv6_subnet
+    gateway: '2001:db8::'
+    address_mode: slaac
+    ra_mode: slaac
+    enable_dhcp: yes
+
