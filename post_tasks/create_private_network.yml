@@ -245,4 +245,4 @@
               dest: "/etc/sysconfig/network-scripts/route6-{{ interface }}"
           become: true
           when: ipv6_subnet is defined
-        when: not (install.get('bgp', {}).get('enabled', {})|default(False)|bool)
+        when: not (install.bgp.enabled|default(False)|bool)
