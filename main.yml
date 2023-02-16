@@ -32,9 +32,6 @@
 
 - name: Include task "Additional overcloud SSH keys"
   import_playbook: post_tasks/add_extra_overcloud_ssh_keys.yml
-  vars:
-    tester_node: "{{ install.get('tester', {}).get('node', '') }}"
-    tester_username: "{{ install.get('tester', {}).get('username', '') }}"
   when: '"add_extra_overcloud_ssh_keys" in install.tasks'
 
 - name: Include task "Scale down"
