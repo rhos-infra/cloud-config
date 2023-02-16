@@ -319,12 +319,18 @@ subparsers:
                         The name of the node from where the tests will be run
                         (tempest, tobiko, rally, etc) and the post/config tasks
                         are performed.
+                        NOTE: do not use this option when the tests are executed from the undercloud
                         NOTE: currently the only tasks applied to this node is
-                        the generation of extra ssh keys and their exchange
-                        with overcloud nodes.
+                        the generation of extra ssh keys and their exchange with overcloud nodes.
+                      ansible_variable: tester_node
+                      default: ''
                   tester-username:
                       type: Value
-                      help: The installation user name that will be used on the tester-node.
+                      help: |
+                        The installation user name that will be used on the tester-node.
+                        NOTE: use this option only when --tester-node is used too
+                      ansible_variable: tester_username
+                      default: ''
 
             - title: Workload Launch
               options:
