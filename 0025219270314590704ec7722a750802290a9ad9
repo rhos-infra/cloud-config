@@ -16,6 +16,23 @@
       "message": "recheck",
       "revId": "0025219270314590704ec7722a750802290a9ad9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34a92dc8_a7d1768c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1017622
+      },
+      "writtenOn": "2023-02-21T08:48:26Z",
+      "side": 1,
+      "message": "recheck infrared-pipeline",
+      "revId": "0025219270314590704ec7722a750802290a9ad9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
