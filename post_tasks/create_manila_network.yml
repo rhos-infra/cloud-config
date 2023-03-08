@@ -77,6 +77,7 @@
             allocation_pool_start: "{{ AllocationPools[0]['start'].split('.')[0:3] | join('.')  }}.150"
             allocation_pool_end: "{{ AllocationPools[0]['end'].split('.')[0:3] | join('.')  }}.250"
             cidr: "{{ (manila_backend == 'cephfs-nfs') | ternary(StorageNFSNetCidr, StorageNetCidr) }}"
+            no_gateway_ip: yes
         delegate_to: "{{ groups.shade | first }}"
         ignore_errors: yes
         when: install.network.protocol == 'ipv4'
@@ -98,6 +99,7 @@
           ip_version: 6
           ipv6_address_mode: dhcpv6-stateful
           ipv6_ra_mode: dhcpv6-stateful
+          no_gateway_ip: yes
         delegate_to: "{{ groups.shade | first }}"
         ignore_errors: yes
         when: install.network.protocol == 'ipv6'
