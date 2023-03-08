@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1d93a67_a22ff645",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2023-03-08T16:40:59Z",
+      "side": 1,
+      "message": "Liron, Vida, can you please check that it doesn\u0027t impact your use cases?\n(let\u0027s discuss internally about this)",
+      "revId": "560b143cfbbb1470e076db967aa98352accbe3e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
