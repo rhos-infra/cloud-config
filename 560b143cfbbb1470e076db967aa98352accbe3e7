@@ -33,6 +33,23 @@
       "message": "The change is inline with StorageNFS network provisioning guidelines.",
       "revId": "560b143cfbbb1470e076db967aa98352accbe3e7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2985f040_0c3f2a5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1014216
+      },
+      "writtenOn": "2023-03-09T16:37:14Z",
+      "side": 1,
+      "message": "I don\u0027t know if it\u0027ll affect the manila scenario tests.\nCurrently I don\u0027t have an environment to validate it.\n",
+      "revId": "560b143cfbbb1470e076db967aa98352accbe3e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
