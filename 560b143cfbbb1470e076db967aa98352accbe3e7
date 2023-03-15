@@ -67,6 +67,24 @@
       "message": "I\u0027ve tested it deploying OCP on OSP with this change (StorageNFSSubnet without a gateway_ip) and the results are ok, didn\u0027t find any difference compared to results without the patch, and didn\u0027t hit the default routes issue:\n · Tested in 4.12 on 16.1.9: Results in [1]\n · Tested in 4.12 on 16.2.4: Results in [2]\n\n[1] http://rhos-ci-logs.lab.eng.tlv2.redhat.com/logs/j2pg/DFG-osasinfra-shiftstack_ci-ocp_testing/537/test_results/\n[2] http://rhos-ci-logs.lab.eng.tlv2.redhat.com/logs/j2pg/DFG-osasinfra-shiftstack_ci-ocp_testing/538/test_results/",
       "revId": "560b143cfbbb1470e076db967aa98352accbe3e7",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a298a991_14ca9d04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2023-03-15T09:09:10Z",
+      "side": 1,
+      "message": "For references to internal results, please refer to internal tickets.",
+      "parentUuid": "ad17dfdb_8166efbe",
+      "revId": "560b143cfbbb1470e076db967aa98352accbe3e7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
