@@ -68,7 +68,7 @@
           lineinfile:
             path: "{{ overcloud_deploy_script }}"
             insertafter: "openstack overcloud deploy"
-            line: "--limit {{scale_string}} --skip-tags external_deploy_steps --tags all \\"
+            line: "--limit undercloud,controller,{{scale_string}} \\"
 
         when:
             - install.use.limit
