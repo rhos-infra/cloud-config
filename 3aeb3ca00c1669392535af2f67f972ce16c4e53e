@@ -16,6 +16,23 @@
       "message": "Does it work on all OSP releases where this task is used? cloud-config is not branched",
       "revId": "3aeb3ca00c1669392535af2f67f972ce16c4e53e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88a77fd9_249ac2aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2023-04-13T13:17:41Z",
+      "side": 1,
+      "message": "Clarified discussing with David: this should have been the right syntax all along for all the versions where this feature is supported (starting from 16.1)",
+      "revId": "3aeb3ca00c1669392535af2f67f972ce16c4e53e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
