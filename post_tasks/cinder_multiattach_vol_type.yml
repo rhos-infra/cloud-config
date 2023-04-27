@@ -1,0 +1,10 @@
+---
+- name: Cinder multiattach volume type
+  hosts: undercloud
+  tasks:
+    - name: Set a multiattach volume type and create it if needed
+      shell: |
+          source ~/{{ install.overcloud.stack }}rc
+          openstack volume type show "{{ install.cinder.multiattach.volume.type }}" &>/dev/null || \
+            openstack volume type create "{{ install.cinder.multiattach.volume.type }}"
+          openstack volume type set multiattach="<is> True" "{{ install.cinder.multiattach.volume.type }}"
