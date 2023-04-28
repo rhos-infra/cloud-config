@@ -59,7 +59,19 @@
       openstack baremetal node set --property capabilities='profile:{{ item.item.rstrip('1234567890-').split('-')[-1] }},boot_option:local' {{ item.stdout }}
   with_items: "{{ nodes_uuid_info.results }}"
   tags: skip_ansible_lint
-  when: not install.specific.node.ids
+  when:
+      - not install.specific.node.ids
+      - '"computerhel" not in item.item'
+
+- name: set additional properties
+  shell: |
+      source ~/stackrc
+      openstack baremetal node set --property capabilities='profile:computerhel8,boot_option:local' {{ item.stdout }}
+  with_items: "{{ nodes_uuid_info.results }}"
+  tags: skip_ansible_lint
+  when:
+      - not install.specific.node.ids
+      - '"computerhel" in item.item'
 
 - block:
     - name: get baremetal info about new UUIDs
@@ -212,6 +224,17 @@
             node_type: "{{ item.key }}"
         with_dict: "{{ new_nodes_count }}"
         register: current_node_count
+        when:
+            - '"compute" not in item.key'
+
+      - name: get current scale for compute nodes
+        shell: cat {{ nodes_data_path.stdout }} | egrep -i '{{ node_type }}.?Count:' | awk '{print $2}'
+        vars:
+            node_type: "{{ item.key }}"
+        with_dict: "{{ new_nodes_count }}"
+        register: current_node_count_compute
+        when:
+            - '"compute" in item.key'
 
       - name: Update scale count in overcloud deploy script
         replace:
@@ -220,6 +243,18 @@
             replace: "\\1 {{ item.stdout|int + new_nodes_count[item.item.key]|int }}"
             backup: yes
         with_items: "{{ current_node_count.results }}"
+        when:
+            - '"compute" not in item.item.key'
+
+      - name: Update scale count in overcloud deploy script for compute nodes
+        replace:
+            path: "{{ nodes_data_path.stdout }}"
+            regexp: "(?i)^(\\s+.*{{ item.item.key }}.?Count:) {{ item.stdout }}"
+            replace: "\\1 {{ item.stdout|int + new_nodes_count[item.item.key]|int }}"
+            backup: yes
+        with_items: "{{ current_node_count_compute.results }}"
+        when:
+            - '"compute" in item.item.key'
 
       - name: Print nodes data yaml
         command: "cat {{ nodes_data_path.stdout }}"
@@ -279,11 +314,23 @@
 
       - name: get current scale for nodes from baremetal_deployment.yaml
         shell: |
-            cat "{{ baremetal_deployment_path }}/baremetal_deployment.yaml" | grep -A1 {{ node_type | capitalize }} | grep count | awk '{print $2}'
+            cat "{{ baremetal_deployment_path }}/baremetal_deployment.yaml" | grep -A1 {{ node_type | capitalize }}$ | grep count | awk '{print $2}'
         vars:
             node_type: "{{ item.key }}"
         with_dict: "{{ new_nodes_count }}"
         register: current_node_count
+        when:
+            - '"computerhel" not in item.key'
+
+      - name: get current scale for nodes from baremetal_deployment.yaml for computerhel8 nodes
+        shell: |
+            cat "{{ baremetal_deployment_path }}/baremetal_deployment.yaml" | grep -A1 ComputeRHEL8 | grep count | awk '{print $2}'
+        vars:
+            node_type: "{{ item.key }}"
+        with_dict: "{{ new_nodes_count }}"
+        register: current_node_count_rhel8
+        when:
+            - '"computerhel" in item.key'
 
       - name: Update scale count in baremetal_deployment.yaml
         replace:
@@ -292,6 +339,18 @@
             replace: "\\1 {{ item.stdout|int + new_nodes_count[item.item.key]|int }}"
             backup: yes
         with_items: "{{ current_node_count.results }}"
+        when:
+            - '"computerhel" not in item.item.key'
+
+      - name: Update scale count in baremetal_deployment.yaml for computerhel8 nodes
+        replace:
+            path: "{{ baremetal_deployment_path }}/baremetal_deployment.yaml"
+            regexp: "(ComputeRHEL8\n.+count:) {{ item.stdout }}"
+            replace: "\\1 {{ item.stdout|int + new_nodes_count[item.item.key]|int }}"
+            backup: yes
+        with_items: "{{ current_node_count_rhel8.results }}"
+        when:
+            - '"computerhel" in item.item.key'
 
       - name: Print baremetal_deployment.yaml
         command: cat "{{ baremetal_deployment_path }}/baremetal_deployment.yaml"

@@ -196,8 +196,17 @@
 
             - name: get current scale for nodes from baremetal_deployment.yaml
               shell: |
-                  cat "{{ baremetal_deployment_path }}/baremetal_deployment.yaml" | grep -A1 {{ node_type | capitalize }} | grep count | awk '{print $2}'
+                  cat "{{ baremetal_deployment_path }}/baremetal_deployment.yaml" | grep -A1 {{ node_type | capitalize }}$ | grep count | awk '{print $2}'
               register: current_node_count
+              when:
+                  - '"computerhel" not in node_type'
+
+            - name: get current scale for nodes from baremetal_deployment.yaml for computerhel8 nodes
+              shell: |
+                  cat "{{ baremetal_deployment_path }}/baremetal_deployment.yaml" | grep -A1 ComputeRHEL8 | grep count | awk '{print $2}'
+              register: current_node_count_rhel8
+              when:
+                  - '"computerhel" in node_type'
 
             - name: Update scale count in baremetal_deployment.yaml
               replace:
@@ -205,6 +214,17 @@
                   regexp: "({{ node_type | capitalize }}\n.+count:) {{ current_node_count.stdout }}"
                   replace: "\\1 {{ current_node_count.stdout|int -1 }}"
                   backup: yes
+              when:
+                  - '"computerhel" not in node_type'
+
+            - name: Update scale count in baremetal_deployment.yaml for computerhel8 nodes
+              replace:
+                  path: "{{ baremetal_deployment_path }}/baremetal_deployment.yaml"
+                  regexp: "(ComputeRHEL8\n.+count:) {{ current_node_count_rhel8.stdout }}"
+                  replace: "\\1 {{ current_node_count_rhel8.stdout|int -1 }}"
+                  backup: yes
+              when:
+                  - '"computerhel" in node_type'
 
             - name: get scale down node uuid
               shell: |
