@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d8f7ff3_9095f3fe",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1010634
+      },
+      "writtenOn": "2023-04-28T19:30:31Z",
+      "side": 1,
+      "message": "could the computerhel8 be included in this var definition somehow?\ni.e.:\nnode_type: \"{{ item is search(\u0027rhel8\u0027) | ternary(item.split(\u0027-\u0027)[-2], item.rstrip(\u00271234567890-\u0027).split(\u0027-\u0027)[-1] }}\"\n\n^ not tested",
+      "revId": "fb456bfa76a30dd9acff9781ab7d154addf5e910",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
