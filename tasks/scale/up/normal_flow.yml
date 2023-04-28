@@ -56,7 +56,7 @@
 - name: set additional properties
   shell: |
       source ~/stackrc
-      openstack baremetal node set --property capabilities='profile:{{ item.item.rstrip('1234567890-').split('-')[-1] }},boot_option:local' {{ item.stdout }}
+      openstack baremetal node set --property capabilities='profile:{{ item.item is search('rhel8') | ternary(item.item.split('-')[-2],item.item.rstrip('1234567890-').split('-')[-1]) }},boot_option:local' {{ item.stdout }}
   with_items: "{{ nodes_uuid_info.results }}"
   tags: skip_ansible_lint
   when: not install.specific.node.ids
@@ -174,7 +174,7 @@
   set_fact:
       new_nodes_count: "{{ new_nodes_count|default({})|combine({ node_type: (new_nodes_count|default({})).get(node_type)|default(0)|int + 1 }) }}"
   vars:
-      node_type: "{{ item.rstrip('1234567890-').split('-')[-1] }}"
+      node_type: "{{ item is search('rhel8') | ternary(item.split('-')[-2],item.rstrip('1234567890-').split('-')[-1]) }}"
   with_items: "{{ install.scale.nodes }}"
 
 - name: check for nodes data
@@ -212,6 +212,17 @@
             node_type: "{{ item.key }}"
         with_dict: "{{ new_nodes_count }}"
         register: current_node_count
+        when:
+            - '"compute" not in item.key'
+
+      - name: get current scale for compute nodes
+        shell: cat {{ nodes_data_path.stdout }} | egrep -i '{{ node_type }}Count:' | awk '{print $2}'
+        vars:
+            node_type: "{{ item.key }}"
+        with_dict: "{{ new_nodes_count }}"
+        register: current_node_count_compute
+        when:
+            - '"compute" in item.key'
 
       - name: Update scale count in overcloud deploy script
         replace:
@@ -220,6 +231,18 @@
             replace: "\\1 {{ item.stdout|int + new_nodes_count[item.item.key]|int }}"
             backup: yes
         with_items: "{{ current_node_count.results }}"
+        when:
+            - '"compute" not in item.item.key'
+
+      - name: Update scale count in overcloud deploy script for compute nodes
+        replace:
+            path: "{{ nodes_data_path.stdout }}"
+            regexp: "(?i)^(\\s+.*{{ item.item.key }}Count:) {{ item.stdout }}"
+            replace: "\\1 {{ item.stdout|int + new_nodes_count[item.item.key]|int }}"
+            backup: yes
+        with_items: "{{ current_node_count_compute.results }}"
+        when:
+            - '"compute" in item.item.key'
 
       - name: Print nodes data yaml
         command: "cat {{ nodes_data_path.stdout }}"
@@ -279,7 +302,7 @@
 
       - name: get current scale for nodes from baremetal_deployment.yaml
         shell: |
-            cat "{{ baremetal_deployment_path }}/baremetal_deployment.yaml" | grep -A1 {{ node_type | capitalize }} | grep count | awk '{print $2}'
+            cat "{{ baremetal_deployment_path }}/baremetal_deployment.yaml" | grep -i -A1 {{ node_type }}$ | grep count | awk '{print $2}'
         vars:
             node_type: "{{ item.key }}"
         with_dict: "{{ new_nodes_count }}"
@@ -288,7 +311,7 @@
       - name: Update scale count in baremetal_deployment.yaml
         replace:
             path: "{{ baremetal_deployment_path }}/baremetal_deployment.yaml"
-            regexp: "({{ item.item.key | capitalize }}\n.+count:) {{ item.stdout }}"
+            regexp: "(?i)({{ item.item.key }}\n.+count:) {{ item.stdout }}"
             replace: "\\1 {{ item.stdout|int + new_nodes_count[item.item.key]|int }}"
             backup: yes
         with_items: "{{ current_node_count.results }}"

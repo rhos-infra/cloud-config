@@ -192,17 +192,17 @@
 
             - name: set node type
               set_fact:
-                  node_type: "{{ install.node.name.rstrip('1234567890-').split('-')[-1] }}"
+                  node_type: "{{ install.node.name is search('rhel8') | ternary(install.node.name.split('-')[-2],install.node.name.rstrip('1234567890-').split('-')[-1]) }}"
 
             - name: get current scale for nodes from baremetal_deployment.yaml
               shell: |
-                  cat "{{ baremetal_deployment_path }}/baremetal_deployment.yaml" | grep -A1 {{ node_type | capitalize }} | grep count | awk '{print $2}'
+                  cat "{{ baremetal_deployment_path }}/baremetal_deployment.yaml" | grep -i -A1 {{ node_type }}$ | grep count | awk '{print $2}'
               register: current_node_count
 
             - name: Update scale count in baremetal_deployment.yaml
               replace:
                   path: "{{ baremetal_deployment_path }}/baremetal_deployment.yaml"
-                  regexp: "({{ node_type | capitalize }}\n.+count:) {{ current_node_count.stdout }}"
+                  regexp: "(?i)({{ node_type }}\n.+count:) {{ current_node_count.stdout }}"
                   replace: "\\1 {{ current_node_count.stdout|int -1 }}"
                   backup: yes
 
@@ -252,6 +252,14 @@
           - name: get current scale for nodes
             shell: cat {{ nodes_data_path.stdout }} | egrep -i '{{ ''.join(install.node.name.split('-')[0:-1]) }}.*Count:' | awk '{print $2}'
             register: current_node_count
+            when:
+                - '"compute" not in install.node.name'
+
+          - name: get current scale for nodes for compute nodes
+            shell: cat {{ nodes_data_path.stdout }} | egrep -i '{{ ''.join(install.node.name.split('-')[0:-1]) }}Count:' | awk '{print $2}'
+            register: current_node_count_compute
+            when:
+                - '"compute" in install.node.name'
 
           - name: Update scale count in overcloud deploy script
             replace:
@@ -259,6 +267,17 @@
                 regexp: "(?i)^(\\s+.*{{ ''.join(install.node.name.split('-')[0:-1]) }}.*Count:) {{ current_node_count.stdout }}"
                 replace: "\\1 {{ current_node_count.stdout|int - 1 }}"
                 backup: yes
+            when:
+                - '"compute" not in install.node.name'
+
+          - name: Update scale count in overcloud deploy script for compute nodes
+            replace:
+                path: "{{ nodes_data_path.stdout }}"
+                regexp: "(?i)^(\\s+.*{{ ''.join(install.node.name.split('-')[0:-1]) }}Count:) {{ current_node_count_compute.stdout }}"
+                replace: "\\1 {{ current_node_count_compute.stdout|int - 1 }}"
+                backup: yes
+            when:
+                - '"compute" in install.node.name'
         when:
             - not install.splitstack|default(False)
             - is_node_data.rc == 0
