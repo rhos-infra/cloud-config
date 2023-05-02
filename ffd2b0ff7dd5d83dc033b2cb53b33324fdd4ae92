@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2722690_4838418e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1009116
+      },
+      "writtenOn": "2023-05-02T09:59:42Z",
+      "side": 1,
+      "message": "the way I understand it is that it\u0027s gonna be required by cinder if this gets backported https://review.opendev.org/c/openstack/cinder/+/874865 (https://bugzilla.redhat.com/show_bug.cgi?id\u003d2184834)\n^it stops supporting the old way -\u003e multiattach\u003dTrue \n\nThe tempest change - https://review.opendev.org/c/openstack/tempest/+/875372/ - just makes tempest use the new argument which has been around since Queens",
+      "range": {
+        "startLine": 9,
+        "startChar": 8,
+        "endLine": 9,
+        "endChar": 45
+      },
+      "revId": "ffd2b0ff7dd5d83dc033b2cb53b33324fdd4ae92",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
