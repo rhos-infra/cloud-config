@@ -34,6 +34,24 @@
       "parentUuid": "3d8f7ff3_9095f3fe",
       "revId": "fb456bfa76a30dd9acff9781ab7d154addf5e910",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3da04357_18be9030",
+        "filename": "tasks/scale/up/normal_flow.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1017725
+      },
+      "writtenOn": "2023-05-02T15:31:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "270afee3_2e35e63c",
+      "revId": "fb456bfa76a30dd9acff9781ab7d154addf5e910",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
