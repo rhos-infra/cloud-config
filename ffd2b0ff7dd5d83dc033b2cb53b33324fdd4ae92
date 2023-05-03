@@ -22,6 +22,30 @@
       },
       "revId": "ffd2b0ff7dd5d83dc033b2cb53b33324fdd4ae92",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fef85307_736d34cb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1016110
+      },
+      "writtenOn": "2023-05-03T13:28:04Z",
+      "side": 1,
+      "message": "And without creating a multiattach volume type, those test won\u0027t run after that tempest change. This is regardless of the cinder change",
+      "parentUuid": "e2722690_4838418e",
+      "range": {
+        "startLine": 9,
+        "startChar": 8,
+        "endLine": 9,
+        "endChar": 45
+      },
+      "revId": "ffd2b0ff7dd5d83dc033b2cb53b33324fdd4ae92",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
