@@ -89,5 +89,9 @@
   import_playbook: post_tasks/cinder_config_vol_types.yml
   when: '"cinder_config_vol_types" in install.tasks'
 
+- name: Set Cinder multiattach volume type
+  import_playbook: post_tasks/cinder_multiattach_vol_type.yml
+  when: '"cinder_multiattach_vol_type" in install.tasks'
+
 - name: Run workarounds
   import_playbook: workarounds.yml

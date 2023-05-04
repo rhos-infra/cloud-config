@@ -409,6 +409,15 @@ subparsers:
                        In multibackend Cinder deployments, this parameter should be used to populate
                        the default volume types backend, i.e. set the volume type for the 'tripleo' backend.
 
+                  # see https://review.opendev.org/c/openstack/tempest/+/875372 and the corresponding
+                  # devstack change https://review.opendev.org/c/openstack/devstack/+/877337
+                  cinder-multiattach-volume-type:
+                     type: Value
+                     default: 'multiattach'
+                     help: |
+                       The volume type that is configured (and created if it does not exist) with the multiattach
+                       property set, required by a few tempest tests.
+
                   manila-backend:
                       type: Value
                       choices:
