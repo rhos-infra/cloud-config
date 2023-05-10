@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "64d8710e_12c110e5",
         "filename": "post_tasks/roles/replace-controller/tasks/remove_ceph_monitor.yml",
@@ -14,10 +15,10 @@
       "side": 1,
       "message": "I think the release in the when needs to handle this condition on 15 (stein) not 16.\n\nAlso, \"ceph-container\" is not the default name. Using ceph-mon-`hostname` should work in its place.",
       "revId": "64af1ddb74201c611408d87421ea6f1f679adcf2",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": true
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "a9bbe9b6_61df186e",
         "filename": "post_tasks/roles/replace-controller/tasks/remove_ceph_monitor.yml",
@@ -32,8 +33,25 @@
       "message": "Done",
       "parentUuid": "64d8710e_12c110e5",
       "revId": "64af1ddb74201c611408d87421ea6f1f679adcf2",
-      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
-      "unresolved": false
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c5573dd_73fc5e65",
+        "filename": "post_tasks/roles/replace-controller/tasks/remove_ceph_monitor.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1006992
+      },
+      "writtenOn": "2023-05-10T20:10:35Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a9bbe9b6_61df186e",
+      "revId": "64af1ddb74201c611408d87421ea6f1f679adcf2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
