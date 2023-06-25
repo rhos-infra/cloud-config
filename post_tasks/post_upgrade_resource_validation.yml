@@ -1,0 +1,45 @@
+---
+- name: Post-upgrade resources validation
+  hosts: undercloud
+  gather_facts: no
+  tasks:
+      - name: Read resource ids from file
+        shell: cat /home/stack/resource_ids.yml
+        register: result
+        ignore_errors: yes
+
+      - name: Parse yaml into variable
+        set_fact:
+            my_yaml: "{{ result.stdout | from_yaml }}"
+        ignore_errors: yes
+
+      - name: Extend manila share
+        shell: |
+            source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
+            manila extend {{ item }} 2
+        notify: Delete manila share
+        with_items: "{{ my_yaml['share_id'] }}"
+        ignore_errors: yes
+
+      - name: Extend cinder volume
+        shell: |
+            source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
+            cinder extend {{ item }} 2
+        notify: Delete cinder volume
+        with_items: "{{ my_yaml['volume_id'] }}"
+        ignore_errors: yes
+
+  handlers:
+      - name: Delete manila share
+        shell: |
+            source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
+            manila delete {{ item }}
+        with_items: "{{ my_yaml['share_id'] }}"
+        ignore_errors: yes
+
+      - name: Delete cinder volume
+        shell: |
+            source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
+            cinder delete {{ item }}
+        with_items: "{{ my_yaml['volume_id'] }}"
+        ignore_errors: yes

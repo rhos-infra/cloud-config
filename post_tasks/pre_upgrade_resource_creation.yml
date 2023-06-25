@@ -1,0 +1,37 @@
+---
+- name: Pre-upgrade resource creation
+  hosts: undercloud
+  gather_facts: no
+  tasks:
+     - name: Create resources
+       block:
+          - name: Create manila share
+            shell: |
+               source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
+               manila create nfs 1 | grep " id " | awk '{print$4}'
+            register: share_id
+
+          - set_fact:
+                share:
+                    share_id: "{{ share_id.stdout_lines }}"
+
+          - name: Save a manila share id
+            copy:
+                content: "{{ share | to_nice_yaml }}"
+                dest: /home/stack/resource_ids.yml
+
+          - name: Create cinder volume
+            shell: |
+               source {{ ansible_user_dir }}/{{ install.overcloud.stack }}rc
+               cinder create 1 | grep " id " | awk '{print$4}'
+            register: volume_id
+
+          - set_fact:
+                volume:
+                    volume_id: "{{ volume_id.stdout_lines }}"
+
+          - name: Save a cinder volume id
+            lineinfile:
+                dest: /home/stack/resource_ids.yml
+                line: "{{ volume | to_nice_yaml }}"
+       ignore_errors: yes

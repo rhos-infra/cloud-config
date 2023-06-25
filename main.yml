@@ -93,5 +93,13 @@
   import_playbook: post_tasks/cinder_multiattach_vol_type.yml
   when: '"cinder_multiattach_vol_type" in install.tasks'
 
+- name: Pre upgrade resource creation
+  import_playbook: post_tasks/pre_upgrade_resource_creation.yml
+  when: '"pre_upgrade_resource_creation" in install.tasks'
+
+- name: Post upgrade resources validation
+  import_playbook: post_tasks/post_upgrade_resource_validation.yml
+  when: '"post_upgrade_resource_validation" in install.tasks'
+
 - name: Run workarounds
   import_playbook: workarounds.yml
