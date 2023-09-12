@@ -16,6 +16,24 @@
       "message": "I guess this is no more needed?",
       "revId": "68ae16ceb509c5c2232699efad09850c07fb1551",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a44fad2_9cfad082",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006664
+      },
+      "writtenOn": "2023-09-12T11:45:31Z",
+      "side": 1,
+      "message": "ack",
+      "parentUuid": "51b2c7f1_4a884bcd",
+      "revId": "68ae16ceb509c5c2232699efad09850c07fb1551",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
