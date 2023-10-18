@@ -1,0 +1,21 @@
+---
+subnet:
+    cidr: 10.0.0.0/24
+    name: external_subnet
+    # Gateway for ext.net may differ from ExternalInterfaceDefaultRoute.
+    # As for ipv6 deployments we use still ipv4 gw, we need to specify
+    # it explicitly also here for ext. net. purpose.
+    gateway: 10.0.0.1
+    allocation_pool:
+        start: 10.0.0.151
+        end: 10.0.0.254
+ipv6_subnet:
+    cidr: 2620:52:0:13b8::/64
+    name: external_ipv6_subnet
+    gateway: 2620:52:0:13b8::fe
+    allocation_pool:
+        start: 2620:52:0:13b8::1000:1
+        end: 2620:52:0:13b8::1000:aa
+    address_mode: dhcpv6-stateful
+    ra_mode: dhcpv6-stateful
+    enable_dhcp: yes
