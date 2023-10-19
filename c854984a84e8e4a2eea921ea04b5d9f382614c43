@@ -1,0 +1,8 @@
+Code-Review+2: Candido Campos Rivas <ccamposr@redhat.com>
+Code-Review+2: Luigi Toscano <ltoscano@redhat.com>
+Verified+1: rhosqeauto <aopincar+rhosqeauto@redhat.com>
+Submitted-by: Luigi Toscano <ltoscano@redhat.com>
+Submitted-at: Thu, 19 Oct 2023 12:12:12 +0000
+Reviewed-on: https://review.gerrithub.io/c/rhos-infra/cloud-config/+/1170874
+Project: rhos-infra/cloud-config
+Branch: refs/heads/master
