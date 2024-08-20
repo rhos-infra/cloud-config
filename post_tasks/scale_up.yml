@@ -34,7 +34,7 @@
       default_pubkey: "{{ default_privatekey }}.pub"
       # rhos-release vars
       tmp_oc_repos_dir: /tmp/oc_repos/yum.repos.d
-      rhos_release_rpm: "https://url.corp.redhat.com/rhos-release-latest-rpm"
+      rhos_release_rpm: "https://url.corp.redhat.com/latest-rhos-release-rpm"
   tasks:
       - name: Scale up validation
         include_tasks: ../tasks/scale/up/validation.yml
