@@ -396,6 +396,7 @@ subparsers:
                           - swift
                           - netapp-iscsi
                           - netapp-nfs
+                          - nfs
                           - lvm
                       help: |
                         The storage (mainly cinder) that we would like to use.
