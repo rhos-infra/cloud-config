@@ -1,0 +1,9 @@
+Code-Review+2: Luigi Toscano <ltoscano@redhat.com>
+Code-Review+2: Tuvya Korol <tkorol@redhat.com>
+Verified+1: Tuvya Korol <tkorol@redhat.com>
+Submitted-by: Luigi Toscano <ltoscano@redhat.com>
+Submitted-at: Fri, 28 Mar 2025 09:16:49 +0000
+Reviewed-on: https://review.gerrithub.io/c/rhos-infra/cloud-config/+/1208569
+Comments-Total: 6
+Project: rhos-infra/cloud-config
+Branch: refs/heads/master
