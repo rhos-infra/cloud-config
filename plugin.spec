@@ -176,6 +176,15 @@ subparsers:
                       help: |
                          An Optional external VLAN ID of the external network (Not to be confused with the Public API network)
 
+                  external-physnet-type:
+                      type: Value
+                      help: |
+                         The provider network type for the external network (flat or vlan)
+                      default: vlan
+                      choices:
+                          - flat
+                          - vlan
+
                   external-dhcp:
                       type: Bool
                       default: False

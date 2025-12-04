@@ -104,7 +104,7 @@
         block:
           - name: create the external network
             vars:
-                physnet_type: "vlan"
+                physnet_type: "{{ install.external.physnet.type | default('vlan') }}"
                 vlan_id: "{{ install.get('external', {}).vlan | default(((network_template|default({})).parameter_defaults|default({})).ExternalNetworkVlanID|default('')) }}"
                 # Here can't be used {{ path_venv }}, because it's not a Jinja template
                 ansible_python_interpreter: "/var/tmp/venv_shade/bin/python"
