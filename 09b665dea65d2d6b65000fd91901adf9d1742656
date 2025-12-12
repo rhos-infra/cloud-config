@@ -1,0 +1,7 @@
+Code-Review+2: Tuvya Korol <tkorol@redhat.com>
+Verified+1: rhosqeauto <aopincar+rhosqeauto@redhat.com>
+Submitted-by: Tuvya Korol <tkorol@redhat.com>
+Submitted-at: Fri, 12 Dec 2025 16:43:38 +0000
+Reviewed-on: https://review.gerrithub.io/c/rhos-infra/cloud-config/+/1227503
+Project: rhos-infra/cloud-config
+Branch: refs/heads/master
