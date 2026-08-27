@@ -49,10 +49,14 @@
                   option: vendor_name
                   value: NetApp
                   condition: "{{ storage_backend.startswith('netapp') }}"
-                # Workaround RHBZ#1484419 cinder-backup permission to swift
+                # Workaround RHBZ#1484419 cinder-backup permission to swift.
+                # Include member: Tempest 26.1 (OSP 16.2) only defaults to
+                # member when tempest_roles is empty, so swiftoperator-only
+                # users 403 on identity:ec2_* after CVE-2026-33551
+                # (OSPCIX-1477).
                 - section: auth
                   option: tempest_roles
-                  value: swiftoperator
+                  value: member,swiftoperator
                   condition: "{{ (install.version|default(undercloud_version)|openstack_release < 17) or (not storage_backend.startswith('ceph')) }}"
                 # Set of Sahara plugins - required until https://bugs.launchpad.net/bugs/1560111 is fixed
                 - section: data-processing-feature-enabled
